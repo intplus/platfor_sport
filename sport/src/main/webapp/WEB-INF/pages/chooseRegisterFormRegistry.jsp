@@ -9,13 +9,12 @@
 
     <spring:url value="/resources/css/chooseRegisterFormRegistry.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
-    <spring:url value="/resources/images/sil1_1.jpg" var="image" />
-    <spring:url value="/resources/images/sil1_2.jpg" var="image2" />
+
 
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
-    <img href="${image3}" >
+
 
 
 </head>

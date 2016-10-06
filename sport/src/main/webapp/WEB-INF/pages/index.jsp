@@ -39,9 +39,9 @@
 <nav class="page-navigation">
     <div class="container">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="/showChooseRegisterForm">GO-GO-GO</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Главная</a></li>
+            <li><a href="/showChooseRegisterForm">Старт</a></li>
+            <li><a href="#">Контакты</a></li>
         </ul>
 
         <!-- LOGIN FORM -->
