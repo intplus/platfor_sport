@@ -71,7 +71,7 @@
                     <br/><br/>
 
 
-                  <h3>  <a href="/registerPerson/showForm"> REGISTER</a></h3>
+                  <h3>  <a href="/registerPerson/general_registration_form"> REGISTER</a></h3>
                     <br/><br/>
                 </div>
             </div>
