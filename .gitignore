@@ -16,6 +16,9 @@ $RECYCLE.BIN/
 *.idea
 *.iml
 *.md
+*.mp4
+*.jpg
+*.png
 target/
 .targer/
 
