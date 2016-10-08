@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "user2")
+@Table(name = "user")
 public class User extends Model implements UserDetails{
 
     private static final long serialVersionUID = -8950386400041310256L;
@@ -20,35 +20,27 @@ public class User extends Model implements UserDetails{
     @Column(name = "login", length = 25)
     private String login;
 
-    @NotNull
     @Column(name = "email")
     private String email;
 
-    @NotNull
     @Column(name = "name")
     private String name;
 
-    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
     @Column(name = "phone")
     private String phone;
 
-    @NotNull
     @Column(name = "country")
     private String country;
 
-    @NotNull
     @Column(name = "district")
     private String district;
 
-    @NotNull
     @Column(name = "city")
     private String city;
 
-    @NotNull
     @Column(name = "password", length = 64)
     private String password;
 
@@ -56,6 +48,11 @@ public class User extends Model implements UserDetails{
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false))
     private Set<Role> roles =new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+    private Set<TypeOfSport> sports = new HashSet<>();
 
     public User() {
     }
@@ -156,6 +153,14 @@ public class User extends Model implements UserDetails{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Set<TypeOfSport> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<TypeOfSport> sports) {
+        this.sports = sports;
     }
 
     @Override
