@@ -1,8 +1,11 @@
-<%@taglib tagdir="/WEB-INF/pages/tags" prefix="t"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=Cp1251" pageEncoding="Cp1251"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="locale"%>
 
 <!DOCTYPE html>
 <html>
@@ -56,84 +59,7 @@
 <!-- /NAVIGATION -->
 <!-- MAIN SECTION -->
 <main>
-
-
-<div>
-<div>
-    <input type="button" value="Add1">
-    <input type="button" value="Add2">
-    <input type="button" value="Add3">
-    <input type="button" value="Add4">
-    </div>
-    <br/><br/>
-    <br/><br/>
-
-    <input type="button" value="найти">
-    <input type="button" value="редактировать">
-<div style="font-weight: bold;
-	width: 130px;
-	padding: 5px 10px;
-	margin-top: 30px;
-	margin-left: 800px;
-background: #cccccc; "  >
-
-
-
-
-    <input type="button" value="добавить">
-    <input type="button" value="удалить">
-    <input type="button" value="Отправить смс">
-    <input type="button" value="отправить письмо">
- </div>
-    </div>
-    <br/><br/>
-    <br/><br/>
-    <br/><br/>
-
-<form:form>
-
-
-
-    <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <tr>
-            <th colspan="7">
-                <h3><br>Общие данные</h3>
-            </th>
-        </tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-            <th>Телефон</th>
-            <th>почта</th>
-            <th>дата рождения</th>
-            <th>должность</th>
-            <th>комментарий</th>
-           <th><input type="checkbox"></th>
-            <tr>
-                <td>Alex</td>
-                <td>Linov</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>checbox</td>
-            </tr>
-
-    </table>
-    
-    
-    
-    
-    
-    
-</form:form>
-
-
-<br><br>
-
-<br><br>
-
-
+<jsp:body />
 </main>
 <!-- /MAIN SECTION -->
 <!-- FOOTER -->
