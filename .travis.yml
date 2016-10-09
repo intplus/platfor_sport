@@ -1,10 +1,2 @@
 language: java
 
-before_script:
-  - composer install --dev
-
-script:
-  - javaunit --coverage-clover build/logs/clover.xml
-
-after_script:
-  - java vendor/bin/coveralls -v
