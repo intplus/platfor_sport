@@ -1,4 +1,4 @@
-package com.sport.mvc;
+package com.sport.mvc.Controllers.smoll_fintess;
 
 import org.springframework.stereotype.Controller;
 

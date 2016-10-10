@@ -17,7 +17,7 @@ public class TypeOfSport extends Model {
     private String country;
 
     @ManyToMany(mappedBy = "sports")
-    private Set<User> users = new HashSet<>();
+    private Set<Coach> trainers = new HashSet<>();
 
     public TypeOfSport() {
         super();
@@ -39,11 +39,11 @@ public class TypeOfSport extends Model {
         this.sport = sport;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<Coach> getTrainers() {
+        return trainers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setTrainers(Set<Coach> trainers) {
+        this.trainers = trainers;
     }
 }
