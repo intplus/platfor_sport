@@ -27,6 +27,9 @@ public class User extends Model {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "birthday")
+    private Date birthday;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
@@ -93,5 +96,11 @@ public class User extends Model {
         this.roles = roles;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
 
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }
