@@ -22,6 +22,9 @@ public class Coach extends Model {
     @Column(name = "login")
     private String login;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "phone")
     private String phone;
 
@@ -138,5 +141,13 @@ public class Coach extends Model {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
