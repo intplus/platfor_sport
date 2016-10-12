@@ -34,8 +34,7 @@ public class A_PersonsController {
     }
 
     @RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
-//    public String showDataForm(@ModelAttribute("registerPersonDate") RegisterPerson registerPerson){
-    public ModelAndView workPage(){
+   public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<User> users = userService.getAll();
 
