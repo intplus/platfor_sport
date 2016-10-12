@@ -7,26 +7,24 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role extends Model {
+public class Status extends Model {
 
     private static final long serialVersionUID = -5380958355394845918L;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
     @Column(name = "title", length = 25, insertable = false, updatable = false)
-    private RoleList roleUser;
+    private String title;
 
     @Column(name = "description", length = 255)
     private String description;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+//    @OneToMany(mappedBy = "status")
+//    private Set<User> users = new HashSet<>();
 
-    public Role() {
+    public Status() {
         super();
     }
 
-    public Role(Long id) {
+    public Status(Long id) {
         super(id);
     }
 
@@ -38,19 +36,11 @@ public class Role extends Model {
         this.description = description;
     }
 
-    public RoleList getRoleUser() {
-        return roleUser;
-    }
-
-    public void setRoleUser(RoleList roleUser) {
-        this.roleUser = roleUser;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }

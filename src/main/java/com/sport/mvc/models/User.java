@@ -15,30 +15,43 @@ public class User extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "name")
     private String name;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "surname")
+    private String surname;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "birthday")
     private Date birthday;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-    private Set<Group> groups = new HashSet<>();
+    @Column(name = "phone")
+    private String phone;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false))
-    private Set<Role> roles =new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
+//    private Set<Group> groups2 = new HashSet<>();
+//
+//
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+//            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+//    private Set<Sport> sports = new HashSet<>();
+
+//    @ManyToOne
+//    @JoinColumn(name = "status_id")
+//    private Status status;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "comment_id")
+//    private Comment comment;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "card_id")
+//    private CustomerCard customerCard;
 
     public User() {
         super();
@@ -54,14 +67,6 @@ public class User extends Model {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getName() {
@@ -80,21 +85,13 @@ public class User extends Model {
         this.phone = phone;
     }
 
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<Group> getGroups() {
+//        return groups2;
+//    }
+//
+//    public void setGroups(Set<Group> groups) {
+//        this.groups2 = groups2;
+//    }
 
     public Date getBirthday() {
         return birthday;
@@ -102,5 +99,53 @@ public class User extends Model {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+//    public Comment getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(Comment comment) {
+//        this.comment = comment;
+//    }
+
+//    public CustomerCard getCustomerCard() {
+//        return customerCard;
+//    }
+//
+//    public void setCustomerCard(CustomerCard customerCard) {
+//        this.customerCard = customerCard;
+//    }
+//
+//    public Set<Group> getGroups2() {
+//        return groups2;
+//    }
+//
+//    public void setGroups2(Set<Group> groups2) {
+//        this.groups2 = groups2;
+//    }
+//
+//    public Set<Sport> getSports() {
+//        return sports;
+//    }
+//
+//    public void setSports(Set<Sport> sports) {
+//        this.sports = sports;
+//    }
+//
+//    public Status getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(Status status) {
+//        this.status = status;
+//    }
+
+    public String getSurName() {
+        return surname;
+    }
+
+    public void setSurName(String surName) {
+        this.surname = surName;
     }
 }
