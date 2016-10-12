@@ -8,45 +8,56 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "group2")
+@Table(name = "group")
 public class Group extends Model {
 
     private static final long serialVersionUID = 5110150966894003873L;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<Coach> treiners = new HashSet<>();
+    @Column(name = "discription")
+    private String discription;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<User> users = new HashSet<>();
+//    @ManyToMany(mappedBy = "groups")
+//    private Set<Coach> treiners = new HashSet<>();
+
+//    @ManyToMany(mappedBy = "groups2")
+//    private Set<User> users = new HashSet<>();
 
     public Group() {
         super();
     }
 
-    public String getComment() {
-        return comment;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 
-    public Set<Coach> getTreiners() {
-        return treiners;
+    public String getName() {
+        return name;
     }
 
-    public void setTreiners(Set<Coach> treiners) {
-        this.treiners = treiners;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
+//    public Set<Coach> getTreiners() {
+//        return treiners;
+//    }
+//
+//    public void setTreiners(Set<Coach> treiners) {
+//        this.treiners = treiners;
+//    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }

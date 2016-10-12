@@ -16,9 +16,6 @@ public class Coach extends Model {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "login")
     private String login;
 
@@ -28,27 +25,27 @@ public class Coach extends Model {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "city")
+    private String city;
+
     @Column(name = "country")
     private String country;
 
     @Column(name = "district")
     private String district;
 
-    @Column(name = "city")
-    private String city;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "coach_sport", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
+//    inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+//    private Set<Sport> sports = new HashSet<>();
 
-    @Column(name = "type_of_sport")
-    private String typeOfSport;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "coach_sport", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
-    inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-    private Set<TypeOfSport> sports = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "coach_group", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-    private Set<Group> groups = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "coach_group", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
+//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
+//    private Set<Group> groups = new HashSet<>();
 
 
     public Coach() {
@@ -119,29 +116,21 @@ public class Coach extends Model {
         this.surname = surname;
     }
 
-    public String getTypeOfSport() {
-        return typeOfSport;
-    }
+//    public Set<Sport> getSports() {
+//        return sports;
+//    }
+//
+//    public void setSports(Set<Sport> sports) {
+//        this.sports = sports;
+//    }
 
-    public void setTypeOfSport(String typeOfSport) {
-        this.typeOfSport = typeOfSport;
-    }
-
-    public Set<TypeOfSport> getSports() {
-        return sports;
-    }
-
-    public void setSports(Set<TypeOfSport> sports) {
-        this.sports = sports;
-    }
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
+//    public Set<Group> getGroups() {
+//        return groups;
+//    }
+//
+//    public void setGroups(Set<Group> groups) {
+//        this.groups = groups;
+//    }
 
     public String getPassword() {
         return password;
@@ -150,4 +139,5 @@ public class Coach extends Model {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
