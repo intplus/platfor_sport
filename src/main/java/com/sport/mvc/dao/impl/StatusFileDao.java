@@ -1,15 +1,15 @@
 package com.sport.mvc.dao.impl;
 
-import com.sport.mvc.dao.RoleDao;
-import com.sport.mvc.models.Role;
+import com.sport.mvc.dao.StatusDao;
+import com.sport.mvc.models.Status;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository(value = "roleFileDao")
-public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
+public class StatusFileDao extends FileAbstractDao<Status> implements StatusDao {
 
-    public RoleFileDao() {
+    public StatusFileDao() {
     }
 
     @Override
@@ -18,12 +18,12 @@ public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
     }
 
     @Override
-    public List<Role> getAll() {
+    public List<Status> getAll() {
         return null;
     }
 
     @Override
-    public Role getById(Long id) {
+    public Status getById(Long id) {
         return null;
     }
 
