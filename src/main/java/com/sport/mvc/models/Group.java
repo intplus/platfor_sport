@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "group")
+@Table(name = "group2")
 public class Group extends Model {
 
     private static final long serialVersionUID = 5110150966894003873L;
@@ -22,8 +22,8 @@ public class Group extends Model {
 //    @ManyToMany(mappedBy = "groups")
 //    private Set<Coach> treiners = new HashSet<>();
 
-//    @ManyToMany(mappedBy = "groups2")
-//    private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "groups2")
+    private Set<User> users = new HashSet<>();
 
     public Group() {
         super();
@@ -53,11 +53,11 @@ public class Group extends Model {
 //        this.treiners = treiners;
 //    }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }

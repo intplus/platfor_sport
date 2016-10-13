@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sports")
+@Table(name = "sport")
 public class Sport extends Model {
 
     private static final long serialVersionUID = -5417868963964887203L;
@@ -18,6 +18,9 @@ public class Sport extends Model {
 
 //    @ManyToMany(mappedBy = "sports")
 //    private Set<Coach> trainers = new HashSet<>();
+
+//    @ManyToMany(mappedBy = "sports2")
+//    private Set<Sport> sports = new HashSet<>();
 
     public Sport() {
         super();

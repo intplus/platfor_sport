@@ -41,7 +41,7 @@ public class Coach extends Model {
 //    @JoinTable(name = "coach_sport", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
 //    inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
 //    private Set<Sport> sports = new HashSet<>();
-
+//
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinTable(name = "coach_group", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
 //            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
