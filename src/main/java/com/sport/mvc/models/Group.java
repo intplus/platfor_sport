@@ -20,10 +20,10 @@ public class Group extends Model {
     private String discription;
 
 //    @ManyToMany(mappedBy = "groups")
-//    private Set<Coach> treiners = new HashSet<>();
+//    private Set<User> treiners = new HashSet<>();
 
-    @ManyToMany(mappedBy = "groups2")
-    private Set<User> users = new HashSet<>();
+//    @ManyToMany(mappedBy = "groups2")
+//    private Set<Student> users = new HashSet<>();
 
     public Group() {
         super();
@@ -45,19 +45,19 @@ public class Group extends Model {
         this.name = name;
     }
 
-//    public Set<Coach> getTreiners() {
+//    public Set<User> getTreiners() {
 //        return treiners;
 //    }
 //
-//    public void setTreiners(Set<Coach> treiners) {
+//    public void setTreiners(Set<User> treiners) {
 //        this.treiners = treiners;
 //    }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<Student> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<Student> users) {
+//        this.users = users;
+//    }
 }

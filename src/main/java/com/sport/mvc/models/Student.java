@@ -10,8 +10,8 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "user")
-public class User extends Model {
+@Table(name = "student")
+public class Student extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;
 
@@ -53,11 +53,11 @@ public class User extends Model {
 //    @JoinColumn(name = "card_id")
 //    private CustomerCard customerCard;
 
-    public User() {
+    public Student() {
         super();
     }
 
-    public User(Long id) {
+    public Student(Long id) {
         super(id);
     }
 
@@ -148,4 +148,5 @@ public class User extends Model {
     public void setSurname(String surName) {
         this.surname = surName;
     }
+
 }
