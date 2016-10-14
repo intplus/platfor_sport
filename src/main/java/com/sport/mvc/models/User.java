@@ -1,14 +1,19 @@
 package com.sport.mvc.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
 public class User extends Model {
 
-    private static final long serialVersionUID = -9012426419230168501L;
+    private static final long serialVersionUID = -8950386400041310256L;
 
     @Column(name = "name")
     private String name;
@@ -16,64 +21,44 @@ public class User extends Model {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "birthday")
+    private Date birthday;
 
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "district")
-    private String district;
-
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "coach_sport", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
-//    inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-//    private Set<Sport> sports = new HashSet<>();
+//    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
+//    private Set<Group> groups2 = new HashSet<>();
+//
 //
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "coach_group", joinColumns = @JoinColumn(name = "coach_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-//    private Set<Group> groups = new HashSet<>();
+//    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+//            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+//    private Set<Sport> sports = new HashSet<>();
 
+//    @ManyToOne
+//    @JoinColumn(name = "status_id")
+//    private Status status;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "comment_id")
+//    private Comment comment;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "card_id")
+//    private CustomerCard customerCard;
 
     public User() {
         super();
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
+    public User(Long id) {
+        super(id);
     }
 
     public String getEmail() {
@@ -82,14 +67,6 @@ public class User extends Model {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getName() {
@@ -108,14 +85,46 @@ public class User extends Model {
         this.phone = phone;
     }
 
-    public String getSurname() {
-        return surname;
+//    public Set<Group> getGroups() {
+//        return groups2;
+//    }
+//
+//    public void setGroups(Set<Group> groups) {
+//        this.groups2 = groups2;
+//    }
+
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
+//    public Comment getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(Comment comment) {
+//        this.comment = comment;
+//    }
+
+//    public CustomerCard getCustomerCard() {
+//        return customerCard;
+//    }
+//
+//    public void setCustomerCard(CustomerCard customerCard) {
+//        this.customerCard = customerCard;
+//    }
+//
+//    public Set<Group> getGroups2() {
+//        return groups2;
+//    }
+//
+//    public void setGroups2(Set<Group> groups2) {
+//        this.groups2 = groups2;
+//    }
+//
 //    public Set<Sport> getSports() {
 //        return sports;
 //    }
@@ -123,22 +132,20 @@ public class User extends Model {
 //    public void setSports(Set<Sport> sports) {
 //        this.sports = sports;
 //    }
-
-//    public Set<Group> getGroups() {
-//        return groups;
+//
+//    public Status getStatus() {
+//        return status;
 //    }
 //
-//    public void setGroups(Set<Group> groups) {
-//        this.groups = groups;
+//    public void setStatus(Status status) {
+//        this.status = status;
 //    }
 
-    public String getPassword() {
-        return password;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSurname(String surName) {
+        this.surname = surName;
     }
-
-
 }
