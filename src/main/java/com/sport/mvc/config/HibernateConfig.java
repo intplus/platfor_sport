@@ -32,6 +32,9 @@ public class HibernateConfig {
     private static final String ENTITY_MANAGER_PACKAGES_TO_SCAN = "packagesToScan";
     private static final String HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
     private static final String HIBERNATE_ENABLE_LAZY_LOAD_NO_TRANS = "hibernate.enable_lazy_load_no_trans";
+    private static final String HIBERNATE_CONNECTION_CHARSET = "hibernate.connection.Charset";
+    private static final String HIBERNATE_CONNECTION_CHARSET_ENCODING = "hibernate.connection.CharacterEncoding";
+    private static final String HIBERNATE_CONNECTION_USE_UNICODE = "hibernate.connection.Useunicode";
 
     @Resource
     private Environment environment;
@@ -61,6 +64,9 @@ public class HibernateConfig {
         properties.put(HIBERNATE_SHOW_SQL, environment.getRequiredProperty(HIBERNATE_SHOW_SQL));
         properties.put(HIBERNATE_HBM2DDL_AUTO, environment.getRequiredProperty(HIBERNATE_HBM2DDL_AUTO));
         properties.put(HIBERNATE_ENABLE_LAZY_LOAD_NO_TRANS, environment.getRequiredProperty(HIBERNATE_ENABLE_LAZY_LOAD_NO_TRANS));
+        properties.put(HIBERNATE_CONNECTION_CHARSET, environment.getRequiredProperty(HIBERNATE_CONNECTION_CHARSET));
+        properties.put(HIBERNATE_CONNECTION_CHARSET_ENCODING, environment.getRequiredProperty(HIBERNATE_CONNECTION_CHARSET_ENCODING));
+        properties.put(HIBERNATE_CONNECTION_USE_UNICODE, environment.getRequiredProperty(HIBERNATE_CONNECTION_USE_UNICODE));
         return properties;
     }
 
