@@ -141,11 +141,11 @@ public class User extends Model {
 //        this.status = status;
 //    }
 
-    public String getSurName() {
+    public String getSurname() {
         return surname;
     }
 
-    public void setSurName(String surName) {
+    public void setSurname(String surName) {
         this.surname = surName;
     }
 }
