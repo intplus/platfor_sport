@@ -28,9 +28,6 @@ public class A_PersonsController {
     @Qualifier("studentService")
     private StudentService studentService;
 
-
-    @Autowired
-    UserService userService;
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
 
