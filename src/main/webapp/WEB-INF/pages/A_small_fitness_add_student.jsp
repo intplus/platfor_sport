@@ -49,23 +49,23 @@
     </div>
 </nav>
 
-<div class="container adduser_form">
-    <h1>Add user</h1>
+<div class="container addstudent_form">
+    <h1>Add student</h1>
     <br>
-    <form:form modelAttribute="newUser" method="post">
-        <label for="name"><spring:message code="addUser.form.name"></spring:message></label>
+    <form:form modelAttribute="newStudent" method="post">
+        <label for="name"><spring:message code="addStudent.form.name"></spring:message></label>
         <form:input id="name" path="name"></form:input>
         <br>
-        <label for="lastName"><spring:message code="addUser.form.lastName"></spring:message> </label>
+        <label for="lastName"><spring:message code="addStudent.form.lastName"></spring:message> </label>
         <form:input path="surname" id="lastName"></form:input>
         <br>
-        <label for="email"><spring:message code="addUser.form.email"></spring:message></label>
+        <label for="email"><spring:message code="addStudent.form.email"></spring:message></label>
         <form:input id="email" path="email"></form:input>
         <br>
-        <label for="phone"><spring:message code="addUser.form.phone"></spring:message> </label>
+        <label for="phone"><spring:message code="addStudent.form.phone"></spring:message> </label>
         <form:input path="phone" id="phone"></form:input>
         <br>
-        <label for="birthday"><spring:message code="addUser.form.birthday"></spring:message> </label>
+        <label for="birthday"><spring:message code="addStudent.form.birthday"></spring:message> </label>
         <form:input path="birthday" id="birthday"></form:input>
         <br>
         <input type="submit" value="Add">
