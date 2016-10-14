@@ -22,8 +22,8 @@ public class Group extends Model {
 //    @ManyToMany(mappedBy = "groups")
 //    private Set<Coach> treiners = new HashSet<>();
 
-    @ManyToMany(mappedBy = "groups2")
-    private Set<User> users = new HashSet<>();
+//    @ManyToMany(mappedBy = "groups2")
+//    private Set<User> users = new HashSet<>();
 
     public Group() {
         super();
@@ -53,11 +53,11 @@ public class Group extends Model {
 //        this.treiners = treiners;
 //    }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }
