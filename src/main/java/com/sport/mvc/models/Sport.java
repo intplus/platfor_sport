@@ -49,4 +49,5 @@ public class Sport extends Model {
 //    public void setTrainers(Set<User> trainers) {
 //        this.trainers = trainers;
 //    }
+
 }

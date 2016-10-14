@@ -69,4 +69,5 @@ public class CustomerCard extends Model {
 //    public void setUsers(Set<Student> users) {
 //        this.users = users;
 //    }
+
 }
