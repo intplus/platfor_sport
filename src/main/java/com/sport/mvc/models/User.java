@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user2")
+@Table(name = "user")
 public class User extends Model {
 
     private static final long serialVersionUID = -9012426419230168501L;
@@ -139,5 +139,6 @@ public class User extends Model {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }

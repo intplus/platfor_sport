@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "student2")
+@Table(name = "student")
 public class Student extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;

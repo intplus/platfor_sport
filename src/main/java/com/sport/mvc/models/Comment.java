@@ -62,12 +62,6 @@ public class Comment extends Model {
         this.updated = updated;
     }
 
-//    public Set<Student> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<Student> users) {
-//        this.users = users;
-//    }
+
 
 }
