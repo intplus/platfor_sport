@@ -24,14 +24,13 @@ import java.util.List;
 @RequestMapping(value = "/registerPerson/")
 public class A_PersonsController {
 
-/*    @Autowired
-    @Qualifier("userService")
-    private UserServiceImpl userService;*/
-
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
 
+
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
 
@@ -68,6 +67,7 @@ public class A_PersonsController {
         studentService.addStudent(student);
         return "redirect:/registerPerson/addStudent";
     }
+
     /*works with date format which receives from the form*/
     @InitBinder
     public void initBinder(WebDataBinder binder)
