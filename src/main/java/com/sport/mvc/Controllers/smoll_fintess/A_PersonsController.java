@@ -1,7 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
-import com.sport.mvc.models.User;
-import com.sport.mvc.services.UserService;
+import com.sport.mvc.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,16 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 
 @Controller
 @RequestMapping(value = "/registerPerson/")
 public class A_PersonsController {
 
     @Autowired
-    @Qualifier("userService")
-    private UserService userService;
+    @Qualifier("studentService")
+    private StudentService studentService;
 
 
     @RequestMapping(value = "/general_registration_form")
@@ -36,7 +33,7 @@ public class A_PersonsController {
     @RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
-//        List<User> users = userService.getAll();
+//        List<Student> users = userService.getAll();
 //
 //        modelAndView.addObject("users", users);
         modelAndView.setViewName("A_small_fitness_first_work_Page");

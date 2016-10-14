@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository(value = "userFileDao")
 public class UserFileDao extends FileAbstractDao<User> implements UserDao {
-
     public UserFileDao() {
     }
 
@@ -24,11 +23,6 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
 
     @Override
     public User getById(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getByUsername(String username) {
         return null;
     }
 }
