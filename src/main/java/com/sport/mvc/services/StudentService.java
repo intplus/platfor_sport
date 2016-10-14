@@ -10,18 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service(value = "studentService")
-public class StudentService {
+public interface StudentService {
+    List<Student> getAll();
 
-    @Autowired
-    @Qualifier("studentDatabaseDao")
-    private StudentDao studentDao;
+    void addStudent(Student student);
 
-    public StudentService() {
-    }
-
-    @Transactional
-    public List<Student> getAll() {
-        return studentDao.getAll();
-    }
+//    @Autowired
+//    @Qualifier("studentDatabaseDao")
+//    private StudentDao studentDao;
+//
+//    public StudentService() {
+//    }
+//
+//    @Transactional
+//    public List<Student> getAll() {
+//        return studentDao.getAll();
+//    }
 
 }
