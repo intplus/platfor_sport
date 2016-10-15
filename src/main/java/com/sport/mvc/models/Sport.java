@@ -19,7 +19,7 @@ public class Sport extends Model {
     @ManyToMany(mappedBy = "sports")
     private Set<User> trainers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "sports2")
+    @ManyToMany(mappedBy = "sports")
     private Set<Student> sports = new HashSet<>();
 
     public Sport() {

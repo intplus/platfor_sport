@@ -39,7 +39,7 @@ public class Student extends Model {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_sport", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-    private Set<Sport> sports2 = new HashSet<>();
+    private Set<Sport> sports = new HashSet<>();
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
@@ -47,7 +47,7 @@ public class Student extends Model {
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "status_id")
     private Status status;
 
@@ -116,12 +116,12 @@ public class Student extends Model {
     }
 
 
-    public Set<Sport> getSports2() {
-        return sports2;
+    public Set<Sport> getSports() {
+        return sports;
     }
 
-    public void setSports2(Set<Sport> sports2) {
-        this.sports2 = sports2;
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
     }
 
     public Status getStatus() {

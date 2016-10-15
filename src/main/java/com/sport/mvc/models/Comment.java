@@ -23,7 +23,7 @@ public class Comment extends Model {
     @Column(name = "deleted")
     private boolean deleted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "student_id")
     private Student student;
 

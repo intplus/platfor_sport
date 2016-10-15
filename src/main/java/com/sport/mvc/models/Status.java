@@ -17,7 +17,7 @@ public class Status extends Model {
     @Column(name = "description", length = 255)
     private String description;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Student> students = new HashSet<>();
 
     public Status() {
