@@ -72,4 +72,12 @@ public class CustomerCard extends Model {
     public void setStudents(Set<Student> students) {
         this.students = students;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
