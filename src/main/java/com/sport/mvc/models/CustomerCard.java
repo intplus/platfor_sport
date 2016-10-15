@@ -14,6 +14,9 @@ public class CustomerCard extends Model {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "price")
+    private int price;
+
     @Column(name = "created")
     private Date created;
 
