@@ -15,16 +15,4 @@ public interface StudentService {
 
     void addStudent(Student student);
 
-//    @Autowired
-//    @Qualifier("studentDatabaseDao")
-//    private StudentDao studentDao;
-//
-//    public StudentService() {
-//    }
-//
-//    @Transactional
-//    public List<Student> getAll() {
-//        return studentDao.getAll();
-//    }
-
 }

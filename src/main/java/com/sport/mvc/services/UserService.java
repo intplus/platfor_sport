@@ -1,12 +1,11 @@
 package com.sport.mvc.services;
 
 import com.sport.mvc.models.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by admin on 12.10.2016.
- */
+@Service(value = "userService")
 public interface UserService {
     List<User> getAll();
 
