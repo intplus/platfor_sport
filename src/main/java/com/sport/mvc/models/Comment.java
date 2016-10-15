@@ -23,8 +23,9 @@ public class Comment extends Model {
     @Column(name = "deleted")
     private boolean deleted;
 
-    @OneToMany(mappedBy = "comment" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Student> students = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     public Comment() {
         super();
@@ -62,11 +63,11 @@ public class Comment extends Model {
         this.updated = updated;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

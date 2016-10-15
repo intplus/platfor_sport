@@ -41,17 +41,15 @@ public class Student extends Model {
             inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
     private Set<Sport> sports2 = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "card_id")
-    private CustomerCard customerCard;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CustomerCard> cards = new HashSet<>();
+
+    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
-
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
 
     public Student() {
         super();
@@ -93,20 +91,20 @@ public class Student extends Model {
         this.birthday = birthday;
     }
 
-    public Comment getComment() {
-        return comment;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
-    public CustomerCard getCustomerCard() {
-        return customerCard;
+    public Set<CustomerCard> getCards() {
+        return cards;
     }
 
-    public void setCustomerCard(CustomerCard customerCard) {
-        this.customerCard = customerCard;
+    public void setCards(Set<CustomerCard> cards) {
+        this.cards = cards;
     }
 
     public Set<Group> getGroups() {

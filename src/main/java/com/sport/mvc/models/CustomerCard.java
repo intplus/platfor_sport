@@ -26,8 +26,9 @@ public class CustomerCard extends Model {
     @Column(name = "deleted")
     private boolean deleted;
 
-    @OneToMany(mappedBy = "customerCard", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Student> students = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     public CustomerCard() {
         super();
@@ -65,12 +66,12 @@ public class CustomerCard extends Model {
         this.updated = updated;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public int getPrice() {
