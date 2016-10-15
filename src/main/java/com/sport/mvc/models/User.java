@@ -30,28 +30,31 @@ public class User extends Model {
     @Column(name = "phone")
     private String phone;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-//    private Set<Group> groups2 = new HashSet<>();
-//
-//
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-//    private Set<Sport> sports = new HashSet<>();
+    @Column(name = "login")
+    private String login;
 
-//    @ManyToOne
-//    @JoinColumn(name = "status_id")
-//    private Status status;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "comment_id")
-//    private Comment comment;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "card_id")
-//    private CustomerCard customerCard;
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "district")
+    private String district;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
+    private Set<Group> groups2 = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+    private Set<Sport> sports = new HashSet<>();
 
     public User() {
         super();
@@ -85,14 +88,6 @@ public class User extends Model {
         this.phone = phone;
     }
 
-//    public Set<Group> getGroups() {
-//        return groups2;
-//    }
-//
-//    public void setGroups(Set<Group> groups) {
-//        this.groups2 = groups2;
-//    }
-
     public Date getBirthday() {
         return birthday;
     }
@@ -101,51 +96,67 @@ public class User extends Model {
         this.birthday = birthday;
     }
 
-//    public Comment getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//    }
-
-//    public CustomerCard getCustomerCard() {
-//        return customerCard;
-//    }
-//
-//    public void setCustomerCard(CustomerCard customerCard) {
-//        this.customerCard = customerCard;
-//    }
-//
-//    public Set<Group> getGroups2() {
-//        return groups2;
-//    }
-//
-//    public void setGroups2(Set<Group> groups2) {
-//        this.groups2 = groups2;
-//    }
-//
-//    public Set<Sport> getSports() {
-//        return sports;
-//    }
-//
-//    public void setSports(Set<Sport> sports) {
-//        this.sports = sports;
-//    }
-//
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
-
     public String getSurname() {
         return surname;
     }
 
     public void setSurname(String surName) {
         this.surname = surName;
+    }
+
+    public Set<Sport> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
+    }
+
+    public Set<Group> getGroups2() {
+        return groups2;
+    }
+
+    public void setGroups2(Set<Group> groups2) {
+        this.groups2 = groups2;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

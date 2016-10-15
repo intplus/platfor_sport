@@ -30,28 +30,28 @@ public class Student extends Model {
     @Column(name = "phone")
     private String phone;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-//    private Set<Group> groups2 = new HashSet<>();
-//
-//
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-//    private Set<Sport> sports = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "student_group", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
+    private Set<Group> groups = new HashSet<>();
 
-//    @ManyToOne
-//    @JoinColumn(name = "status_id")
-//    private Status status;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "comment_id")
-//    private Comment comment;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "card_id")
-//    private CustomerCard customerCard;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "student_sport", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+    private Set<Sport> sports2 = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "card_id")
+    private CustomerCard customerCard;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 
     public Student() {
         super();
@@ -85,14 +85,6 @@ public class Student extends Model {
         this.phone = phone;
     }
 
-//    public Set<Group> getGroups() {
-//        return groups2;
-//    }
-//
-//    public void setGroups(Set<Group> groups) {
-//        this.groups2 = groups2;
-//    }
-
     public Date getBirthday() {
         return birthday;
     }
@@ -101,45 +93,46 @@ public class Student extends Model {
         this.birthday = birthday;
     }
 
-//    public Comment getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//    }
+    public Comment getComment() {
+        return comment;
+    }
 
-//    public CustomerCard getCustomerCard() {
-//        return customerCard;
-//    }
-//
-//    public void setCustomerCard(CustomerCard customerCard) {
-//        this.customerCard = customerCard;
-//    }
-//
-//    public Set<Group> getGroups2() {
-//        return groups2;
-//    }
-//
-//    public void setGroups2(Set<Group> groups2) {
-//        this.groups2 = groups2;
-//    }
-//
-//    public Set<Sport> getSports() {
-//        return sports;
-//    }
-//
-//    public void setSports(Set<Sport> sports) {
-//        this.sports = sports;
-//    }
-//
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public CustomerCard getCustomerCard() {
+        return customerCard;
+    }
+
+    public void setCustomerCard(CustomerCard customerCard) {
+        this.customerCard = customerCard;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
+
+    public Set<Sport> getSports2() {
+        return sports2;
+    }
+
+    public void setSports2(Set<Sport> sports2) {
+        this.sports2 = sports2;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public String getSurname() {
         return surname;

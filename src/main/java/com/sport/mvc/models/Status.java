@@ -17,8 +17,8 @@ public class Status extends Model {
     @Column(name = "description", length = 255)
     private String description;
 
-//    @OneToMany(mappedBy = "status")
-//    private Set<Student> users = new HashSet<>();
+    @OneToMany(mappedBy = "status")
+    private Set<Student> students = new HashSet<>();
 
     public Status() {
         super();
@@ -36,13 +36,13 @@ public class Status extends Model {
         this.description = description;
     }
 
-//    public Set<Student> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<Student> users) {
-//        this.users = users;
-//    }
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 
     public String getTitle() {
         return title;
