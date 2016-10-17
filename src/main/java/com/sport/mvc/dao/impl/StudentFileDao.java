@@ -26,11 +26,11 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
 
     @Override
     public List<Student> getAll() {
-        //open current session
-        Session session = sessionFactory.getCurrentSession();
-        //get the list of users
-        List<Student> students = session.createQuery("from Student").list();
-        return students;
+//        //open current session
+//        Session session = sessionFactory.getCurrentSession();
+//        //get the list of users
+//        List<Student> students = session.createQuery("from Student").list();
+        return null;
     }
 
     @Override
@@ -38,28 +38,28 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
         return null;
     }
 
-    @Override
-    public Student getByUsername(String username) {
-        return null;
-    }
+//    @Override
+//    public Student getByUsername(String username) {
+//        return null;
+//    }
 
-    @Override
-    public void deleteListOfStudents(List<Long> id) {
-        Session session = sessionFactory.getCurrentSession();
-        for (int i = 0; i<id.size(); i++) {
-           Student students = (Student) session.load(Student.class, new Long(id.get(i)));
-            if (null != students)
-            session.delete(students);
-        }
-    }
+//    @Override
+//    public void deleteListOfStudents(List id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        for (int i = 0; i<id.size(); i++) {
+//           Student students = (Student) session.load(Student.class, new Long(id.get(i)));
+//            if (null != students)
+//            session.delete(students);
+//        }
+//    }
 
     @Override
     public void add(Student student) {
-        //open session
-        Session session  = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(student);
-        session.flush();
-
+//        //open session
+//        Session session  = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(student);
+//        session.flush();
+//
 
     }
 }

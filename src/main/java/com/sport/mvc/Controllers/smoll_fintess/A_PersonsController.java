@@ -72,7 +72,7 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List<Long> id) {
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) Long id) {
         if (id!=null)
             studentService.deleteListOfStudents(id);
         return "redirect:/registerPerson/showFirstWorkPage";

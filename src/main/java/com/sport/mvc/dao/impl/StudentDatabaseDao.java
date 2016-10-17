@@ -15,16 +15,11 @@ public class StudentDatabaseDao extends HibernateAbstractDao<Student> implements
     public StudentDatabaseDao() {
 
     }
-
-    @Override
-    public Student getByUsername(String surname) {
-        Criteria criteria =getSession().createCriteria(Student.class);
-        criteria.add(Restrictions.eq("surname", surname));
-        return (Student) criteria.uniqueResult();
-    }
-
-    @Override
-    public void deleteListOfStudents(List<Long> id) {
-
-    }
+//
+//    @Override
+//    public Student getByUsername(String surname) {
+//        Criteria criteria =getSession().createCriteria(Student.class);
+//        criteria.add(Restrictions.eq("surname", surname));
+//        return (Student) criteria.uniqueResult();
+//    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Service(value = "studentService")
 public class StudentServiceImpl implements StudentService {
 
-    @Qualifier("studentFileDao")
+    @Qualifier("studentDatabaseDao")
     @Autowired
     private StudentDao studentDao;
 
@@ -36,8 +36,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     @Override
-    public void deleteListOfStudents(List<Long> id) {
-        studentDao.deleteListOfStudents(id);
+    public void deleteListOfStudents(Long id) {
+        studentDao.remove(studentDao.getById(id));
     }
 
 }
