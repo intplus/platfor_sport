@@ -10,8 +10,8 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "user")
-public class User extends Model {
+@Table(name = "student")
+public class Student extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;
 
@@ -30,37 +30,32 @@ public class User extends Model {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "district")
-    private String district;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+    @JoinTable(name = "student_group", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-    private Set<Group> groups2 = new HashSet<>();
+    private Set<Group> groups = new HashSet<>();
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+    @JoinTable(name = "student_sport", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
     private Set<Sport> sports = new HashSet<>();
 
-    public User() {
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CustomerCard> cards = new HashSet<>();
+
+    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    public Student() {
         super();
     }
 
-    public User(Long id) {
+    public Student(Long id) {
         super(id);
     }
 
@@ -96,13 +91,30 @@ public class User extends Model {
         this.birthday = birthday;
     }
 
-    public String getSurname() {
-        return surname;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public void setSurname(String surName) {
-        this.surname = surName;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
+
+    public Set<CustomerCard> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<CustomerCard> cards) {
+        this.cards = cards;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
 
     public Set<Sport> getSports() {
         return sports;
@@ -112,51 +124,20 @@ public class User extends Model {
         this.sports = sports;
     }
 
-    public Set<Group> getGroups2() {
-        return groups2;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setGroups2(Set<Group> groups2) {
-        this.groups2 = groups2;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public String getCity() {
-        return city;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setSurname(String surName) {
+        this.surname = surName;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

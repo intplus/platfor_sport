@@ -1,6 +1,8 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
+import com.sport.mvc.models.Student;
 import com.sport.mvc.models.User;
+import com.sport.mvc.services.StudentService;
 import com.sport.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,12 +24,10 @@ import java.util.List;
 @RequestMapping(value = "/registerPerson/")
 public class A_PersonsController {
 
-/*    @Autowired
-    @Qualifier("userService")
-    private UserServiceImpl userService;*/
-
     @Autowired
-    UserService userService;
+    @Qualifier("studentService")
+    private StudentService studentService;
+
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
 
@@ -42,8 +42,8 @@ public class A_PersonsController {
     @RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
-        List<User> users = userService.getAll();
-        modelAndView.addObject("users", users);
+        List<Student> students = studentService.getAll();
+        modelAndView.addObject("students", students);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
 
         return modelAndView;
@@ -51,19 +51,20 @@ public class A_PersonsController {
 
     //add new user method
     //returns model of new user and enables form fields
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public String addUser(Model model) {
-        User newUser = new User();
-        model.addAttribute("newUser", newUser);
-        return "A_small_fitness_add_user";
+    @RequestMapping(value = "/addStudent", method = RequestMethod.GET)
+    public String addStudent(Model model) {
+        Student newStudent = new Student();
+        model.addAttribute("newStudent", newStudent);
+        return "A_small_fitness_add_student";
     }
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addNewUser(Model model, @ModelAttribute("newUser") User user) {
-        System.out.print(user.getName());
-        userService.addUser(user);
-        return "redirect:/registerPerson/addUser";
+    @RequestMapping(value = "/addStudent", method = RequestMethod.POST)
+    public String addNewStudent(Model model, @ModelAttribute("newStudent") Student student) {
+        System.out.print(student.getName());
+        studentService.addStudent(student);
+        return "redirect:/registerPerson/addStudent";
     }
+
     /*works with date format which receives from the form*/
     @InitBinder
     public void initBinder(WebDataBinder binder)

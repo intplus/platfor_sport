@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository(value = "roleFileDao")
+@Repository(value = "statusFileDao")
 public class StatusFileDao extends FileAbstractDao<Status> implements StatusDao {
 
     public StatusFileDao() {

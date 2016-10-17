@@ -13,6 +13,7 @@ import java.util.List;
 @Service(value = "userService")
 public class UserServiceImpl implements UserService{
 
+    @Qualifier("userFileDao")
     @Autowired
     private UserDao userDao;
 

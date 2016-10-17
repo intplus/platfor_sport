@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sports")
+@Table(name = "sport")
 public class Sport extends Model {
 
     private static final long serialVersionUID = -5417868963964887203L;
@@ -16,8 +16,11 @@ public class Sport extends Model {
 
     private String country;
 
-//    @ManyToMany(mappedBy = "sports")
-//    private Set<Coach> trainers = new HashSet<>();
+    @ManyToMany(mappedBy = "sports")
+    private Set<User> trainers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "sports")
+    private Set<Student> sports = new HashSet<>();
 
     public Sport() {
         super();
@@ -39,11 +42,19 @@ public class Sport extends Model {
         this.sport = sport;
     }
 
-//    public Set<Coach> getTrainers() {
-//        return trainers;
-//    }
-//
-//    public void setTrainers(Set<Coach> trainers) {
-//        this.trainers = trainers;
-//    }
+    public Set<User> getTrainers() {
+        return trainers;
+    }
+
+    public void setTrainers(Set<User> trainers) {
+        this.trainers = trainers;
+    }
+
+    public Set<Student> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Student> sports) {
+        this.sports = sports;
+    }
 }
