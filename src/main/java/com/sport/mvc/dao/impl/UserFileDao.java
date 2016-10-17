@@ -2,12 +2,10 @@ package com.sport.mvc.dao.impl;
 
 import com.sport.mvc.dao.UserDao;
 import com.sport.mvc.models.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository(value = "userFileDao")
@@ -27,7 +25,7 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     @Override
     public List<User> getAll() {
         //open current session
-        Session session = sessionFactory.getCurrentSession();
+       org.hibernate.Session session = sessionFactory.getCurrentSession();
         //get the list of users
         List<User> users = session.createQuery("from User").list();
         return users;
@@ -46,7 +44,7 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     @Override
     public void add(User user) {
         //open session
-        Session session  = sessionFactory.getCurrentSession();
+        org.hibernate.Session session  = sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
         session.flush();
 

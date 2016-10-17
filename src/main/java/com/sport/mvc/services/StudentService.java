@@ -15,4 +15,5 @@ public interface StudentService {
 
     void addStudent(Student student);
 
+    public void deleteListOfStudents(List<Long> id);
 }
