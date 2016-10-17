@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service(value = "userService")
 public interface UserService {
     List<User> getAll();
 
