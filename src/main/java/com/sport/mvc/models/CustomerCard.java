@@ -14,6 +14,9 @@ public class CustomerCard extends Model {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "price")
+    private int price;
+
     @Column(name = "created")
     private Date created;
 
@@ -23,8 +26,9 @@ public class CustomerCard extends Model {
     @Column(name = "deleted")
     private boolean deleted;
 
-//    @OneToMany(mappedBy = "customer_card", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<User> users = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     public CustomerCard() {
         super();
@@ -62,11 +66,19 @@ public class CustomerCard extends Model {
         this.updated = updated;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }

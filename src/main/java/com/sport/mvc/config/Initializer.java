@@ -1,6 +1,9 @@
 package com.sport.mvc.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,5 +20,12 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    protected Filter[] getServletFilter() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("UTF-8");
+        encodingFilter.setForceEncoding(true);
+        return new Filter[]{encodingFilter};
     }
 }

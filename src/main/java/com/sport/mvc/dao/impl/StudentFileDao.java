@@ -1,22 +1,22 @@
 package com.sport.mvc.dao.impl;
 
-import com.sport.mvc.dao.UserDao;
-import com.sport.mvc.models.User;
+import com.sport.mvc.dao.StudentDao;
+import com.sport.mvc.models.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value = "userFileDao")
-public class UserFileDao extends FileAbstractDao<User> implements UserDao {
+@Repository(value = "studentFileDao")
+public class StudentFileDao extends FileAbstractDao<Student> implements StudentDao {
+
     //getting session factory from the bean
     @Autowired
     SessionFactory sessionFactory;
 
-    public UserFileDao() {
+    public StudentFileDao() {
     }
 
     @Override
@@ -25,29 +25,29 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Student> getAll() {
         //open current session
         Session session = sessionFactory.getCurrentSession();
         //get the list of users
-        List<User> users = session.createQuery("from User").list();
-        return users;
+        List<Student> students = session.createQuery("from Student").list();
+        return students;
     }
 
     @Override
-    public User getById(Long id) {
+    public Student getById(Long id) {
         return null;
     }
 
     @Override
-    public User getByUsername(String username) {
+    public Student getByUsername(String username) {
         return null;
     }
 
     @Override
-    public void add(User user) {
+    public void add(Student student) {
         //open session
         Session session  = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(user);
+        session.saveOrUpdate(student);
         session.flush();
 
 

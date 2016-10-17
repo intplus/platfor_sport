@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Table(name = "status")
 public class Status extends Model {
 
     private static final long serialVersionUID = -5380958355394845918L;
@@ -17,8 +17,8 @@ public class Status extends Model {
     @Column(name = "description", length = 255)
     private String description;
 
-//    @OneToMany(mappedBy = "status")
-//    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Student> students = new HashSet<>();
 
     public Status() {
         super();
@@ -36,11 +36,19 @@ public class Status extends Model {
         this.description = description;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
