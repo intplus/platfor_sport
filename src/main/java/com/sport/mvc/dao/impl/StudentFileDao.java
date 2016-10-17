@@ -26,11 +26,11 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
 
     @Override
     public List<Student> getAll() {
-        //open current session
-        Session session = sessionFactory.getCurrentSession();
-        //get the list of users
-        List<Student> students = session.createQuery("from Student").list();
-        return students;
+//        //open current session
+//        Session session = sessionFactory.getCurrentSession();
+//        //get the list of users
+//        List<Student> students = session.createQuery("from Student").list();
+        return null;
     }
 
     @Override
@@ -45,11 +45,11 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
 
     @Override
     public void add(Student student) {
-        //open session
-        Session session  = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(student);
-        session.flush();
-
+//        //open session
+//        Session session  = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(student);
+//        session.flush();
+//
 
     }
 }

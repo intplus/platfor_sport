@@ -26,11 +26,11 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
 
     @Override
     public List<User> getAll() {
-        //open current session
-        Session session = sessionFactory.getCurrentSession();
-        //get the list of users
-        List<User> users = session.createQuery("from User").list();
-        return users;
+//        //open current session
+//        Session session = sessionFactory.getCurrentSession();
+//        //get the list of users
+//        List<User> users = session.createQuery("from User").list();
+        return null;
     }
 
     @Override
@@ -45,11 +45,11 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
 
     @Override
     public void add(User user) {
-        //open session
-        Session session  = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(user);
-        session.flush();
-
+//        //open session
+//        Session session  = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(user);
+//        session.flush();
+//
 
     }
 }

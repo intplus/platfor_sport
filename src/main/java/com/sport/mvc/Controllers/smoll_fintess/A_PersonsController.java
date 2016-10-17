@@ -10,10 +10,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -32,9 +29,7 @@ public class A_PersonsController {
     public String showForm(Model model){
 
         //   RegisterPerson theRegisterPerson= new RegisterPerson();
-
         //   model.addAttribute("registerPersonDate", theRegisterPerson);
-
         return "general_registration_formRegistry";
 
     }
@@ -74,5 +69,12 @@ public class A_PersonsController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, true));
+    }
+
+    @RequestMapping("/delete")
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) Long id) {
+        if (id!=null)
+            studentService.deleteListOfStudents(id);
+        return "redirect:/registerPerson/showFirstWorkPage";
     }
 }
