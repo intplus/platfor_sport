@@ -44,6 +44,16 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
     }
 
     @Override
+    public void deleteListOfStudents(List<Long> id) {
+        Session session = sessionFactory.getCurrentSession();
+        for (int i = 0; i<id.size(); i++) {
+           Student students = (Student) session.load(Student.class, new Long(id.get(i)));
+            if (null != students)
+            session.delete(students);
+        }
+    }
+
+    @Override
     public void add(Student student) {
         //open session
         Session session  = sessionFactory.getCurrentSession();

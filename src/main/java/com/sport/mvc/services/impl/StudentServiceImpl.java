@@ -34,4 +34,10 @@ public class StudentServiceImpl implements StudentService {
         studentDao.add(student);
     }
 
+    @Transactional
+    @Override
+    public void deleteListOfStudents(List<Long> id) {
+        studentDao.deleteListOfStudents(id);
+    }
+
 }
