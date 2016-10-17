@@ -26,7 +26,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public void addStudent(Group group) {
+    public void addGroup(Group group) {
         groupDao.add(group);
     }
 
