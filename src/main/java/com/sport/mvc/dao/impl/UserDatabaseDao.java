@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserDao {
     public UserDatabaseDao() {
     }
-
-    @Override
-    public User getByUsername(String username) {
-        return null;
-    }
+//
+//    @Override
+//    public User getByUsername(String username) {
+//        return null;
+//    }
 }

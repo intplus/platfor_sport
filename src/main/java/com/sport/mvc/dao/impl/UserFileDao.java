@@ -38,10 +38,10 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
         return null;
     }
 
-    @Override
-    public User getByUsername(String username) {
-        return null;
-    }
+//    @Override
+//    public User getByUsername(String username) {
+//        return null;
+//    }
 
     @Override
     public void add(User user) {

@@ -38,10 +38,10 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
         return null;
     }
 
-    @Override
-    public Student getByUsername(String username) {
-        return null;
-    }
+//    @Override
+//    public Student getByUsername(String username) {
+//        return null;
+//    }
 
     @Override
     public void add(Student student) {
