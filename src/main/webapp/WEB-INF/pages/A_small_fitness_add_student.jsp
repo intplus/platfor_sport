@@ -52,45 +52,45 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <%--<form:form action="saveStudent" modelAttribute="student" method="POST">--%>
+    <form:form action="saveStudent" modelAttribute="student" method="POST">
 
-        <%--<form:hidden path="id" />--%>
+        <form:hidden path="id" />
 
-        <%--<table>--%>
-            <%--<tbody>--%>
-            <%--<tr>--%>
-                <%--<td><label>First name:</label></td>--%>
-                <%--<td><form:input path="name" /></td>--%>
-            <%--</tr>--%>
+        <table>
+            <tbody>
+            <tr>
+                <td><label>First name:</label></td>
+                <td><form:input path="name" /></td>
+            </tr>
 
-            <%--<tr>--%>
-                <%--<td><label>Last name:</label></td>--%>
-                <%--<td><form:input path="surname" /></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><label>Last name:</label></td>
+                <td><form:input path="surname" /></td>
+            </tr>
 
-            <%--<tr>--%>
-                <%--<td><label>Email:</label></td>--%>
-                <%--<td><form:input path="email" /></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><form:input path="email" /></td>
+            </tr>
 
             <%--<tr>--%>
                 <%--<td><label>Phone:</label></td>--%>
                 <%--<td><form:input path="phone" /></td>--%>
             <%--</tr>--%>
 
-            <%--tr>--%>
-            <%--<td><label>Birthday:</label></td>--%>
-            <%--<td><form:input path="birthday" /></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><label>Birthday:</label></td>
+                <td><form:input path="birthday" /></td>
+            </tr>
 
-            <%--<tr>--%>
-                <%--<td><label></label></td>--%>
-                <%--<td><input type="submit" value="Save" class="save" /></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><label></label></td>
+                <td><input type="submit" value="Save" class="save" /></td>
+            </tr>
 
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</form:form>--%>
+            </tbody>
+        </table>
+    </form:form>
 </div>
 <footer class="footer">
     <div class="container">
