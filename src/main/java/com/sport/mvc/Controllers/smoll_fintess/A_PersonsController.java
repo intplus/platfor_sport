@@ -69,7 +69,7 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") Student theStudent) {
-        studentService.saveStudent(theStudent);
+        studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
