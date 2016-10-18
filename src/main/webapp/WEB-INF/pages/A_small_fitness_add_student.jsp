@@ -31,8 +31,8 @@
 <nav class="page-navigation">
     <div class="container">
         <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="">Группы</a></li>
+            <li><a href="#">Главная</a></li>
+            <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="#">Кабинет</a></li>
             <%--<li><a href="#">Просмотр моей страници</a></li>--%>
             <%--<li><a href="#">Статистика</a></li>--%>
@@ -52,24 +52,45 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form modelAttribute="newStudent" method="post">
-        <label for="name"><spring:message code="addStudent.form.name"></spring:message></label>
-        <form:input id="name" path="name"></form:input>
-        <br>
-        <label for="lastName"><spring:message code="addStudent.form.lastName"></spring:message> </label>
-        <form:input path="surname" id="lastName"></form:input>
-        <br>
-        <label for="email"><spring:message code="addStudent.form.email"></spring:message></label>
-        <form:input id="email" path="email"></form:input>
-        <br>
-        <label for="phone"><spring:message code="addStudent.form.phone"></spring:message> </label>
-        <form:input path="phone" id="phone"></form:input>
-        <br>
-        <label for="birthday"><spring:message code="addStudent.form.birthday"></spring:message> </label>
-        <form:input path="birthday" id="birthday"></form:input>
-        <br>
-        <input type="submit" value="Add">
-    </form:form>
+    <%--<form:form action="saveStudent" modelAttribute="student" method="POST">--%>
+
+        <%--<form:hidden path="id" />--%>
+
+        <%--<table>--%>
+            <%--<tbody>--%>
+            <%--<tr>--%>
+                <%--<td><label>First name:</label></td>--%>
+                <%--<td><form:input path="name" /></td>--%>
+            <%--</tr>--%>
+
+            <%--<tr>--%>
+                <%--<td><label>Last name:</label></td>--%>
+                <%--<td><form:input path="surname" /></td>--%>
+            <%--</tr>--%>
+
+            <%--<tr>--%>
+                <%--<td><label>Email:</label></td>--%>
+                <%--<td><form:input path="email" /></td>--%>
+            <%--</tr>--%>
+
+            <%--<tr>--%>
+                <%--<td><label>Phone:</label></td>--%>
+                <%--<td><form:input path="phone" /></td>--%>
+            <%--</tr>--%>
+
+            <%--tr>--%>
+            <%--<td><label>Birthday:</label></td>--%>
+            <%--<td><form:input path="birthday" /></td>--%>
+            <%--</tr>--%>
+
+            <%--<tr>--%>
+                <%--<td><label></label></td>--%>
+                <%--<td><input type="submit" value="Save" class="save" /></td>--%>
+            <%--</tr>--%>
+
+            <%--</tbody>--%>
+        <%--</table>--%>
+    <%--</form:form>--%>
 </div>
 <footer class="footer">
     <div class="container">

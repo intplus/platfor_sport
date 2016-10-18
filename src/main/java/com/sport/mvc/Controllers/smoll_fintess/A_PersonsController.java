@@ -47,7 +47,8 @@ public class A_PersonsController {
 
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder)
+    {
         //format of date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
@@ -66,7 +67,7 @@ public class A_PersonsController {
     }
 
 
-    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET)
+    @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") Student theStudent) {
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
