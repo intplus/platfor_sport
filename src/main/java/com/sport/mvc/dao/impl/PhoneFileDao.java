@@ -1,15 +1,15 @@
 package com.sport.mvc.dao.impl;
 
-import com.sport.mvc.dao.SportDao;
-import com.sport.mvc.models.Sport;
+import com.sport.mvc.dao.PhoneDao;
+import com.sport.mvc.models.Phone;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository(value = "sportFileDao")
-public class SportFileDao extends FileAbstractDao<Sport> implements SportDao {
+@Repository(value = "phoneFileDao")
+public class PhoneFileDao extends FileAbstractDao<Phone> implements PhoneDao {
 
-    public SportFileDao() {
+    public PhoneFileDao() {
     }
 
     @Override
@@ -18,12 +18,12 @@ public class SportFileDao extends FileAbstractDao<Sport> implements SportDao {
     }
 
     @Override
-    public List<Sport> getAll() {
+    public List<Phone> getAll() {
         return null;
     }
 
     @Override
-    public Sport getById(Long id) {
+    public Phone getById(Long id) {
         return null;
     }
 }

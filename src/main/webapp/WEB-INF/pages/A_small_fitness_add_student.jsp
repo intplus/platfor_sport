@@ -72,10 +72,10 @@
             <td><label>Email:</label></td>
             <td><form:input path="email" /></td>
         </tr>
-        <%--<tr>--%>
-            <%--<td><label>Phone:</label></td>--%>
-            <%--<td><form:input path="phone" /></td>--%>
-        <%--</tr>--%>
+        <tr>
+            <td><label>Phone:</label></td>
+            <td><form:input path="phone" /></td>
+        </tr>
 
         <tr>
             <td><label>Birthday:</label></td>
