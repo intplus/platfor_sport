@@ -75,7 +75,7 @@
 
         tr>
         <td><label>Phone:</label></td>
-        <td><form:input path="phone" /></td>
+        <%--<td><form:input path="phone" /></td>--%>
         </tr>
 
         tr>

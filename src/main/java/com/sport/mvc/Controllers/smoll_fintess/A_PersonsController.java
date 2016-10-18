@@ -121,34 +121,19 @@ public class A_PersonsController {
         return "A_small_fitness_add_student";
     }
 
-//    @PostMapping("/sendMail")
-//    public String sendMail(@ModelAttribute("student") Student theStudent){
-//
-//        System.out.println("in mail");
-//        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
-//
-//        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
-//
-//        return "redirect:/registerPerson/showFirstWorkPage";
-//
-//    }
-
     @PostMapping("/sendMail")
-    public String sendMail(@ModelAttribute("student") Student theStudent,
-                           Model model, @RequestParam(value = "case", required = false) Long id){
-        if (id!=null)
+    public String sendMail(@ModelAttribute("student") Student theStudent){
+
         System.out.println("in mail");
-        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname()+"----"+
-        theStudent.getEmail());
-        System.out.println(id+" its id");
+        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
 
-
-
-//        sendMailService.sendMailTo(theStudent.getEmail(),theStudent.getName(),theStudent.getSurname());
+        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
 
         return "redirect:/registerPerson/showFirstWorkPage";
 
     }
+
+
 
     @RequestMapping("/showMailForm")
     public String showMailForm(Model theModel){
