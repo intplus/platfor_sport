@@ -1,5 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
+import com.sport.mvc.AdvertisingServices.SendMail;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.StudentService;
@@ -24,6 +25,11 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
+
+
+    @Autowired
+    @Qualifier("sendMailService")
+    private  SendMail sendMailService;
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -94,5 +100,25 @@ public class A_PersonsController {
 
         return "A_small_fitness_add_student";
     }
+
+    @PostMapping("/sendMail")
+    public String sendMail(@ModelAttribute("student") Student theStudent){
+
+        System.out.println("in mail");
+        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+
+        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+
+        return "redirect:/registerPerson/showFirstWorkPage";
+
+    }
+
+    @RequestMapping("/showMailForm")
+    public String showMailForm(Model theModel){
+        Student theStudent = new Student();
+        theModel.addAttribute("student", theStudent);
+        return "A_send_Mail_form";
+    }
+
 
 }
