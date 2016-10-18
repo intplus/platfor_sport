@@ -22,6 +22,9 @@ import java.util.List;
 @RequestMapping(value = "/registerPerson/")
 public class A_PersonsController {
 
+
+    private long ids;
+
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
@@ -79,10 +82,27 @@ public class A_PersonsController {
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
+
     @RequestMapping("/delete")
     public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) Long id) {
         if (id!=null)
-            studentService.deleteListOfStudents(id);
+            System.out.println(id+"  id in delete method");
+        studentService.deleteListOfStudents(id);
+
+
+        return "redirect:/registerPerson/showFirstWorkPage";
+    }
+
+
+
+
+    @RequestMapping("/takeIndex")
+    public String takeIndex(Model model, @RequestParam(value = "case", required = false) Long id) {
+        if (id!=null)
+            System.out.println(id+"  id in it index");
+
+      ids=id;
+
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
@@ -91,7 +111,7 @@ public class A_PersonsController {
     public String showFormForUpdate(@RequestParam("studentId") long theId, Model theModel) {
 
      //   logger.info("showing form for update");
-        System.out.println(theId);
+        System.out.println(theId+" the id in update form");
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
 
@@ -101,13 +121,30 @@ public class A_PersonsController {
         return "A_small_fitness_add_student";
     }
 
+//    @PostMapping("/sendMail")
+//    public String sendMail(@ModelAttribute("student") Student theStudent){
+//
+//        System.out.println("in mail");
+//        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+//
+//        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+//
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//
+//    }
+
     @PostMapping("/sendMail")
-    public String sendMail(@ModelAttribute("student") Student theStudent){
-
+    public String sendMail(@ModelAttribute("student") Student theStudent,
+                           Model model, @RequestParam(value = "case", required = false) Long id){
+        if (id!=null)
         System.out.println("in mail");
-        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname()+"----"+
+        theStudent.getEmail());
+        System.out.println(id+" its id");
 
-        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+
+
+//        sendMailService.sendMailTo(theStudent.getEmail(),theStudent.getName(),theStudent.getSurname());
 
         return "redirect:/registerPerson/showFirstWorkPage";
 
