@@ -41,4 +41,13 @@ public class StudentServiceImpl implements StudentService {
         studentDao.remove(studentDao.getById(id));
     }
 
+    @Override
+    public Student getStudent(long theId) {
+        return null;
+    }
+
+    @Override
+    public void saveStudent(Student theStudent) {
+
+    }
 }
