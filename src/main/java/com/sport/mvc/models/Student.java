@@ -27,8 +27,8 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
-    @Column(name = "phone")
-    private String phone;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Phone> phones = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_group", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
@@ -73,14 +73,6 @@ public class Student extends Model {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public Date getBirthday() {
@@ -138,6 +130,14 @@ public class Student extends Model {
 
     public void setSurname(String surName) {
         this.surname = surName;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
     }
 
 }

@@ -45,10 +45,18 @@ public class User extends Model {
     @Column(name = "district")
     private String district;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "session_history_id")
+    private SessionHistory sessionHistory;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
-    private Set<Group> groups2 = new HashSet<>();
+    private Set<Group> groups = new HashSet<>();
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -112,12 +120,12 @@ public class User extends Model {
         this.sports = sports;
     }
 
-    public Set<Group> getGroups2() {
-        return groups2;
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setGroups2(Set<Group> groups2) {
-        this.groups2 = groups2;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
     public String getCity() {

@@ -1,9 +1,6 @@
 package com.sport.mvc.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,11 +16,15 @@ public class Group extends Model {
     @Column(name = "discription")
     private String discription;
 
-    @ManyToMany(mappedBy = "groups2")
+    @ManyToMany(mappedBy = "groups")
     private Set<User> treiners = new HashSet<>();
 
     @ManyToMany(mappedBy = "groups")
-    private Set<Student> users = new HashSet<>();
+    private Set<Student> students = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "category_id")
+    private CategoryGroup categoryGroups;
 
     public Group() {
         super();
@@ -53,11 +54,19 @@ public class Group extends Model {
         this.treiners = treiners;
     }
 
-    public Set<Student> getUsers() {
-        return users;
+    public CategoryGroup getCategoryGroups() {
+        return categoryGroups;
     }
 
-    public void setUsers(Set<Student> users) {
-        this.users = users;
+    public void setCategoryGroups(CategoryGroup categoryGroups) {
+        this.categoryGroups = categoryGroups;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }
