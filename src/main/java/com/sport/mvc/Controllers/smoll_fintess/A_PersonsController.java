@@ -44,31 +44,32 @@ public class A_PersonsController {
         return modelAndView;
     }
 
-    //add new user method
-    //returns model of new user and enables form fields
-    @RequestMapping(value = "/addStudent", method = RequestMethod.GET)
-    public String addStudent(Model model) {
-        Student newStudent = new Student();
-        model.addAttribute("newStudent", newStudent);
-        return "A_small_fitness_add_student";
-    }
 
-    @RequestMapping(value = "/addStudent", method = RequestMethod.POST)
-    public String addNewStudent(Model model, @ModelAttribute("newStudent") Student student) {
-        System.out.print(student.getName());
-        studentService.addStudent(student);
-        return "redirect:/registerPerson/addStudent";
-    }
 
-    /*works with date format which receives from the form*/
     @InitBinder
-    public void initBinder(WebDataBinder binder)
-    {
+    public void initBinder(WebDataBinder binder) {
         //format of date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, true));
+    }
+
+
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model theModel) {
+
+        // create model attribute to bind form data
+        Student theStudent = new Student();
+        theModel.addAttribute("student", theStudent);
+        return "A_small_fitness_add_student";
+    }
+
+
+    @RequestMapping(value = "/saveStudent", method = RequestMethod.GET)
+    public String saveCustomer(@ModelAttribute("student") Student theStudent) {
+        studentService.addStudent(theStudent);
+        return "redirect:/registerPerson/showFirstWorkPage";
     }
 
     @RequestMapping("/delete")
@@ -77,4 +78,20 @@ public class A_PersonsController {
             studentService.deleteListOfStudents(id);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
+
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("studentId") long theId, Model theModel) {
+
+     //   logger.info("showing form for update");
+        System.out.println(theId);
+        // get customer from database
+        Student theStudent = studentService.getStudent(theId);
+
+        // set customer as model attribute to pre-populate the form
+        theModel.addAttribute("student", theStudent);
+
+        return "A_small_fitness_add_student";
+    }
+
 }

@@ -5,6 +5,7 @@ import com.sport.mvc.dao.UserDao;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.StudentService;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -41,4 +42,13 @@ public class StudentServiceImpl implements StudentService {
         studentDao.remove(studentDao.getById(id));
     }
 
+    @Override
+    public Student getStudent(long theId) {
+        return studentDao.getById(theId);
+    }
+//
+//    @Override
+//    public void saveStudent(Student theStudent) {
+//        studentDao.add(theStudent);
+//    }
 }
