@@ -10,4 +10,6 @@ public interface StudentDao extends ItemDao<Student> {
 
 //    public void deleteListOfStudents(List<Long> id);
 
+ //   public Student getCustomer(int theId);
+
 }
