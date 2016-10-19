@@ -95,8 +95,10 @@
     background: #cccccc; "
             <form:form method="get" action="delete">
 
+            <input type="button" value="Добавить"
+                   onclick="window.location.href='showFormForAddGroup'; return false;" class="add-button"
+            />
 
-            <button><a href="/group/showFormForAddGroup">добавить</a></button>
             <input type="submit" value="удалить">
             <input type="button" value="Отправить смс">
             <input type="button" value="отправить письмо">
@@ -131,6 +133,8 @@
                 <td>${group2.discription}</td>
                 <td><input type="checkbox" class="case", name="case" value="${group.id}"></td>
                 <td align="left"></td>
+
+
             </tr>
         </c:forEach>
 

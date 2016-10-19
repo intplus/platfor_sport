@@ -15,6 +15,11 @@ public class StudentDatabaseDao extends HibernateAbstractDao<Student> implements
     public StudentDatabaseDao() {
 
     }
+
+//    @Override
+//    public void deleteListOfStudents(List<Long> id) {
+
+//    }
 //
 //    @Override
 //    public Student getByUsername(String surname) {

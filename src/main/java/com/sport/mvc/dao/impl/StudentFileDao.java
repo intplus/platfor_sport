@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository(value = "studentFileDao")
-public class StudentFileDao extends FileAbstractDao<Student> implements StudentDao {
+public  class StudentFileDao extends FileAbstractDao<Student> implements StudentDao {
 
     //getting session factory from the bean
-    @Autowired
-    SessionFactory sessionFactory;
+//    @Autowired
+//    SessionFactory sessionFactory;
 
     public StudentFileDao() {
     }
@@ -38,28 +38,20 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
         return null;
     }
 
-//    @Override
-//    public Student getByUsername(String username) {
-//        return null;
-//    }
 
+
+    // test this moment
 //    @Override
-//    public void deleteListOfStudents(List id) {
+//    public void deleteListOfStudents(List<Long> id) {
+//        System.out.println("in method delete");
 //        Session session = sessionFactory.getCurrentSession();
 //        for (int i = 0; i<id.size(); i++) {
-//           Student students = (Student) session.load(Student.class, new Long(id.get(i)));
+//            Student students = (Student) session.load(Student.class, new Long(id.get(i)));
 //            if (null != students)
-//            session.delete(students);
+//                session.delete(students);
 //        }
 //    }
 
-    @Override
-    public void add(Student student) {
-//        //open session
-//        Session session  = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(student);
-//        session.flush();
-//
 
-    }
+
 }
