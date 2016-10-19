@@ -1,15 +1,9 @@
 package com.sport.mvc.services;
 
-
 import com.sport.mvc.models.Student;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service(value = "studentService")
 public interface StudentService {
     List<Student> getAll();
 
@@ -19,8 +13,6 @@ public interface StudentService {
 
     public Student getStudent(long theId);
 
-
-  //  public void saveStudent(Student theStudent);
-
+    public void saveStudent(Student theStudent);
 
 }

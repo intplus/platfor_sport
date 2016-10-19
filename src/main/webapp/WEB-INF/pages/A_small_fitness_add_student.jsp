@@ -78,14 +78,8 @@
         </tr>
 
         <tr>
-        <td><label>Phone:</label></td>
-        <%--<td><form:input path="phone" /></td>--%>
-        </tr>
-
-        <tr>
-        <td><label>Birthday:</label></td>
-        <td><form:input path="birthday" /></td>
-
+            <td><label>Birthday:</label></td>
+            <td><form:input path="birthday" /></td>
         </tr>
 
 
