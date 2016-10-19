@@ -96,7 +96,7 @@
             <form:form method="get" action="delete">
 
 
-            <button><a href="/registerPerson/addStudent">добавить</a></button>
+            <button><a href="#">добавить</a></button>
             <input type="submit" value="удалить">
             <input type="button" value="Отправить смс">
             <input type="button" value="отправить письмо">
@@ -122,16 +122,14 @@
         <th>Количество студентов</th>
         <th>комментарий</th>
         <th><input type="checkbox" id="selectall"></th>
-        <c:forEach items="${students}" var="student">
+        <c:forEach items="${groups}" var="group2">
             <tr align="center">
-                <td>${student.name}</td>
-                <td align="left">${student.surname}</td>
-                <td align="left">${student.phone}</td>
-                <td>${student.email}</td>
-                <td>${student.birthday}</td>
+                <td>${group2.name}</td>
+                <td align="left"></td>
+                <td align="left"></td>
                 <td></td>
-                <td></td>
-                <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
+                <td>${group2.discription}</td>
+                <td><input type="checkbox" class="case", name="case" value="${group.id}"></td>
                 <td align="left"></td>
             </tr>
         </c:forEach>
