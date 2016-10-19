@@ -84,7 +84,7 @@ public class A_PersonsController {
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") Student theStudent) {
         studentService.addStudent(theStudent);
-        return "redirect:/registerPerson/showFirstWorkPage";
+        return "redirect:/registerPerson/showFormForAdd";
     }
 
     @RequestMapping("/delete")
@@ -93,6 +93,15 @@ public class A_PersonsController {
             studentService.deleteListOfStudents(id);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
+
+    @PostMapping("/saveStudentAfterUpdate")
+    public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
+        studentService.addStudent(theStudent);
+        return "redirect:/registerPerson/showFirstWorkPage";
+    }
+
+
+
 
 
     @GetMapping("/showFormForUpdate")
@@ -106,7 +115,7 @@ public class A_PersonsController {
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
-        return "A_small_fitness_add_student";
+        return "A_small_fitness_update_student";
     }
 
     @PostMapping("/sendMail")
