@@ -80,9 +80,9 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) Long id) {
-        if (id!=null)
-            studentService.deleteListOfStudents(id);
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List<Long> ids) {
+        if (ids!=null)
+            studentService.deleteListOfStudents(ids);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 

@@ -1,4 +1,4 @@
-package com.sport.mvc.dao.impl;
+package com.sport.mvc.dao.impl.file;
 
 
 import com.sport.mvc.dao.accessors.FileDataSourceAccessor;

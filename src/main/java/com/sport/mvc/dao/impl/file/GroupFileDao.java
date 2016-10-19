@@ -1,6 +1,7 @@
-package com.sport.mvc.dao.impl;
+package com.sport.mvc.dao.impl.file;
 
 import com.sport.mvc.dao.GroupDao;
+import com.sport.mvc.dao.impl.file.FileAbstractDao;
 import com.sport.mvc.models.Group;
 import org.springframework.stereotype.Repository;
 

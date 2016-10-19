@@ -1,4 +1,4 @@
-package com.sport.mvc.dao.impl;
+package com.sport.mvc.dao.impl.database;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.sport.mvc.dao.impl;
+package com.sport.mvc.dao.impl.database;
 
 import com.sport.mvc.dao.CommentDao;
 import com.sport.mvc.models.Comment;

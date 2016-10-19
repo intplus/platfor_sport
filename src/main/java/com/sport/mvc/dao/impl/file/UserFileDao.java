@@ -1,6 +1,7 @@
-package com.sport.mvc.dao.impl;
+package com.sport.mvc.dao.impl.file;
 
 import com.sport.mvc.dao.UserDao;
+import com.sport.mvc.dao.impl.file.FileAbstractDao;
 import com.sport.mvc.models.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,30 +25,11 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
 
     @Override
     public List<User> getAll() {
-//        //open current session
-//        Session session = sessionFactory.getCurrentSession();
-//        //get the list of users
-//        List<User> users = session.createQuery("from User").list();
         return null;
     }
 
     @Override
     public User getById(Long id) {
         return null;
-    }
-
-//    @Override
-//    public User getByUsername(String username) {
-//        return null;
-//    }
-
-    @Override
-    public void add(User user) {
-//        //open session
-//        Session session  = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(user);
-//        session.flush();
-//
-
     }
 }
