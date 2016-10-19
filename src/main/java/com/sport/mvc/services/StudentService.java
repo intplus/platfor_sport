@@ -1,6 +1,6 @@
 package com.sport.mvc.services;
 
-import com.sport.mvc.dao.StudentDao;
+
 import com.sport.mvc.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +19,8 @@ public interface StudentService {
 
     public Student getStudent(long theId);
 
-    public void saveStudent(Student theStudent);
+
+  //  public void saveStudent(Student theStudent);
+
 
 }

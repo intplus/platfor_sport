@@ -1,10 +1,10 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
-import com.sport.mvc.AdvertisingServices.SendMail;
+//import com.sport.mvc.AdvertisingServices.SendMail;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.StudentService;
-import com.sport.mvc.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -30,9 +30,9 @@ public class A_PersonsController {
     private StudentService studentService;
 
 
-    @Autowired
-    @Qualifier("sendMailService")
-    private  SendMail sendMailService;
+//    @Autowired
+//    @Qualifier("sendMailService")
+  //  private  SendMail sendMailService;
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -78,7 +78,9 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") Student theStudent) {
-        studentService.saveStudent(theStudent);
+
+       // studentService.saveStudent(theStudent);
+
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
@@ -121,17 +123,17 @@ public class A_PersonsController {
         return "A_small_fitness_add_student";
     }
 
-    @PostMapping("/sendMail")
-    public String sendMail(@ModelAttribute("student") Student theStudent){
-
-        System.out.println("in mail");
-        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
-
-        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
-
-        return "redirect:/registerPerson/showFirstWorkPage";
-
-    }
+//    @PostMapping("/sendMail")
+//    public String sendMail(@ModelAttribute("student") Student theStudent){
+//
+//        System.out.println("in mail");
+//        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+//
+//        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+//
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//
+//    }
 
 
 
