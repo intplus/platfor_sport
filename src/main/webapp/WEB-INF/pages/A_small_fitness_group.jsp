@@ -92,8 +92,7 @@
 	padding: 5px 10px;
 	margin-top: 30px;
 	margin-left: 800px;
-background: #cccccc; "  >
-
+    background: #cccccc; "
             <form:form method="get" action="delete">
 
 
@@ -114,15 +113,13 @@ background: #cccccc; "  >
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
         <tr>
             <th colspan="7">
-                <h3><br>Группа</h3>
+                <h3><br>Список групп</h3>
             </th>
         </tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Телефон</th>
-        <th>почта</th>
-        <th>дата рождения</th>
-        <th>должность</th>
+        <th>Название группы</th>
+        <th>Тренер</th>
+        <th>Спорт</th>
+        <th>Количество студентов</th>
         <th>комментарий</th>
         <th><input type="checkbox" id="selectall"></th>
         <c:forEach items="${students}" var="student">

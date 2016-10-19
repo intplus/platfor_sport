@@ -27,9 +27,6 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
-    @Column(name = "phone")
-    private String phone;
-
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Phone> phones = new HashSet<>();
 
@@ -143,11 +140,11 @@ public class Student extends Model {
         this.phones = phones;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+//    public String getPhone() {
+//        return phone;
+//    }
+//
+//    public void setPhone(String phone) {
+//        this.phone = phone;
+//    }
 }

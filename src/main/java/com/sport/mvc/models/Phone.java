@@ -12,7 +12,7 @@ public class Phone extends Model {
     private String number;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "phone_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
