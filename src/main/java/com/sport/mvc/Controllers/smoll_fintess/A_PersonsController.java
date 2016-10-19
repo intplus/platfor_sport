@@ -1,13 +1,11 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.models.Phone;
+import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
-import com.sport.mvc.models.User;
 import com.sport.mvc.services.PhoneService;
 import com.sport.mvc.services.StudentService;
-import com.sport.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -33,6 +31,10 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("phoneService")
     private PhoneService phoneService;
+
+    @Autowired
+    @Qualifier("mail")
+    private SendMailService sendMailService;
 
 
 
@@ -86,7 +88,7 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) Long id) {
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> id) {
         if (id!=null)
             studentService.deleteListOfStudents(id);
         return "redirect:/registerPerson/showFirstWorkPage";
@@ -113,7 +115,7 @@ public class A_PersonsController {
         System.out.println("in mail");
         System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
 
-      //  sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+       sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
 
         return "redirect:/registerPerson/showFirstWorkPage";
 
@@ -123,8 +125,11 @@ public class A_PersonsController {
     public String showMailForm(Model theModel){
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
-        return "A_send_Mail_form";
+        return "A_send_mail_form";
     }
+
+
+
 
 
 }
