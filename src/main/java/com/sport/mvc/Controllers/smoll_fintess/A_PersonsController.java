@@ -1,8 +1,11 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
-//import com.sport.mvc.AdvertisingServices.SendMail;
+
+import com.sport.mvc.models.Phone;
+
 import com.sport.mvc.models.Student;
 import com.sport.mvc.models.User;
+import com.sport.mvc.services.PhoneService;
 import com.sport.mvc.services.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +33,10 @@ public class A_PersonsController {
     private StudentService studentService;
 
 
-//    @Autowired
-//    @Qualifier("sendMailService")
-  //  private  SendMail sendMailService;
+    @Autowired
+    @Qualifier("phoneService")
+    private PhoneService phoneService;
+
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){

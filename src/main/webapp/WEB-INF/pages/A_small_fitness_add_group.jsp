@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 12.10.2016
-  Time: 15:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -49,54 +42,40 @@
     </div>
 </nav>
 
-<div class="container addstudent_form">
-    <h1>Add student</h1>
+<div class="container addgroup_form">
+    <h1>Add group</h1>
     <br>
-    <form:form action="saveStudent" modelAttribute="student" method="POST">
+    <form:form action="saveGroup" modelAttribute="group" method="POST">
 
         <form:hidden path="id" />
 
-    <table>
-        <tbody>
-        <tr>
-            <td><label>First name:</label></td>
-            <td><form:input path="name" /></td>
-        </tr>
+        <table>
+            <tbody>
+            <tr>
+                <td><label>Name:</label></td>
+                <td><form:input path="name" /></td>
+            </tr>
 
-        <tr>
-            <td><label>Last name:</label></td>
-            <td><form:input path="surname" /></td>
-        </tr>
+            <tr>
+                <td><label>Discription:</label></td>
+                <td><form:input path="discription" /></td>
+            </tr>
+            <tr>
+                <td>Coach:</td>
+                <td><form:select path="" /></td>
+            </tr>
+            <tr>
+                <td>TypeOfSport:</td>
+                <td><form:select path="" /></td>
+            </tr>
 
-        <tr>
-            <td><label>Email:</label></td>
-            <td><form:input path="email" /></td>
-        </tr>
-        <tr>
-            <td><label>Phone:</label></td>
-            <%--<td><form:input path="phone" /></td>--%>
-        </tr>
+            <tr>
+                <td><label></label></td>
+                <td><input type="submit" value="Save" class="save" /></td>
+            </tr>
 
-        <tr>
-        <td><label>Phone:</label></td>
-        <%--<td><form:input path="phone" /></td>--%>
-        </tr>
-
-        <tr>
-        <td><label>Birthday:</label></td>
-        <td><form:input path="birthday" /></td>
-
-        </tr>
-
-
-
-        <tr>
-            <td><label></label></td>
-            <td><input type="submit" value="Save" class="save" /></td>
-        </tr>
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </form:form>
 </div>
 <footer class="footer">
