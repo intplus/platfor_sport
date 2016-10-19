@@ -54,7 +54,7 @@
     <div class="container">
         <ul>
             <li><a href="#">Главная</a></li>
-            <li><a href="#">Группы</a></li>
+            <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
             <%--<li><a href="#">РџСЂРѕСЃРјРѕС‚СЂ РјРѕРµР№ СЃС‚СЂР°РЅРёС†Рё</a></li>--%>
             <%--<li><a href="#">РЎС‚Р°С‚РёСЃС‚РёРєР°</a></li>--%>
@@ -96,7 +96,7 @@
             <form:form method="get" action="delete">
 
 
-            <button><a href="#">добавить</a></button>
+            <button><a href="/group/showFormForAddGroup">добавить</a></button>
             <input type="submit" value="удалить">
             <input type="button" value="Отправить смс">
             <input type="button" value="отправить письмо">

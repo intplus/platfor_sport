@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -32,15 +29,20 @@ public class A_GroupController {
         return modelAndView;
 
     }
-}
-/*
-@RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView workPage(){
-        ModelAndView modelAndView = new ModelAndView();
-        List<Student> students = studentService.getAll();
-        modelAndView.addObject("students", students);
-        modelAndView.setViewName("A_small_fitness_first_work_Page");
 
-        return modelAndView;
+    @GetMapping("/showFormForAddGroup")
+    public String showFormForAdd(Model theModel) {
+
+        // create model attribute to bind form data
+        Group group = new Group();
+        theModel.addAttribute("group", group);
+        return "A_small_fitness_add_group";
     }
- */
+
+    @PostMapping("/saveGroup")
+    public String saveCustomer(@ModelAttribute("group") Group group) {
+        groupService.addGroup(group);
+        return "redirect:/group/showFormForAddGroup";
+    }
+}
+

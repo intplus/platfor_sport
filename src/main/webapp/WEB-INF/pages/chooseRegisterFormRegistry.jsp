@@ -36,7 +36,7 @@
 <nav class="page-navigation">
     <div class="container">
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="/showPage">GO-GO-GO</a></li>
             <li><a href="#">Contacts</a></li>
         </ul>
