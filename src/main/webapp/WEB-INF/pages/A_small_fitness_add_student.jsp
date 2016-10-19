@@ -81,6 +81,10 @@
             <td><label>Birthday:</label></td>
             <td><form:input path="birthday" /></td>
         </tr>
+        <%--<tr>--%>
+            <%--<td>Comment:</td>--%>
+            <%--<td><form:textarea path="comments" /></td>--%>
+        <%--</tr>--%>
 
         <tr>
             <td><label></label></td>
