@@ -17,8 +17,8 @@ import java.util.List;
 @Service(value = "studentService")
 public class StudentServiceImpl implements StudentService {
 
-@Autowired
-    SessionFactory sessionFactory;
+//@Autowired
+//    SessionFactory sessionFactory;
 
     @Qualifier("studentDatabaseDao")
     @Autowired
@@ -39,31 +39,35 @@ public class StudentServiceImpl implements StudentService {
         studentDao.add(student);
     }
 
-
-//    @Override
-//    @Transactional
-//    public void deleteListOfStudents(Long id) {
-//        studentDao.remove(studentDao.getById(id));
-//
-//    }
-
-    //test this moment
-//    @Transactional
-//    @Override
-//    public void deleteListOfStudents(List<Long> id) {
-//        studentDao.deleteListOfStudents(id);
-//    }
- @Transactional
- @Override
-    public void deleteListOfStudents(List<Long> id) {
-        System.out.println("in method delete");
-        Session session = sessionFactory.getCurrentSession();
-        for (int i = 0; i<id.size(); i++) {
-            Student students = (Student) session.load(Student.class, new Long(id.get(i)));
-            if (null != students)
-                session.delete(students);
-        }
+    @Override
+    @Transactional
+    public void updateStudent(Student student) {
+        studentDao.update(student);
     }
+
+
+
+    @Override
+    @Transactional
+    public  void deleteListOfStudents(Long id) {
+        studentDao.remove(studentDao.getById(id));
+
+    }
+
+    //test this moment with sesion
+
+// @Transactional
+// @Override
+//    public void deleteListOfStudents(List<Long> id) {
+//        System.out.println("in method delete");
+//        Session session = sessionFactory.getCurrentSession();
+//        for (int i = 0; i<id.size(); i++) {
+//            Student students = (Student) session.load(Student.class, new Long(id.get(i)));
+//            if (null != students)
+//                session.delete(students);
+//
+//        }
+//    }
 
 
 

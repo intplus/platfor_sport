@@ -90,13 +90,17 @@ public class A_PersonsController {
     @RequestMapping("/delete")
     public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> id) {
         if (id!=null)
-            studentService.deleteListOfStudents(id);
+
+        for (int i =0; i<id.size();i++) {
+            System.out.println("in method A_controller del "+id );
+            studentService.deleteListOfStudents(id.get(i));
+        }
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
-        studentService.addStudent(theStudent);
+        studentService.updateStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
