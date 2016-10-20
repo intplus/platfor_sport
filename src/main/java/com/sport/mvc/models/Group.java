@@ -1,9 +1,6 @@
 package com.sport.mvc.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,40 +10,63 @@ public class Group extends Model {
 
     private static final long serialVersionUID = 5110150966894003873L;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "discription")
+    private String discription;
 
     @ManyToMany(mappedBy = "groups")
-    private Set<Coach> treiners = new HashSet<>();
+    private Set<User> treiners = new HashSet<>();
 
     @ManyToMany(mappedBy = "groups")
-    private Set<User> users = new HashSet<>();
+    private Set<Student> students = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "category_id")
+    private CategoryGroup categoryGroups;
 
     public Group() {
         super();
     }
 
-    public String getComment() {
-        return comment;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 
-    public Set<Coach> getTreiners() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<User> getTreiners() {
         return treiners;
     }
 
-    public void setTreiners(Set<Coach> treiners) {
+    public void setTreiners(Set<User> treiners) {
         this.treiners = treiners;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public CategoryGroup getCategoryGroups() {
+        return categoryGroups;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setCategoryGroups(CategoryGroup categoryGroups) {
+        this.categoryGroups = categoryGroups;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

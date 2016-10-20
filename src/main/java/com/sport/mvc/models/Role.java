@@ -1,49 +1,31 @@
 package com.sport.mvc.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role extends Model {
+public class Role extends Model{
 
-    private static final long serialVersionUID = -5380958355394845918L;
+    private static final long serialVersionUID = 808952197122769312L;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "title", length = 25, insertable = false, updatable = false)
-    private RoleList roleUser;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "description", length = 255)
-    private String description;
-
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users = new HashSet<>();
 
     public Role() {
         super();
     }
 
-    public Role(Long id) {
-        super(id);
+    public String getName() {
+        return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public RoleList getRoleUser() {
-        return roleUser;
-    }
-
-    public void setRoleUser(RoleList roleUser) {
-        this.roleUser = roleUser;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<User> getUsers() {
