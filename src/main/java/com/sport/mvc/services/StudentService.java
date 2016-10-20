@@ -11,10 +11,14 @@ public interface StudentService {
 
     // void deleteListOfStudents(Long id);
 
-    //test this moment
-    void deleteListOfStudents(List<Long> id);
+    //test this moment with session
+  //  void deleteListOfStudents(List<Long> id);
+
+    void deleteListOfStudents(Long id);
 
      Student getStudent(long theId);
+
+    void updateStudent(Student student);
 
 
 
