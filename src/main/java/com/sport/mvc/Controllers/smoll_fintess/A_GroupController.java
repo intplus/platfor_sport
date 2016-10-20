@@ -44,5 +44,19 @@ public class A_GroupController {
         groupService.addGroup(group);
         return "redirect:/group/showFormForAddGroup";
     }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("groupId") long theId, Model theModel) {
+
+        //   logger.info("showing form for update");
+        System.out.println(theId);
+        // get customer from database
+        Group group = groupService.getGroup(theId);
+
+        // set customer as model attribute to pre-populate the form
+        theModel.addAttribute("group", group);
+
+        return "A_small_fitness_update_group";
+    }
 }
 

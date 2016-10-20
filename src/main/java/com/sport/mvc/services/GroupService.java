@@ -11,4 +11,6 @@ public interface GroupService {
     void addGroup(Group group);
 
     public void deleteListOfGroup(Long id);
+
+    Group getGroup(long theId);
 }
