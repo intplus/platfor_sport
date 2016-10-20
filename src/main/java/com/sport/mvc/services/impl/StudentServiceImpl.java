@@ -50,8 +50,6 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
-
-
     @Transactional
     @Override
     public Student getStudent(long theId) {

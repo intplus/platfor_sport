@@ -88,12 +88,12 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> id) {
-        if (id!=null)
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> ids) {
+        if (ids!=null)
 
-            for (int i =0; i<id.size();i++) {
-                System.out.println("in method A_controller del "+id );
-                studentService.deleteListOfStudents(id.get(i));
+            for (int i =0; i < ids.size();i++) {
+                System.out.println("in method A_controller del " + ids );
+                studentService.deleteListOfStudents(ids.get(i));
             }
         return "redirect:/registerPerson/showFirstWorkPage";
     }
