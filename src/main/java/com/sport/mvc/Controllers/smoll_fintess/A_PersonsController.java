@@ -131,8 +131,15 @@ public class A_PersonsController {
        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
 
         return "redirect:/registerPerson/showFirstWorkPage";
-
+//
     }
+
+
+
+
+
+
+
 
     @RequestMapping("/showMailForm")
     public String showMailForm(Model theModel){
