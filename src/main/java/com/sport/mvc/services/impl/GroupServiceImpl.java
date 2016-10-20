@@ -36,4 +36,10 @@ public class GroupServiceImpl implements GroupService {
     public void deleteListOfGroup(Long id) {
         groupDao.remove(groupDao.getById(id));
     }
+
+    @Transactional
+    @Override
+    public Group getGroup(long theId) {
+        return  groupDao.getById(theId);
+    }
 }

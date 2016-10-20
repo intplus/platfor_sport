@@ -133,6 +133,16 @@
                 <td>${group2.discription}</td>
                 <td><input type="checkbox" class="case", name="case" value="${group.id}"></td>
                 <td align="left"></td>
+                <td>
+                    <!-- construct an "update" link with group id -->
+                    <c:url var="updateLink" value="/group/showFormForUpdate" >
+                        <c:param name="groupId" value="${group2.id}"/>
+                    </c:url>
+
+                    <!-- display the update link -->
+                    <a href="${updateLink}">Редактировать</a>
+
+                </td>
 
 
             </tr>
