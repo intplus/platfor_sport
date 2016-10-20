@@ -8,7 +8,9 @@
 <body>
 ololo
 <br/><br/>
-<form:form action="sendMail" modelAttribute="student" method="POST">
+<form:form action="sendMail" modelAttribute="student"  method="POST">
+
+
         <form:hidden path="id" />
     First name  <form:input path="name"/>
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -88,15 +89,20 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> id) {
+    public String deleteListOfUsers(@RequestParam(value = "case", required = false) List <Long> id) {
         if (id!=null)
 
         for (int i =0; i<id.size();i++) {
+            System.out.println(studentService.getStudent(id.get(i)).getEmail());
             System.out.println("in method A_controller del "+id );
             studentService.deleteListOfStudents(id.get(i));
         }
         return "redirect:/registerPerson/showFirstWorkPage";
     }
+
+
+
+
 
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
@@ -131,20 +137,38 @@ public class A_PersonsController {
        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
 
         return "redirect:/registerPerson/showFirstWorkPage";
-//
+
     }
 
 
+//    @PostMapping("/sendMail")
+//    public String sendMail(@ModelAttribute("studentListForMail") List <Student> theStudents,
+//                           @RequestParam(value = "case", required = false) List <Long> id){
+//
+//        System.out.println("in mail");
+//       // System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+//        if(id!=null) {
+//            for (int i = 0; i < id.size(); i++) {
+//                System.out.println(i+" its id");
+//                System.out.println(theStudents.get(i).getEmail()+"-----");
+//                //  studentService.deleteListOfStudents(id.get(i));
+//                System.out.println(studentService.getStudent(id.get(i)).getEmail());
+//                //    sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+//            }
+//        }
+//      //  sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//    }
 
 
 
 
-
-
-    @RequestMapping("/showMailForm")
-    public String showMailForm(Model theModel){
+    @RequestMapping ("/showMailForm")
+    public String showMailForms(Model theModel){
         Student theStudent = new Student();
+
         theModel.addAttribute("student", theStudent);
+
         return "A_send_mail_form";
     }
 
