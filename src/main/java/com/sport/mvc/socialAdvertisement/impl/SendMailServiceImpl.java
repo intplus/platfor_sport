@@ -26,8 +26,8 @@ public class SendMailServiceImpl implements SendMailService {
 @Override
 @Transactional
     public void sendMailTo(String mail, String subjectTo,String bodyTo)  {
-subject =subjectTo;
-    body=bodyTo;
+     subject =subjectTo;
+     body=bodyTo;
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
