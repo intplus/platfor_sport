@@ -1,11 +1,11 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
-import com.sport.mvc.models.Phone;
+
+import com.sport.mvc.socialAdvertisement.SendMailService;
+
 import com.sport.mvc.models.Student;
-import com.sport.mvc.models.User;
 import com.sport.mvc.services.PhoneService;
 import com.sport.mvc.services.StudentService;
-import com.sport.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,9 +27,17 @@ public class A_PersonsController {
     @Qualifier("studentService")
     private StudentService studentService;
 
+
     @Autowired
     @Qualifier("phoneService")
     private PhoneService phoneService;
+
+    @Autowired
+    @Qualifier("mail")
+    private SendMailService sendMailService;
+
+
+
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -76,21 +84,34 @@ public class A_PersonsController {
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") Student theStudent) {
         studentService.addStudent(theStudent);
-        return "redirect:/registerPerson/showFirstWorkPage";
+        return "redirect:/registerPerson/showFormForAdd";
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List<Long> ids) {
-        if (ids!=null)
-            studentService.deleteListOfStudents(ids);
+    public String deleteListOfUsers(Model model, @RequestParam(value = "case", required = false) List <Long> id) {
+        if (id!=null)
+
+            for (int i =0; i<id.size();i++) {
+                System.out.println("in method A_controller del "+id );
+                studentService.deleteListOfStudents(id.get(i));
+            }
         return "redirect:/registerPerson/showFirstWorkPage";
     }
+
+    @PostMapping("/saveStudentAfterUpdate")
+    public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
+        studentService.updateStudent(theStudent);
+        return "redirect:/registerPerson/showFirstWorkPage";
+    }
+
+
+
 
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("studentId") long theId, Model theModel) {
 
-     //   logger.info("showing form for update");
+        //   logger.info("showing form for update");
         System.out.println(theId);
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
@@ -98,7 +119,37 @@ public class A_PersonsController {
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
-        return "A_small_fitness_add_student";
+        return "A_small_fitness_update_student";
     }
+
+    @PostMapping("/sendMail")
+    public String sendMail(@ModelAttribute("student") Student theStudent){
+
+        System.out.println("in mail");
+        System.out.println(theStudent.getName()+"-----"+theStudent.getSurname());
+
+        sendMailService.sendMailTo("artyrgetman@gmail.com",theStudent.getName(),theStudent.getSurname());
+
+        return "redirect:/registerPerson/showFirstWorkPage";
+//
+    }
+
+
+
+
+
+
+
+
+    @RequestMapping("/showMailForm")
+    public String showMailForm(Model theModel){
+        Student theStudent = new Student();
+        theModel.addAttribute("student", theStudent);
+        return "A_send_mail_form";
+    }
+
+
+
+
 
 }

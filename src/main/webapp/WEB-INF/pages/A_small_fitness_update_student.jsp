@@ -52,7 +52,7 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form action="saveStudent" modelAttribute="student" method="POST">
+    <form:form action="saveStudentAfterUpdate" modelAttribute="student" method="POST">
 
         <form:hidden path="id" />
 
@@ -74,17 +74,13 @@
         </tr>
         <tr>
             <td><label>Phone:</label></td>
-            <td><form:input path="" /></td>
+            <%--<td><form:input path="phone" /></td>--%>
         </tr>
 
         <tr>
             <td><label>Birthday:</label></td>
             <td><form:input path="birthday" /></td>
         </tr>
-        <%--<tr>--%>
-            <%--<td>Comment:</td>--%>
-            <%--<td><form:textarea path="comments" /></td>--%>
-        <%--</tr>--%>
 
 
 
@@ -98,7 +94,7 @@
     </form:form>
 </div>
 
-<a href="/registerPerson/showFirstWorkPage">Return to work page</a>
+<a href="A_small_fitness_first_work_Page.jsp"></a>
 <footer class="footer">
     <div class="container">
 

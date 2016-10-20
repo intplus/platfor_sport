@@ -9,10 +9,10 @@ public interface StudentService {
 
     void addStudent(Student student);
 
-    public void deleteListOfStudents(List <Long> id);
+    void deleteListOfStudents(Long id);
 
-    public Student getStudent(long theId);
+     Student getStudent(long theId);
 
-//    public void saveStudent(Student theStudent);
+    void updateStudent(Student student);
 
 }

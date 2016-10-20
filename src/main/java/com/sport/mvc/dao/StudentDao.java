@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface StudentDao extends ItemDao<Student> {
 //
-//    public Student getByUsername(String username);
+ //   public Student getByUsername(String username);
 
-//    public void deleteListOfStudents(List<Long> id);
+   // void deleteListOfStudents(List id);
+    //test this moment
+   //  void deleteListOfStudents(List<Long> id);
 
- //   public Student getCustomer(int theId);
+  //  public Student getById(Long theId);
 
 }
