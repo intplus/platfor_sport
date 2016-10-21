@@ -54,6 +54,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(long theId) {
      return  studentDao.getById(theId);
-    }
 }
+        }
 
