@@ -1,12 +1,8 @@
 package com.sport.mvc.services.impl;
 
 import com.sport.mvc.dao.StudentDao;
-import com.sport.mvc.dao.UserDao;
 import com.sport.mvc.models.Student;
-import com.sport.mvc.models.User;
 import com.sport.mvc.services.StudentService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

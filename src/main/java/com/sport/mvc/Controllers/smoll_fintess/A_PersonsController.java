@@ -135,12 +135,6 @@ public class A_PersonsController {
     }
 
 
-
-
-
-
-
-
     @RequestMapping("/showMailForm")
     public String showMailForm(Model theModel){
         Student theStudent = new Student();
