@@ -19,9 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/registerPerson/")
@@ -165,6 +163,40 @@ public class A_PersonsController {
         theModel.addAttribute("id", ids);
         theModel.addAttribute("students", students);
         return "A_send_mail_form";
+    }
+
+    //sorts students by age and who get only phone number
+    @RequestMapping("/sort")
+    public String sortMethod(Model model, @RequestParam("option") String option) {
+        List<Student> students = studentService.getAll();
+        List<Student> studentsOnlyWithPhoneNumber = null;
+        if (option.equals("age")) {
+            Collections.sort(students, new Comparator<Student>(){
+                public int compare(Student s1, Student s2) {
+                    //if user has birthday
+                    if (s1.getBirthday()!=null && s2.getBirthday()!=null)
+                    return s1.getBirthday().compareTo(s2.getBirthday());
+                    else
+                    //else compare by name
+                    if (s1.getName()!=null && s2.getName()!=null)
+                        return s1.getName().compareToIgnoreCase(s1.getName());
+                    return 0;
+                }
+            });
+        }
+        else if (option.equals("number")) {
+            for (int i = 0; i<students.size(); i++) {
+                if (students.get(i).getName()==null && students.get(i).getEmail()==null) {
+                    studentsOnlyWithPhoneNumber.add(students.get(i));
+                }
+            }
+        }
+
+        //here's a problem
+        //how to send different students to one page ????
+        model.addAttribute("students", students);
+        model.addAttribute("studenst", studentsOnlyWithPhoneNumber);
+        return "redirect:/registerPerson/showFirstWorkPage";
     }
 
 }
