@@ -14,8 +14,8 @@ ololo
 </c:forEach>
 <br/><br/>
 <form:form  action="sendMail" method="post">
-<input type="text" name="topic" placeholder="Enter the topic of the message">
-    <textarea name="body">Enter message here</textarea>
+<input type="text" name="topic" placeholder="">
+    <textarea name="body" placeholder="Enter message here"></textarea>
     <br><br>
 
         <input type="submit" value="Send"/>
