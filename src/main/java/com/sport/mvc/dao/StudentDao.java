@@ -12,6 +12,6 @@ public interface StudentDao extends ItemDao<Student> {
     //test this moment
    //  void deleteListOfStudents(List<Long> id);
 
-  //  public Student getById(Long theId);
+    //public Student getById(Long theId);
 
 }
