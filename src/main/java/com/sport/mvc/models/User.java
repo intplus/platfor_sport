@@ -30,8 +30,8 @@ public class User extends Model {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -152,12 +152,28 @@ public class User extends Model {
         this.district = district;
     }
 
-    public String getLogin() {
-        return login;
+    public Role getRole() {
+        return role;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public SessionHistory getSessionHistory() {
+        return sessionHistory;
+    }
+
+    public void setSessionHistory(SessionHistory sessionHistory) {
+        this.sessionHistory = sessionHistory;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
