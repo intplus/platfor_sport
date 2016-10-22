@@ -168,17 +168,10 @@ public class A_PersonsController {
  //   sorts students by age and who get only phone number
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-        System.out.println("in method sort");
-//        List<Student> students = studentService.getAll();
-//        List<Student> studentsOnlyWithPhoneNumber = null;
+
         ModelAndView modelAndView = new ModelAndView();
         if (option.equals("age")) {
-            System.out.println(option + " its option");
-
             List<Student> students = studentService.getAllByAge();
-//            for (Student s:students){
-//                System.out.println(s.getName()+ " " +s.getAge());
-//            }
             modelAndView.addObject("students", students);
 
         }
