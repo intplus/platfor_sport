@@ -99,11 +99,12 @@ public class Student extends Model {
         super();
     }
 
-    public int getAge() {
+
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -196,13 +197,7 @@ public class Student extends Model {
         this.phones = phones;
     }
 
-    public String getAge() {
-        return age;
-    }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
 
 //    public String getPhone() {
 //        return phone;
