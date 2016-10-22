@@ -2,6 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.User;
+import com.sport.mvc.services.impl.StudentServiceImpl;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -28,6 +29,8 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
+
+
 
 
     @Autowired
@@ -165,21 +168,27 @@ public class A_PersonsController {
         //
     }
 
- //   sorts students by age and who get only phone number
+ //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-
+        List<Student> students =new ArrayList<>();
+        //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
-        if (option.equals("age")) {
-            List<Student> students = studentService.getAllByAge();
-            modelAndView.addObject("students", students);
+        if (option.equals("ageAfterSixteen")) {
+
+             students = studentService.getStudentAgeAfterSixteen();
+        }
+       else if (option.equals("ageBeforeSixteen")){
+           students = studentService.getStudentAgeBeforSixteen();
 
         }
-        if (option.equals("number")){
-            List<Student> studentsOll = studentService.getAll();
-            modelAndView.addObject("students", studentsOll);
+       else if(option.equals("allStudent")){
+             students = studentService.getAll();
+
         }
-        modelAndView.setViewName("A_small_fitness_first_work_Page");
+
+            modelAndView.addObject("students", students);
+            modelAndView.setViewName("A_small_fitness_first_work_Page");
             return modelAndView;
 
 
