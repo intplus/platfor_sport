@@ -20,11 +20,6 @@ public class PhoneServiceImpl implements PhoneService {
     public PhoneServiceImpl() {
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     @Transactional
     @Override
     public List<Phone> getAll() {
