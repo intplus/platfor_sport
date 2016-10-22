@@ -23,6 +23,11 @@ public class CustomerCardFileDao extends FileAbstractDao<CustomerCard> implement
     }
 
     @Override
+    public List<CustomerCard> getAllByAge() {
+        return null;
+    }
+
+    @Override
     public CustomerCard getById(Long id) {
         return null;
     }

@@ -29,6 +29,11 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     }
 
     @Override
+    public List<User> getAllByAge() {
+        return null;
+    }
+
+    @Override
     public User getById(Long id) {
         return null;
     }

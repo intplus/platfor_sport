@@ -50,13 +50,12 @@ public class A_PersonsController {
 
     }
 
-    @RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-        modelAndView.addObject("students", students);
-        modelAndView.setViewName("A_small_fitness_first_work_Page");
-
+            modelAndView.addObject("students", students);
+            modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }
 
@@ -163,40 +162,35 @@ public class A_PersonsController {
         theModel.addAttribute("id", ids);
         theModel.addAttribute("students", students);
         return "A_send_mail_form";
+        //
     }
 
-    //sorts students by age and who get only phone number
+ //   sorts students by age and who get only phone number
     @RequestMapping("/sort")
-    public String sortMethod(Model model, @RequestParam("option") String option) {
-        List<Student> students = studentService.getAll();
-        List<Student> studentsOnlyWithPhoneNumber = null;
+    public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
+        System.out.println("in method sort");
+//        List<Student> students = studentService.getAll();
+//        List<Student> studentsOnlyWithPhoneNumber = null;
+        ModelAndView modelAndView = new ModelAndView();
         if (option.equals("age")) {
-            Collections.sort(students, new Comparator<Student>(){
-                public int compare(Student s1, Student s2) {
-                    //if user has birthday
-                    if (s1.getBirthday()!=null && s2.getBirthday()!=null)
-                    return s1.getBirthday().compareTo(s2.getBirthday());
-                    else
-                    //else compare by name
-                    if (s1.getName()!=null && s2.getName()!=null)
-                        return s1.getName().compareToIgnoreCase(s1.getName());
-                    return 0;
-                }
-            });
-        }
-        else if (option.equals("number")) {
-            for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getName()==null && students.get(i).getEmail()==null) {
-                    studentsOnlyWithPhoneNumber.add(students.get(i));
-                }
-            }
-        }
+            System.out.println(option + " its option");
 
-        //here's a problem
-        //how to send different students to one page ????
-        model.addAttribute("students", students);
-        model.addAttribute("studenst", studentsOnlyWithPhoneNumber);
-        return "redirect:/registerPerson/showFirstWorkPage";
+            List<Student> students = studentService.getAllByAge();
+//            for (Student s:students){
+//                System.out.println(s.getName()+ " " +s.getAge());
+//            }
+            modelAndView.addObject("students", students);
+
+        }
+        if (option.equals("number")){
+            List<Student> studentsOll = studentService.getAll();
+            modelAndView.addObject("students", studentsOll);
+        }
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
+            return modelAndView;
+
+
     }
+
 
 }

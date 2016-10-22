@@ -24,6 +24,11 @@ public class PhoneFileDao extends FileAbstractDao<Phone> implements PhoneDao {
     }
 
     @Override
+    public List<Phone> getAllByAge() {
+        return null;
+    }
+
+    @Override
     public Phone getById(Long id) {
         return null;
     }

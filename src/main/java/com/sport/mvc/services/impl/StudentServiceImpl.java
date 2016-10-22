@@ -28,6 +28,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
+    public List<Student> getAllByAge(){
+        return   studentDao.getAllByAge();
+    }
+
+    @Override
+    @Transactional
     public void addStudent(Student student) {
         studentDao.add(student);
     }
