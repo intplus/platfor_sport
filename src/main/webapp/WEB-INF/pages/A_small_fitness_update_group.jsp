@@ -72,7 +72,7 @@ background: #cccccc; "  >
         <form:form method="get" action="delete">
 
         <input type="button" value="Добавить"
-               onclick="window.location.href='showFormForAdd'; return false;" class="add-button"
+               onclick="window.location.href='showFormForAddGroup'; return false;" class="add-button"
         />
         <input type="submit" value="удалить">
         <input type="button" value="send email"
