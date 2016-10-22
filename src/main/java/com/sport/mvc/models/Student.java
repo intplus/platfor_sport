@@ -68,6 +68,9 @@ public class Student extends Model {
 
     private String age;
 
+    @Column(name = "phone")
+    private String phone;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Phone> phones = new HashSet<>();
 
@@ -96,8 +99,20 @@ public class Student extends Model {
         super();
     }
 
-    public Student(Long id) {
-        super(id);
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
