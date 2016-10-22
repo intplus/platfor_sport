@@ -27,6 +27,9 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
+    @Column(name = "age")
+    private int age;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Phone> phones = new HashSet<>();
 
