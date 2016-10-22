@@ -27,12 +27,17 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.getAll();
     }
 
+
+
+    // method with select only data  witch age . The first implementation in HibernateAbstractDao
     @Override
     @Transactional
     public List<Student> getAllByAge(){
         return   studentDao.getAllByAge();
     }
 
+
+    //method, who return list only student with age>16
     @Override
     @Transactional
     public List<Student> getStudentAgeAfterSixteen(){
@@ -40,20 +45,15 @@ public class StudentServiceImpl implements StudentService {
         List<Student> afterSixteenList = new ArrayList<>();
 
             for (Student s:getAllByAge()){
-
-            int age =Integer.parseInt(s.getAge());
+                int age =Integer.parseInt(s.getAge());
             if(age>=16){
                 afterSixteenList.add(s);
-
+              }
             }
-
-        }
-
-
         return afterSixteenList;
     }
 
-
+   // method, who return list only student with age<16
     @Override
     @Transactional
     public List<Student> getStudentAgeBeforSixteen(){
@@ -67,10 +67,7 @@ public class StudentServiceImpl implements StudentService {
                 beforeSixteenList.add(s);
 
             }
-
         }
-
-
         return beforeSixteenList;
     }
 

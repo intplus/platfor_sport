@@ -172,20 +172,19 @@ public class A_PersonsController {
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
         List<Student> students =new ArrayList<>();
+        //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
         if (option.equals("ageAfterSixteen")) {
 
              students = studentService.getStudentAgeAfterSixteen();
-         //   modelAndView.addObject("students", students);
-
         }
        else if (option.equals("ageBeforeSixteen")){
            students = studentService.getStudentAgeBeforSixteen();
-         //   modelAndView.addObject("students", students);
+
         }
        else if(option.equals("allStudent")){
              students = studentService.getAll();
-         //   modelAndView.addObject("students", students);
+
         }
 
             modelAndView.addObject("students", students);
