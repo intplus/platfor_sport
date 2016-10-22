@@ -2,6 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.User;
+import com.sport.mvc.services.impl.StudentServiceImpl;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -30,6 +31,8 @@ public class A_PersonsController {
     private StudentService studentService;
 
 
+
+
     @Autowired
     @Qualifier("phoneService")
     private PhoneService phoneService;
@@ -50,13 +53,12 @@ public class A_PersonsController {
 
     }
 
-    @RequestMapping(value = "/showFirstWorkPage", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-        modelAndView.addObject("students", students);
-        modelAndView.setViewName("A_small_fitness_first_work_Page");
-
+            modelAndView.addObject("students", students);
+            modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }
 
@@ -163,40 +165,34 @@ public class A_PersonsController {
         theModel.addAttribute("id", ids);
         theModel.addAttribute("students", students);
         return "A_send_mail_form";
+        //
     }
 
-    //sorts students by age and who get only phone number
+ //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
-    public String sortMethod(Model model, @RequestParam("option") String option) {
-        List<Student> students = studentService.getAll();
-        List<Student> studentsOnlyWithPhoneNumber = null;
-        if (option.equals("age")) {
-            Collections.sort(students, new Comparator<Student>(){
-                public int compare(Student s1, Student s2) {
-                    //if user has birthday
-                    if (s1.getBirthday()!=null && s2.getBirthday()!=null)
-                    return s1.getBirthday().compareTo(s2.getBirthday());
-                    else
-                    //else compare by name
-                    if (s1.getName()!=null && s2.getName()!=null)
-                        return s1.getName().compareToIgnoreCase(s1.getName());
-                    return 0;
-                }
-            });
+    public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
+        List<Student> students =new ArrayList<>();
+        //new modelAndView for return to jsp listStudent with the selected parameters
+        ModelAndView modelAndView = new ModelAndView();
+        if (option.equals("ageAfterSixteen")) {
+
+             students = studentService.getStudentAgeAfterSixteen();
         }
-        else if (option.equals("number")) {
-            for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getName()==null && students.get(i).getEmail()==null) {
-                    studentsOnlyWithPhoneNumber.add(students.get(i));
-                }
-            }
+       else if (option.equals("ageBeforeSixteen")){
+           students = studentService.getStudentAgeBeforSixteen();
+
+        }
+       else if(option.equals("allStudent")){
+             students = studentService.getAll();
+
         }
 
-        //here's a problem
-        //how to send different students to one page ????
-        model.addAttribute("students", students);
-        model.addAttribute("studenst", studentsOnlyWithPhoneNumber);
-        return "redirect:/registerPerson/showFirstWorkPage";
+            modelAndView.addObject("students", students);
+            modelAndView.setViewName("A_small_fitness_first_work_Page");
+            return modelAndView;
+
+
     }
+
 
 }
