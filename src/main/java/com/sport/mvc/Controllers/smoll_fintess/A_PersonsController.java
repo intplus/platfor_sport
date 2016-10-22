@@ -163,6 +163,7 @@ public class A_PersonsController {
         theModel.addAttribute("id", ids);
         theModel.addAttribute("students", students);
         return "A_send_mail_form";
+        //
     }
 
     //sorts students by age and who get only phone number
