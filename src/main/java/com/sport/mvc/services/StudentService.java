@@ -17,4 +17,8 @@ public interface StudentService {
 
     void updateStudent(Student student);
 
+    List<Student> getStudentAgeAfterSixteen();
+
+    public List<Student> getStudentAgeBeforSixteen();
+
 }

@@ -2,6 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.User;
+import com.sport.mvc.services.impl.StudentServiceImpl;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -28,6 +29,8 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
+
+
 
 
     @Autowired
@@ -165,28 +168,28 @@ public class A_PersonsController {
         //
     }
 
- //   sorts students by age and who get only phone number
+ //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-        System.out.println("in method sort");
-//        List<Student> students = studentService.getAll();
-//        List<Student> studentsOnlyWithPhoneNumber = null;
+        List<Student> students =new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
-        if (option.equals("age")) {
-            System.out.println(option + " its option");
+        if (option.equals("ageAfterSixteen")) {
 
-            List<Student> students = studentService.getAllByAge();
-//            for (Student s:students){
-//                System.out.println(s.getName()+ " " +s.getAge());
-//            }
+             students = studentService.getStudentAgeAfterSixteen();
+         //   modelAndView.addObject("students", students);
+
+        }
+       else if (option.equals("ageBeforeSixteen")){
+           students = studentService.getStudentAgeBeforSixteen();
+         //   modelAndView.addObject("students", students);
+        }
+       else if(option.equals("allStudent")){
+             students = studentService.getAll();
+         //   modelAndView.addObject("students", students);
+        }
+
             modelAndView.addObject("students", students);
-
-        }
-        if (option.equals("number")){
-            List<Student> studentsOll = studentService.getAll();
-            modelAndView.addObject("students", studentsOll);
-        }
-        modelAndView.setViewName("A_small_fitness_first_work_Page");
+            modelAndView.setViewName("A_small_fitness_first_work_Page");
             return modelAndView;
 
 

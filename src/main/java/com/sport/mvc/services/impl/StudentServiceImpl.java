@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "studentService")
@@ -30,6 +31,47 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public List<Student> getAllByAge(){
         return   studentDao.getAllByAge();
+    }
+
+    @Override
+    @Transactional
+    public List<Student> getStudentAgeAfterSixteen(){
+
+        List<Student> afterSixteenList = new ArrayList<>();
+
+            for (Student s:getAllByAge()){
+
+            int age =Integer.parseInt(s.getAge());
+            if(age>=16){
+                afterSixteenList.add(s);
+
+            }
+
+        }
+
+
+        return afterSixteenList;
+    }
+
+
+    @Override
+    @Transactional
+    public List<Student> getStudentAgeBeforSixteen(){
+
+        List<Student> beforeSixteenList = new ArrayList<>();
+
+        for (Student s:getAllByAge()){
+
+            int age =Integer.parseInt(s.getAge());
+            if(age<16){
+                beforeSixteenList.add(s);
+
+            }
+
+        }
+
+
+        return beforeSixteenList;
     }
 
     @Override
