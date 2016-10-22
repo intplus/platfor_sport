@@ -23,6 +23,11 @@ public class CommentFileDao extends FileAbstractDao<Comment> implements CommentD
     }
 
     @Override
+    public List<Comment> getAllByAge() {
+        return null;
+    }
+
+    @Override
     public Comment getById(Long id) {
         return null;
     }

@@ -7,6 +7,8 @@ import java.util.List;
 public interface StudentService {
     List<Student> getAll();
 
+    List<Student> getAllByAge();
+
     void addStudent(Student student);
 
     void deleteListOfStudents(Long id);
