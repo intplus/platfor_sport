@@ -111,13 +111,12 @@
 
 
 
-
-    <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <tr>
-            <th colspan="7">
+    <table class="table table-hover"  border="3"  width="100%"   cellpadding="4" cellpacing="3">
+        <%--<tr>--%>
+            <%--<th colspan="7">--%>
                 <h3><br>Список групп</h3>
-            </th>
-        </tr>
+            <%--</th>--%>
+        <%--</tr>--%>
         <th>Название группы</th>
         <th>Тренер</th>
         <th>Спорт</th>
