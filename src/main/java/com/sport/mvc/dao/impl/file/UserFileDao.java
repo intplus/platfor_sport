@@ -11,9 +11,7 @@ import java.util.List;
 
 @Repository(value = "userFileDao")
 public class UserFileDao extends FileAbstractDao<User> implements UserDao {
-    //getting session factory from the bean
-    @Autowired
-    SessionFactory sessionFactory;
+
 
     public UserFileDao() {
     }

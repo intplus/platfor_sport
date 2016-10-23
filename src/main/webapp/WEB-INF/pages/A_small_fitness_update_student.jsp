@@ -69,12 +69,12 @@
         </tr>
 
         <tr>
-            <td><label>Email:</label></td>
-            <td><form:input path="email" /></td>
+            <td><label>Телефон:</label></td>
+            <td><form:input path="phone" /></td>
         </tr>
         <tr>
-            <td><label>Phone:</label></td>
-            <%--<td><form:input path="phone" /></td>--%>
+            <td><label>Email:</label></td>
+            <td><form:input path="email" /></td>
         </tr>
 
         <tr>
@@ -82,8 +82,19 @@
             <td><form:input path="birthday" /></td>
         </tr>
 
+        <tr>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
+        </tr>
 
-
+        <tr>
+            <td><label>Position:</label></td>
+                <%--<td><form:input path="p" /></td>--%>
+        </tr>
+        <tr>
+            <td><label>Comment:</label></td>
+                <%--<td><form:input path="" /></td>--%>
+        </tr>
         <tr>
             <td><label></label></td>
             <td><input type="submit" value="Save" class="save" /></td>

@@ -59,22 +59,22 @@
     <table>
         <tbody>
         <tr>
-            <td><label>First name:</label></td>
+            <td><label>Имя:</label></td>
             <td><form:input path="name" /></td>
         </tr>
 
         <tr>
-            <td><label>Last name:</label></td>
+            <td><label>Фамилия:</label></td>
             <td><form:input path="surname" /></td>
         </tr>
 
         <tr>
-            <td><label>Email:</label></td>
-            <td><form:input path="email" /></td>
+            <td><label>Телефон:</label></td>
+            <td><form:input path="phone" /></td>
         </tr>
         <tr>
-            <td><label>Phone:</label></td>
-            <td><form:input path="" /></td>
+            <td><label>Email:</label></td>
+            <td><form:input path="email" /></td>
         </tr>
 
         <tr>
@@ -83,8 +83,17 @@
         </tr>
 
         <tr>
-            <td><label>Birthday:</label></td>
+            <td><label>Возвраст:</label></td>
             <td><form:input path="age" /></td>
+        </tr>
+
+        <tr>
+            <td><label>Position:</label></td>
+            <%--<td><form:input path="p" /></td>--%>
+        </tr>
+        <tr>
+            <td><label>Comment:</label></td>
+            <%--<td><form:input path="" /></td>--%>
         </tr>
         <%--<tr>--%>
             <%--<td>Comment:</td>--%>
