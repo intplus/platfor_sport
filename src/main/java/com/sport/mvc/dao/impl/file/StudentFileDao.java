@@ -23,16 +23,10 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
         return null;
     }
 
-
-
     @Override
     public Student getById(Long id) {
         return null;
     }
 
-    @Override
-    public List<Student> getAllByAge() {
-        return null;
-    }
 
 }

@@ -24,12 +24,12 @@ public class SportFileDao extends FileAbstractDao<Sport> implements SportDao {
     }
 
     @Override
-    public List<Sport> getAllByAge() {
+    public Sport getById(Long id) {
         return null;
     }
 
     @Override
-    public Sport getById(Long id) {
+    public List<Sport> getStudentByOnlyUnknownStudent() {
         return null;
     }
 }

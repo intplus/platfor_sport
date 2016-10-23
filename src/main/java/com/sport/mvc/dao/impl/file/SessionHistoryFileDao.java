@@ -24,12 +24,12 @@ public class SessionHistoryFileDao extends FileAbstractDao<SessionHistory> imple
     }
 
     @Override
-    public List<SessionHistory> getAllByAge() {
+    public SessionHistory getById(Long id) {
         return null;
     }
 
     @Override
-    public SessionHistory getById(Long id) {
+    public List<SessionHistory> getStudentByOnlyUnknownStudent() {
         return null;
     }
 }

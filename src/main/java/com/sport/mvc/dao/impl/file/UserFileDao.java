@@ -11,9 +11,7 @@ import java.util.List;
 
 @Repository(value = "userFileDao")
 public class UserFileDao extends FileAbstractDao<User> implements UserDao {
-    //getting session factory from the bean
-    @Autowired
-    SessionFactory sessionFactory;
+
 
     public UserFileDao() {
     }
@@ -29,12 +27,12 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> getAllByAge() {
+    public User getById(Long id) {
         return null;
     }
 
     @Override
-    public User getById(Long id) {
+    public List<User> getStudentByOnlyUnknownStudent() {
         return null;
     }
 }

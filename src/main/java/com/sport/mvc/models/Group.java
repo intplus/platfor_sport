@@ -24,7 +24,7 @@ public class Group extends Model {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "category_id")
-    private CategoryGroup categoryGroups;
+    private CategoryGroup categoryGroup;
 
     public Group() {
         super();
@@ -54,12 +54,12 @@ public class Group extends Model {
         this.treiners = treiners;
     }
 
-    public CategoryGroup getCategoryGroups() {
-        return categoryGroups;
+    public CategoryGroup getCategoryGroup() {
+        return categoryGroup;
     }
 
-    public void setCategoryGroups(CategoryGroup categoryGroups) {
-        this.categoryGroups = categoryGroups;
+    public void setCategoryGroup(CategoryGroup categoryGroup) {
+        this.categoryGroup = categoryGroup;
     }
 
     public Set<Student> getStudents() {

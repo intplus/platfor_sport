@@ -16,9 +16,6 @@
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}navbar-static-top.css" rel="stylesheet">
 </head>
 <body>
 <header class="header">
@@ -52,8 +49,8 @@
     </div>
 </nav>
 
-<div class="container">
-    <h1 class="form-signin-heading">Add student</h1>
+<div class="container addstudent_form">
+    <h1>Add student</h1>
     <br>
     <form:form action="saveStudent" modelAttribute="student" method="POST">
 
@@ -62,32 +59,41 @@
     <table>
         <tbody>
         <tr>
-            <td> <label>First name:</label></td>
-            <td><form:input path="name" class="form-control"   /></td>
+            <td><label>Имя:</label></td>
+            <td><form:input path="name" /></td>
         </tr>
 
         <tr>
-            <td><label>Last name:</label></td>
-            <td><form:input path="surname" class="form-control"  /></td>
+            <td><label>Фамилия:</label></td>
+            <td><form:input path="surname" /></td>
         </tr>
 
+        <tr>
+            <td><label>Телефон:</label></td>
+            <td><form:input path="phone" /></td>
+        </tr>
         <tr>
             <td><label>Email:</label></td>
-            <td><form:input path="email" class="form-control" /></td>
-        </tr>
-        <tr>
-            <td><label>Phone:</label></td>
-            <td><form:input path="" class="form-control"  /></td>
+            <td><form:input path="email" /></td>
         </tr>
 
         <tr>
             <td><label>Birthday:</label></td>
-            <td><form:input path="birthday" class="form-control" /></td>
+            <td><form:input path="birthday" /></td>
         </tr>
 
         <tr>
-            <td><label>Birthday:</label></td>
-            <td><form:input path="age" class="form-control" /></td>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
+        </tr>
+
+        <tr>
+            <td><label>Position:</label></td>
+            <%--<td><form:input path="p" /></td>--%>
+        </tr>
+        <tr>
+            <td><label>Comment:</label></td>
+            <%--<td><form:input path="" /></td>--%>
         </tr>
         <%--<tr>--%>
             <%--<td>Comment:</td>--%>
@@ -98,7 +104,7 @@
 
         <tr>
             <td><label></label></td>
-            <td><input type="submit" value="Save" class="btn btn-success" /></td>
+            <td><input type="submit" value="Save" class="save" /></td>
         </tr>
 
         </tbody>
@@ -108,6 +114,9 @@
 
 <a href="/registerPerson/showFirstWorkPage">Return to work page</a>
 <footer class="footer">
+    <div class="container">
+
+    </div>
 </footer>
 </body>
 </html>

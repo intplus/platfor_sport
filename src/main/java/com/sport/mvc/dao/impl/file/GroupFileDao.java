@@ -24,12 +24,12 @@ public class GroupFileDao extends FileAbstractDao<Group> implements GroupDao {
     }
 
     @Override
-    public List<Group> getAllByAge() {
+    public Group getById(Long id) {
         return null;
     }
 
     @Override
-    public Group getById(Long id) {
+    public List<Group> getStudentByOnlyUnknownStudent() {
         return null;
     }
 }

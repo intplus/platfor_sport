@@ -24,12 +24,12 @@ public class StatusFileDao extends FileAbstractDao<Status> implements StatusDao 
     }
 
     @Override
-    public List<Status> getAllByAge() {
+    public Status getById(Long id) {
         return null;
     }
 
     @Override
-    public Status getById(Long id) {
+    public List<Status> getStudentByOnlyUnknownStudent() {
         return null;
     }
 

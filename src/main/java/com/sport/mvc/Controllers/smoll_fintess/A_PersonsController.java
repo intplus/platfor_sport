@@ -203,8 +203,13 @@ public class A_PersonsController {
            students = studentService.getStudentAgeBeforSixteen();
 
         }
-       else if(option.equals("allStudent")){
-             students = studentService.getAll();
+
+        else  if(option.equals("getUnknownStudent")){
+            students =studentService.getStudentByOnlyUnknownStudent();
+        }
+
+        else if(option.equals("allStudent")){
+            students = studentService.getAll();
 
         }
 
@@ -213,6 +218,21 @@ public class A_PersonsController {
             return modelAndView;
 
 
+    }
+
+    @RequestMapping("/find")
+    public ModelAndView findStudent(@RequestParam("surname") String surname) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Student> students = studentService.getAll();
+        List<Student> studentBySurname = new ArrayList<Student>();
+        for (int i = 0; i<students.size(); i++) {
+            if (students.get(i).getSurname().equalsIgnoreCase(surname)) {
+                studentBySurname.add(students.get(i));
+            }
+        }
+        modelAndView.addObject("students", studentBySurname);
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
+        return modelAndView;
     }
 
 
