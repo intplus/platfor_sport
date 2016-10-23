@@ -199,11 +199,4 @@ public class Student extends Model {
 
 
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }
