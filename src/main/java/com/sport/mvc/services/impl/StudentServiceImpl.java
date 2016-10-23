@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service(value = "studentService")
@@ -45,10 +49,8 @@ public class StudentServiceImpl implements StudentService {
         List<Student> afterSixteenList = new ArrayList<>();
 
             for (Student s:getAll()){
-                System.err.println(s.getAge());
-                if (s.getAge() == null) continue;
-                int age =Integer.parseInt(s.getAge());
-                System.out.println("age = " + age);
+                if (s.getBirthday() == null) continue;
+                int age = Age(s.getBirthday());
                 if(age>=16){
                     afterSixteenList.add(s);
                 }
@@ -64,14 +66,23 @@ public class StudentServiceImpl implements StudentService {
         List<Student> beforeSixteenList = new ArrayList<>();
 
         for (Student s:getAll()){
-            if (s.getAge() == null) continue;
-            int age =Integer.parseInt(s.getAge());
+            if (s.getBirthday() == null) continue;
+            int age = Age(s.getBirthday());
             if (age < 16) {
                 beforeSixteenList.add(s);
 
             }
         }
         return beforeSixteenList;
+    }
+
+    private int Age(Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy");
+        Date today = Calendar.getInstance().getTime();
+        int formatToday = Integer.parseInt(df.format(today));
+        int formatDate = Integer.parseInt(df.format(date));
+        int age = formatToday - formatDate;
+        return age;
     }
 
     @Override
