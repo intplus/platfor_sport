@@ -23,11 +23,6 @@ public class CategoryGroupFileDao extends FileAbstractDao<CategoryGroup> impleme
     }
 
     @Override
-    public List<CategoryGroup> getAllByAge() {
-        return null;
-    }
-
-    @Override
     public CategoryGroup getById(Long id) {
         return null;
     }

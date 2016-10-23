@@ -24,11 +24,6 @@ public class SessionHistoryFileDao extends FileAbstractDao<SessionHistory> imple
     }
 
     @Override
-    public List<SessionHistory> getAllByAge() {
-        return null;
-    }
-
-    @Override
     public SessionHistory getById(Long id) {
         return null;
     }

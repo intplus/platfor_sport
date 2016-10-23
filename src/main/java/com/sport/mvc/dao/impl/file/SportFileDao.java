@@ -24,11 +24,6 @@ public class SportFileDao extends FileAbstractDao<Sport> implements SportDao {
     }
 
     @Override
-    public List<Sport> getAllByAge() {
-        return null;
-    }
-
-    @Override
     public Sport getById(Long id) {
         return null;
     }
