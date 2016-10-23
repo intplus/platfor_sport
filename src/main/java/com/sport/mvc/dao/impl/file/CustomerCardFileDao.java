@@ -31,4 +31,9 @@ public class CustomerCardFileDao extends FileAbstractDao<CustomerCard> implement
     public CustomerCard getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<CustomerCard> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }

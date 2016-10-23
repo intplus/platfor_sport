@@ -32,4 +32,9 @@ public class PhoneTypeFileDao extends FileAbstractDao<PhoneType> implements Phon
     public PhoneType getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<PhoneType> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }

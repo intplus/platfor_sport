@@ -33,4 +33,9 @@ public class StatusFileDao extends FileAbstractDao<Status> implements StatusDao 
         return null;
     }
 
+    @Override
+    public List<Status> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
+
 }
