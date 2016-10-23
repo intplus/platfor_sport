@@ -31,16 +31,6 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.getAll();
     }
 
-
-//
-//    // method with select only data  witch age . The first implementation in HibernateAbstractDao
-//    @Override
-//    @Transactional
-//    public List<Student> getAllByAge(){
-//        return   studentDao.getAllByAge();
-//    }
-
-
     //method, who return list only student with age>16
     @Override
     @Transactional
@@ -50,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 
             for (Student s:getAll()){
                 if (s.getBirthday() == null) continue;
-                int age = Age(s.getBirthday());
+                int age = calculateAge(s.getBirthday());
                 if(age>=16){
                     afterSixteenList.add(s);
                 }
@@ -67,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
 
         for (Student s:getAll()){
             if (s.getBirthday() == null) continue;
-            int age = Age(s.getBirthday());
+            int age = calculateAge(s.getBirthday());
             if (age < 16) {
                 beforeSixteenList.add(s);
 
@@ -76,12 +66,20 @@ public class StudentServiceImpl implements StudentService {
         return beforeSixteenList;
     }
 
-    private int Age(Date date) {
-        DateFormat df = new SimpleDateFormat("yyyy");
-        Date today = Calendar.getInstance().getTime();
-        int formatToday = Integer.parseInt(df.format(today));
-        int formatDate = Integer.parseInt(df.format(date));
-        int age = formatToday - formatDate;
+    public static Integer calculateAge(final Date birthday)
+    {
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.setTime(birthday);
+        // include day of birth
+        dob.add(Calendar.DAY_OF_MONTH, -1);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+        System.out.println("age = " + age);
         return age;
     }
 
