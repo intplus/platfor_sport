@@ -28,8 +28,4 @@ public class SessionHistoryFileDao extends FileAbstractDao<SessionHistory> imple
         return null;
     }
 
-    @Override
-    public List<SessionHistory> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
-}
+   }

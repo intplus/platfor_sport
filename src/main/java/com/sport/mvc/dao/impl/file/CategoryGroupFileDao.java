@@ -27,8 +27,4 @@ public class CategoryGroupFileDao extends FileAbstractDao<CategoryGroup> impleme
         return null;
     }
 
-    @Override
-    public List<CategoryGroup> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
 }

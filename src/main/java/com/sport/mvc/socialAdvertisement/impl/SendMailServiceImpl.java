@@ -28,6 +28,7 @@ public class SendMailServiceImpl implements SendMailService {
     public void sendMailTo(String mail, String subjectTo,String bodyTo)  {
      subject =subjectTo;
      body=bodyTo;
+    System.out.println(mail);
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");

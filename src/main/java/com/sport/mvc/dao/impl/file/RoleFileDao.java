@@ -28,8 +28,4 @@ public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
         return null;
     }
 
-    @Override
-    public List<Role> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
 }

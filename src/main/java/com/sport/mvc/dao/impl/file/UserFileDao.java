@@ -31,8 +31,4 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
         return null;
     }
 
-    @Override
-    public List<User> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
 }

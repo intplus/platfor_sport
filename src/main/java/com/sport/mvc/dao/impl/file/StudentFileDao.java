@@ -27,10 +27,5 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
         return null;
     }
 
-    @Override
-    public List<Student> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
-
 
 }

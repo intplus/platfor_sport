@@ -28,8 +28,4 @@ public class PhoneTypeFileDao extends FileAbstractDao<PhoneType> implements Phon
         return null;
     }
 
-    @Override
-    public List<PhoneType> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
 }
