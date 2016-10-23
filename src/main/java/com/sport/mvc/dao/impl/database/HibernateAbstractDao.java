@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.hibernate.hql.internal.antlr.HqlTokenTypes.LIKE;
+
 public abstract class HibernateAbstractDao<T extends Model> {
 
     @Autowired
@@ -35,6 +37,11 @@ public abstract class HibernateAbstractDao<T extends Model> {
 //        List<T> method = getSession().createQuery("from Student s WHERE s.age !=''").list();
 //        return  method;
 //    }
+
+    public List<T> getStudentByOnlyUnknownStudent() {
+        List<T> method = getSession().createQuery("from Student s WHERE s.phone !='' AND s.surname LIKE '' AND s.name LIKE '' AND s.email LIKE ''").list();
+        return  method;
+    }
 
     @SuppressWarnings("unchecked")
     public T getById(Long id) {

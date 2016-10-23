@@ -1,8 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.models.User;
-import com.sport.mvc.services.impl.StudentServiceImpl;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -52,6 +50,29 @@ public class A_PersonsController {
         return "general_registration_formRegistry";
 
     }
+
+    //method for jump register page FITNESS CENTRE =)
+    @RequestMapping(value = "/registerFitnessCenter")
+    public String showRegisterFitnessCentre(Model model){
+        return "register_pages/registerFitnessCenter";
+    }
+    //method for jump register page guest =)
+    @RequestMapping(value = "/registerGuest")
+    public String showRegisterGuest(Model model){
+        return "register_pages/registerGuest";
+    }
+    //method for jump register page SportsSection =)
+    @RequestMapping(value = "/registerSportsSection")
+    public String showRegisterSportSection(Model model){
+        return "register_pages/registerSportsSection";
+    }
+    //method for jump register page Trainer =)
+    @RequestMapping(value = "/registerTrainer")
+    public String showRegisterTrainer(Model model){
+        return "register_pages/registerTrainer";
+    }
+
+
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
@@ -182,8 +203,13 @@ public class A_PersonsController {
            students = studentService.getStudentAgeBeforSixteen();
 
         }
-       else if(option.equals("allStudent")){
-             students = studentService.getAll();
+
+        else  if(option.equals("getUnknownStudent")){
+            students =studentService.getStudentByOnlyUnknownStudent();
+        }
+
+        else if(option.equals("allStudent")){
+            students = studentService.getAll();
 
         }
 

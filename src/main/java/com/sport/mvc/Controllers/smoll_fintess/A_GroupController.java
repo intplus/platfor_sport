@@ -1,7 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 import com.sport.mvc.models.Group;
-import com.sport.mvc.models.Student;
 import com.sport.mvc.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

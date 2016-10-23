@@ -1,7 +1,6 @@
 package com.sport.mvc.dao.impl.file;
 
 import com.sport.mvc.dao.StudentDao;
-import com.sport.mvc.dao.impl.file.FileAbstractDao;
 import com.sport.mvc.models.Student;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +24,11 @@ public class StudentFileDao extends FileAbstractDao<Student> implements StudentD
 
     @Override
     public Student getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Student> getStudentByOnlyUnknownStudent() {
         return null;
     }
 

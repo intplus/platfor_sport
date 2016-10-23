@@ -10,6 +10,8 @@ import java.util.Set;
 @Table(name = "sport")
 public class Sport extends Model {
 
+    ///// коментарий
+
     private static final long serialVersionUID = -5417868963964887203L;
 
     private String sport;

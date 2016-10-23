@@ -27,4 +27,9 @@ public class SportFileDao extends FileAbstractDao<Sport> implements SportDao {
     public Sport getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<Sport> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }

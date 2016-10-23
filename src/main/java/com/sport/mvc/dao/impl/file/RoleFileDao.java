@@ -27,4 +27,9 @@ public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
     public Role getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<Role> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }

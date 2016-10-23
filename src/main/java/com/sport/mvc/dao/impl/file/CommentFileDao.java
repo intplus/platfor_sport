@@ -26,4 +26,9 @@ public class CommentFileDao extends FileAbstractDao<Comment> implements CommentD
     public Comment getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<Comment> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }

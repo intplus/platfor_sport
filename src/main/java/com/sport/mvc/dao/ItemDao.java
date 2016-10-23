@@ -2,6 +2,7 @@ package com.sport.mvc.dao;
 
 import com.sport.mvc.models.Model;
 
+
 import java.util.List;
 
 public interface ItemDao <T extends Model> {
@@ -15,5 +16,7 @@ public interface ItemDao <T extends Model> {
     public void update(T model);
 
     public void remove(T Model);
+
+    public List<T> getStudentByOnlyUnknownStudent();
 
 }
