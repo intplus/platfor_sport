@@ -182,8 +182,13 @@ public class A_PersonsController {
            students = studentService.getStudentAgeBeforSixteen();
 
         }
-       else if(option.equals("allStudent")){
-             students = studentService.getAll();
+
+        else  if(option.equals("getUnknownStudent")){
+            students =studentService.getStudentByOnlyUnknownStudent();
+        }
+
+        else if(option.equals("allStudent")){
+            students = studentService.getAll();
 
         }
 

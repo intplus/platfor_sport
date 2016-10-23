@@ -32,4 +32,9 @@ public class SessionHistoryFileDao extends FileAbstractDao<SessionHistory> imple
     public SessionHistory getById(Long id) {
         return null;
     }
+
+    @Override
+    public List<SessionHistory> getStudentByOnlyUnknownStudent() {
+        return null;
+    }
 }
