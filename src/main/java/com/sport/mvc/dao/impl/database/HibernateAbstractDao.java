@@ -33,12 +33,7 @@ public abstract class HibernateAbstractDao<T extends Model> {
 
     public List<T> getAllByAge() {
         List<T> method = getSession().createQuery("from Student s WHERE s.age !=''").list();
-
         return  method;
-//        Criteria criteria = getSession().createCriteria(this.clazz);
-//
-//        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-//        return criteria.list();
     }
 
     @SuppressWarnings("unchecked")
