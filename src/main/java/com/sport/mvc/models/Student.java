@@ -1,14 +1,9 @@
 package com.sport.mvc.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -22,34 +17,6 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
-    public Student(Long id, String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
-        super(id);
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.birthday = birthday;
-        this.age = age;
-        this.phones = phones;
-        this.groups = groups;
-        this.sports = sports;
-        this.cards = cards;
-        this.comments = comments;
-        this.status = status;
-    }
-
-    public Student(String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.birthday = birthday;
-        this.age = age;
-        this.phones = phones;
-        this.groups = groups;
-        this.sports = sports;
-        this.cards = cards;
-        this.comments = comments;
-        this.status = status;
-    }
 
     @Column(name = "email")
     private String email;
@@ -191,12 +158,7 @@ public class Student extends Model {
     }
 
 
-
     public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 }

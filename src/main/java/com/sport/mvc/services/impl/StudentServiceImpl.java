@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,7 +28,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getAll() {
         return studentDao.getAll();
     }
-
     //method, who return list only student with age>16
     @Override
     @Transactional
@@ -45,10 +42,11 @@ public class StudentServiceImpl implements StudentService {
                     afterSixteenList.add(s);
                 }
             }
+
         return afterSixteenList;
     }
 
-   // method, who return list only student with age<16
+    // method, who return list only student with age<16
     @Override
     @Transactional
     public List<Student> getStudentAgeBeforSixteen(){
@@ -58,6 +56,7 @@ public class StudentServiceImpl implements StudentService {
         for (Student s:getAll()){
             if (s.getBirthday() == null) continue;
             int age = calculateAge(s.getBirthday());
+
             if (age < 16) {
                 beforeSixteenList.add(s);
 
@@ -66,8 +65,7 @@ public class StudentServiceImpl implements StudentService {
         return beforeSixteenList;
     }
 
-    public static Integer calculateAge(final Date birthday)
-    {
+    public static Integer calculateAge(final Date birthday) {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
@@ -82,6 +80,23 @@ public class StudentServiceImpl implements StudentService {
         System.out.println("age = " + age);
         return age;
     }
+
+
+
+    @Transactional
+    public List<Student> getStudentByOnlyUnknownStudent() {
+        List<Student> unknownPhoneList = new ArrayList<>();
+        for (Student s : studentDao.getAll()) {
+            if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("")) {
+                continue;
+            }
+            unknownPhoneList.add(s);
+        }
+        return unknownPhoneList;
+
+    }
+
+
 
     @Override
     @Transactional
@@ -106,7 +121,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     @Override
     public Student getStudent(long theId) {
-     return  studentDao.getById(theId);
+        return  studentDao.getById(theId);
+    }
 }
-        }
 

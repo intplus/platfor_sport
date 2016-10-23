@@ -26,4 +26,5 @@ public class CommentFileDao extends FileAbstractDao<Comment> implements CommentD
     public Comment getById(Long id) {
         return null;
     }
+
 }

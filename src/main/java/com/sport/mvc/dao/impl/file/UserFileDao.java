@@ -30,4 +30,5 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     public User getById(Long id) {
         return null;
     }
+
 }

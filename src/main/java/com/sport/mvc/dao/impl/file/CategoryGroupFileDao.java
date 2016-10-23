@@ -26,4 +26,5 @@ public class CategoryGroupFileDao extends FileAbstractDao<CategoryGroup> impleme
     public CategoryGroup getById(Long id) {
         return null;
     }
+
 }

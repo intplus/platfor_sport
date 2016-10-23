@@ -26,4 +26,5 @@ public class CustomerCardFileDao extends FileAbstractDao<CustomerCard> implement
     public CustomerCard getById(Long id) {
         return null;
     }
+
 }
