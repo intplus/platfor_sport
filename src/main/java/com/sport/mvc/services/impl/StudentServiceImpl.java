@@ -8,11 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service(value = "studentService")
@@ -48,17 +44,19 @@ public class StudentServiceImpl implements StudentService {
 
         List<Student> afterSixteenList = new ArrayList<>();
 
-            for (Student s:getAll()){
-                if (s.getBirthday() == null) continue;
-                int age = Age(s.getBirthday());
-                if(age>=16){
-                    afterSixteenList.add(s);
-                }
+        for (Student s:getAll()){
+            System.err.println(s.getAge());
+            if (s.getAge() == null) continue;
+            int age =Integer.parseInt(s.getAge());
+            System.out.println("age = " + age);
+            if(age>=16){
+                afterSixteenList.add(s);
             }
+        }
         return afterSixteenList;
     }
 
-   // method, who return list only student with age<16
+    // method, who return list only student with age<16
     @Override
     @Transactional
     public List<Student> getStudentAgeBeforSixteen(){
@@ -66,8 +64,8 @@ public class StudentServiceImpl implements StudentService {
         List<Student> beforeSixteenList = new ArrayList<>();
 
         for (Student s:getAll()){
-            if (s.getBirthday() == null) continue;
-            int age = Age(s.getBirthday());
+            if (s.getAge() == null) continue;
+            int age =Integer.parseInt(s.getAge());
             if (age < 16) {
                 beforeSixteenList.add(s);
 
@@ -76,15 +74,34 @@ public class StudentServiceImpl implements StudentService {
         return beforeSixteenList;
     }
 
-    private int Age(Date date) {
-        DateFormat df = new SimpleDateFormat("yyyy");
-        Date today = Calendar.getInstance().getTime();
-        int formatToday = Integer.parseInt(df.format(today));
-        int formatDate = Integer.parseInt(df.format(date));
-        int age = formatToday - formatDate;
-        return age;
+
+    // dont work
+    @Transactional
+    public List<Student> getStudentByOnlyUnknownStudentTwo(){
+        System.out.println("in method");
+        List<Student> unknownPhoneList =new ArrayList<>();
+
+        for (Student s: studentDao.getAll()){
+            System.out.println(s.getSurname());
+            if( s.getPhone()!=null && s.getName()==null  && s.getSurname()==null &&
+                    s.getEmail()==null   ||
+                    s.getPhone()!="" && s.getName()=="" && s.getSurname()=="" &&
+                            s.getEmail()==""  ){
+                System.out.println("in if statment" + s.getPhone());
+                unknownPhoneList.add(s);
+            }
+        }
+
+        return  unknownPhoneList;
+
     }
 
+    // method , hwom return unknown student date( it's if you have only phone number and maby age).
+    @Override
+    @Transactional
+    public List<Student> getStudentByOnlyUnknownStudent(){
+        return studentDao.getStudentByOnlyUnknownStudent();
+    }
     @Override
     @Transactional
     public void addStudent(Student student) {
@@ -108,7 +125,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     @Override
     public Student getStudent(long theId) {
-     return  studentDao.getById(theId);
+        return  studentDao.getById(theId);
+    }
 }
-        }
 
