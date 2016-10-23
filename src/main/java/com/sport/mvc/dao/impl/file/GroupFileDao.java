@@ -28,8 +28,5 @@ public class GroupFileDao extends FileAbstractDao<Group> implements GroupDao {
         return null;
     }
 
-    @Override
-    public List<Group> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
+
 }

@@ -27,8 +27,5 @@ public class CustomerCardFileDao extends FileAbstractDao<CustomerCard> implement
         return null;
     }
 
-    @Override
-    public List<CustomerCard> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
+
 }

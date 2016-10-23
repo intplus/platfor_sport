@@ -6,9 +6,17 @@ import com.sport.mvc.models.Student;
 import org.springframework.stereotype.Repository;
 
 
+
+
 @Repository(value = "studentDatabaseDao")
 public class StudentDatabaseDao extends HibernateAbstractDao<Student> implements StudentDao {
 
     public StudentDatabaseDao() {
     }
+
+
+
 }
+
+
+

@@ -28,8 +28,5 @@ public class PhoneFileDao extends FileAbstractDao<Phone> implements PhoneDao {
         return null;
     }
 
-    @Override
-    public List<Phone> getStudentByOnlyUnknownStudent() {
-        return null;
-    }
+
 }

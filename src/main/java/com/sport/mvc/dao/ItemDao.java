@@ -17,6 +17,6 @@ public interface ItemDao <T extends Model> {
 
     public void remove(T Model);
 
-    public List<T> getStudentByOnlyUnknownStudent();
+
 
 }
