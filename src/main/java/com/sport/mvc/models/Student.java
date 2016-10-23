@@ -108,13 +108,6 @@ public class Student extends Model {
         this.age = age;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getEmail() {
         return email;
