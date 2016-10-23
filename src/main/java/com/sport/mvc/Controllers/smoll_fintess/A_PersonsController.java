@@ -199,5 +199,20 @@ public class A_PersonsController {
 
     }
 
+    @RequestMapping("/find")
+    public ModelAndView findStudent(@RequestParam("surname") String surname) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Student> students = studentService.getAll();
+        List<Student> studentBySurname = new ArrayList<Student>();
+        for (int i = 0; i<students.size(); i++) {
+            if (students.get(i).getSurname().equalsIgnoreCase(surname)) {
+                studentBySurname.add(students.get(i));
+            }
+        }
+        modelAndView.addObject("students", studentBySurname);
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
+        return modelAndView;
+    }
+
 
 }

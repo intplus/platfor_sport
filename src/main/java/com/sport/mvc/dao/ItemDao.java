@@ -9,8 +9,6 @@ public interface ItemDao <T extends Model> {
 
     public List<T> getAll();
 
-    public   List<T> getAllByAge();
-
     public T getById(Long id);
 
     public void add(T model);

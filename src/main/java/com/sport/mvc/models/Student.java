@@ -22,6 +22,34 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
+    public Student(Long id, String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
+        super(id);
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthday = birthday;
+        this.age = age;
+        this.phones = phones;
+        this.groups = groups;
+        this.sports = sports;
+        this.cards = cards;
+        this.comments = comments;
+        this.status = status;
+    }
+
+    public Student(String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthday = birthday;
+        this.age = age;
+        this.phones = phones;
+        this.groups = groups;
+        this.sports = sports;
+        this.cards = cards;
+        this.comments = comments;
+        this.status = status;
+    }
 
     @Column(name = "email")
     private String email;
@@ -71,39 +99,14 @@ public class Student extends Model {
         super();
     }
 
-    public Student(Long id) {
-        super(id);
+
+    public String getAge() {
+        return age;
     }
 
-//    public Student(Long id, String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
-//        super(id);
-//        this.name = name;
-//        this.surname = surname;
-//        this.email = email;
-//        this.birthday = birthday;
-//        this.age = age;
-//        this.phones = phones;
-//        this.groups = groups;
-//        this.sports = sports;
-//        this.cards = cards;
-//        this.comments = comments;
-//        this.status = status;
-//    }
-//
-//    public Student(String name, String surname, String email, Date birthday, String age, Set<Phone> phones, Set<Group> groups, Set<Sport> sports, Set<CustomerCard> cards, Set<Comment> comments, Status status) {
-//        this.name = name;
-//        this.surname = surname;
-//        this.email = email;
-//        this.birthday = birthday;
-//        this.age = age;
-//        this.phones = phones;
-//        this.groups = groups;
-//        this.sports = sports;
-//        this.cards = cards;
-//        this.comments = comments;
-//        this.status = status;
-//    }
-//
+    public void setAge(String age) {
+        this.age = age;
+    }
 
 
     public String getEmail() {
@@ -187,13 +190,7 @@ public class Student extends Model {
         this.phones = phones;
     }
 
-    public String getAge() {
-        return age;
-    }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
 
     public String getPhone() {
         return phone;
