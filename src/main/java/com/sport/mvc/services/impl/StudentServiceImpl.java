@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service(value = "studentService")
@@ -24,13 +26,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public List<Student> getAll() {
-        return studentDao.getAll();
+        List <Student> listStudentWithAge = studentDao.getAll();
+        for(int i = 0; i < listStudentWithAge.size(); ++i) {
+            listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+        }
+        return listStudentWithAge;
     }
-
-
-
-
-
     //method, who return list only student with age>16
     @Override
     @Transactional
@@ -38,15 +39,14 @@ public class StudentServiceImpl implements StudentService {
 
         List<Student> afterSixteenList = new ArrayList<>();
 
-        for (Student s:getAll()){
-            if (s.getAge().equals(null)||s.getAge().equals("")){
-                continue;
+            for (Student s:getAll()){
+                if (s.getBirthday() == null) continue;
+                int age = calculateAge(s.getBirthday());
+                if(age>=16){
+                    afterSixteenList.add(s);
+                }
             }
-            int age =Integer.parseInt(s.getAge());
-            if(age>=16){
-                afterSixteenList.add(s);
-            }
-        }
+
         return afterSixteenList;
     }
 
@@ -58,10 +58,9 @@ public class StudentServiceImpl implements StudentService {
         List<Student> beforeSixteenList = new ArrayList<>();
 
         for (Student s:getAll()){
-            if (s.getAge().equals(null)||s.getAge().equals("")){
-                continue;
-            }
-            int age =Integer.parseInt(s.getAge());
+            if (s.getBirthday() == null) continue;
+            int age = calculateAge(s.getBirthday());
+
             if (age < 16) {
                 beforeSixteenList.add(s);
 
@@ -70,21 +69,36 @@ public class StudentServiceImpl implements StudentService {
         return beforeSixteenList;
     }
 
+    public Integer calculateAge(final Date birthday) {
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.setTime(birthday);
+        // include day of birth
+        dob.add(Calendar.DAY_OF_MONTH, -1);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+        System.out.println("age = " + age);
+        return age;
+    }
 
 
 
     @Transactional
-    public List<Student> getStudentByOnlyUnknownStudent(){
-        List<Student> unknownPhoneList =new ArrayList<>();
-        for (Student s: studentDao.getAll()){
-            if(!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ){
+    public List<Student> getStudentByOnlyUnknownStudent() {
+        List<Student> unknownPhoneList = new ArrayList<>();
+        for (Student s : studentDao.getAll()) {
+            if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("")) {
                 continue;
             }
             unknownPhoneList.add(s);
         }
-        return  unknownPhoneList;
-    }
+        return unknownPhoneList;
 
+    }
 
 
 
