@@ -57,7 +57,6 @@ public class Student extends Model {
         super();
     }
 
-
     public int getAge() {
         return age;
     }

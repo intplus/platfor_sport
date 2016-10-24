@@ -85,7 +85,6 @@ public class StudentServiceImpl implements StudentService {
         if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
-        System.out.println("age = " + age);
         return age;
     }
 
