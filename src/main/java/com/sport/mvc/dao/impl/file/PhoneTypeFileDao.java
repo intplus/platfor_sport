@@ -28,5 +28,4 @@ public class PhoneTypeFileDao extends FileAbstractDao<PhoneType> implements Phon
         return null;
     }
 
-
 }

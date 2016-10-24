@@ -27,5 +27,4 @@ public class CommentFileDao extends FileAbstractDao<Comment> implements CommentD
         return null;
     }
 
-
 }

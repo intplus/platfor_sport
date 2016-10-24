@@ -2,6 +2,7 @@ package com.sport.mvc.services;
 
 import com.sport.mvc.models.Student;
 
+import java.util.Date;
 import java.util.List;
 
 public interface StudentService {
@@ -15,12 +16,10 @@ public interface StudentService {
 
     void updateStudent(Student student);
 
-     List<Student> getStudentAgeAfterSixteen();
+    List<Student> getStudentAgeAfterSixteen();
 
-     List<Student> getStudentAgeBeforSixteen();
+    List<Student> getStudentAgeBeforSixteen();
 
-     List<Student> getStudentByOnlyUnknownStudent();
-
-
+    List<Student> getStudentByOnlyUnknownStudent();
 
 }
