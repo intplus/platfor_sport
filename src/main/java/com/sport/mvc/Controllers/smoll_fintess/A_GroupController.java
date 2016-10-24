@@ -1,5 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
+
 import com.sport.mvc.models.Group;
 import com.sport.mvc.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,7 +31,7 @@ public class A_GroupController {
 
     }
 
-    @GetMapping("/showFormForAddGroup")
+    @RequestMapping("/showFormForAddGroup")
     public String showFormForAdd(Model theModel) {
 
         // create model attribute to bind form data
@@ -57,5 +59,13 @@ public class A_GroupController {
 
         return "A_small_fitness_update_group";
     }
+
+//    @RequestMapping("/ShowNewGroup")
+//    public List<Group> addNewGroup(Model Model){
+//
+//        List<Group> groupList = groupService.getAll();
+//
+//
+//    }
 }
 

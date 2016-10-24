@@ -32,7 +32,6 @@ public class Student extends Model {
     private Date birthday;
 
     @Column(name = "age")
-
     private String age;
 
     @Column(name = "phone")
