@@ -23,6 +23,7 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
+
     private int age;
 
     @Column(name = "phone")
@@ -55,6 +56,7 @@ public class Student extends Model {
     public Student() {
         super();
     }
+
 
     public int getAge() {
         return age;
