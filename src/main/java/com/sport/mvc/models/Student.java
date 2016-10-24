@@ -23,8 +23,11 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
+    @Column(name = "string_birthday")
+    private String strBirthday;
 
-    private int age;
+    @Column(name = "age")
+    private String age;
 
     @Column(name = "phone")
     private String phone;
@@ -57,13 +60,20 @@ public class Student extends Model {
         super();
     }
 
-
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getStrBirthday() {
+        return strBirthday;
+    }
+
+    public void setStrBirthday(String strBirthday) {
+        this.strBirthday = strBirthday;
     }
 
     public void setPhone(String phone) {

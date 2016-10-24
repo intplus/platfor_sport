@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,16 +28,24 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public List<Student> getAll() {
-        List <Student> listStudentWithAge = studentDao.getAll();
-        try {
-            for (int i = 0; i < listStudentWithAge.size(); ++i) {
-                listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+
+        List <Student> listStudentsUpdate = studentDao.getAll();
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+            for (int i = 0; i < listStudentsUpdate.size(); ++i) {
+                try {
+                    listStudentsUpdate.get(i).
+                            setAge(Integer.toString(calculateAge(listStudentsUpdate.get(i).getBirthday())));
+                    listStudentsUpdate.get(i).
+                            setStrBirthday(df.format(listStudentsUpdate.get(i).getBirthday()));
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return listStudentWithAge;
+        return listStudentsUpdate;
     }
+
+
     //method, who return list only student with age>16
     @Override
     @Transactional
@@ -74,6 +84,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Integer calculateAge(final Date birthday) {
+
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
@@ -85,7 +96,6 @@ public class StudentServiceImpl implements StudentService {
         if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
-        System.out.println("age = " + age);
         return age;
     }
 

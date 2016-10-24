@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,19 +29,9 @@ public class A_PersonsController {
     @Qualifier("studentService")
     private StudentService studentService;
 
-
-
-
-    @Autowired
-    @Qualifier("phoneService")
-    private PhoneService phoneService;
-
     @Autowired
     @Qualifier("mail")
     private SendMailService sendMailService;
-
-
-
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -78,8 +69,9 @@ public class A_PersonsController {
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-            modelAndView.addObject("students", students);
-            modelAndView.setViewName("A_small_fitness_first_work_Page");
+
+        modelAndView.addObject("students", students);
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }
 
