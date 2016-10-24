@@ -25,7 +25,7 @@
         <div class="jumbotron">
             <h1>Trainer</h1>
             <p>Registration page <strong></strong> </p>
-            <p>маленький подарок русский буквы нормально отображаются)</p>
+            <p></p>
             <p><input type="submit" value="Submit"></p>
         </div>
 
