@@ -23,6 +23,7 @@ public class Student extends Model {
     @Column(name = "birthday")
     private Date birthday;
 
+
     private int age;
 
     @Column(name = "phone")

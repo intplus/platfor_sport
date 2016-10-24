@@ -221,15 +221,40 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/find")
-    public ModelAndView findStudent(@RequestParam("surname") String surname) {
+    public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
+                                    @RequestParam(value = "option", required = false) String option) {
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
         List<Student> studentBySurname = new ArrayList<Student>();
-        for (int i = 0; i<students.size(); i++) {
-            if (students.get(i).getSurname().equalsIgnoreCase(surname)) {
-                studentBySurname.add(students.get(i));
+        if (option.equals("name")) {
+            for (int i = 0; i<students.size(); i++) {
+                if (students.get(i).getName().equalsIgnoreCase(data)) {
+                    studentBySurname.add(students.get(i));
+                }
             }
         }
+        else if (option.equals("surname")) {
+            for (int i = 0; i<students.size(); i++) {
+                if (students.get(i).getSurname().equalsIgnoreCase(data)) {
+                    studentBySurname.add(students.get(i));
+                }
+            }
+        }
+        else if (option.equals("email")) {
+            for (int i = 0; i<students.size(); i++) {
+                if (students.get(i).getEmail().equalsIgnoreCase(data)) {
+                    studentBySurname.add(students.get(i));
+                }
+            }
+        }
+        else if (option.equals("phone")) {
+            for (int i = 0; i<students.size(); i++) {
+                if (students.get(i).getPhone().equalsIgnoreCase(data)) {
+                    studentBySurname.add(students.get(i));
+                }
+            }
+        }
+
         modelAndView.addObject("students", studentBySurname);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
