@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,13 +31,28 @@ public class StudentServiceImpl implements StudentService {
         List <Student> listStudentWithAge = studentDao.getAll();
         try {
             for (int i = 0; i < listStudentWithAge.size(); ++i) {
-                listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+                listStudentWithAge.get(i).setAge(Integer.toString(calculateAge(listStudentWithAge.get(i).getBirthday())));
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
         return listStudentWithAge;
     }
+
+    private String dateToString(Date date) {
+        // Create an instance of SimpleDateFormat used for formatting
+        // the string representation of date (month/day/year)
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+// Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();
+// Using DateFormat format method we can create a string
+// representation of a date with the defined format.
+        return df.format(today);
+    }
+
+
+
     //method, who return list only student with age>16
     @Override
     @Transactional
