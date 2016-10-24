@@ -17,23 +17,13 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
-
     @Column(name = "email")
     private String email;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-
-
     @Column(name = "birthday")
-
     private Date birthday;
 
-    @Column(name = "age")
-
-    private String age;
+    private int age;
 
     @Column(name = "phone")
     private String phone;
@@ -66,15 +56,17 @@ public class Student extends Model {
         super();
     }
 
-
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getEmail() {
         return email;

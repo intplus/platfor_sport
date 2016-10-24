@@ -26,7 +26,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public List<Student> getAll() {
-        return studentDao.getAll();
+        List <Student> listStudentWithAge = studentDao.getAll();
+        for(int i = 0; i < listStudentWithAge.size(); ++i) {
+            listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+        }
+        return listStudentWithAge;
     }
     //method, who return list only student with age>16
     @Override
@@ -65,7 +69,8 @@ public class StudentServiceImpl implements StudentService {
         return beforeSixteenList;
     }
 
-    public static Integer calculateAge(final Date birthday) {
+    public Integer calculateAge(final Date birthday) {
+
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
