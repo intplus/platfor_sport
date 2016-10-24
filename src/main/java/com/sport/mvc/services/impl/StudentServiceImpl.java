@@ -27,8 +27,12 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public List<Student> getAll() {
         List <Student> listStudentWithAge = studentDao.getAll();
-        for(int i = 0; i < listStudentWithAge.size(); ++i) {
-            listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+        try {
+            for (int i = 0; i < listStudentWithAge.size(); ++i) {
+                listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return listStudentWithAge;
     }
