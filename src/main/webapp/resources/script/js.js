@@ -10,6 +10,7 @@ function Add(){
 	// var newUl = document.createElement("ui");
 	var newLi = document.createElement("li");
 	var a = document.createElement("a");
+	a.setAttribute('href', "http://facebook.com");
 //	a.appendChild(document.setProperty("in",name)).href="http://localhost:8080/registerPerson//showFormForAdd";
 	a.appendChild(document.createTextNode(name));
 	newLi.appendChild(a);
