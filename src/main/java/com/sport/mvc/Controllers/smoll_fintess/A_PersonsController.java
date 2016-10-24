@@ -229,7 +229,6 @@ public class A_PersonsController {
         List<Student> fullCollision = new ArrayList<Student>();
         Set<Student> receivedStudents = new LinkedHashSet<Student>();
         data = data.toLowerCase();
-        String [] dataArray = data.split("");
         if (option.equals("name")) {
                 for (int i = 0; i<students.size(); i++) {
                     //to prevent CAPS symbols
@@ -238,11 +237,9 @@ public class A_PersonsController {
                         //add full collision
                        fullCollision.add(students.get(i));
                     }
-                    for (int j=0; j<dataArray.length; j++) {
-                    if (names.indexOf(dataArray[j])>=0) {
+                    if (names.contains(data)) {
                         //add particular coincidence
                         particularCollision.add(students.get(i));
-                    }
                 }
 
             }
@@ -256,10 +253,9 @@ public class A_PersonsController {
                     System.out.println(students.get(i));
                     fullCollision.add(students.get(i));
                 }
-                for (int j=0; j<dataArray.length; j++) {
-                    if (names.indexOf(dataArray[j])>=0) {
+
+                    if (names.contains(data)) {
                         particularCollision.add(students.get(i));
-                    }
                 }
 
             }
@@ -270,10 +266,8 @@ public class A_PersonsController {
                 if (names.equals(data)){
                     fullCollision.add(students.get(i));
                 }
-                for (int j=0; j<dataArray.length; j++) {
-                    if (names.indexOf(dataArray[j])>=0) {
+                    if (names.contains(data)) {
                         particularCollision.add(students.get(i));
-                    }
                 }
 
             }
