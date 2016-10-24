@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,19 +29,9 @@ public class A_PersonsController {
     @Qualifier("studentService")
     private StudentService studentService;
 
-
-
-
-    @Autowired
-    @Qualifier("phoneService")
-    private PhoneService phoneService;
-
     @Autowired
     @Qualifier("mail")
     private SendMailService sendMailService;
-
-
-
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -78,8 +69,9 @@ public class A_PersonsController {
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-            modelAndView.addObject("students", students);
-            modelAndView.setViewName("A_small_fitness_first_work_Page");
+
+        modelAndView.addObject("students", students);
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }
 
@@ -89,7 +81,7 @@ public class A_PersonsController {
     public void initBinder(WebDataBinder binder)
     {
         //format of date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, true));
@@ -225,37 +217,67 @@ public class A_PersonsController {
                                     @RequestParam(value = "option", required = false) String option) {
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-        List<Student> studentBySurname = new ArrayList<Student>();
+        Set<Student> particularCollision = new LinkedHashSet<Student>();
+        List<Student> fullCollision = new ArrayList<Student>();
+        Set<Student> receivedStudents = new LinkedHashSet<Student>();
+        data = data.toLowerCase();
         if (option.equals("name")) {
-            for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getName().equalsIgnoreCase(data)) {
-                    studentBySurname.add(students.get(i));
+                for (int i = 0; i<students.size(); i++) {
+                    //to prevent CAPS symbols
+                   String names =  students.get(i).getName().toLowerCase();
+                    if (names.equals(data)){
+                        //add full collision
+                       fullCollision.add(students.get(i));
+                    }
+                    if (names.contains(data)) {
+                        //add particular coincidence
+                        particularCollision.add(students.get(i));
                 }
+
             }
+
         }
+        //do the steps above in the surname and email parts
         else if (option.equals("surname")) {
             for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getSurname().equalsIgnoreCase(data)) {
-                    studentBySurname.add(students.get(i));
+                String names =  students.get(i).getSurname().toLowerCase();
+                if (names.equals(data)){
+                    System.out.println(students.get(i));
+                    fullCollision.add(students.get(i));
                 }
+
+                    if (names.contains(data)) {
+                        particularCollision.add(students.get(i));
+                }
+
             }
         }
         else if (option.equals("email")) {
             for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getEmail().equalsIgnoreCase(data)) {
-                    studentBySurname.add(students.get(i));
+                String names =  students.get(i).getEmail().toLowerCase();
+                if (names.equals(data)){
+                    fullCollision.add(students.get(i));
                 }
+                    if (names.contains(data)) {
+                        particularCollision.add(students.get(i));
+                }
+
             }
         }
         else if (option.equals("phone")) {
             for (int i = 0; i<students.size(); i++) {
                 if (students.get(i).getPhone().equalsIgnoreCase(data)) {
-                    studentBySurname.add(students.get(i));
+                    particularCollision.add(students.get(i));
                 }
             }
         }
-
-        modelAndView.addObject("students", studentBySurname);
+        //remove from particular collision data which was in fullcollision
+        particularCollision.removeAll(fullCollision);
+        //to print firs full collision add first fullcollision to the LinkedHashSet value
+        receivedStudents.addAll(fullCollision);
+        //add the other results
+        receivedStudents.addAll(particularCollision);
+        modelAndView.addObject("students", receivedStudents);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }

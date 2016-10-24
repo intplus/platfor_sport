@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,16 +28,36 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public List<Student> getAll() {
-        List <Student> listStudentWithAge = studentDao.getAll();
-        try {
-            for (int i = 0; i < listStudentWithAge.size(); ++i) {
-                listStudentWithAge.get(i).setAge(calculateAge(listStudentWithAge.get(i).getBirthday()));
+        List <Student> listStudentsUpdate = studentDao.getAll();
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+            for (int i = 0; i < listStudentsUpdate.size(); ++i) {
+                try {
+                    listStudentsUpdate.get(i).
+                            setAge(Integer.toString(calculateAge(listStudentsUpdate.get(i).getBirthday())));
+                    listStudentsUpdate.get(i).
+                            setStrBirthday(df.format(listStudentsUpdate.get(i).getBirthday()));
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return listStudentWithAge;
+        return listStudentsUpdate;
     }
+
+    private String dateToString(Date date) {
+        // Create an instance of SimpleDateFormat used for formatting
+        // the string representation of date (month/day/year)
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+// Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();
+// Using DateFormat format method we can create a string
+// representation of a date with the defined format.
+        return df.format(today);
+    }
+
+
+
     //method, who return list only student with age>16
     @Override
     @Transactional
@@ -86,7 +108,6 @@ public class StudentServiceImpl implements StudentService {
         if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
-        System.out.println("age = " + age);
         return age;
     }
 
