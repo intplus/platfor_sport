@@ -66,6 +66,8 @@
         </table>
     </form:form>
 </div>
+
+<a href="/group//ShowGroupPage">Return tu group</a>
 <footer class="footer">
     <div class="container">
 

@@ -23,9 +23,16 @@ public class A_GroupController {
 
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
+
+        List<Group> groupsList = groupService.getAll();
+        for (Group g: groupsList){
+            System.out.println(g.getName());
+        }
+
+
         ModelAndView modelAndView = new ModelAndView();
-        List<Group> groups = groupService.getAll();
-        modelAndView.addObject("groups", groups);
+        modelAndView.addObject("groupsList", groupsList);
+
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
 
@@ -33,7 +40,6 @@ public class A_GroupController {
 
     @RequestMapping("/showFormForAddGroup")
     public String showFormForAdd(Model theModel) {
-
         // create model attribute to bind form data
         Group group = new Group();
         theModel.addAttribute("group", group);
@@ -48,24 +54,18 @@ public class A_GroupController {
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("groupId") long theId, Model theModel) {
-
-        //   logger.info("showing form for update");
-        System.out.println(theId);
         // get customer from database
         Group group = groupService.getGroup(theId);
-
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("group", group);
-
-        return "A_small_fitness_update_group";
+        return "A_small_fitness_add_group";
     }
 
-//    @RequestMapping("/ShowNewGroup")
-//    public List<Group> addNewGroup(Model Model){
-//
-//        List<Group> groupList = groupService.getAll();
-//
-//
-//    }
+    @RequestMapping("/deleteGroup")
+    public  void deleteGrout(){
+      //  groupService.deleteListOfGroup();
+    }
+
+
 }
 

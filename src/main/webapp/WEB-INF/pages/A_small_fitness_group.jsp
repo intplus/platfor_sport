@@ -7,11 +7,15 @@
 <head>
     <title> First Work Page</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <spring:url value="/resources/script/js.js" var="js" />
     <spring:url value="/resources/css/first_work_page.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
+    <spring:url value="/resources/css/tableStyle.css" var="tableStyle" />
 
+    <script src="<c:url value="/resources/script/js.js" />"></script>
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" type="text/css" href="${tableStyle}" >
 
 </head>
 
@@ -40,120 +44,155 @@
     });
 </SCRIPT>
 <!-- HEADER -->
-<header class="header">
-    <div class="container">
-        <h1>World Sport Platform BF 1.0</h1>
-        <h2>
-            <small>Movement breeds success!</small>
-        </h2>
-    </div>
-</header>
-<!-- /HEADER -->
 <!-- NAVIGATION -->
-<nav class="page-navigation">
-    <div class="container">
-        <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="/group/ShowGroupPage">Группы</a></li>
-            <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
-            <%--<li><a href="#">РџСЂРѕСЃРјРѕС‚СЂ РјРѕРµР№ СЃС‚СЂР°РЅРёС†Рё</a></li>--%>
-            <%--<li><a href="#">РЎС‚Р°С‚РёСЃС‚РёРєР°</a></li>--%>
-            <%--<li><a href="#">Р Р°СЃС‡РµС‚С‹</a></li>--%>
-        </ul>
+<div class="menu-navigation">
+    <ul id="navbar">
+        <li><a href="#">Main</a></li>
+        <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
+        <li><a href="#">Groups</a>
+            <ul id="group">
 
-        <!-- LOGIN FORM -->
-        <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required>
-            <input type="submit" value="Sign In">
-        </form>
-        <!-- /LOGIN FORM -->
-    </div>
-</nav>
-<!-- /NAVIGATION -->
+                <li><a href="/group/ShowGroupPage">overall</a></li>
+                <%--<li id="create"><a href="javascript://" onclick="Add();return false;">Create</a>  </li>--%>
+                <li id="create"   ><a href="/group//showFormForAddGroup">Create</a>  </li>
+                <li><a href="#">Delete</a> </li>
+                <li><a href="#">Categoty</a> </li>
+                <li><a href="#">Update</a> </li>
+                  <c:forEach items="${groupsList}" var="groups">
+                    <c:if test="${groups.name!=null}">
+                        <li><a href="/group//ShowGroupPage">
+                            <c:out value="${groups.name}"/>
+                        </a> </li>
+
+                    </c:if>
+
+                </c:forEach>
+
+
+            </ul>
+        </li>
+
+        <li><a href="#">instructors group</a>
+            <ul>
+                <li><a href="#">Create</a>  </li>
+                <li><a href="#">Categoty</a></li>
+                <li><a href="#">Delete</a> </li>
+                <li><a href="#">Update</a> </li>
+
+            </ul>
+        </li>
+        <li><a href="#">Statistics</a></li>
+        <li><a href="#">Finance</a></li>
+        <li id="out"><a href="">Out</a></li>
+    </ul>
+
+</div>
+
+
 <!-- MAIN SECTION -->
 <main>
 
+    <div class="work_form">
 
-    <div>
-        <%--<div>--%>
-            <%--<input type="button" value="Add1">--%>
-            <%--<input type="button" value="Add2">--%>
-            <%--<input type="button" value="Add3">--%>
-            <%--<input type="button" value="Add4">--%>
-        <%--</div>--%>
-        <br/><br/>
-        <br/><br/>
+        <div class="button_navigation_form">
 
-        <input type="button" value="найти">
-        <input type="button" value="редактировать">
-        <div style="font-weight: bold;
-	width: 130px;
-	padding: 5px 10px;
-	margin-top: 30px;
-	margin-left: 800px;
-    background: #cccccc; "
-            <form:form method="get" action="delete">
+            <div class=" fins_form">
 
-            <input type="button" value="Добавить"
-                   onclick="window.location.href='showFormForAddGroup'; return false;" class="add-button"
-            />
+                <form action="find" method="get">
+                    <label for="surname"><spring:message code="firstWorkPage.findStudent.surname"></spring:message> </label>
+                    <input type="text" id="surname" name="surname">
+                    <input type="submit" value="найти">
+                </form>
 
-            <input type="submit" value="удалить">
-            <input type="button" value="Отправить смс">
-            <input type="button" value="отправить письмо">
+            </div>
+
+            <div class="sort_form" >
+
+                <form method="get" action="/registerPerson//sort">
+                    <select name="option">
+                        <option disabled selected><spring:message code="sort.selectSortType"></spring:message> </option>
+                        <option value="ageAfterSixteen"><spring:message code="sort.sortByAgeAfter"></spring:message> </option>
+                        <option value="ageBeforeSixteen"><spring:message code="sort.sortByAgeBefore"></spring:message> </option>
+                        <option value="getUnknownStudent"><spring:message code="sort.getStudentByOnlyUnknownStudent"></spring:message> </option>
+                        <option value="allStudent"><spring:message code="sort.sortByAll"></spring:message> </option>
+                    </select>
+                    <input type="submit" value="<spring:message code="Sort"></spring:message> ">
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <%--Table form--%>
+        <div class="table form">
+
+            <form method="get" action="delete">
+                <input type="hidden" id="txt" name="">
+                <input type="button" value="Добавить"
+                       onclick="window.location.href='showFormForAdd'; return false;" class="add-button"
+                />
+                <input type="submit" name="deletee" value="удалить">
+                <input type="submit" name="send_email" value="send email" class="add-button"
+                />
+                <input type="button" value="Отправить смс">
+                <%--<input type="button" value="отправить письмо">--%>
         </div>
     </div>
     <br/><br/>
     <br/><br/>
     <br/><br/>
 
-
-
-
-    <table class="table table-hover"  border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <%--<tr>--%>
-            <%--<th colspan="7">--%>
-                <h3><br>Список групп</h3>
-            <%--</th>--%>
-        <%--</tr>--%>
-        <th>Название группы</th>
-        <th>Тренер</th>
-        <th>Спорт</th>
-        <th>Количество студентов</th>
-        <th>комментарий</th>
+    <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Телефон</th>
+        <th>почта</th>
+        <th>абонимент</th>
+        <th>Разовое посещение</th>
+        <th>Дата начала Абонимента</th>
+        <th>Дата кончания Абониментадата</th>
+        <th>Статус оплаты</th>
         <th><input type="checkbox" id="selectall"></th>
-        <c:forEach items="${groups}" var="group2">
+
+        <c:forEach items="${students}" var="student">
             <tr align="center">
-                <td>${group2.name}</td>
-                <td align="left"></td>
-                <td align="left"></td>
+                <td>${student.name}</td>
+                <td align="left">${student.surname}</td>
+                <td>${student.phone}</td>
+                <td>${student.email}</td>
+                <td>${student.birthday}</td>
                 <td></td>
-                <td>${group2.discription}</td>
-                <td><input type="checkbox" class="case", name="case" value="${group.id}"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
                 <td align="left"></td>
                 <td>
-                    <!-- construct an "update" link with group id -->
-                    <c:url var="updateLink" value="/group/showFormForUpdate" >
-                        <c:param name="groupId" value="${group2.id}"/>
+                    <!-- construct an "update" link with customer id -->
+                    <c:url var="updateLink" value="/registerPerson/showFormForUpdate" >
+                        <c:param name="studentId" value="${student.id}"/>
                     </c:url>
 
                     <!-- display the update link -->
                     <a href="${updateLink}">Редактировать</a>
 
                 </td>
-
-
             </tr>
         </c:forEach>
+
     </table>
-    </form:form>
+    </form>
 
 
     <br><br>
     <br><br>
+
+    </div>
+
 </main>
-<!-- /MAIN SECTION -->
+
+
 <!-- FOOTER -->
 <footer class="footer">
     <div class="container">
