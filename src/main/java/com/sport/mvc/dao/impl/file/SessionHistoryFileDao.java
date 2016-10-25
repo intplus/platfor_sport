@@ -28,5 +28,4 @@ public class SessionHistoryFileDao extends FileAbstractDao<SessionHistory> imple
         return null;
     }
 
-
-}
+   }

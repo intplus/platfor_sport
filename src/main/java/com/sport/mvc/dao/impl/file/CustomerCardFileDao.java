@@ -27,5 +27,4 @@ public class CustomerCardFileDao extends FileAbstractDao<CustomerCard> implement
         return null;
     }
 
-
 }

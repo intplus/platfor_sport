@@ -28,5 +28,4 @@ public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
         return null;
     }
 
-
 }

@@ -33,6 +33,10 @@ public abstract class HibernateAbstractDao<T extends Model> {
         return criteria.list();
     }
 
+//    public List<T> getStudentByOnlyUnknownStudent() {
+//        List<T> method = getSession().createQuery("from Student s WHERE s.phone !='' AND s.surname LIKE '' AND s.name LIKE '' AND s.email LIKE ''").list();
+//        return  method;
+//    }
 
     @SuppressWarnings("unchecked")
     public T getById(Long id) {

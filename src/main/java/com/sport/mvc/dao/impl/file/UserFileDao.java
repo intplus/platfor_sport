@@ -31,5 +31,4 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
         return null;
     }
 
-
 }

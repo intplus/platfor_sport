@@ -28,5 +28,4 @@ public class GroupFileDao extends FileAbstractDao<Group> implements GroupDao {
         return null;
     }
 
-
 }
