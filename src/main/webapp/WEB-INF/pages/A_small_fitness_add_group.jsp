@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_pageAdd.css" var="style" />
+    <spring:url value="/resources/css/first_work_page.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
     <link rel="stylesheet" type="text/css" href="${style}" >
@@ -56,8 +56,20 @@
                 <td><form:input path="name" /></td>
             </tr>
 
+            <tr>
+                <td><label>Discription:</label></td>
+                <td><form:input path="discription" /></td>
+            </tr>
+            <tr>
+                <td>Coach:</td>
+                <td><form:select path="" /></td>
+            </tr>
+            <tr>
+                <td>TypeOfSport:</td>
+                <td><form:select path="" /></td>
+            </tr>
 
-
+            <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>
@@ -66,8 +78,6 @@
         </table>
     </form:form>
 </div>
-
-<a href="/group//ShowGroupPage">Return tu group</a>
 <footer class="footer">
     <div class="container">
 

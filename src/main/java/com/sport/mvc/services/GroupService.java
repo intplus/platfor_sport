@@ -10,7 +10,7 @@ public interface GroupService {
 
     void addGroup(Group group);
 
-    void deleteListOfGroup(Long id);
+    public void deleteListOfGroup(Long id);
 
     Group getGroup(long theId);
 }

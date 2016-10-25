@@ -1,8 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.models.Group;
-import com.sport.mvc.services.GroupService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -30,17 +28,6 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
-
-    @Autowired
-    @Qualifier("groupService")
-    private GroupService groupService;
-
-
-
-
-    @Autowired
-    @Qualifier("phoneService")
-    private PhoneService phoneService;
 
     @Autowired
     @Qualifier("mail")
@@ -80,20 +67,11 @@ public class A_PersonsController {
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
-        //add atribute to group
-        List<Group> groupList = groupService.getAll();
-//        groupList.add("DeleteOp");
-//        groupList.add("CreateOp");
-//        groupList.add("CategotyOp");
-
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
 
         modelAndView.addObject("students", students);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
-            modelAndView.addObject("students", students);
-            modelAndView.addObject("groupList", groupList);
-            modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
     }
 

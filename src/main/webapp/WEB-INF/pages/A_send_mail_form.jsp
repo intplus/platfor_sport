@@ -19,7 +19,7 @@ ololo
     <br><br>
 
         <input type="submit" value="Send"/>
-        <!--  submit automaticaly setFirsnName and setLastName in to Students -->
+        <!--  submit automaticaly setFirsnName and setLastName in to Student -->
     </form:form>
 
 <br><br>
