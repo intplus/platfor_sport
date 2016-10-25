@@ -42,4 +42,15 @@ public class GroupServiceImpl implements GroupService {
     public Group getGroup(long theId) {
         return  groupDao.getById(theId);
     }
+
+    @Transactional
+    public void saveStudentsGroup(){
+
+    }
+
+    @Override
+    @Transactional
+    public  void  saveIdsToStudent_Group(Long studentId, Long groupId){
+        groupDao.saveToDBGroupIdANdStudentId(studentId,groupId);
+    }
 }

@@ -28,4 +28,9 @@ public class GroupFileDao extends FileAbstractDao<Group> implements GroupDao {
         return null;
     }
 
+
+    @Override
+    public void saveToDBGroupIdANdStudentId(Long studentId, Long groupId) {
+
+    }
 }

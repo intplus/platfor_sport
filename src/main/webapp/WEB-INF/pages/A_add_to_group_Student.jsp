@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page.css" var="style" />
+    <spring:url value="/resources/css/first_work_page_css.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
     <link rel="stylesheet" type="text/css" href="${style}" >
@@ -27,9 +27,7 @@
             <li><a href="#">Главная</a></li>
             <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
-            <%--<li><a href="#">Просмотр моей страници</a></li>--%>
-            <%--<li><a href="#">Статистика</a></li>--%>
-            <%--<li><a href="#">Расчеты</a></li>--%>
+
         </ul>
 
         <!-- LOGIN FORM -->
@@ -43,9 +41,9 @@
 </nav>
 
 <div class="container addgroup_form">
-    <h1>Add group</h1>
+    <h1>Add student to group</h1>
     <br>
-    <form:form action="saveGroup" modelAttribute="group" method="POST">
+    <form:form action="/group/saveStudentToGroup" modelAttribute="student" method="POST">
 
         <form:hidden path="id" />
 
@@ -56,10 +54,35 @@
                 <td><form:input path="name" /></td>
             </tr>
 
+            <tr>
+                <td><label>SurName:</label></td>
+                <td><form:input path="surname" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Phone:</label></td>
+                <td><form:input path="phone" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Email:</label></td>
+                <td><form:input path="email" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Abonement:</label></td>
+                <%--<td><form:input path="amonement" /></td>--%>
+            </tr>
+
+            <tr>
+                <td><label>Ones:</label></td>
+            <%--//    <td><form:input path="raz" /></td>--%>
+            </tr>
 
 
-                <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+
+            <td><label></label></td>
+            <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 
             </tbody>
