@@ -9,4 +9,20 @@ public class GroupDatabaseDao extends HibernateAbstractDao<Group> implements Gro
 
     public GroupDatabaseDao() {
     }
+
+   public void   saveToDBGroupIdANdStudentId(Long studentId, Long groupId){
+       // now get a  session and start transaction
+       getSession().beginTransaction();
+
+
+
+      // Group mGroup = getSession().get(Group.class, getById(groupId));
+
+       getSession().createQuery("INSERT INTO student_group(student_id) select studentId from student").executeUpdate();
+
+       // commit the tranzaction
+       getSession().getTransaction().commit();
+
+       System.out.println("Done!");
+   }
 }

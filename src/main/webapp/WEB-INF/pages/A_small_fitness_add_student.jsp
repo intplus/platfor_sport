@@ -83,6 +83,11 @@
         </tr>
 
         <tr>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
+        </tr>
+
+        <tr>
             <td><label>Position:</label></td>
             <%--<td><form:input path="p" /></td>--%>
         </tr>

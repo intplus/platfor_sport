@@ -17,17 +17,26 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
+
     @Column(name = "email")
     private String email;
 
-    @Column(name = "birthday")
-    private Date birthday;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-    @Column(name = "string_birthday")
-    private String strBirthday;
+
+
+    @Column(name = "birthday")
+
+    private Date birthday;
 
     @Column(name = "age")
     private String age;
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     @Column(name = "phone")
     private String phone;
@@ -60,6 +69,7 @@ public class Student extends Model {
         super();
     }
 
+
     public String getAge() {
         return age;
     }
@@ -68,17 +78,6 @@ public class Student extends Model {
         this.age = age;
     }
 
-    public String getStrBirthday() {
-        return strBirthday;
-    }
-
-    public void setStrBirthday(String strBirthday) {
-        this.strBirthday = strBirthday;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getEmail() {
         return email;
