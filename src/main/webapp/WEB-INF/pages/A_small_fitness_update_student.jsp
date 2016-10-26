@@ -60,26 +60,26 @@
         <tbody>
         <tr>
             <td><label>First name:</label></td>
-            <td><form:input path="name" /></td>
+            <td><form:input path="name" /><form:errors path="name" class="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
             <td><label>Last name:</label></td>
-            <td><form:input path="surname" /></td>
+            <td><form:input path="surname" /><form:errors path="surname" class="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
             <td><label>Телефон:</label></td>
-            <td><form:input path="phone" /></td>
+            <td><form:input path="phone" /><form:errors path="phone" class="alert alert-danger"></form:errors></td>
         </tr>
         <tr>
             <td><label>Email:</label></td>
-            <td><form:input path="email" /></td>
+            <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
             <td><label>Birthday:</label></td>
-            <td><form:input path="birthday" /></td>
+            <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
