@@ -49,6 +49,10 @@
     <ul id="navbar">
         <li><a href="#">Main</a></li>
         <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
+        <c:forEach items="${groupsList}" var="groups">
+        <%--<c:if test="${groups.id!=null}">--%>
+        <%--<li><a href="#">${groups.name}</a>--%>
+        <%--</c:if>--%>
         <li><a href="#">Groups</a>
             <ul id="group">
 
@@ -58,7 +62,7 @@
                 <li><a href="#">Delete</a> </li>
                 <li><a href="#">Categoty</a> </li>
                 <li><a href="/group//showFormForUpdate">Update</a> </li>
-                  <c:forEach items="${groupsList}" var="groups">
+                  <%--<c:forEach items="${groupsList}" var="groups">--%>
                       <c:url var="takeGroupId" value="/group//takeIdGroup" >
                           <c:param name="groupId" value="${groups.id}"/>
                       </c:url>
