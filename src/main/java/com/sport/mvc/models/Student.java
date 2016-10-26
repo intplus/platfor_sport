@@ -1,6 +1,12 @@
 package com.sport.mvc.models;
 
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,15 +18,20 @@ public class Student extends Model {
     private static final long serialVersionUID = -8950386400041310256L;
 
     @Column(name = "name")
+    @Size(min=3, max=30)
     private String name;
 
+    @Size(min=3, max=30)
     @Column(name = "surname")
     private String surname;
 
     @Column(name = "email")
+    @Email
     private String email;
 
     @Column(name = "birthday")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Past
     private Date birthday;
 
     @Column(name = "string_birthday")
@@ -30,6 +41,8 @@ public class Student extends Model {
     private String age;
 
     @Column(name = "phone")
+    @Pattern(regexp = "^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$",
+    message = "{pattern.invalid.phone}")
     private String phone;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

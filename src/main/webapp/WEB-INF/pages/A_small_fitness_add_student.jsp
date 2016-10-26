@@ -53,33 +53,34 @@
     <h1>Add student</h1>
     <br>
     <form:form action="saveStudent" modelAttribute="student" method="POST">
-
         <form:hidden path="id" />
 
     <table>
         <tbody>
         <tr>
             <td><label>Имя:</label></td>
-            <td><form:input path="name" /></td>
+            <td><form:input path="name" />
+                <form:errors path="name" class="alert alert-danger"></form:errors>
+            </td>
         </tr>
 
         <tr>
             <td><label>Фамилия:</label></td>
-            <td><form:input path="surname" /></td>
+            <td><form:input path="surname" /><form:errors path="surname" cssClass="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
             <td><label>Телефон:</label></td>
-            <td><form:input path="phone" /></td>
+            <td><form:input path="phone" /><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
         </tr>
         <tr>
             <td><label>Email:</label></td>
-            <td><form:input path="email" /></td>
+            <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>
             <td><label>Birthday:</label></td>
-            <td><form:input path="birthday" /></td>
+            <td><form:input path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
         </tr>
 
         <tr>

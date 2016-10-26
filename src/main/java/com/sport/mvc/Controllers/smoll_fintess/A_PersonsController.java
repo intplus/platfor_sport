@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -100,7 +102,10 @@ public class A_PersonsController {
 
 
     @PostMapping("/saveStudent")
-    public String saveCustomer(@ModelAttribute("student") Student theStudent) {
+    public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        if(result.hasErrors()) {
+            return "A_small_fitness_add_student";
+        }
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
     }
@@ -132,7 +137,10 @@ public class A_PersonsController {
     }
 
     @PostMapping("/saveStudentAfterUpdate")
-    public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
+    public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        if(result.hasErrors()) {
+            return "A_small_fitness_update_student";
+        }
         studentService.updateStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
