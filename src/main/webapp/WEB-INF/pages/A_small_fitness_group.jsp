@@ -59,14 +59,27 @@
                 <li><a href="#">Categoty</a> </li>
                 <li><a href="/group//showFormForUpdate">Update</a> </li>
                   <c:forEach items="${groupsList}" var="groups">
+                      <c:url var="takeGroupId" value="/group//takeIdGroup" >
+                          <c:param name="groupId" value="${groups.id}"/>
+                      </c:url>
                     <c:if test="${groups.name!=null}">
-                        <li><a href="/group//ShowGroupPage">
-                            <c:out value="${groups.name}"/>
+
+                        <li >
+
+                            <%--<a href="/group//ShowGroupPage" >--%>
+                                <a href="${takeGroupId}" >
+
+                            <c:out value="${groups.name}" />
+
+
+
+
                         </a> </li>
 
                     </c:if>
 
                 </c:forEach>
+
 
 
             </ul>
@@ -84,9 +97,11 @@
         <li><a href="#">Statistics</a></li>
         <li><a href="#">Finance</a></li>
         <li id="out"><a href="">Out</a></li>
+
     </ul>
 
 </div>
+
 
 
 <!-- MAIN SECTION -->
