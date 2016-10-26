@@ -213,12 +213,11 @@ public class A_PersonsController {
 
     }
 
-    @RequestMapping("/find")
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
                                     @RequestParam(value = "option", required = false) String option) {
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-        System.out.println("введенные данные " + data);
         Set<Student> particularCollision = new LinkedHashSet<Student>();
         List<Student> fullCollision = new ArrayList<Student>();
         Set<Student> receivedStudents = new LinkedHashSet<Student>();
@@ -229,12 +228,10 @@ public class A_PersonsController {
         if (matcher.matches() == true) {
             Locale russian = new Locale("RU");
             data = data.toLowerCase(russian);
-            System.out.println("if else data "+data);
         }
         else {
             data = data.toLowerCase();
         }
-        System.out.println(data);
         if (option.equals("name")) {
                 for (int i = 0; i<students.size(); i++) {
                     //to prevent CAPS symbols
