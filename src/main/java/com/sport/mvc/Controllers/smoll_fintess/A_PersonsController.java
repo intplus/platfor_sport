@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(value = "/registerPerson/")
@@ -69,7 +71,6 @@ public class A_PersonsController {
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-
         modelAndView.addObject("students", students);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -217,10 +218,23 @@ public class A_PersonsController {
                                     @RequestParam(value = "option", required = false) String option) {
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
+        System.out.println("введенные данные " + data);
         Set<Student> particularCollision = new LinkedHashSet<Student>();
         List<Student> fullCollision = new ArrayList<Student>();
         Set<Student> receivedStudents = new LinkedHashSet<Student>();
-        data = data.toLowerCase();
+        Pattern pattern = Pattern.compile(
+                "[" +                   //beginning of list allowed symbols
+                        "а-яА-ЯёЁ" + "]"); //russian symbols
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.matches() == true) {
+            Locale russian = new Locale("RU");
+            data = data.toLowerCase(russian);
+            System.out.println("if else data "+data);
+        }
+        else {
+            data = data.toLowerCase();
+        }
+        System.out.println(data);
         if (option.equals("name")) {
                 for (int i = 0; i<students.size(); i++) {
                     //to prevent CAPS symbols
