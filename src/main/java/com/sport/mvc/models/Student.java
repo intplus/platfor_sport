@@ -108,6 +108,14 @@ public class Student extends Model {
         return comments;
     }
 
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
@@ -118,14 +126,6 @@ public class Student extends Model {
 
     public void setCards(Set<CustomerCard> cards) {
         this.cards = cards;
-    }
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
     }
 
 

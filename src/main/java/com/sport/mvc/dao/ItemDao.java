@@ -7,16 +7,14 @@ import java.util.List;
 
 public interface ItemDao <T extends Model> {
 
-    public List<T> getAll();
+    List<T> getAll();
 
-    public T getById(Long id);
+    T getById(Long id);
 
-    public void add(T model);
+    void add(T model);
 
-    public void update(T model);
+    void update(T model);
 
-    public void remove(T Model);
-
-//    public List<T> getStudentByOnlyUnknownStudent();
+    void remove(T Model);
 
 }
