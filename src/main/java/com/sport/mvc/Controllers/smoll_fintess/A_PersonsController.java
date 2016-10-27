@@ -1,22 +1,29 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.models.Student;
-import com.sport.mvc.services.StudentService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
+
+import com.sport.mvc.models.Student;
+import com.sport.mvc.services.PhoneService;
+import com.sport.mvc.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(value = "/registerPerson/")
@@ -30,6 +37,14 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
+    @RequestMapping(value = "/general_registration_form")
+    public String showForm(Model model){
+
+        //   RegisterPerson theRegisterPerson= new RegisterPerson();
+        //   model.addAttribute("registerPersonDate", theRegisterPerson);
+        return "general_registration_formRegistry";
+
+    }
 
     //method for jump register page FITNESS CENTRE =)
     @RequestMapping(value = "/registerFitnessCenter")
@@ -58,7 +73,6 @@ public class A_PersonsController {
     public ModelAndView workPage(){
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
-
         modelAndView.addObject("students", students);
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -88,7 +102,10 @@ public class A_PersonsController {
 
 
     @PostMapping("/saveStudent")
-    public String saveCustomer(@ModelAttribute("student") Student theStudent) {
+    public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        if(result.hasErrors()) {
+            return "A_small_fitness_add_student";
+        }
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
     }
@@ -120,7 +137,10 @@ public class A_PersonsController {
     }
 
     @PostMapping("/saveStudentAfterUpdate")
-    public String saveCustomerAfterUpdate(@ModelAttribute("student") Student theStudent) {
+    public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        if(result.hasErrors()) {
+            return "A_small_fitness_update_student";
+        }
         studentService.updateStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
     }
@@ -201,7 +221,7 @@ public class A_PersonsController {
 
     }
 
-    @RequestMapping("/find")
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
                                     @RequestParam(value = "option", required = false) String option) {
         ModelAndView modelAndView = new ModelAndView();
@@ -209,7 +229,17 @@ public class A_PersonsController {
         Set<Student> particularCollision = new LinkedHashSet<Student>();
         List<Student> fullCollision = new ArrayList<Student>();
         Set<Student> receivedStudents = new LinkedHashSet<Student>();
-        data = data.toLowerCase();
+        Pattern pattern = Pattern.compile(
+                "[" +                   //beginning of list allowed symbols
+                        "а-яА-ЯёЁ" + "]"); //russian symbols
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.matches() == true) {
+            Locale russian = new Locale("RU");
+            data = data.toLowerCase(russian);
+        }
+        else {
+            data = data.toLowerCase();
+        }
         if (option.equals("name")) {
                 for (int i = 0; i<students.size(); i++) {
                     //to prevent CAPS symbols
