@@ -148,6 +148,7 @@
     <br/><br/>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
+       <thead>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
@@ -158,6 +159,8 @@
         <th>Дата окончания Абонементадата</th>
         <th>Статус оплаты</th>
         <th><input type="checkbox" id="selectall"></th>
+        </thead>
+        <tbody>
 
         <c:forEach items="${studentList}" var="student">
             <tr align="center">
@@ -168,8 +171,20 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <c:set value="${gregCalObject.getActualMaximum(gregCalObject.DAY_OF_MONTH)}" var="day"/>
+                <td>
+                    <select name="selectedCode">
+                        <option value=""><c:out value="${day}"/></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="selectedCode">
+                        <option value="1">Олачено</option>
+                        <option value="2">Не оплачено</option>
+                        <option value="3">Долг</option>
+                    </select>
+
+                </td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
                 <td align="left"></td>
                 <td>
@@ -184,7 +199,7 @@
                 </td>
             </tr>
         </c:forEach>
-
+</tbody>
     </table>
     </form>
 
