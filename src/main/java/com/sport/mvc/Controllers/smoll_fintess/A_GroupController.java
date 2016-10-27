@@ -36,10 +36,9 @@ public class A_GroupController {
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
 
-      // String theId = request.getParameter("idd");
+     //create list student and group for add data to the jsp page
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
-
         //param for identifying locations is ->String chooseGroup
         int groupId = Integer.parseInt(String.valueOf(idGroup));
         String chooseGroup= groupsList.get(groupId-1).getName();
@@ -48,6 +47,7 @@ public class A_GroupController {
 
         ModelAndView modelAndView = new ModelAndView();
 
+        //
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("shooseNewGroup", chooseGroup );
@@ -56,9 +56,6 @@ public class A_GroupController {
         return modelAndView;
 
     }
-
-
-
 
     @RequestMapping("/showFormForAddGroup")
     public String showFormForAdd(Model theModel) {
@@ -69,14 +66,11 @@ public class A_GroupController {
     }
 
     @PostMapping("/saveGroup")
-    public String saveCustomer(@ModelAttribute("group") Group group) {
+    public String saveGroup(@ModelAttribute("group") Group group) {
+        //add group to DB
         groupService.addGroup(group);
-
-
         return "redirect:/group/showFormForAddGroup";
     }
-
-
 
 
 
@@ -96,38 +90,40 @@ public class A_GroupController {
 
     @RequestMapping("/addStudentToGroupForm")
     public  String addStudentToGroup(Model theModel){
-        System.out.println("in method shou ato student to group");
+        //create new student for add form
         Student theStudent = new Student();
+        //transfer student to "A_add_to_group_Student" form
         theModel.addAttribute("student", theStudent);
         return "A_add_to_group_Student";
     }
 
 
-   // @PostMapping("/saveStudentToGroup")
+
     @RequestMapping("saveStudentToGroup")
     public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
         System.out.println("in method save st to group");
-
+        //add new student to the DB
         studentService.addStudent(theStudent);
+        // get back needed student from DB, with right id
         List<Student> studentList =studentService.getAll();
         for(int i=0;i<studentList.size(); i++) {
+            //needed student it's the last student in DB
             theStudent = studentList.get(i);
         }
+        // take group where we naw, and where we will write new student
         Group theGroup = groupService.getGroup(idGroup);
 
-
-
+        //save this data
         groupService.saveIdsToStudent_Group(theStudent,theGroup);
         return "redirect:/group/addStudentToGroupForm";
 
     }
 
-
-
     @RequestMapping("/takeIdGroup")
     public String TakeIdGroup(@RequestParam("groupId") long theId ) {
+        //take id group, where we now, and write it in to global variable->idGroup
         idGroup = theId;
-        System.out.println("take group id iy oo "+theId);
+        //return to showGroup page for fow all data on the  page
         return "redirect:/group/ShowGroupPage";
     }
 

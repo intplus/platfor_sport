@@ -49,16 +49,11 @@
     <ul id="navbar">
         <li><a href="#">Main</a></li>
         <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
-        <%--<c:forEach items="${groupsList}" var="groups">--%>
-        <%--<c:if test="${groups.id!=null}">--%>
-        <%--<li><a href="#">${groups.name}</a>--%>
-        <%--</c:if>--%>
         <li><a href="#">Groups</a>
             <ul >
 
                 <li><a href="/group/ShowGroupPage">overall</a></li>
-                <%--<li id="create"><a href="javascript://" onclick="Add();return false;">Create</a>  </li>--%>
-                <li id="create"   ><a href="/group//showFormForAddGroup">Create</a>  </li>
+                <li id="create" ><a href="/group//showFormForAddGroup">Create</a>  </li>
                 <li><a href="#">Delete</a> </li>
                 <li><a href="#">Categoty</a> </li>
                 <li><a href="/group//showFormForUpdate">Update</a> </li>
@@ -69,23 +64,12 @@
                     <c:if test="${groups.name!=null}">
 
                         <li >
-
-                            <%--<a href="/group//ShowGroupPage" >--%>
-                                <a href="${takeGroupId}" >
-
-                            <c:out value="${groups.name}" />
-
-
-
-
-                        </a> </li>
-
+                            <a href="${takeGroupId}" >
+                                <c:out value="${groups.name}" />
+                            </a>
+                        </li>
                     </c:if>
-
-                </c:forEach>
-
-
-
+                  </c:forEach>
             </ul>
         </li>
 
@@ -95,22 +79,18 @@
                 <li><a href="#">Categoty</a></li>
                 <li><a href="#">Delete</a> </li>
                 <li><a href="#">Update</a> </li>
-
             </ul>
         </li>
         <li><a href="#">Statistics</a></li>
         <li><a href="#">Finance</a></li>
         <li id="out"><a href="">Out</a></li>
-
     </ul>
 
 </div>
 
 <div>
     <c:set value="${shooseNewGroup}" var="groupName"/>
-
     <h1>You in ${groupName}   group</h1>
-
 </div>
 
 <!-- MAIN SECTION -->
