@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=Cp1251" pageEncoding="Cp1251"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -21,6 +23,11 @@
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="resources/script/bootstrap.min.js" type="text/javascript"></script>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 <!-- HEADER -->
@@ -43,11 +50,32 @@
         </ul>
 
         <!-- LOGIN FORM -->
-        <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required >
-            <input type="submit" value="Sign In">
-        </form>
+        <%--login by Verlamov--%>
+        <div class="login">
+
+            <form method="POST" action="${contextPath}/login" class="form-signin">
+
+                <div class="form-group ${error != null ? 'has-error' : ''}">
+                    <span>${message}</span>
+                    <input name="username" type="text" class="form-control" placeholder="Username"
+                           autofocus="true"/>
+                    <input name="password" type="password" class="form-control" placeholder="Password"/>
+                    <span>${error}</span>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+                </div>
+
+            </form>
+
+
+        </div>
+
+        <%--<form action="#" class="login">--%>
+            <%--<input type="text" placeholder="Login" required>--%>
+            <%--<input type="password" placeholder="Password" required >--%>
+            <%--<input type="submit" value="Sign In">--%>
+        <%--</form>--%>
 
         <!-- /LOGIN FORM -->
     </div>

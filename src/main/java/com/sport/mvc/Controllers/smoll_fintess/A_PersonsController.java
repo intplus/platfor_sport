@@ -1,11 +1,9 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.socialAdvertisement.SendMailService;
-
 import com.sport.mvc.models.Student;
-import com.sport.mvc.services.PhoneService;
 import com.sport.mvc.services.StudentService;
+import com.sport.mvc.socialAdvertisement.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -33,14 +30,6 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
-    @RequestMapping(value = "/general_registration_form")
-    public String showForm(Model model){
-
-        //   RegisterPerson theRegisterPerson= new RegisterPerson();
-        //   model.addAttribute("registerPersonDate", theRegisterPerson);
-        return "general_registration_formRegistry";
-
-    }
 
     //method for jump register page FITNESS CENTRE =)
     @RequestMapping(value = "/registerFitnessCenter")
