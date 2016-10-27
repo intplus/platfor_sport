@@ -106,7 +106,12 @@
 
 </div>
 
+<div>
+    <c:set value="${shooseNewGroup}" var="groupName"/>
 
+    <h1>You in ${groupName}   group</h1>
+
+</div>
 
 <!-- MAIN SECTION -->
 <main>

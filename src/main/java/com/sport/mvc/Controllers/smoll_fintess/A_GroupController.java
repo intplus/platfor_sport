@@ -37,12 +37,12 @@ public class A_GroupController {
     public ModelAndView showForm(){
 
       // String theId = request.getParameter("idd");
-
-
-
-
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
+
+        //param for identifying locations is ->String chooseGroup
+        int groupId = Integer.parseInt(String.valueOf(idGroup));
+        String chooseGroup= groupsList.get(groupId-1).getName();
 
 
 
@@ -50,6 +50,7 @@ public class A_GroupController {
 
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
+        modelAndView.addObject("shooseNewGroup", chooseGroup );
 
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
@@ -57,32 +58,7 @@ public class A_GroupController {
     }
 
 
-//    @RequestMapping("/selectGroup")
-//    public String Select(@RequestParam("option") String option){
-//
-//
-//        List<Student> students =new ArrayList<>();
-//        //new modelAndView for return to jsp listStudent with the selected parameters
-//        ModelAndView modelAndView = new ModelAndView();
-//        if (option.equals("ageAfterSixteen")) {
-//
-//            students = studentService.getStudentAgeAfterSixteen();
-//        }
-//
-//        List<Group> groupsList = groupService.getAll();
-//        List<Student> studentsList=studentService.getAll();
-//
-//
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        modelAndView.addObject("studentList", studentsList);
-//        modelAndView.addObject("groupsList", groupsList);
-//
-//        modelAndView.setViewName("A_small_fitness_group");
-//        return modelAndView;
-//
-//    }
+
 
     @RequestMapping("/showFormForAddGroup")
     public String showFormForAdd(Model theModel) {
