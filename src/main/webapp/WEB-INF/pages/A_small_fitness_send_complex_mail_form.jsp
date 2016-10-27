@@ -80,7 +80,7 @@
         </div>
 
     </fieldset>
-    </form:form>
+</form:form>
 
 <br><br>
 

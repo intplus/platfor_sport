@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" href="/resources/css/bootstrap.css">
 </head>
 <body>
 <header class="header">

@@ -1,7 +1,9 @@
 package com.sport.mvc.models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
@@ -34,15 +36,15 @@ public class Student extends Model {
     @Past
     private Date birthday;
 
+    @Pattern(regexp = "[0-9]{2,2}.[0-9]{2,2}.[1-2]{1,1}[0-9]{3,3}", message = "{Pattern.student.strBirthday}")
     @Column(name = "string_birthday")
     private String strBirthday;
 
     @Column(name = "age")
     private String age;
 
+    @Pattern(regexp = "[0-9]{10,10}+", message="{Pattern.student.phone}")
     @Column(name = "phone")
-    @Pattern(regexp = "^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$",
-    message = "{pattern.invalid.phone}")
     private String phone;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

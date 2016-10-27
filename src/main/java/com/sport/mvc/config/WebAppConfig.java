@@ -62,4 +62,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localeChangeInterceptor);
     }
 
+
+
 }

@@ -114,6 +114,7 @@ public class A_PersonsController {
     public String deleteListOfUsers(@RequestParam(value = "deletee", required = false) String deletee,
                                     @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
                                     @RequestParam(value = "case", required = false) List <Long> ids,
+                                    @RequestParam(value = "send_complex_email", required = false) String complexEmail,
                                     RedirectAttributes ra) {
 
 
@@ -125,6 +126,12 @@ public class A_PersonsController {
                     studentService.deleteListOfStudents(ids.get(i));
                 }
         }
+        else if (complexEmail!=null) {
+            //redirect ids to the send complex message page
+            ra.addFlashAttribute("id", ids);
+            return "redirect:/registerPerson/showComplexMailForm";
+        }
+
         else if(sendEmail!=null){
             //redirect our ids to the send message page
             ra.addFlashAttribute("id", ids);
@@ -159,18 +166,28 @@ public class A_PersonsController {
     }
     //create empty array list in order to fill it in the showMailForm method
     List<String> studenEmail = new ArrayList<String>();
+
     @PostMapping("/sendMail")
     public String sendMail(HttpServletRequest request){
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
         //get the topic and body of the message
         String body = request.getParameter("body");
         String topic = request.getParameter("topic");
         for (int i=0; i<studenEmail.size(); i++) {
             if (studenEmail.get(i)!=null || !studenEmail.get(i).equals(""));
-            sendMailService.sendMailTo(studenEmail.get(i), topic, body);
+            sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
 
         }
+        studenEmail.clear();
         return "redirect:/registerPerson/showFirstWorkPage";
 //
+    }
+
+    //complex message method
+    @RequestMapping("/showComplexMailForm")
+    public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
+        return "A_small_fitness_send_complex_mail_form";
     }
 
 
@@ -187,7 +204,6 @@ public class A_PersonsController {
         theModel.addAttribute("id", ids);
         theModel.addAttribute("students", students);
         return "A_send_mail_form";
-        //
     }
 
  //   sorts students by age(after 16, befor 16 and select all student
