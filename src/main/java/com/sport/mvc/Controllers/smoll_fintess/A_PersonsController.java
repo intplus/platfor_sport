@@ -248,15 +248,8 @@ public class A_PersonsController {
     }
 
 
-    @RequestMapping("Group List")
-    public List<String> groupList(){
-        List<String> groupList = new ArrayList<>();
-        groupList.add("Delete");
-        groupList.add("Create");
-        groupList.add("Categoty");
 
-        return groupList;
 
-    }
+
 
 }

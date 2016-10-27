@@ -5,6 +5,9 @@ import com.sport.mvc.models.Group;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.GroupService;
 import com.sport.mvc.services.StudentService;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.dialect.Sybase11Dialect;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/group/")
@@ -29,6 +29,9 @@ public class A_GroupController {
     @Autowired
     @Qualifier("studentService")
     private StudentService studentService;
+
+//variable for taking the group id, when some group will by in use.
+    private  Long idGroup;
 
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
@@ -117,6 +120,7 @@ public class A_GroupController {
 
     @RequestMapping("/addStudentToGroupForm")
     public  String addStudentToGroup(Model theModel){
+        System.out.println("in method shou ato student to group");
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
         return "A_add_to_group_Student";
@@ -125,35 +129,29 @@ public class A_GroupController {
 
    // @PostMapping("/saveStudentToGroup")
     @RequestMapping("saveStudentToGroup")
-  //  public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent, @ModelAttribute("groups") Group group){
-        public  String saveStudentToGroup(HttpServletRequest request){
-        long id = Long.parseLong(request.getParameter("groupId"));
-        System.out.println(id+" group id");
-//        System.out.println("group id " +group.getId());
-//
-//        System.out.println(" in method save");
-//        System.out.println(theStudent.getPhone()+"-----Phoneees");
-//        studentService.addStudent(theStudent);
-//        long id=0;
-//
-//        List<Student> studentsList= studentService.getAll();
-//
-//        for (Student s: studentsList){
-//            if(studentsList.size()==studentsList.size()){
-//                id=s.getId();
-//            }
-//        }
-//        System.out.println("Student id="+id);
+    public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
+        System.out.println("in method save st to group");
 
-      //  groupService.saveIdsToStudent_Group(id,id);
+        studentService.addStudent(theStudent);
+        List<Student> studentList =studentService.getAll();
+        for(int i=0;i<studentList.size(); i++) {
+            theStudent = studentList.get(i);
+        }
+        Group theGroup = groupService.getGroup(idGroup);
+
+
+
+        groupService.saveIdsToStudent_Group(theStudent,theGroup);
         return "redirect:/group/addStudentToGroupForm";
 
     }
 
+
+
     @RequestMapping("/takeIdGroup")
     public String TakeIdGroup(@RequestParam("groupId") long theId ) {
-        System.out.println("in yake");
-        System.out.println(" iy oo "+theId);
+        idGroup = theId;
+        System.out.println("take group id iy oo "+theId);
         return "redirect:/group/ShowGroupPage";
     }
 
