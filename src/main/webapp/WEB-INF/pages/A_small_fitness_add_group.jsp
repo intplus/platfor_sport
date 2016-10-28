@@ -27,9 +27,6 @@
             <li><a href="#">Главная</a></li>
             <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
-            <%--<li><a href="#">Просмотр моей страници</a></li>--%>
-            <%--<li><a href="#">Статистика</a></li>--%>
-            <%--<li><a href="#">Расчеты</a></li>--%>
         </ul>
 
         <!-- LOGIN FORM -->
@@ -46,19 +43,14 @@
     <h1>Add group</h1>
     <br>
     <form:form action="saveGroup" modelAttribute="group" method="POST">
-
         <form:hidden path="id" />
-
         <table>
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
                 <td><form:input path="name" /></td>
             </tr>
-
-
-
-                <td><label></label></td>
+            <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 

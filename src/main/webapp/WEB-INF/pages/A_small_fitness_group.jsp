@@ -50,25 +50,26 @@
         <li><a href="#">Main</a></li>
         <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
         <li><a href="#">Groups</a>
-            <ul id="group">
+            <ul >
 
                 <li><a href="/group/ShowGroupPage">overall</a></li>
-                <%--<li id="create"><a href="javascript://" onclick="Add();return false;">Create</a>  </li>--%>
-                <li id="create"   ><a href="/group//showFormForAddGroup">Create</a>  </li>
+                <li id="create" ><a href="/group//showFormForAddGroup">Create</a>  </li>
                 <li><a href="#">Delete</a> </li>
                 <li><a href="#">Categoty</a> </li>
                 <li><a href="/group//showFormForUpdate">Update</a> </li>
                   <c:forEach items="${groupsList}" var="groups">
+                      <c:url var="takeGroupId" value="/group//takeIdGroup" >
+                          <c:param name="groupId" value="${groups.id}"/>
+                      </c:url>
                     <c:if test="${groups.name!=null}">
-                        <li><a href="/group//ShowGroupPage">
-                            <c:out value="${groups.name}"/>
-                        </a> </li>
 
+                        <li >
+                            <a href="${takeGroupId}" >
+                                <c:out value="${groups.name}" />
+                            </a>
+                        </li>
                     </c:if>
-
-                </c:forEach>
-
-
+                  </c:forEach>
             </ul>
         </li>
 
@@ -78,7 +79,6 @@
                 <li><a href="#">Categoty</a></li>
                 <li><a href="#">Delete</a> </li>
                 <li><a href="#">Update</a> </li>
-
             </ul>
         </li>
         <li><a href="#">Statistics</a></li>
@@ -88,6 +88,10 @@
 
 </div>
 
+<div>
+    <c:set value="${shooseNewGroup}" var="groupName"/>
+    <h1>You in ${groupName}   group</h1>
+</div>
 
 <!-- MAIN SECTION -->
 <main>
@@ -144,6 +148,7 @@
     <br/><br/>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
+       <thead>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
@@ -154,6 +159,8 @@
         <th>Дата окончания Абонементадата</th>
         <th>Статус оплаты</th>
         <th><input type="checkbox" id="selectall"></th>
+        </thead>
+        <tbody>
 
         <c:forEach items="${studentList}" var="student">
             <tr align="center">
@@ -163,9 +170,34 @@
                 <td>${student.email}</td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <select name="selectedStartDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                            <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <select name="selectedFinisfDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                        <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
+                    </select>
+
+                </td>
+                <td>
+                    <select name="selectedCode">
+                        <option value="1">Олачено</option>
+                        <option value="2">Не оплачено</option>
+                        <option value="3">Долг</option>
+                    </select>
+
+                </td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
                 <td align="left"></td>
                 <td>
@@ -180,7 +212,7 @@
                 </td>
             </tr>
         </c:forEach>
-
+</tbody>
     </table>
     </form>
 

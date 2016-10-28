@@ -1,7 +1,7 @@
 package com.sport.mvc.services;
 
 import com.sport.mvc.models.Group;
-import org.springframework.stereotype.Service;
+import com.sport.mvc.models.Student;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface GroupService {
 
     Group getGroup(long theId);
 
-    void saveIdsToStudent_Group(Long studentId, Long grouptId);
+    void saveIdsToStudent_Group(Student student, Group theGroup);
 }

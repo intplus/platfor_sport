@@ -12,10 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/group/")
@@ -29,21 +27,27 @@ public class A_GroupController {
     @Qualifier("studentService")
     private StudentService studentService;
 
+//variable for taking the group id, when some group will by in use.
+    private  Long idGroup;
+
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
 
-        A_PersonsController personsController;
-
+     //create list student and group for add data to the jsp page
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
+        //param for identifying locations is ->String chooseGroup
+        int groupId = Integer.parseInt(String.valueOf(idGroup));
+        String chooseGroup= groupsList.get(groupId-1).getName();
 
 
 
         ModelAndView modelAndView = new ModelAndView();
-
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
-
+        modelAndView.addObject("shooseNewGroup", chooseGroup );
+        //add to page model list of day in current month
+        modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
 
@@ -58,14 +62,11 @@ public class A_GroupController {
     }
 
     @PostMapping("/saveGroup")
-    public String saveCustomer(@ModelAttribute("group") Group group) {
+    public String saveGroup(@ModelAttribute("group") Group group) {
+        //add group to DB
         groupService.addGroup(group);
-
-
         return "redirect:/group/showFormForAddGroup";
     }
-
-
 
 
 
@@ -85,34 +86,61 @@ public class A_GroupController {
 
     @RequestMapping("/addStudentToGroupForm")
     public  String addStudentToGroup(Model theModel){
+        //create new student for add form
         Student theStudent = new Student();
+        //transfer student to "A_add_to_group_Student" form
         theModel.addAttribute("student", theStudent);
         return "A_add_to_group_Student";
     }
 
-    @PostMapping("/saveStudentToGroup")
-    public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent, @ModelAttribute("groups") Group group){
-        System.out.println("group id " +group.getId());
 
-        System.out.println(" in method save");
-        System.out.println(theStudent.getPhone()+"-----Phoneees");
+
+    @RequestMapping("saveStudentToGroup")
+    public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
+        System.out.println("in method save st to group");
+        //add new student to the DB
         studentService.addStudent(theStudent);
-        long id=0;
-
-        List<Student> studentsList= studentService.getAll();
-
-        for (Student s: studentsList){
-            if(studentsList.size()==studentsList.size()){
-                id=s.getId();
-            }
+        // get back needed student from DB, with right id
+        List<Student> studentList =studentService.getAll();
+        for(int i=0;i<studentList.size(); i++) {
+            //needed student it's the last student in DB
+            theStudent = studentList.get(i);
         }
-        System.out.println("Student id="+id);
+        // take group where we naw, and where we will write new student
+        Group theGroup = groupService.getGroup(idGroup);
 
-      //  groupService.saveIdsToStudent_Group(id,id);
+        //save this data
+        groupService.saveIdsToStudent_Group(theStudent,theGroup);
         return "redirect:/group/addStudentToGroupForm";
 
     }
 
+    @RequestMapping("/takeIdGroup")
+    public String TakeIdGroup(@RequestParam("groupId") long theId ) {
+        //take id group, where we now, and write it in to global variable->idGroup
+        idGroup = theId;
+        //return to showGroup page for fow all data on the  page
+        return "redirect:/group/ShowGroupPage";
+    }
+
+    private List<String> ListOfDayInMonth() {
+        Calendar calendar = Calendar.getInstance();
+        int iYear = calendar.get(Calendar.YEAR);
+        int iMonth = calendar.get(Calendar.MONTH);
+        int iDay = 1;
+// Create a calendar object and set year and month
+        Calendar mycal = new GregorianCalendar(iYear, iMonth, iDay);
+// Get the number of days in that month
+        List<String> listDayOfMonth = new ArrayList<>();
+        String curentDate = null;
+        int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 1; i <= daysInMonth; i++) {
+            curentDate = i + "." + iMonth + "." + iYear;
+            listDayOfMonth.add(curentDate);
+
+        }
+        return listDayOfMonth;
+    }
 
 }
 
