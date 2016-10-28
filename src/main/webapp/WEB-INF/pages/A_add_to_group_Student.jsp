@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page_css.css" var="style" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
     <link rel="stylesheet" type="text/css" href="${style}" >
