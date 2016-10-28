@@ -88,12 +88,6 @@
             <td><label>Возвраст:</label></td>
             <td><form:input path="age" /></td>
         </tr>
-
-        <tr>
-            <td><label>Возвраст:</label></td>
-            <td><form:input path="age" /></td>
-        </tr>
-
         <tr>
             <td><label>Position:</label></td>
             <%--<td><form:input path="p" /></td>--%>
@@ -102,12 +96,6 @@
             <td><label>Comment:</label></td>
             <%--<td><form:input path="" /></td>--%>
         </tr>
-        <%--<tr>--%>
-            <%--<td>Comment:</td>--%>
-            <%--<td><form:textarea path="comments" /></td>--%>
-        <%--</tr>--%>
-
-
 
         <tr>
             <td><label></label></td>
