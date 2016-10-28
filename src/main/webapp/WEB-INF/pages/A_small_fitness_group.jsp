@@ -170,12 +170,25 @@
                 <td>${student.email}</td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <c:set value="${gregCalObject.getActualMaximum(gregCalObject.DAY_OF_MONTH)}" var="day"/>
                 <td>
-                    <select name="selectedCode">
-                        <option value=""><c:out value="${day}"/></option>
+                    <select name="selectedStartDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                            <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
                     </select>
+
+                </td>
+
+                <td>
+
+                    <select name="selectedFinisfDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                        <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
+                    </select>
+
                 </td>
                 <td>
                     <select name="selectedCode">

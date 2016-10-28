@@ -5,9 +5,6 @@ import com.sport.mvc.models.Group;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.GroupService;
 import com.sport.mvc.services.StudentService;
-import org.hibernate.annotations.SourceType;
-import org.hibernate.dialect.Sybase11Dialect;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -46,12 +43,11 @@ public class A_GroupController {
 
 
         ModelAndView modelAndView = new ModelAndView();
-
-        //
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("shooseNewGroup", chooseGroup );
-
+        //add to page model list of day in current month
+        modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
 
@@ -127,6 +123,24 @@ public class A_GroupController {
         return "redirect:/group/ShowGroupPage";
     }
 
+    private List<String> ListOfDayInMonth() {
+        Calendar calendar = Calendar.getInstance();
+        int iYear = calendar.get(Calendar.YEAR);
+        int iMonth = calendar.get(Calendar.MONTH);
+        int iDay = 1;
+// Create a calendar object and set year and month
+        Calendar mycal = new GregorianCalendar(iYear, iMonth, iDay);
+// Get the number of days in that month
+        List<String> listDayOfMonth = new ArrayList<>();
+        String curentDate = null;
+        int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 1; i <= daysInMonth; i++) {
+            curentDate = i + "." + iMonth + "." + iYear;
+            listDayOfMonth.add(curentDate);
+
+        }
+        return listDayOfMonth;
+    }
 
 }
 
