@@ -38,19 +38,22 @@ public class StudentServiceImpl implements StudentService {
 
         List<Student> afterSixteenList = new ArrayList<>();
 
-            for (Student s:getAll()){
-                if (s.getAge().equals(null)||s.getAge().equals("")){
-                    continue;
-                }
-                int age =Integer.parseInt(s.getAge());
-                if(age>=16){
-                    afterSixteenList.add(s);
-                }
+        for (Student s:getAll()){
+
+            if (s.getAge()==null||s.getAge().equals("")){
+
+                continue;
             }
+            int age =Integer.parseInt(s.getAge());
+            if(age>=16){
+
+                afterSixteenList.add(s);
+            }
+        }
         return afterSixteenList;
     }
 
-   // method, who return list only student with age<16
+    // method, who return list only student with age<16
     @Override
     @Transactional
     public List<Student> getStudentAgeBeforSixteen(){
@@ -58,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> beforeSixteenList = new ArrayList<>();
 
         for (Student s:getAll()){
-            if (s.getAge().equals(null)||s.getAge().equals("")){
+            if (s.getAge()==null||s.getAge().equals("")){
                 continue;
             }
             int age =Integer.parseInt(s.getAge());
@@ -84,7 +87,6 @@ public class StudentServiceImpl implements StudentService {
         }
         return  unknownPhoneList;
     }
-
 
 
 
