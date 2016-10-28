@@ -80,10 +80,13 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getStudentByOnlyUnknownStudent(){
         List<Student> unknownPhoneList =new ArrayList<>();
         for (Student s: studentDao.getAll()){
-            if(!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ){
+            System.out.println(s.getName()+" "+ s.getSurname()+"  "+s.getEmail());
+            if(!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ||
+                    !(s.getName()==null) || !(s.getSurname()==null) || !(s.getEmail()==null)){
                 continue;
             }
-            unknownPhoneList.add(s);
+                unknownPhoneList.add(s);
+
         }
         return  unknownPhoneList;
     }
