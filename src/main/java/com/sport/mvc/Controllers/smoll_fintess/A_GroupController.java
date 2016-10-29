@@ -37,15 +37,15 @@ public class A_GroupController {
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
         //param for identifying locations is ->String chooseGroup
-        int groupId = Integer.parseInt(String.valueOf(idGroup));
-        String chooseGroup= groupsList.get(groupId-1).getName();
+
+        String chooseGroup= groupService.getGroup(idGroup).getName();
 
 
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
-        modelAndView.addObject("shooseNewGroup", chooseGroup );
+        modelAndView.addObject("chooseNewGroup", chooseGroup );
         //add to page model list of day in current month
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
