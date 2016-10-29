@@ -164,7 +164,7 @@
 
 <div>
 
-    <c:set value="${shooseNewGroup}" var="groupName"/>
+    <c:set value="${chooseNewGroup}" var="groupName"/>
     <c:if test="${groupName!=null}">
     <h1>You in ${groupName}   group</h1>
         </c:if>

@@ -49,6 +49,7 @@ public class A_GroupController {
         //param for identifying locations is ->String chooseGroup
         Long groupId = Long.parseLong(String.valueOf(idGroup));
 //        String chooseGroup= groupsList.get(groupId-1).getName();
+        String chooseGroup = groupService.getGroup(idGroup).getName();
 //        String chooseGroup= groupsList.get(groupService.getGroup(groupId).getName();
 //        System.out.println("group id " +chooseGroup);
 
@@ -57,7 +58,7 @@ public class A_GroupController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
-//        modelAndView.addObject("shooseNewGroup", chooseGroup );
+       modelAndView.addObject("chooseNewGroup", chooseGroup );
         modelAndView.addObject("categoryList",categoryGroupList);
 
 //        if(idCategory!=null) {
