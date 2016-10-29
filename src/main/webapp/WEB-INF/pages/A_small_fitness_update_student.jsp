@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page.css" var="style" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
     <link rel="stylesheet" type="text/css" href="${style}" >
@@ -80,6 +80,11 @@
         <tr>
             <td><label>Birthday in format (dd.mm.yyyy):</label></td>
             <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
+        </tr>
+
+        <tr>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
         </tr>
 
         <tr>

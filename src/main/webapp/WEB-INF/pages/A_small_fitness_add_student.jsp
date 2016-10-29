@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page.css" var="style" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
     <link rel="stylesheet" type="text/css" href="${style}" >
@@ -86,6 +86,10 @@
         </tr>
         <br>
         <tr>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
+        </tr>
+        <tr>
             <td><label>Position:</label></td>
             <%--<td><form:input path="p" /></td>--%>
         </tr>
@@ -93,12 +97,6 @@
             <td><label>Comment:</label></td>
             <%--<td><form:input path="" /></td>--%>
         </tr>
-        <%--<tr>--%>
-            <%--<td>Comment:</td>--%>
-            <%--<td><form:textarea path="comments" /></td>--%>
-        <%--</tr>--%>
-
-
 
         <tr>
             <td><label></label></td>
