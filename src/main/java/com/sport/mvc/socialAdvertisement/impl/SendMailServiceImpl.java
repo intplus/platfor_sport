@@ -25,7 +25,7 @@ public class SendMailServiceImpl implements SendMailService {
     Session session;
 @Override
 @Transactional
-    public void sendMailTo(String mail, String subjectTo,String bodyTo)  {
+    public void sendMailTo(String mail, String subjectTo,String bodyTo, String emailFrom, String passwordFrom)  {
      subject =subjectTo;
      body=bodyTo;
     System.out.println(mail);
@@ -38,14 +38,14 @@ public class SendMailServiceImpl implements SendMailService {
 
         session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("artyrgetman@gmail.com", "capoeira0904");
+                return new PasswordAuthentication(emailFrom, passwordFrom);
             }
         });
 
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("artyrgetman@gmail.com"));
+            message.setFrom(new InternetAddress(emailFrom));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
             message.setSubject(subject);
             // message.setText("Dear Mail Crawler," + "\n\n No spam to my email,

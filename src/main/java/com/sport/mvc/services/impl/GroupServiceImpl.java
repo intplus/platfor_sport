@@ -2,6 +2,7 @@ package com.sport.mvc.services.impl;
 
 import com.sport.mvc.dao.GroupDao;
 import com.sport.mvc.models.Group;
+import com.sport.mvc.models.Student;
 import com.sport.mvc.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,5 +42,16 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Group getGroup(long theId) {
         return  groupDao.getById(theId);
+    }
+
+    @Transactional
+    public void saveStudentsGroup(){
+
+    }
+
+    @Override
+    @Transactional
+    public  void  saveIdsToStudent_Group(Student student, Group group){
+        groupDao.saveToDBGroupIdANdStudentId(student,group);
     }
 }
