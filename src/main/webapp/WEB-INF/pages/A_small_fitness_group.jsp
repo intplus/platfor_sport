@@ -11,11 +11,14 @@
     <spring:url value="/resources/css/first_work_page.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
     <spring:url value="/resources/css/tableStyle.css" var="tableStyle" />
+    <spring:url value="/resources/css/navigate.css" var="navigate" />
+
 
     <script src="<c:url value="/resources/script/js.js" />"></script>
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
     <link rel="stylesheet" type="text/css" href="${tableStyle}" >
+    <link rel="stylesheet" type="text/css" href="${navigate}" >
 
 </head>
 
@@ -45,52 +48,126 @@
 </SCRIPT>
 <!-- HEADER -->
 <!-- NAVIGATION -->
-<div class="menu-navigation">
-    <ul id="navbar">
-        <li><a href="#">Main</a></li>
-        <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
-        <li><a href="#">Groups</a>
-            <ul >
+<%--<div class="menu-navigation">--%>
+    <%--<ul id="navbar">--%>
+        <%--<li><a href="#">Main</a></li>--%>
+        <%--<li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>--%>
+        <%--<li><a href="#">Groups</a>--%>
+            <%--<ul >--%>
 
-                <li><a href="/group/ShowGroupPage">overall</a></li>
-                <li id="create" ><a href="/group//showFormForAddGroup">Create</a>  </li>
-                <li><a href="#">Delete</a> </li>
-                <li><a href="#">Categoty</a> </li>
-                <li><a href="/group//showFormForUpdate">Update</a> </li>
-                  <c:forEach items="${groupsList}" var="groups">
-                      <c:url var="takeGroupId" value="/group//takeIdGroup" >
-                          <c:param name="groupId" value="${groups.id}"/>
-                      </c:url>
-                    <c:if test="${groups.name!=null}">
+                <%--<li><a href="/group/ShowGroupPage">overall</a></li>--%>
+                <%--<li id="create" ><a href="/group//showFormForAddGroup">Create</a>  </li>--%>
+                <%--<li><a href="#">Delete</a> </li>--%>
+                <%--<li><a href="#">Categoty</a>--%>
+                    <%--<ul>--%>
+                        <%--<li><a href="#">new</a></li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
+                <%--<li><a href="/group//showFormForUpdate">Update</a> </li>--%>
+                  <%--<c:forEach items="${groupsList}" var="groups">--%>
+                      <%--<c:url var="takeGroupId" value="/group//takeIdGroup" >--%>
+                          <%--<c:param name="groupId" value="${groups.id}"/>--%>
+                      <%--</c:url>--%>
+                    <%--<c:if test="${groups.name!=null}">--%>
 
-                        <li >
-                            <a href="${takeGroupId}" >
-                                <c:out value="${groups.name}" />
-                            </a>
-                        </li>
-                    </c:if>
-                  </c:forEach>
-            </ul>
-        </li>
+                        <%--<li >--%>
+                            <%--<a href="${takeGroupId}" >--%>
+                                <%--<c:out value="${groups.name}" />--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
+                    <%--</c:if>--%>
+                  <%--</c:forEach>--%>
+            <%--</ul>--%>
+        <%--</li>--%>
 
-        <li><a href="#">instructors group</a>
-            <ul>
-                <li><a href="#">Create</a>  </li>
-                <li><a href="#">Categoty</a></li>
-                <li><a href="#">Delete</a> </li>
-                <li><a href="#">Update</a> </li>
-            </ul>
-        </li>
-        <li><a href="#">Statistics</a></li>
-        <li><a href="#">Finance</a></li>
-        <li id="out"><a href="">Out</a></li>
-    </ul>
+        <%--<li><a href="#">instructors group</a>--%>
+            <%--<ul>--%>
+                <%--<li><a href="#">Create</a>  </li>--%>
+                <%--<li><a href="#">Categoty</a></li>--%>
+                <%--<li><a href="#">Delete</a> </li>--%>
+                <%--<li><a href="#">Update</a> </li>--%>
+            <%--</ul>--%>
+        <%--</li>--%>
+        <%--<li><a href="#">Statistics</a></li>--%>
+        <%--<li><a href="#">Finance</a></li>--%>
+        <%--<li id="out"><a href="">Out</a></li>--%>
+    <%--</ul>--%>
 
+<%--</div>--%>
+
+<div class="navigate">
+<ul class="navbar cf">
+    <li><a href="#">Main</a></li>
+
+    <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
+    <li><a href="">CWS</a></li>
+    <li><a href="">Groups</a>
+        <ul>
+            <li><a href="/group//showFormForAddGroup">Create</a></li>
+            <li><a href="#">Category</a>
+                <ul>
+                    <li><a href="/group//showFormForAddCategory">new</a></li>
+                    <c:forEach items="${categoryList}" var="category">
+                    <c:if test="${category!=null}">
+                    <li><a href="#"><c:out value="${category.name}"/></a>
+
+                      </c:if>
+                        </c:forEach>
+                        <li><a href="#">xxx</a>
+                        <ul>
+                            <li><a href="#">sub item 1</a></li>
+                            <li><a href="#">sub item 2</a></li>
+                            <li><a href="#">sub item 3</a>
+                                <ul>
+                                    <li><a href="#">sub sub sub item 1</a></li>
+                                    <li><a href="#">sub sub sub item 2</a></li>
+                                    <li><a href="#">sub sub sub item 3</a>
+                                        <ul>
+                                            <li><a href="#">sub item 1</a></li>
+                                            <li><a href="#">sub item 2</a></li>
+                                            <li><a href="#">sub item 3</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">sub sub item 3</a></li>
+                            <li><a href="#">sub sub item 4</a></li>
+                            <li><a href="#">sub sub item 5</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+<c:forEach items="${groupsList}" var="groups">
+    <c:url var="takeGroupId" value="/group//takeIdGroup" >
+        <c:param name="groupId" value="${groups.id}"/>
+    </c:url>
+    <c:if test="${groups.name!=null}">
+            <li><a href="${takeGroupId}"><c:out value="${groups.name}"/></a></li>
+
+    </c:if>
+</c:forEach>
+            <li><a href="#">Delete</a></li>
+        </ul>
+    </li>
+
+    <li><a href="#">item 4</a></li>
+
+    <li><a href="#">item 5</a></li>
+</ul>
 </div>
 
+
+
+
+
 <div>
+
     <c:set value="${shooseNewGroup}" var="groupName"/>
+    <c:if test="${groupName!=null}">
     <h1>You in ${groupName}   group</h1>
+        </c:if>
 </div>
 
 <!-- MAIN SECTION -->

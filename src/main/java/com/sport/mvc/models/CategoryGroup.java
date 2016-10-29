@@ -16,6 +16,9 @@ public class CategoryGroup extends Model {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "nameTraine")
+    private String nameTraine;
+
     public CategoryGroup() {
         super();
     }

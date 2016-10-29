@@ -1,0 +1,66 @@
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+/*body {*/
+.navigate{
+    font: 9px "open sans", Arial, sans-serif;
+    background: rgb(97, 56, 56);
+}
+
+ul.navbar {
+    background: rgb(97, 56, 56); /* Old browsers */
+    width: 1000px;
+    margin: 2em auto;
+}
+
+ul.navbar li {
+    float: left;
+    margin: 0;
+    position: relative;
+}
+
+ul.navbar li a {
+    display: block;
+    padding: 13px 15px;
+    color: #777 !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all .2s ease-in-out;
+}
+
+ul.navbar li a:hover,
+ul.navbar li:hover > a {
+    background: #930659;
+    color: #fff !important;
+}
+
+ul.navbar li ul {
+    margin: 0;
+    position: absolute;
+    background: #222;
+    left: 10%;
+    font-size: 10px;
+    min-width: 170px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 99;
+    transition: all .1s ease;
+}
+
+ul.navbar ul li { float: none; }
+ul.navbar li:hover > ul { opacity: 1; visibility: visible; left: 0; max-height: 250px }
+ul.navbar > li:hover > ul { opacity: 1; visibility: visible; top: 100%; left: 0; }
+ul.navbar li > ul  ul { top: 0; left: 90%; }
+ul.navbar li > ul li:hover > ul { left: 100%; }

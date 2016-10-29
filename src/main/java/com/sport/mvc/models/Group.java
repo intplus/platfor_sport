@@ -13,6 +13,9 @@ public class Group extends Model {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "nameTraine")
+    private String nameTraine;
+
     @Column(name = "discription")
     private String discription;
 
