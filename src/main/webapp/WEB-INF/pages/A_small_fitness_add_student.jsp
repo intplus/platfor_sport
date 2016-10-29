@@ -64,26 +64,27 @@
                 <form:errors path="name" class="alert alert-danger"></form:errors>
             </td>
         </tr>
-
+<br>
         <tr>
             <td><label>Фамилия:</label></td>
             <td><form:input path="surname" /><form:errors path="surname" cssClass="alert alert-danger"></form:errors></td>
         </tr>
-
+        <br>
         <tr>
-            <td><label>Телефон:</label></td>
+            <td><label>Телефон в формате (0xxxxxxxxx):</label></td>
             <td><form:input path="phone" /><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
         </tr>
+        <br>
         <tr>
             <td><label>Email:</label></td>
             <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
         </tr>
-
+        <br>
         <tr>
-            <td><label>Birthday:</label></td>
+            <td><label>Birthday in format (dd.mm.yyyy):</label></td>
             <td><form:input path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
         </tr>
-
+        <br>
         <tr>
             <td><label>Position:</label></td>
             <%--<td><form:input path="p" /></td>--%>

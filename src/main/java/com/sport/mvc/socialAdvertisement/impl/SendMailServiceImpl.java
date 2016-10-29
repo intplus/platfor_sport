@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -25,7 +26,8 @@ public class SendMailServiceImpl implements SendMailService {
     Session session;
 @Override
 @Transactional
-    public void sendMailTo(String mail, String subjectTo,String bodyTo, String emailFrom, String passwordFrom)  {
+    public void sendMailTo(String mail, String subjectTo,String bodyTo, String emailFrom, String passwordFrom)
+        throws AddressException, MessagingException {
      subject =subjectTo;
      body=bodyTo;
     System.out.println(mail);
@@ -41,9 +43,6 @@ public class SendMailServiceImpl implements SendMailService {
                 return new PasswordAuthentication(emailFrom, passwordFrom);
             }
         });
-
-        try {
-
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailFrom));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
@@ -56,9 +55,7 @@ public class SendMailServiceImpl implements SendMailService {
 
             System.out.println("Done");
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public String getSubject() {

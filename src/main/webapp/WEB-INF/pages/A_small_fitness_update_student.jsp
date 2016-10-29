@@ -69,7 +69,7 @@
         </tr>
 
         <tr>
-            <td><label>Телефон:</label></td>
+            <td><label>Телефон в формате (0xxxxxxxxx):</label></td>
             <td><form:input path="phone" /><form:errors path="phone" class="alert alert-danger"></form:errors></td>
         </tr>
         <tr>
@@ -78,7 +78,7 @@
         </tr>
 
         <tr>
-            <td><label>Birthday:</label></td>
+            <td><label>Birthday in format (dd.mm.yyyy):</label></td>
             <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
         </tr>
 
