@@ -71,6 +71,7 @@ public class A_GroupController {
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
+        //
 
     }
 
