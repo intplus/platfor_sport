@@ -10,11 +10,15 @@ public class CategoryGroup extends Model {
 
     private static final long serialVersionUID = 1960998098645977429L;
 
+
     @OneToMany(mappedBy = "categoryGroup" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "nameTraine")
+    private String nameTraine;
 
     public CategoryGroup() {
         super();
@@ -34,5 +38,13 @@ public class CategoryGroup extends Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNameTraine() {
+        return nameTraine;
+    }
+
+    public void setNameTraine(String nameTraine) {
+        this.nameTraine = nameTraine;
     }
 }

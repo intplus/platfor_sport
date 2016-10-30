@@ -13,6 +13,9 @@ public class Group extends Model {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "nameTraine")
+    private String nameTraine;
+
     @Column(name = "discription")
     private String discription;
 
@@ -23,10 +26,10 @@ public class Group extends Model {
     @ManyToMany(mappedBy = "groups")
     private Set<User> treiners = new HashSet<>();
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", cascade = CascadeType.ALL)
     private Set<Student> students = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private CategoryGroup categoryGroup;
 
@@ -72,5 +75,13 @@ public class Group extends Model {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public String getNameTraine() {
+        return nameTraine;
+    }
+
+    public void setNameTraine(String nameTraine) {
+        this.nameTraine = nameTraine;
     }
 }

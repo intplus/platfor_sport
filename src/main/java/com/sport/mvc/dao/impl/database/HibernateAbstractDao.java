@@ -44,7 +44,7 @@ public abstract class HibernateAbstractDao<T extends Model> {
 
 
     public void add(T model) {
-        getSession().save(model);
+        getSession().saveOrUpdate(model);
     }
 
 

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Add new user</title>
+    <title>Add new group</title>
     <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
 
@@ -42,24 +42,23 @@
 
 
 <div class="container addgroup_form">
-    <h1>Add new group or add new group to category</h1>
+    <h1>Add new group to trainers or add new group to trainers category </h1>
     <br>
-    <form:form action="saveGroup" modelAttribute="group" method="POST">
+    <form:form action="saveGroupToTrainers" modelAttribute="group" method="POST">
         <form:hidden path="id" />
         <table>
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="nameTraine" /></td>
             </tr>
-
             <tr>
-            <select name="option">
-                <option value="">выберите категорию</option>
+            <select name="choose">
+                <option value="">выберите инструктора</option>
                 <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.name!=null}">
-                    <option value="${category.name}">
-                        <c:out value="${category.name}"/>
+                    <c:if test="${category.nameTraine!=null}">
+                    <option value="${category.nameTraine}">
+                        <c:out value="${category.nameTraine}"/>
                     </option>
                     </c:if>
                 </c:forEach>
