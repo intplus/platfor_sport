@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -63,12 +62,55 @@ public class A_GroupController {
             String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
             modelAndView.addObject("chooseNewCategory", chooseCategory );
         }
+        if(idGroup!=null) {
+            String chooseGroup = groupService.getGroup(idGroup).getNameTraine();
+            modelAndView.addObject("chooseNewGroupTrainer", chooseGroup);
+        }
+        if(idCategory!=null) {
+            String chooseCategory = categoryService.getCategoryGroup(idCategory).getNameTraine();
+            modelAndView.addObject("chooseNewCategoryTrainer", chooseCategory );
+        }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
 
+    }
+
+    @RequestMapping( value = "/AddGroupToInstructorsForm", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForAddInstructors() {
+        // create model attribute to bind form data
+        Group group = new Group();
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categoryList" ,categoryGroupList);
+        modelAndView.addObject("group", group);
+        modelAndView.setViewName("A_small_fitness_add_group_to_instructors");
+        //  return "A_small_fitness_add_group";
+        return  modelAndView;
+    }
+
+
+    @PostMapping("/saveGroupToTrainers")
+    public String saveGroupToTrainers(@ModelAttribute("group") Group group,@RequestParam("choose") String categoryName) {
+        //add group to DB
+        if(categoryName.equals("")){
+            groupService.addGroup(group);
+        }else {
+            CategoryGroup categoryGroup = new CategoryGroup();
+            categoryGroup.setNameTraine(categoryName);
+            for (CategoryGroup category: categoryService.getAll()) {
+                System.out.println(category.getNameTraine()+"t r");
+                System.out.println(categoryGroup.getNameTraine()+" int new name");
+                if (category.getNameTraine().equals(categoryGroup.getNameTraine())) {
+                    group.setCategoryGroup(category);
+                    groupService.addGroup(group);
+                    break;
+                }
+            }
+        }
+        return "redirect:/group/AddGroupToInstructorsForm";
     }
 
     @RequestMapping( value = "/showFormForAddGroup", method = {RequestMethod.GET, RequestMethod.POST})
@@ -92,21 +134,24 @@ public class A_GroupController {
     public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
 
-        System.out.println(categoryName);
+
        if(categoryName.equals("")){
            groupService.addGroup(group);
        }
-        CategoryGroup categoryGroup = new CategoryGroup();
-        categoryGroup.setName(categoryName);
-        for(CategoryGroup category: categoryService.getAll()) {
-            if(category.getName().equals(categoryGroup.getName())) {
-                group.setCategoryGroup(category);
-                groupService.addGroup(group);
-                break;
-            }
-        }
+       else {
+           CategoryGroup categoryGroup = new CategoryGroup();
+           categoryGroup.setName(categoryName);
+           for (CategoryGroup category : categoryService.getAll()) {
+               if (category.getName().equals(categoryGroup.getName())) {
+                   group.setCategoryGroup(category);
+                   groupService.addGroup(group);
+                   break;
+               }
+           }
+       }
         return "redirect:/group/showFormForAddGroup";
     }
+
     @RequestMapping("/showFormForAddCategory")
     public String showFormForAddCategory(Model theModel) {
         // create model attribute to bind form data
@@ -120,6 +165,23 @@ public class A_GroupController {
         //add group to DB
         categoryService.addCategoryGroup(category);
         return "redirect:/group/showFormForAddCategory";
+    }
+
+
+    @RequestMapping("/showFormForAddCategoryTrainers")
+    public String showFormForAddCategoryTrainers(Model theModel) {
+        // create model attribute to bind form data
+        CategoryGroup category = new CategoryGroup();
+        theModel.addAttribute("category", category);
+        return "A_small_fitness_add_category_trainers";
+    }
+
+
+    @PostMapping("/saveTrainersCategory")
+    public String saveTrainersCategory(@ModelAttribute("category") CategoryGroup category) {
+        //add group to DB
+        categoryService.addCategoryGroup(category);
+        return "redirect:/group/showFormForAddCategoryTrainers";
     }
 
 

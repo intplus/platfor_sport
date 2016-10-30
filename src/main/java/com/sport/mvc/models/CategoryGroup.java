@@ -39,4 +39,12 @@ public class CategoryGroup extends Model {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getNameTraine() {
+        return nameTraine;
+    }
+
+    public void setNameTraine(String nameTraine) {
+        this.nameTraine = nameTraine;
+    }
 }

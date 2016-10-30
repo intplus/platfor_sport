@@ -1,7 +1,6 @@
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Add new user</title>
@@ -40,32 +39,17 @@
     </div>
 </nav>
 
-
-<div class="container addgroup_form">
-    <h1>Add new group or add new group to category</h1>
+<div class="container add_category_form">
+    <h1>Add new trainers category </h1>
     <br>
-    <form:form action="saveGroup" modelAttribute="group" method="POST">
+    <form:form action="saveTrainersCategory" modelAttribute="category" method="POST">
         <form:hidden path="id" />
         <table>
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="nameTraine" /></td>
             </tr>
-
-            <tr>
-            <select name="option">
-                <option value="">выберите категорию</option>
-                <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.name!=null}">
-                    <option value="${category.name}">
-                        <c:out value="${category.name}"/>
-                    </option>
-                    </c:if>
-                </c:forEach>
-            </select>
-                </tr>
-            <tr>
             <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>

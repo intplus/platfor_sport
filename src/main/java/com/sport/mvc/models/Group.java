@@ -76,4 +76,12 @@ public class Group extends Model {
     public void setStudents(Set<Student> students) {
         this.students = students;
     }
+
+    public String getNameTraine() {
+        return nameTraine;
+    }
+
+    public void setNameTraine(String nameTraine) {
+        this.nameTraine = nameTraine;
+    }
 }

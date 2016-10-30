@@ -121,7 +121,7 @@
                     </li>
                     <%--//create and show new category--%>
                     <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category!=null}">
+                    <c:if test="${category.name!=null}">
                     <li><a href="#"><c:out value="${category.name}"/></a>
                         <ul>
                                 <%--//show groups if they location in one of the category--%>
@@ -158,7 +158,72 @@
         </ul>
     </li>
     <%--//close groups menu, and show first level menu items--%>
-    <li><a href="#">Instructors Groups</a></li>
+
+
+    <%--//add this functionality to the Instructors Groups--%>
+    <li><a href="#">Instructors Groups</a>
+    <ul>
+        <li><a href="#">controls</a>
+            <ul>
+                <li><a href="#">Update</a></li>
+                <li><a href="#">Delete</a></li>
+                <li><a href="/group//AddGroupToInstructorsForm">new group</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Category</a>
+            <%--//create controls item for updeting categoty of group--%>
+            <ul>
+                <li><a href="#">controls</a>
+                    <ul>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                        <li><a href="/group//showFormForAddCategoryTrainers">new trainers</a></li>
+                    </ul>
+                </li>
+                <%--//create and show new category--%>
+                <c:forEach items="${categoryList}" var="category">
+                    <c:if test="${category.nameTraine!=null}">
+                        <li><a href="#"><c:out value="${category.nameTraine}"/></a>
+                            <ul>
+                                    <%--//show groups if they location in one of the category--%>
+                                <c:forEach items="${groupsList}" var="groups">
+                                    <%--//create links for click--%>
+                                    <c:url var="takeGroupId" value="/group//takeIdGroup" >
+                                        <c:param name="groupId" value="${groups.id}"/>
+                                    </c:url>
+
+                                    <c:if test="${groups.categoryGroup.id.equals(category.id)}">
+                                        <li> <a href="${takeGroupId}"> <c:out value="${groups.nameTraine}"/></a></li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </li>
+        <%--// Empty li--%>
+        <li><a href="#">.....</a></li>
+        <%--//show new creating groups--%>
+        <c:forEach items="${groupsList}" var="groups">
+            <%--// check, if groups don't belongs some of category, the show it--%>
+            <c:if test="${groups.categoryGroup.id==null && groups.nameTraine!=null}">
+                <%--//create links for click--%>
+                <c:url var="takeGroupId" value="/group//takeIdGroup" >
+                    <c:param name="groupId" value="${groups.id}"/>
+                </c:url>
+
+                <li><a href="${takeGroupId}"><c:out value="${groups.nameTraine}"/></a></li>
+            </c:if>
+        </c:forEach>
+    </ul>
+    </li>
+    <%--//close groups menu, and show first level menu items--%>
+
+
+
+
+
 
     <li><a href="#">Statistic</a></li>
 
