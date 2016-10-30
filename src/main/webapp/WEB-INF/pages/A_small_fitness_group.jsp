@@ -172,7 +172,7 @@
         <c:param name="groupId" value="${groups.id}"/>
        </c:url>
 
-    <c:if test="${groups.name!=null}">
+    <c:if test="${groups.categoryGroup.id==null && groups.name!=null}">
             <li><a href="${takeGroupId}"><c:out value="${groups.name}"/></a></li>
     </c:if>
           <%--</c:if>--%>
