@@ -233,11 +233,23 @@
 
 
 <div>
-<%--// show you group locations--%>
     <c:set value="${chooseNewGroup}" var="groupName"/>
-       <c:if test="${groupName!=null}">
-    <h1>You in ${groupName}   group</h1>
-        </c:if>
+    <c:set value="${chooseNewGroupTrainer}" var="groupTrainer"/>
+
+
+    <c:choose>
+        <c:when test="${groupTrainer!=null}">
+            <h1>You in ${groupTrainer} group </h1>
+        </c:when>
+        <c:when test="${groupName!=null}">
+            <h1>You in ${groupName} group</h1>
+        </c:when>
+        <c:otherwise >
+            <h1>You in you cabinet</h1>
+        </c:otherwise>
+
+    </c:choose>
+    <%--<h1>You in you cabinet</h1>--%>
 </div>
 
 <!-- MAIN SECTION -->

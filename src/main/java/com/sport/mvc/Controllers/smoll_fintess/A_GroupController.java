@@ -45,32 +45,28 @@ public class A_GroupController {
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
-        //param for identifying locations is ->String chooseGroup
-
-
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
-
+        //param for identifying locations is ->String chooseGroup
         if(idGroup!=null) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseNewGroup", chooseGroup);
         }
-        if(idCategory!=null) {
-            String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
-            modelAndView.addObject("chooseNewCategory", chooseCategory );
-        }
+//        if(idCategory!=null) {
+//            String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
+//            modelAndView.addObject("chooseNewCategory", chooseCategory );
+//        }
         if(idGroup!=null) {
-            String chooseGroup = groupService.getGroup(idGroup).getNameTraine();
-            modelAndView.addObject("chooseNewGroupTrainer", chooseGroup);
+            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
+            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
         }
-        if(idCategory!=null) {
-            String chooseCategory = categoryService.getCategoryGroup(idCategory).getNameTraine();
-            modelAndView.addObject("chooseNewCategoryTrainer", chooseCategory );
-        }
-
+//        if(idCategory!=null) {
+//            String chooseCategory = categoryService.getCategoryGroup(idCategory).getNameTraine();
+//            modelAndView.addObject("chooseNewCategoryTrainer", chooseCategory );
+//        }
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
@@ -101,8 +97,10 @@ public class A_GroupController {
             CategoryGroup categoryGroup = new CategoryGroup();
             categoryGroup.setNameTraine(categoryName);
             for (CategoryGroup category: categoryService.getAll()) {
-                System.out.println(category.getNameTraine()+"t r");
-                System.out.println(categoryGroup.getNameTraine()+" int new name");
+                if(category.getNameTraine()==null){
+                    continue;
+                }
+
                 if (category.getNameTraine().equals(categoryGroup.getNameTraine())) {
                     group.setCategoryGroup(category);
                     groupService.addGroup(group);
@@ -142,6 +140,9 @@ public class A_GroupController {
            CategoryGroup categoryGroup = new CategoryGroup();
            categoryGroup.setName(categoryName);
            for (CategoryGroup category : categoryService.getAll()) {
+               if(category.getName()==null){
+                   continue;
+               }
                if (category.getName().equals(categoryGroup.getName())) {
                    group.setCategoryGroup(category);
                    groupService.addGroup(group);

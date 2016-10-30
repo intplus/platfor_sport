@@ -99,26 +99,30 @@ private Long idCategory;
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
-        //param for identifying locations is ->String chooseGroup
-
-
-
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("studentList", studentsList);
+        modelAndView.addObject("students", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
-
+//param for identifying locations is ->String chooseGroup
        if(idGroup!=null) {
         String chooseGroup = groupService.getGroup(idGroup).getName();
         modelAndView.addObject("chooseNewGroup", chooseGroup);
-           }
-           if(idCategory!=null) {
-        String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
-        modelAndView.addObject("chooseNewCategory", chooseCategory );
-          }
+                        }
+//           if(idCategory!=null) {
+//        String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
+//        modelAndView.addObject("chooseNewCategory", chooseCategory );
+//                               }
+        if(idGroup!=null) {
+            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
+            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
+        }
+//        if(idCategory!=null) {
+//            String chooseNewCategoryTrainer = categoryService.getCategoryGroup(idCategory).getNameTraine();
+//            modelAndView.addObject("chooseNewCategoryTrainer", chooseNewCategoryTrainer );
+//        }
 
-        modelAndView.setViewName("A_small_fitness_group");
+        modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
 
     }
