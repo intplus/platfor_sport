@@ -97,91 +97,67 @@
 
 <div class="navigate">
 <ul class="navbar cf">
-    <li><a href="#">Main</a></li>
 
     <li><a href="/registerPerson/showFirstWorkPage">Cabinet</a></li>
     <li><a href="">Groups</a>
+        <%--//create controls item for updeting group--%>
         <ul>
             <li><a href="#">controls</a>
             <ul>
                 <li><a href="#">Update</a></li>
                 <li><a href="#">Delete</a></li>
-                <li><a href="/group//showFormForAddGroup">New group</a></li>
+                <li><a href="/group//showFormForAddGroup">new group</a></li>
             </ul>
             </li>
             <li><a href="#">Category</a>
+                <%--//create controls item for updeting categoty of group--%>
                 <ul>
                     <li><a href="#">controls</a>
-                    <ul>
+                     <ul>
                         <li><a href="#">Update</a></li>
                         <li><a href="#">Delete</a></li>
                         <li><a href="/group//showFormForAddCategory">new</a></li>
-                    </ul>
-
-
+                     </ul>
                     </li>
-
-                    <%--<li><a href="/group//showFormForAddCategory">new</a></li>--%>
-
                     <%--//create and show new category--%>
                     <c:forEach items="${categoryList}" var="category">
                     <c:if test="${category!=null}">
                     <li><a href="#"><c:out value="${category.name}"/></a>
                         <ul>
-
-                            <%--//show groups if they location in on of the category--%>
+                                <%--//show groups if they location in one of the category--%>
                         <c:forEach items="${groupsList}" var="groups">
-
-
                             <%--//create links for click--%>
                             <c:url var="takeGroupId" value="/group//takeIdGroup" >
                                 <c:param name="groupId" value="${groups.id}"/>
                             </c:url>
 
-                                <c:if test="${groups.categoryGroup.id.equals(category.id)}">
-
-                                        <li> <a href="${takeGroupId}"> <c:out value="${groups.name}"/></a></li>
-
-                                </c:if>
+                            <c:if test="${groups.categoryGroup.id.equals(category.id)}">
+                                <li> <a href="${takeGroupId}"> <c:out value="${groups.name}"/></a></li>
+                            </c:if>
                         </c:forEach>
                         </ul>
-
-                    <%--</li>--%>
-                        <%--<li><a href="#">xxx</a>--%>
-                        <%--<ul>--%>
-
-                            <%--<li><a href="#">sub item 2</a></li>--%>
-                            <%--<li><a href="#">sub item 3</a></li>--%>
-                        <%--</ul>--%>
                     </li>
                     </c:if>
                     </c:forEach>
                 </ul>
             </li>
-            <%--// Empty li--%>
-            <%--<li><a href="#">.....</a></li>--%>
-
+            // Empty li
+            <li><a href="#">.....</a></li>
             <%--//show new creating groups--%>
-
-
-              <c:forEach items="${groupsList}" var="groups">
-
-                  <%--<c:if test="${groups.categoryGroup.name!=categoryList.get(groups.categoryGroup.id).name}">--%>
-          <%--//create url-> go to the choosen group--%>
+            <c:forEach items="${groupsList}" var="groups">
+                <%--// check, if groups don't belongs some of category, the show it--%>
+                  <c:if test="${groups.categoryGroup.id==null && groups.name!=null}">
+                      <%--//create links for click--%>
        <c:url var="takeGroupId" value="/group//takeIdGroup" >
         <c:param name="groupId" value="${groups.id}"/>
        </c:url>
 
-    <c:if test="${groups.categoryGroup.id==null && groups.name!=null}">
-            <li><a href="${takeGroupId}"><c:out value="${groups.name}"/></a></li>
-    </c:if>
-          <%--</c:if>--%>
-               </c:forEach>
-
-
+                      <li><a href="${takeGroupId}"><c:out value="${groups.name}"/></a></li>
+                 </c:if>
+              </c:forEach>
         </ul>
     </li>
-
+    <%--//close groups menu, and show first level menu items--%>
     <li><a href="#">Instructors Groups</a></li>
 
     <li><a href="#">Statistic</a></li>
@@ -191,13 +167,10 @@
 </div>
 
 
-
-
-
 <div>
-
+<%--// show you group locations--%>
     <c:set value="${chooseNewGroup}" var="groupName"/>
-    <c:if test="${groupName!=null}">
+       <c:if test="${groupName!=null}">
     <h1>You in ${groupName}   group</h1>
         </c:if>
 </div>
