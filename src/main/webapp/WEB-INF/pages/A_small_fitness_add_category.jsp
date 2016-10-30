@@ -40,7 +40,7 @@
 </nav>
 
 <div class="container add_category_form">
-    <h1>Add category</h1>
+    <h1>Add new category</h1>
     <br>
     <form:form action="saveCategory" modelAttribute="category" method="POST">
         <form:hidden path="id" />

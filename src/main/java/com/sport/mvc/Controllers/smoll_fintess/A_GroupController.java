@@ -55,14 +55,14 @@ public class A_GroupController {
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
 
-//        if(idGroup!=null) {
+        if(idGroup!=null) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseNewGroup", chooseGroup);
-     //   }
-     //   if(idCategory!=null) {
+        }
+        if(idCategory!=null) {
             String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
             modelAndView.addObject("chooseNewCategory", chooseCategory );
-      //  }
+        }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
@@ -91,7 +91,11 @@ public class A_GroupController {
     @PostMapping("/saveGroup")
     public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
-        boolean flag = false;
+
+        System.out.println(categoryName);
+       if(categoryName.equals("")){
+           groupService.addGroup(group);
+       }
         CategoryGroup categoryGroup = new CategoryGroup();
         categoryGroup.setName(categoryName);
         for(CategoryGroup category: categoryService.getAll()) {
@@ -101,29 +105,6 @@ public class A_GroupController {
                 break;
             }
         }
-//        Set<Group> groups = new HashSet<>();
-//        groups.add(group);
-//        categoryGroup.setGroups(groups);
-//        for(CategoryGroup category: categoryService.getAll()){
-//            System.out.println(category.getName()+" its all");
-//            if(category.getName().equals(categoryGroup.getName())){
-//                System.out.println(category.getName()+" from db");
-//                System.out.println(categoryGroup.getName()+" new cat");
-//                CategoryGroup cat = categoryService.getCategoryGroup(category.getId());
-//                cat.setGroups(groups);
-//                categoryService.updateCategoryGroup(cat);
-//
-//                break;
-//            }
-//            flag=true;
-//
-//        }
-//        System.out.println(flag+" flag");
-//        if (flag==true) {
-//            System.out.println("after");
-          //  categoryService.addCategoryGroup(categoryGroup);
- //       }
-//        System.out.println(group.getName()+"  "+ group.getCategoryGroup().getName());
         return "redirect:/group/showFormForAddGroup";
     }
     @RequestMapping("/showFormForAddCategory")

@@ -42,7 +42,7 @@
 
 
 <div class="container addgroup_form">
-    <h1>Add group</h1>
+    <h1>Add new group or add new group to category</h1>
     <br>
     <form:form action="saveGroup" modelAttribute="group" method="POST">
         <form:hidden path="id" />
@@ -58,7 +58,7 @@
             <%--</tr>--%>
             <tr>
             <select name="option">
-                <option value="0">выберите категорию</option>
+                <option value="">выберите категорию</option>
                 <c:forEach items="${categoryList}" var="category">
                     <option value="${category.name}"><c:out value="${category.name}"/>
                         <%--<form:input path="categoryGroup" />--%>
