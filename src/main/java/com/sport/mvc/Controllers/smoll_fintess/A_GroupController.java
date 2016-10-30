@@ -47,13 +47,8 @@ public class A_GroupController {
         List<Group> groupsList = groupService.getAll();
         List<Student> studentsList=studentService.getAll();
         //param for identifying locations is ->String chooseGroup
-        Long groupId = Long.parseLong(String.valueOf(idGroup));
-//        String chooseGroup= groupsList.get(groupId-1).getName();
+
         String chooseGroup = groupService.getGroup(idGroup).getName();
-//        String chooseGroup= groupsList.get(groupService.getGroup(groupId).getName();
-//        System.out.println("group id " +chooseGroup);
-
-
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("studentList", studentsList);
@@ -61,12 +56,10 @@ public class A_GroupController {
        modelAndView.addObject("chooseNewGroup", chooseGroup );
         modelAndView.addObject("categoryList",categoryGroupList);
 
-//        if(idCategory!=null) {
-//            int categoryId = Integer.parseInt(String.valueOf(idCategory));
-//            String chooseCategory = categoryGroupList.get(categoryId - 1).getName();
-//            System.out.println("categoryId" + categoryId);
-//            modelAndView.addObject("chooseNewCategory", chooseCategory );
-//        }
+        if(idCategory!=null) {
+            String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
+            modelAndView.addObject("chooseNewCategory", chooseCategory );
+        }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
@@ -75,18 +68,59 @@ public class A_GroupController {
 
     }
 
-    @RequestMapping("/showFormForAddGroup")
-    public String showFormForAdd(Model theModel) {
+    @RequestMapping( value = "/showFormForAddGroup", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForAddGroup() {
         // create model attribute to bind form data
         Group group = new Group();
-        theModel.addAttribute("group", group);
-        return "A_small_fitness_add_group";
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<String> stringList = new ArrayList<>();
+        for(CategoryGroup category: categoryGroupList){
+            stringList.add(category.getName());
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categoryList" ,categoryGroupList);
+        modelAndView.addObject("group", group);
+        modelAndView.setViewName("A_small_fitness_add_group");
+      //  return "A_small_fitness_add_group";
+        return  modelAndView;
     }
 
     @PostMapping("/saveGroup")
-    public String saveGroup(@ModelAttribute("group") Group group) {
+    public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
-        groupService.addGroup(group);
+        boolean flag = false;
+        CategoryGroup categoryGroup = new CategoryGroup();
+        categoryGroup.setName(categoryName);
+        for(CategoryGroup category: categoryService.getAll()) {
+            if(category.getName().equals(categoryGroup.getName())) {
+                group.setCategoryGroup(category);
+                groupService.addGroup(group);
+                break;
+            }
+        }
+//        Set<Group> groups = new HashSet<>();
+//        groups.add(group);
+//        categoryGroup.setGroups(groups);
+//        for(CategoryGroup category: categoryService.getAll()){
+//            System.out.println(category.getName()+" its all");
+//            if(category.getName().equals(categoryGroup.getName())){
+//                System.out.println(category.getName()+" from db");
+//                System.out.println(categoryGroup.getName()+" new cat");
+//                CategoryGroup cat = categoryService.getCategoryGroup(category.getId());
+//                cat.setGroups(groups);
+//                categoryService.updateCategoryGroup(cat);
+//
+//                break;
+//            }
+//            flag=true;
+//
+//        }
+//        System.out.println(flag+" flag");
+//        if (flag==true) {
+//            System.out.println("after");
+          //  categoryService.addCategoryGroup(categoryGroup);
+ //       }
+//        System.out.println(group.getName()+"  "+ group.getCategoryGroup().getName());
         return "redirect:/group/showFormForAddGroup";
     }
     @RequestMapping("/showFormForAddCategory")
@@ -146,6 +180,7 @@ public class A_GroupController {
         Group theGroup = groupService.getGroup(idGroup);
 
         //save this data
+//        theStudent.setGroups();
         groupService.saveIdsToStudent_Group(theStudent,theGroup);
         return "redirect:/group/addStudentToGroupForm";
 

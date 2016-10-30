@@ -26,10 +26,10 @@ public class Group extends Model {
     @ManyToMany(mappedBy = "groups")
     private Set<User> treiners = new HashSet<>();
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", cascade = CascadeType.ALL)
     private Set<Student> students = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private CategoryGroup categoryGroup;
 

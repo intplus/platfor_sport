@@ -10,6 +10,7 @@ public class CategoryGroup extends Model {
 
     private static final long serialVersionUID = 1960998098645977429L;
 
+
     @OneToMany(mappedBy = "categoryGroup" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 

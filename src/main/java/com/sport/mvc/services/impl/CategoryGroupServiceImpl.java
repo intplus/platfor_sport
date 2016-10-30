@@ -47,4 +47,10 @@ public class CategoryGroupServiceImpl implements CategoryGroupService {
     public CategoryGroup getCategoryGroup(long theId) {
         return categoryDao.getById(theId);
     }
+
+    @Transactional
+    @Override
+    public void updateCategoryGroup(CategoryGroup categoryGroup) {
+        categoryDao.update(categoryGroup);
+    }
 }

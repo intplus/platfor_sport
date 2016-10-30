@@ -15,5 +15,7 @@ public interface CategoryGroupService {
 
     CategoryGroup getCategoryGroup(long theId);
 
+    void updateCategoryGroup(CategoryGroup categoryGroup);
+
 
 }
