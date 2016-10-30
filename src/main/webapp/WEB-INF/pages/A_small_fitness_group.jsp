@@ -8,10 +8,10 @@
     <title> First Work Page</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <spring:url value="/resources/script/js.js" var="js" />
-    <spring:url value="/resources/css/first_work_page.css" var="style" />
+    <spring:url value="/resources/css/first_work_page_for_cabinet.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
     <spring:url value="/resources/css/tableStyle.css" var="tableStyle" />
-    <spring:url value="/resources/css/navigate.css" var="navigate" />
+    <spring:url value="/resources/css/page_for_group_menu.css" var="navigate" />
 
 
     <script src="<c:url value="/resources/script/js.js" />"></script>
@@ -141,7 +141,7 @@
                     </c:forEach>
                 </ul>
             </li>
-            // Empty li
+            <%--// Empty li--%>
             <li><a href="#">.....</a></li>
             <%--//show new creating groups--%>
             <c:forEach items="${groupsList}" var="groups">

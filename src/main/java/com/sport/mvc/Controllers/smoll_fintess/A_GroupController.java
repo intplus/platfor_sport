@@ -48,18 +48,21 @@ public class A_GroupController {
         List<Student> studentsList=studentService.getAll();
         //param for identifying locations is ->String chooseGroup
 
-        String chooseGroup = groupService.getGroup(idGroup).getName();
+
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
-       modelAndView.addObject("chooseNewGroup", chooseGroup );
         modelAndView.addObject("categoryList",categoryGroupList);
 
-        if(idCategory!=null) {
+//        if(idGroup!=null) {
+            String chooseGroup = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseNewGroup", chooseGroup);
+     //   }
+     //   if(idCategory!=null) {
             String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
             modelAndView.addObject("chooseNewCategory", chooseCategory );
-        }
+      //  }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());

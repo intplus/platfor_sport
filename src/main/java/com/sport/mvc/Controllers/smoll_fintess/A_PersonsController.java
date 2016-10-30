@@ -1,7 +1,9 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
+import com.sport.mvc.models.CategoryGroup;
 import com.sport.mvc.models.Group;
+import com.sport.mvc.services.CategoryGroupService;
 import com.sport.mvc.services.GroupService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
@@ -38,6 +40,10 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
+
+    @Autowired
+    @Qualifier("categoryGroupService")
+    private CategoryGroupService categoryService;
 
 
 
@@ -83,21 +89,38 @@ public class A_PersonsController {
         return "register_pages/registerTrainer";
     }
 
-
+private Long idGroup;
+private Long idCategory;
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
         //add atribute to group
-        List<Group> groupList = groupService.getAll();
+        //create list student and group for add data to the jsp page
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<Group> groupsList = groupService.getAll();
+        List<Student> studentsList=studentService.getAll();
+        //param for identifying locations is ->String chooseGroup
+
+
 
 
         ModelAndView modelAndView = new ModelAndView();
-        List<Student> students = studentService.getAll();
+        modelAndView.addObject("studentList", studentsList);
+        modelAndView.addObject("groupsList", groupsList);
+        modelAndView.addObject("categoryList",categoryGroupList);
 
-            modelAndView.addObject("students", students);
-            modelAndView.addObject("groupList", groupList);
-            modelAndView.setViewName("A_small_fitness_first_work_Page");
+       if(idGroup!=null) {
+        String chooseGroup = groupService.getGroup(idGroup).getName();
+        modelAndView.addObject("chooseNewGroup", chooseGroup);
+           }
+           if(idCategory!=null) {
+        String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
+        modelAndView.addObject("chooseNewCategory", chooseCategory );
+          }
+
+        modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
+
     }
 
 
