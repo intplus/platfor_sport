@@ -27,6 +27,7 @@
             <li><a href="#">Главная</a></li>
             <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
+
         </ul>
 
         <!-- LOGIN FORM -->
@@ -40,18 +41,48 @@
 </nav>
 
 <div class="container addgroup_form">
-    <h1>Add group</h1>
+    <h1>Add student to group</h1>
     <br>
-    <form:form action="saveGroup" modelAttribute="group" method="POST">
+    <form:form action="/group/saveStudentToGroup" modelAttribute="student" method="POST">
+
         <form:hidden path="id" />
+
         <table>
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
                 <td><form:input path="name" /></td>
             </tr>
+
+            <tr>
+                <td><label>SurName:</label></td>
+                <td><form:input path="surname" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Phone:</label></td>
+                <td><form:input path="phone" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Email:</label></td>
+                <td><form:input path="email" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Abonement:</label></td>
+                <%--<td><form:input path="amonement" /></td>--%>
+            </tr>
+
+            <tr>
+                <td><label>Ones:</label></td>
+            <%--//    <td><form:input path="raz" /></td>--%>
+            </tr>
+
+
+
             <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+            <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 
             </tbody>

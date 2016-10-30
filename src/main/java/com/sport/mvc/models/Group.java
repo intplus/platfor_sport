@@ -16,6 +16,10 @@ public class Group extends Model {
     @Column(name = "discription")
     private String discription;
 
+    public Group(Long id) {
+        super(id);
+    }
+
     @ManyToMany(mappedBy = "groups")
     private Set<User> treiners = new HashSet<>();
 
