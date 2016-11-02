@@ -91,7 +91,7 @@ public class A_GroupController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categoryList" ,categoryGroupList);
         modelAndView.addObject("group", group);
-        modelAndView.setViewName("A_small_fitness_add_group_to_instructors");
+        modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group_to_instructors");
         //  return "A_small_fitness_add_group";
         return  modelAndView;
     }
@@ -132,7 +132,7 @@ public class A_GroupController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categoryList" ,categoryGroupList);
         modelAndView.addObject("group", group);
-        modelAndView.setViewName("A_small_fitness_add_group");
+        modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group");
       //  return "A_small_fitness_add_group";
         return  modelAndView;
     }
@@ -167,7 +167,7 @@ public class A_GroupController {
         // create model attribute to bind form data
         CategoryGroup category = new CategoryGroup();
         theModel.addAttribute("category", category);
-        return "A_small_fitness_add_category";
+        return "a_small_fitness/add_form/A_small_fitness_add_category";
     }
 
     @PostMapping("/saveCategory")
@@ -183,7 +183,7 @@ public class A_GroupController {
         // create model attribute to bind form data
         CategoryGroup category = new CategoryGroup();
         theModel.addAttribute("category", category);
-        return "A_small_fitness_add_category_trainers";
+        return "a_small_fitness/add_form/A_small_fitness_add_category_trainers";
     }
 
 
@@ -205,7 +205,7 @@ public class A_GroupController {
        ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("groupList" ,groupList);
         modelAndView.addObject("group", group);
-        modelAndView.setViewName("A_small_fitness_update_groups");
+        modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_groups");
         //  return "A_small_fitness_add_group";
         return  modelAndView;
     }
@@ -242,7 +242,7 @@ public class A_GroupController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categoryList" ,categoryGroupList);
         modelAndView.addObject("category", category);
-        modelAndView.setViewName("A_small_fitness_update_category");
+        modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_category");
         //  return "A_small_fitness_add_group";
         return  modelAndView;
     }
@@ -280,7 +280,7 @@ public class A_GroupController {
         Student theStudent = new Student();
         //transfer student to "A_add_to_group_Student" form
         theModel.addAttribute("student", theStudent);
-        return "A_add_to_group_Student";
+        return "a_small_fitness/add_form/A_add_to_group_Student";
     }
 
 
