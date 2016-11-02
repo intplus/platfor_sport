@@ -31,6 +31,17 @@ public class Student extends Model {
     @Email
     private String email;
 
+    public String getGroupSort() {
+        return groupSort;
+    }
+
+    public void setGroupSort(String groupSort) {
+        this.groupSort = groupSort;
+    }
+
+    @Column(name = "group_sort")
+    private  String groupSort;
+
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Past

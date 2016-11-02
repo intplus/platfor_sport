@@ -40,14 +40,31 @@ public class A_GroupController {
 
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
-
+        ModelAndView modelAndView = new ModelAndView();
      //create list student and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
-        List<Student> studentsList=studentService.getAll();
+       // List<Student> studentsList=studentService.getAll();
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("studentList", studentsList);
+        List<Student> studentsList = new ArrayList<>();
+
+
+
+        for (Student s: studentService.getAll()){
+            if( s.getGroupSort()!=null && s.getGroupSort().equals(groupService.getGroup(idGroup).getName())){
+                System.out.println(s.getGroupSort());
+                studentsList.add(s);
+
+            }
+
+        }
+
+
+        if (!(studentsList.isEmpty())){
+            modelAndView.addObject("studentList", studentsList);
+        }
+
+//        modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
         //param for identifying locations is ->String chooseGroup
@@ -214,21 +231,28 @@ public class A_GroupController {
 
     @RequestMapping("saveStudentToGroup")
     public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
-        System.out.println("in method save st to group");
-        //add new student to the DB
-        studentService.addStudent(theStudent);
-        // get back needed student from DB, with right id
-        List<Student> studentList =studentService.getAll();
-        for(int i=0;i<studentList.size(); i++) {
-            //needed student it's the last student in DB
-            theStudent = studentList.get(i);
-        }
-        // take group where we naw, and where we will write new student
-        Group theGroup = groupService.getGroup(idGroup);
+//        System.out.println("in method save st to group");
+//        //add new student to the DB
+//        studentService.addStudent(theStudent);
+//        // get back needed student from DB, with right id
+//        List<Student> studentList =studentService.getAll();
+//        for(int i=0;i<studentList.size(); i++) {
+//            //needed student it's the last student in DB
+//            theStudent = studentList.get(i);
+//        }
+//        // take group where we naw, and where we will write new student
+//        Group theGroup = groupService.getGroup(idGroup);
+//
+//        //save this data
+////        theStudent.setGroups();
+//        groupService.saveIdsToStudent_Group(theStudent,theGroup);
+//        return "redirect:/group/addStudentToGroupForm";
 
-        //save this data
-//        theStudent.setGroups();
-        groupService.saveIdsToStudent_Group(theStudent,theGroup);
+
+//SECOND METHODp
+        String theGroup = groupService.getGroup(idGroup).getName();
+        theStudent.setGroupSort(theGroup);
+     studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
 
     }
