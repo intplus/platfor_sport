@@ -91,7 +91,7 @@ public class A_PersonsController {
     }
 
     private Long idGroup;
-private Long idCategory;
+
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
