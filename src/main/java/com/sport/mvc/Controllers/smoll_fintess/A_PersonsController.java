@@ -165,7 +165,6 @@ public class A_PersonsController {
             if (ids!=null)
 
                 for (int i =0; i < ids.size();i++) {
-                    System.out.println("in method A_controller del " + ids );
                     studentService.deleteListOfStudents(ids.get(i));
                 }
         }

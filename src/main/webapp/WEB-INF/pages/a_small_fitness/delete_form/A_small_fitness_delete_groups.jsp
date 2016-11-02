@@ -12,6 +12,28 @@
     <link rel="stylesheet" type="text/css" href="${normalize}" >
 </head>
 <body>
+<SCRIPT language="javascript">
+    $.noConflict();
+    $(function(){
+
+        // add multiple select / deselect functionality
+        $("#selectall").click(function () {
+            $('.case').attr('checked', this.checked);
+        });
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".case").click(function(){
+
+            if($(".case").length == $(".case:checked").length) {
+                $("#selectall").attr("checked", "checked");
+            } else {
+                $("#selectall").removeAttr("checked");
+            }
+
+        });
+    });
+</SCRIPT>
 <header class="header">
     <div class="container">
         <h1>World Sport Platform BF 1.0</h1>
@@ -20,6 +42,7 @@
         </h2>
     </div>
 </header>
+
 <!-- /HEADER -->
 <!-- NAVIGATION -->
 <nav class="page-navigation">
@@ -46,16 +69,16 @@
     <form:form action="deleteGroup" modelAttribute="group" method="POST">
     <form:hidden path="id" />
     <h3>Check groups for delete</h3>
-    <li>Group List <input type="checkbox">
+    <li>Group List <input type="checkbox" id="selectall">
         <ul>
             <c:forEach items="${groupList}" var="groups">
 
                 <c:choose>
                     <c:when test="${groups.name!=null}">
-                      <li>  <c:out value="${groups.name}"/> <input type="checkbox"></li>
+                      <li>  <c:out value="${groups.name}"/><input type="checkbox" class="case", name="case" value="${groups.id}"></li>
                     </c:when>
                     <c:when test="${groups.nameTraine!=null}">
-                     <li>   <c:out value="${groups.nameTraine}"/> <input type="checkbox"> </li>
+                     <li>   <c:out value="${groups.nameTraine}"/> <input type="checkbox" class="case", name="case" value="${groups.id}"> </li>
                     </c:when>
                 </c:choose>
 
@@ -64,6 +87,8 @@
 
 
     </li>
+
+        <input type="submit" value="Delete">
 </form:form>
 </div>
 <a href="/group//ShowGroupPage">Return tu group</a>

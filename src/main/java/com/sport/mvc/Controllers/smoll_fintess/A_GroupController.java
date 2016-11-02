@@ -57,6 +57,8 @@ public class A_GroupController {
                 studentsList.add(s);
             }
         }
+
+
 // show student in his group if group has more then 0 student
         if (!(studentsList.isEmpty())){
             modelAndView.addObject("studentList", studentsList);
@@ -208,20 +210,11 @@ public class A_GroupController {
     }
 
     @PostMapping("/deleteGroup")
-    public String deleteGroup(@ModelAttribute("group") Group group,@RequestParam("option") Long theId) {
-        //add group to DB
-        System.out.println(group.getName());
-        for(Group g: groupService.getAll()){
-            if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
-                g.setName(group.getName());
-                groupService.addGroup(g);
-                continue;
-            }
-            if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
-                g.setNameTraine(group.getName());
-                groupService.addGroup(g);
-                continue;
-            }
+    public String deleteGroup( @RequestParam(value = "case", required = false) List <Long> ids) {
+
+        for(int i =0; i<ids.size();i++){
+            groupService.deleteListOfGroup(ids.get(i));
+
         }
         return "redirect:/group/showFormForDelete";
     }
@@ -323,10 +316,11 @@ public class A_GroupController {
 //        Set<Group> groupSet = new HashSet<>();
 //        groupSet.add(groupService.getGroup(idGroup));
 //        theStudent.setGroups(groupSet);
-//        return "redirect:/group/addStudentToGroupForm";
+      //  return "redirect:/group/addStudentToGroupForm";
 
 
 //SECOND METHODp
+
         String theGroup;
         if (groupService.getGroup(idGroup).getNameTraine()==null) {
             theGroup = groupService.getGroup(idGroup).getName();
@@ -335,7 +329,7 @@ public class A_GroupController {
             theGroup =groupService.getGroup(idGroup).getNameTraine();
         }
         theStudent.setGroupSort(theGroup);
-     studentService.addStudent(theStudent);
+        studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
 
     }
