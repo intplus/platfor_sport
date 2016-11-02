@@ -42,44 +42,30 @@
 
 
 <div class="container addgroup_form">
-    <h1>Update category ar trainers of group</h1>
-    <br>
-    <form:form action="updateCategory" modelAttribute="category" method="POST">
-        <form:hidden path="id" />
-        <table>
-            <tbody>
-            <tr>
-                <td><label>Введите новое имя:</label></td>
-                <td><form:input path="name" /></td>
-            </tr>
 
-            <tr>
-            <select name="option">
-                <option value="">выберите категорию</option>
-                <c:forEach items="${categoryList}" var="category">
-                    <option value="${category.id}">
-                    <c:choose>
-                        <c:when test="${category.name!=null}">
-                            <c:out value="${category.name}"/>
-                        </c:when>
-                        <c:when test="${category.nameTraine!=null}">
-                            <c:out value="${category.nameTraine}"/>
-                        </c:when>
-                    </c:choose>
-                    </option>
-                </c:forEach>
-            </select>
-                </tr>
-            <tr>
-            <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
-            </tr>
+    <form:form action="deleteGroup" modelAttribute="group" method="POST">
+    <form:hidden path="id" />
+    <h3>Check groups for delete</h3>
+    <li>Group List <input type="checkbox">
+        <ul>
+            <c:forEach items="${groupList}" var="groups">
 
-            </tbody>
-        </table>
-    </form:form>
+                <c:choose>
+                    <c:when test="${groups.name!=null}">
+                      <li>  <c:out value="${groups.name}"/> <input type="checkbox"></li>
+                    </c:when>
+                    <c:when test="${groups.nameTraine!=null}">
+                     <li>   <c:out value="${groups.nameTraine}"/> <input type="checkbox"> </li>
+                    </c:when>
+                </c:choose>
+
+            </c:forEach>
+        </ul>
+
+
+    </li>
+</form:form>
 </div>
-
 <a href="/group//ShowGroupPage">Return tu group</a>
 <footer class="footer">
     <div class="container">
