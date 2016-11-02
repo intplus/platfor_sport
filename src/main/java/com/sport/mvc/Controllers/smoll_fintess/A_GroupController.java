@@ -194,6 +194,38 @@ public class A_GroupController {
         return "redirect:/group/showFormForAddCategoryTrainers";
     }
 
+    @RequestMapping( value = "/showFormForDelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForDeleteGroups() {
+        // create model attribute to bind form data
+        Group group = new Group();
+        List<Group> groupList = groupService.getAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("groupList" ,groupList);
+        modelAndView.addObject("group", group);
+        modelAndView.setViewName("a_small_fitness/delete_form/A_small_fitness_delete_groups");
+        //  return "A_small_fitness_add_group";
+        return  modelAndView;
+    }
+
+    @PostMapping("/deleteGroup")
+    public String deleteGroup(@ModelAttribute("group") Group group,@RequestParam("option") Long theId) {
+        //add group to DB
+        System.out.println(group.getName());
+        for(Group g: groupService.getAll()){
+            if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
+                g.setName(group.getName());
+                groupService.addGroup(g);
+                continue;
+            }
+            if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
+                g.setNameTraine(group.getName());
+                groupService.addGroup(g);
+                continue;
+            }
+        }
+        return "redirect:/group/showFormForDelete";
+    }
+
 
 
 
