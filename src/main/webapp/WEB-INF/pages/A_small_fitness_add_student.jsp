@@ -67,7 +67,7 @@
 <br>
         <tr>
             <td><label>Фамилия:</label></td>
-            <td><form:input path="surname" /><form:errors path="surname" cssClass="alert alert-danger"></form:errors></td>
+            <td><form:input path="surname" /></td>
         </tr>
         <br>
         <tr>
