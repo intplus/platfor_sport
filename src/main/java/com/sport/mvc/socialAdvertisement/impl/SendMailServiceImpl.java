@@ -30,7 +30,8 @@ public class SendMailServiceImpl implements SendMailService {
         throws AddressException, MessagingException {
      subject =subjectTo;
      body=bodyTo;
-    System.out.println(mail);
+    System.out.println(emailFrom);
+    System.out.println(passwordFrom);
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
