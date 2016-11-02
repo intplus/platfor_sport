@@ -5,5 +5,5 @@ import com.sport.mvc.models.Student;
 
 public interface GroupDao extends ItemDao<Group> {
 
-    void saveToDBGroupIdANdStudentId(Student theStudent, Group theGroup);
+
 }

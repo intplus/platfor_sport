@@ -30,8 +30,6 @@ public class GroupFileDao extends FileAbstractDao<Group> implements GroupDao {
     }
 
 
-    @Override
-    public void saveToDBGroupIdANdStudentId(Student theStufent, Group theGroup) {
 
-    }
+
 }

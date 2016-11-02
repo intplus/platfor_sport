@@ -317,6 +317,7 @@
         <th>Дата начала Абонемента</th>
         <th>Дата окончания Абонементадата</th>
         <th>Статус оплаты</th>
+        <th>Блок<input type="radio"></th>
         <th><input type="checkbox" id="selectall"></th>
         </thead>
         <tbody>
@@ -357,6 +358,7 @@
                     </select>
 
                 </td>
+                <td > <input type="radio"></td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
                 <td align="left"></td>
                 <td>

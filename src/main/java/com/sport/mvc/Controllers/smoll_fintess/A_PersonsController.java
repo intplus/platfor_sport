@@ -90,7 +90,7 @@ public class A_PersonsController {
         return "register_pages/registerTrainer";
     }
 
-private Long idGroup;
+    private Long idGroup;
 private Long idCategory;
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
@@ -110,18 +110,11 @@ private Long idCategory;
         String chooseGroup = groupService.getGroup(idGroup).getName();
         modelAndView.addObject("chooseNewGroup", chooseGroup);
                         }
-//           if(idCategory!=null) {
-//        String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
-//        modelAndView.addObject("chooseNewCategory", chooseCategory );
-//                               }
+
         if(idGroup!=null) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
             modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
         }
-//        if(idCategory!=null) {
-//            String chooseNewCategoryTrainer = categoryService.getCategoryGroup(idCategory).getNameTraine();
-//            modelAndView.addObject("chooseNewCategoryTrainer", chooseNewCategoryTrainer );
-//        }
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
