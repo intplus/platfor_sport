@@ -196,14 +196,78 @@ public class A_GroupController {
 
 
 
-    @RequestMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("groupId") long theId, Model theModel) {
-        // get customer from database
-        Group group = groupService.getGroup(theId);
-        // set customer as model attribute to pre-populate the form
-        theModel.addAttribute("group", group);
-        return "A_small_fitness_add_group";
+
+    @RequestMapping( value = "/showFormForUpdate", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForUpdateGroups() {
+        // create model attribute to bind form data
+        Group group = new Group();
+        List<Group> groupList = groupService.getAll();
+       ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("groupList" ,groupList);
+        modelAndView.addObject("group", group);
+        modelAndView.setViewName("A_small_fitness_update_groups");
+        //  return "A_small_fitness_add_group";
+        return  modelAndView;
     }
+
+
+
+
+    @PostMapping("/updateGroup")
+    public String updateGroup(@ModelAttribute("group") Group group,@RequestParam("option") Long theId) {
+        //add group to DB
+        System.out.println(group.getName());
+      for(Group g: groupService.getAll()){
+          if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
+              g.setName(group.getName());
+              groupService.addGroup(g);
+              continue;
+          }
+          if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
+              g.setNameTraine(group.getName());
+              groupService.addGroup(g);
+              continue;
+          }
+      }
+        return "redirect:/group/showFormForUpdate";
+    }
+
+
+    @RequestMapping( value = "/showFormForUpdateCategory", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForUpdateTrainersGroups() {
+        // create model attribute to bind form data
+        CategoryGroup category = new CategoryGroup();
+
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categoryList" ,categoryGroupList);
+        modelAndView.addObject("category", category);
+        modelAndView.setViewName("A_small_fitness_update_category");
+        //  return "A_small_fitness_add_group";
+        return  modelAndView;
+    }
+
+
+
+
+    @PostMapping("/updateCategory")
+    public String updateTrainersGroup(@ModelAttribute("category") CategoryGroup category,@RequestParam("option") Long theId) {
+        //add group to DB
+
+        for(CategoryGroup c: categoryService.getAll()){
+            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getNameTraine()!=null) {
+                c.setNameTraine(category.getName());
+                categoryService.addCategoryGroup(c);
+            }
+            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getName()!=null) {
+                c.setName(category.getName());
+                categoryService.addCategoryGroup(c);
+            }
+        }
+        return "redirect:/group/showFormForUpdateCategory";
+    }
+
+
 
     @RequestMapping("/deleteGroup")
     public  void deleteGrout(){
