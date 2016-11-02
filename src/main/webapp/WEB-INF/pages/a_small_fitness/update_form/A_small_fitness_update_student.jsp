@@ -102,7 +102,7 @@
     </form:form>
 </div>
 
-<a href="A_small_fitness_first_work_Page.jsp"></a>
+<a href="../../A_small_fitness_first_work_Page.jsp"></a>
 <footer class="footer">
     <div class="container">
 
