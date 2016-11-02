@@ -14,5 +14,5 @@ public interface GroupService {
 
     Group getGroup(long theId);
 
-    void saveIdsToStudent_Group(Student student, Group theGroup);
+
 }
