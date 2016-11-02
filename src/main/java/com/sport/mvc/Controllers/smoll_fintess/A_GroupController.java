@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+
 @Controller
 @RequestMapping(value = "/group/")
 public class A_GroupController {
@@ -36,17 +37,31 @@ public class A_GroupController {
 //variable for taking the group id, when some group will by in use.
     private  Long idGroup;
 
-    private Long idCategory;
+
 
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
-
+        ModelAndView modelAndView = new ModelAndView();
      //create list student and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
-        List<Student> studentsList=studentService.getAll();
+       // List<Student> studentsList=studentService.getAll();
 
-        ModelAndView modelAndView = new ModelAndView();
+        List<Student> studentsList = new ArrayList<>();
+
+
+//check in which a group of students
+        for (Student s: studentService.getAll()){
+            if( s.getGroupSort()!=null && s.getGroupSort().equals(groupService.getGroup(idGroup).getName()) ||
+                    s.getGroupSort()!=null &&s.getGroupSort().equals(groupService.getGroup(idGroup).getNameTraine())){
+                studentsList.add(s);
+            }
+        }
+// show student in his group if group has more then 0 student
+        if (!(studentsList.isEmpty())){
+            modelAndView.addObject("studentList", studentsList);
+        }
+
         modelAndView.addObject("studentList", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
@@ -55,18 +70,12 @@ public class A_GroupController {
             String chooseGroup = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseNewGroup", chooseGroup);
         }
-//        if(idCategory!=null) {
-//            String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
-//            modelAndView.addObject("chooseNewCategory", chooseCategory );
-//        }
+
         if(idGroup!=null) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
             modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
         }
-//        if(idCategory!=null) {
-//            String chooseCategory = categoryService.getCategoryGroup(idCategory).getNameTraine();
-//            modelAndView.addObject("chooseNewCategoryTrainer", chooseCategory );
-//        }
+
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
@@ -215,21 +224,23 @@ public class A_GroupController {
 
     @RequestMapping("saveStudentToGroup")
     public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
-        System.out.println("in method save st to group");
-        //add new student to the DB
-        studentService.addStudent(theStudent);
-        // get back needed student from DB, with right id
-        List<Student> studentList =studentService.getAll();
-        for(int i=0;i<studentList.size(); i++) {
-            //needed student it's the last student in DB
-            theStudent = studentList.get(i);
-        }
-        // take group where we naw, and where we will write new student
-        Group theGroup = groupService.getGroup(idGroup);
 
-        //save this data
-//        theStudent.setGroups();
-        groupService.saveIdsToStudent_Group(theStudent,theGroup);
+//        Set<Group> groupSet = new HashSet<>();
+//        groupSet.add(groupService.getGroup(idGroup));
+//        theStudent.setGroups(groupSet);
+//        return "redirect:/group/addStudentToGroupForm";
+
+
+//SECOND METHODp
+        String theGroup;
+        if (groupService.getGroup(idGroup).getNameTraine()==null) {
+            theGroup = groupService.getGroup(idGroup).getName();
+        }
+        else {
+            theGroup =groupService.getGroup(idGroup).getNameTraine();
+        }
+        theStudent.setGroupSort(theGroup);
+     studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
 
     }
@@ -242,13 +253,13 @@ public class A_GroupController {
         return "redirect:/group/ShowGroupPage";
     }
 
-    @RequestMapping("/takeIdCategory")
-    public String TakeIdCategory(@RequestParam("categoryId") long theId ) {
-        //take id group, where we now, and write it in to global variable->idGroup
-        idCategory = theId;
-        //return to showGroup page for fow all data on the  page
-        return "redirect:/group/ShowGroupPage";
-    }
+//    @RequestMapping("/takeIdCategory")
+//    public String TakeIdCategory(@RequestParam("categoryId") long theId ) {
+//        //take id group, where we now, and write it in to global variable->idGroup
+//        idCategory = theId;
+//        //return to showGroup page for fow all data on the  page
+//        return "redirect:/group/ShowGroupPage";
+//    }
 
     private List<String> ListOfDayInMonth() {
         Calendar calendar = Calendar.getInstance();

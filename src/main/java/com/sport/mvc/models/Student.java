@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -20,16 +21,27 @@ public class Student extends Model {
     private static final long serialVersionUID = -8950386400041310256L;
 
     @Column(name = "name")
-    @Size(min=3, max=30)
+    //@Size(min=3, max=30)
     private String name;
 
-    @Size(min=3, max=30)
+    //@Size(min=3, max=30)
     @Column(name = "surname")
     private String surname;
 
     @Column(name = "email")
     @Email
     private String email;
+
+    public String getGroupSort() {
+        return groupSort;
+    }
+
+    public void setGroupSort(String groupSort) {
+        this.groupSort = groupSort;
+    }
+
+    @Column(name = "group_sort")
+    private  String groupSort;
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
