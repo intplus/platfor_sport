@@ -140,14 +140,14 @@ public class A_PersonsController {
         // create model attribute to bind form data
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
-        return "A_small_fitness_add_student";
+        return "a_small_fitness/add_form/A_small_fitness_add_student";
     }
 
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
-            return "A_small_fitness_add_student";
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
@@ -189,7 +189,7 @@ public class A_PersonsController {
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
-            return "A_small_fitness_update_student";
+            return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
         studentService.updateStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
@@ -205,7 +205,7 @@ public class A_PersonsController {
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
-        return "A_small_fitness_update_student";
+        return "a_small_fitness/update_form/A_small_fitness_update_student";
     }
     //create empty array list in order to fill it in the showMailForm method
     List<String> studenEmail = new ArrayList<String>();

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 12.10.2016
-  Time: 15:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -16,7 +9,6 @@
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
-
     <link rel="stylesheet" href="/resources/css/bootstrap.css">
 </head>
 <body>
@@ -54,44 +46,51 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form action="saveStudentAfterUpdate" modelAttribute="student" method="POST">
-
+    <form:form action="saveStudent" modelAttribute="student" method="POST">
         <form:hidden path="id" />
 
     <table>
         <tbody>
         <tr>
-            <td><label>First name:</label></td>
-            <td><form:input path="name" /><form:errors path="name" class="alert alert-danger"></form:errors></td>
+            <td><label>Имя:</label></td>
+            <td><form:input path="name" />
+                <form:errors path="name" class="alert alert-danger"></form:errors>
+            </td>
         </tr>
-
+<br>
         <tr>
-            <td><label>Last name:</label></td>
-            <td><form:input path="surname" /><form:errors path="surname" class="alert alert-danger"></form:errors></td>
+            <td><label>Фамилия:</label></td>
+            <td><form:input path="surname" /></td>
         </tr>
-
+        <br>
         <tr>
             <td><label>Телефон в формате (0xxxxxxxxx):</label></td>
-            <td><form:input path="phone" /><form:errors path="phone" class="alert alert-danger"></form:errors></td>
+            <td><form:input path="phone" /><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
         </tr>
+        <br>
         <tr>
             <td><label>Email:</label></td>
             <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
         </tr>
-
+        <br>
         <tr>
             <td><label>Birthday in format (dd.mm.yyyy):</label></td>
-            <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
+            <td><form:input path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
         </tr>
-
+        <br>
+        <tr>
+            <td><label>Возвраст:</label></td>
+            <td><form:input path="age" /></td>
+        </tr>
         <tr>
             <td><label>Position:</label></td>
-                <%--<td><form:input path="p" /></td>--%>
+            <%--<td><form:input path="p" /></td>--%>
         </tr>
         <tr>
             <td><label>Comment:</label></td>
-                <%--<td><form:input path="" /></td>--%>
+            <%--<td><form:input path="" /></td>--%>
         </tr>
+
         <tr>
             <td><label></label></td>
             <td><input type="submit" value="Save" class="save" /></td>
@@ -102,7 +101,7 @@
     </form:form>
 </div>
 
-<a href="A_small_fitness_first_work_Page.jsp"></a>
+<a href="/registerPerson/showFirstWorkPage">Return to work page</a>
 <footer class="footer">
     <div class="container">
 
