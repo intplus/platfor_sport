@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.DateFormat;
@@ -89,8 +90,8 @@ public class A_PersonsController {
         return "register_pages/registerTrainer";
     }
 
-private Long idGroup;
-private Long idCategory;
+    private Long idGroup;
+
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
@@ -109,18 +110,11 @@ private Long idCategory;
         String chooseGroup = groupService.getGroup(idGroup).getName();
         modelAndView.addObject("chooseNewGroup", chooseGroup);
                         }
-//           if(idCategory!=null) {
-//        String chooseCategory = categoryService.getCategoryGroup(idCategory).getName();
-//        modelAndView.addObject("chooseNewCategory", chooseCategory );
-//                               }
+
         if(idGroup!=null) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
             modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
         }
-//        if(idCategory!=null) {
-//            String chooseNewCategoryTrainer = categoryService.getCategoryGroup(idCategory).getNameTraine();
-//            modelAndView.addObject("chooseNewCategoryTrainer", chooseNewCategoryTrainer );
-//        }
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -146,14 +140,14 @@ private Long idCategory;
         // create model attribute to bind form data
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
-        return "A_small_fitness_add_student";
+        return "a_small_fitness/add_form/A_small_fitness_add_student";
     }
 
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
-            return "A_small_fitness_add_student";
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
@@ -195,7 +189,7 @@ private Long idCategory;
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
-            return "A_small_fitness_update_student";
+            return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
         studentService.updateStudent(theStudent);
         return "redirect:/registerPerson/showFirstWorkPage";
@@ -211,26 +205,41 @@ private Long idCategory;
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
-        return "A_small_fitness_update_student";
+        return "a_small_fitness/update_form/A_small_fitness_update_student";
     }
     //create empty array list in order to fill it in the showMailForm method
     List<String> studenEmail = new ArrayList<String>();
 
     @PostMapping("/sendMail")
-    public String sendMail(HttpServletRequest request){
+    public String sendMail(HttpServletRequest request, Model model){
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        System.out.println(email);
         //get the topic and body of the message
         String body = request.getParameter("body");
         String topic = request.getParameter("topic");
+        String resultMessage = "";
         for (int i=0; i<studenEmail.size(); i++) {
             if (studenEmail.get(i)!=null || !studenEmail.get(i).equals(""));
-            sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
+
+            try {
+                sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
+                resultMessage = "The e-mail was sent successfully";
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                resultMessage = "There's an error: " + e.getMessage();
+            }
+            finally {
+                email = null;
+                password = null;
+                studenEmail.clear();
+                model.addAttribute("message", resultMessage);
+                return "A_small_fitness_result_of_send_message";
+
+            }
 
         }
-        studenEmail.clear();
-        return "redirect:/registerPerson/showFirstWorkPage";
-//
+        return email;
     }
 
     //complex message method
@@ -350,9 +359,14 @@ private Long idCategory;
         }
         else if (option.equals("phone")) {
             for (int i = 0; i<students.size(); i++) {
-                if (students.get(i).getPhone().equalsIgnoreCase(data)) {
+                String names =  students.get(i).getPhone().toLowerCase();
+                if (names.equals(data)){
+                    fullCollision.add(students.get(i));
+                }
+                if (names.contains(data)) {
                     particularCollision.add(students.get(i));
                 }
+
             }
         }
         //remove from particular collision data which was in fullcollision

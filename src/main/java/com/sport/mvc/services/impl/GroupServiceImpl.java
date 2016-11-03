@@ -49,9 +49,5 @@ public class GroupServiceImpl implements GroupService {
 
     }
 
-    @Override
-    @Transactional
-    public  void  saveIdsToStudent_Group(Student student, Group group){
-        groupDao.saveToDBGroupIdANdStudentId(student,group);
-    }
+
 }
