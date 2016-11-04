@@ -74,7 +74,7 @@ public class A_GroupController {
             modelAndView.addObject("chooseGroup", chooseGroup);
         }
 
-        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
+        else {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }

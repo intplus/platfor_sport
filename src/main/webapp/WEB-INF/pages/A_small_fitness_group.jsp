@@ -176,21 +176,15 @@
         <li><a href="#">Finance</a></li>
 
         <li>
-            <c:set value="${chooseGroup}" var="groupName"/>
             <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
 
-
             <c:choose>
-                <c:when test="${groupTrainer!=null}">
+                <c:when test="${groupTrainer}!=null">
                     <h4>You in ${groupTrainer} group </h4>
                 </c:when>
-                <c:when test="${groupName!=null}">
-                    <h4>You in ${groupName} group</h4>
-                </c:when>
                 <c:otherwise >
-                    <h4>You in your cabinet</h4>
+                    <h4>You in ${groupTrainer} group</h4>
                 </c:otherwise>
-
             </c:choose>
         </li>
 
@@ -202,21 +196,15 @@
 
 
 <div>
-    <c:set value="${chooseGroup}" var="groupName"/>
-    <c:set value="${chooseGroup}" var="groupTrainer"/>
-
+    <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
 
     <c:choose>
-        <c:when test="${groupTrainer!=null}">
+        <c:when test="${groupTrainer}!=null">
             <h4>You in ${groupTrainer} group </h4>
         </c:when>
-        <c:when test="${groupName!=null}">
-            <h4>You in ${groupName} group</h4>
-        </c:when>
         <c:otherwise >
-            <h4>You in your cabinet</h4>
+            <h4>You in ${groupTrainer} group</h4>
         </c:otherwise>
-
     </c:choose>
 
 </div>
