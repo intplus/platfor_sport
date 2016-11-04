@@ -94,6 +94,16 @@ public class Student extends Model {
 
     private String post;
 
+//    @Column(name = "isMain")
+//    private  boolean isMain = false;
+//
+//    public boolean isMain() {
+//        return isMain;
+//    }
+//
+//    public void setMain(boolean main) {
+//        isMain = main;
+//    }
 
     @Pattern(regexp = "[0-9]{10,10}+", message="{Pattern.student.phone}")
     @Column(name = "phone")

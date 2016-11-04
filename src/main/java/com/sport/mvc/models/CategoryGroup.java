@@ -20,6 +20,17 @@ public class CategoryGroup extends Model {
     @Column(name = "nameTraine")
     private String nameTraine;
 
+    @Column(name="isMain")
+    private boolean isMain;
+
+    public boolean isMain() {
+        return isMain;
+    }
+
+    public void setMain(boolean main) {
+        isMain = main;
+    }
+
     public CategoryGroup() {
         super();
     }

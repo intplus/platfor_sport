@@ -76,7 +76,7 @@
                     </li>
                     <%--//create and show new category--%>
                     <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.name!=null}">
+                    <c:if test="${category.main==true}">
                     <li><a href="#"><c:out value="${category.name}"/></a>
                         <ul>
                                 <%--//show groups if they location in one of the category--%>

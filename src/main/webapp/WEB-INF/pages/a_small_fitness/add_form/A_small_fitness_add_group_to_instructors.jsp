@@ -50,15 +50,15 @@
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="nameTraine" /></td>
+                <td><form:input path="name" /></td>
             </tr>
             <tr>
             <select name="choose">
                 <option value="">выберите инструктора</option>
                 <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.nameTraine!=null}">
-                    <option value="${category.nameTraine}">
-                        <c:out value="${category.nameTraine}"/>
+                    <c:if test="${category.main!=true}">
+                    <option value="${category.name}">
+                        <c:out value="${category.name}"/>
                     </option>
                     </c:if>
                 </c:forEach>

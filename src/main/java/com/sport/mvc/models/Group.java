@@ -23,6 +23,17 @@ public class Group extends Model {
         super(id);
     }
 
+    public boolean isMain() {
+        return isMain;
+    }
+
+    public void setMain(boolean main) {
+        isMain = main;
+    }
+
+    @Column(name="isMain")
+    private  boolean isMain;
+
     @ManyToMany(mappedBy = "groups")
     private Set<User> treiners = new HashSet<>();
 

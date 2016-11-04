@@ -69,14 +69,14 @@ public class A_GroupController {
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
         //param for identifying locations is ->String chooseGroup
-        if(idGroup!=null) {
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseNewGroup", chooseGroup);
+            modelAndView.addObject("chooseGroup", chooseGroup);
         }
 
-        if(idGroup!=null) {
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
-            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
+            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
@@ -105,21 +105,17 @@ public class A_GroupController {
         //add group to DB
         if(categoryName.equals("")){
             groupService.addGroup(group);
-        }else {
-            CategoryGroup categoryGroup = new CategoryGroup();
-            categoryGroup.setNameTraine(categoryName);
-            for (CategoryGroup category: categoryService.getAll()) {
-                if(category.getNameTraine()==null){
-                    continue;
-                }
-
-                if (category.getNameTraine().equals(categoryGroup.getNameTraine())) {
+        }
+        else {
+            for (CategoryGroup category : categoryService.getAll()) {
+                if(category.getName().equals(categoryName)){
                     group.setCategoryGroup(category);
                     groupService.addGroup(group);
-                    break;
                 }
+
             }
         }
+
         return "redirect:/group/AddGroupToInstructorsForm";
     }
 
@@ -144,22 +140,17 @@ public class A_GroupController {
     public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
 
-
+      group.setMain(true);
        if(categoryName.equals("")){
            groupService.addGroup(group);
        }
        else {
-           CategoryGroup categoryGroup = new CategoryGroup();
-           categoryGroup.setName(categoryName);
            for (CategoryGroup category : categoryService.getAll()) {
-               if(category.getName()==null){
-                   continue;
-               }
-               if (category.getName().equals(categoryGroup.getName())) {
+               if(category.getName().equals(categoryName)){
                    group.setCategoryGroup(category);
                    groupService.addGroup(group);
-                   break;
                }
+
            }
        }
         return "redirect:/group/showFormForAddGroup";
@@ -176,6 +167,7 @@ public class A_GroupController {
     @PostMapping("/saveCategory")
     public String saveCategory(@ModelAttribute("category") CategoryGroup category) {
         //add group to DB
+        category.setMain(true);
         categoryService.addCategoryGroup(category);
         return "redirect:/group/showFormForAddCategory";
     }

@@ -57,7 +57,7 @@
             <select name="option">
                 <option value="">выберите категорию</option>
                 <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.name!=null}">
+                    <c:if test="${category.main==true}">
                     <option value="${category.name}">
                         <c:out value="${category.name}"/>
                     </option>
