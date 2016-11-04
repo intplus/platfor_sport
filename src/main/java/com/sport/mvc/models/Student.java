@@ -59,9 +59,6 @@ public class Student extends Model {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Phone> phones = new HashSet<>();
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_group", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
@@ -75,9 +72,6 @@ public class Student extends Model {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
-
-    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "status_id")
@@ -131,20 +125,12 @@ public class Student extends Model {
         this.birthday = birthday;
     }
 
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
     public Set<Group> getGroups() {
         return groups;
     }
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 
     public Set<CustomerCard> getCards() {
@@ -180,16 +166,46 @@ public class Student extends Model {
         this.surname = surName;
     }
 
-    public Set<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<Phone> phones) {
-        this.phones = phones;
-    }
-
-
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        if (surname != null ? !surname.equals(student.surname) : student.surname != null) return false;
+        if (email != null ? !email.equals(student.email) : student.email != null) return false;
+        if (groupSort != null ? !groupSort.equals(student.groupSort) : student.groupSort != null) return false;
+        if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
+        if (strBirthday != null ? !strBirthday.equals(student.strBirthday) : student.strBirthday != null) return false;
+        if (age != null ? !age.equals(student.age) : student.age != null) return false;
+        if (phone != null ? !phone.equals(student.phone) : student.phone != null) return false;
+        if (groups != null ? !groups.equals(student.groups) : student.groups != null) return false;
+        if (sports != null ? !sports.equals(student.sports) : student.sports != null) return false;
+        if (cards != null ? !cards.equals(student.cards) : student.cards != null) return false;
+        return status != null ? status.equals(student.status) : student.status == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (groupSort != null ? groupSort.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (strBirthday != null ? strBirthday.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (groups != null ? groups.hashCode() : 0);
+        result = 31 * result + (sports != null ? sports.hashCode() : 0);
+        result = 31 * result + (cards != null ? cards.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

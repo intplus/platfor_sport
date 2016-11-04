@@ -51,4 +51,25 @@ public class Status extends Model {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Status status = (Status) o;
+
+        if (title != null ? !title.equals(status.title) : status.title != null) return false;
+        if (description != null ? !description.equals(status.description) : status.description != null) return false;
+        return students != null ? students.equals(status.students) : status.students == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (students != null ? students.hashCode() : 0);
+        return result;
+    }
 }
