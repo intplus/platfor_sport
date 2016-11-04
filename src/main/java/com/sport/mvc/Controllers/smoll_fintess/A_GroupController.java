@@ -53,11 +53,14 @@ public class A_GroupController {
 
 //check in which a group of students
         for (Student s: studentService.getAll()){
-            if( s.getGroupSort()!=null && s.getGroupSort().equals(groupService.getGroup(idGroup).getName()) ||
-                    s.getGroupSort()!=null &&s.getGroupSort().equals(groupService.getGroup(idGroup).getNameTraine())){
+            if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup){
+                System.out.println(s.getId()+"it is my student");
                 studentsList.add(s);
             }
+
         }
+
+
 
 
 
