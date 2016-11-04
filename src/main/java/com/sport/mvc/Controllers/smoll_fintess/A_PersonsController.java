@@ -101,7 +101,7 @@ public class A_PersonsController {
 
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseGroup", chooseNewGroupTrainer);
+            modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
 
 

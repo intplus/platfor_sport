@@ -203,7 +203,7 @@
 
 <div>
     <c:set value="${chooseGroup}" var="groupName"/>
-    <c:set value="${chooseGroup}" var="groupTrainer"/>
+    <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
 
 
     <c:choose>
