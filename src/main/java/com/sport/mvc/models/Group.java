@@ -87,28 +87,5 @@ public class Group extends Model {
         isMain = main;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Group group = (Group) o;
-
-        if (name != null ? !name.equals(group.name) : group.name != null) return false;
-        if (discription != null ? !discription.equals(group.discription) : group.discription != null) return false;
-        if (user != null ? !user.equals(group.user) : group.user != null) return false;
-        if (students != null ? !students.equals(group.students) : group.students != null) return false;
-        return categoryGroup != null ? categoryGroup.equals(group.categoryGroup) : group.categoryGroup == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (discription != null ? discription.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (students != null ? students.hashCode() : 0);
-        result = 31 * result + (categoryGroup != null ? categoryGroup.hashCode() : 0);
-        return result;
-    }
 }
