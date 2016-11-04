@@ -60,6 +60,8 @@ public class A_GroupController {
         }
 
 
+
+
 // show student in his group if group has more then 0 student
         if (!(studentsList.isEmpty())){
             modelAndView.addObject("studentList", studentsList);
@@ -308,22 +310,22 @@ public class A_GroupController {
     @RequestMapping("saveStudentToGroup")
     public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
 
-//        Set<Group> groupSet = new HashSet<>();
-//        groupSet.add(groupService.getGroup(idGroup));
-//        theStudent.setGroups(groupSet);
+        Set<Group> groupSet = new HashSet<>();
+        groupSet.add(groupService.getGroup(idGroup));
+        theStudent.setGroups(groupSet);
       //  return "redirect:/group/addStudentToGroupForm";
 
 
 //SECOND METHODp
 
-        String theGroup;
-        if (groupService.getGroup(idGroup).getNameTraine()==null) {
-            theGroup = groupService.getGroup(idGroup).getName();
-        }
-        else {
-            theGroup =groupService.getGroup(idGroup).getNameTraine();
-        }
-        theStudent.setGroupSort(theGroup);
+//        String theGroup;
+//        if (groupService.getGroup(idGroup).isMain()==true) {
+//            theGroup = groupService.getGroup(idGroup).getName();
+//        }
+//        else {
+//
+//        }
+       // theStudent.setGroupSort(theGroup);
         studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
 
