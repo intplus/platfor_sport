@@ -22,7 +22,7 @@ public abstract class HibernateAbstractDao<T extends Model> {
     @SuppressWarnings("unchecked")
     public HibernateAbstractDao() {
         final ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.clazz = (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[0];
+        this.clazz = (Class<T>) superClass.getActualTypeArguments()[0];
 
     }
 

@@ -35,7 +35,7 @@ public class A_GroupController {
     private CategoryGroupService categoryService;
 
 
-//variable for taking the group id, when some group will by in use.
+    //variable for taking the group id, when some group will by in use.
     private  Long idGroup;
 
 
@@ -43,10 +43,10 @@ public class A_GroupController {
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
         ModelAndView modelAndView = new ModelAndView();
-     //create list student and group for add data to the jsp page
+        //create list student and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
-       // List<Student> studentsList=studentService.getAll();
+        // List<Student> studentsList=studentService.getAll();
 
         List<Student> studentsList = new ArrayList<>();
 
@@ -60,11 +60,6 @@ public class A_GroupController {
 
         }
 
-
-
-
-
-
 // show student in his group if group has more then 0 student
         if (!(studentsList.isEmpty())){
             modelAndView.addObject("studentList", studentsList);
@@ -76,13 +71,11 @@ public class A_GroupController {
         //param for identifying locations is ->String chooseGroup
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
-            System.out.println(chooseGroup+" true");
             modelAndView.addObject("chooseGroup", chooseGroup);
         }
 
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            System.out.println(chooseNewGroupTrainer+" false");
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
 
@@ -139,7 +132,7 @@ public class A_GroupController {
         modelAndView.addObject("categoryList" ,categoryGroupList);
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group");
-      //  return "A_small_fitness_add_group";
+        //  return "A_small_fitness_add_group";
         return  modelAndView;
     }
 
@@ -147,19 +140,19 @@ public class A_GroupController {
     public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
 
-      group.setMain(true);
-       if(categoryName.equals("")){
-           groupService.addGroup(group);
-       }
-       else {
-           for (CategoryGroup category : categoryService.getAll()) {
-               if(category.getName().equals(categoryName)){
-                   group.setCategoryGroup(category);
-                   groupService.addGroup(group);
-               }
+        group.setMain(true);
+        if(categoryName.equals("")){
+            groupService.addGroup(group);
+        }
+        else {
+            for (CategoryGroup category : categoryService.getAll()) {
+                if(category.getName().equals(categoryName)){
+                    group.setCategoryGroup(category);
+                    groupService.addGroup(group);
+                }
 
-           }
-       }
+            }
+        }
         return "redirect:/group/showFormForAddGroup";
     }
 
@@ -227,7 +220,7 @@ public class A_GroupController {
         // create model attribute to bind form data
         Group group = new Group();
         List<Group> groupList = groupService.getAll();
-       ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("groupList" ,groupList);
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_groups");
@@ -242,18 +235,18 @@ public class A_GroupController {
     public String updateGroup(@ModelAttribute("group") Group group,@RequestParam("option") Long theId) {
         //add group to DB
         System.out.println(group.getName());
-      for(Group g: groupService.getAll()){
-          if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
-              g.setName(group.getName());
-              groupService.addGroup(g);
-              continue;
-          }
-          if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
-              g.setNameTraine(group.getName());
-              groupService.addGroup(g);
-              continue;
-          }
-      }
+        for(Group g: groupService.getAll()){
+            if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
+                g.setName(group.getName());
+                groupService.addGroup(g);
+                continue;
+            }
+//            if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
+//                g.setNameTraine(group.getName());
+//                groupService.addGroup(g);
+//                continue;
+//            }
+        }
         return "redirect:/group/showFormForUpdate";
     }
 
@@ -280,10 +273,10 @@ public class A_GroupController {
         //add group to DB
 
         for(CategoryGroup c: categoryService.getAll()){
-            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getNameTraine()!=null) {
-                c.setNameTraine(category.getName());
-                categoryService.addCategoryGroup(c);
-            }
+//            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getNameTraine()!=null) {
+//                c.setNameTraine(category.getName());
+//                categoryService.addCategoryGroup(c);
+//            }
             if(c.getId()==theId && categoryService.getCategoryGroup(theId).getName()!=null) {
                 c.setName(category.getName());
                 categoryService.addCategoryGroup(c);
@@ -296,7 +289,7 @@ public class A_GroupController {
 
     @RequestMapping("/deleteGroup")
     public  void deleteGrout(){
-      //  groupService.deleteListOfGroup();
+        //  groupService.deleteListOfGroup();
     }
 
     @RequestMapping("/addStudentToGroupForm")
@@ -316,19 +309,6 @@ public class A_GroupController {
         Set<Group> groupSet = new HashSet<>();
         groupSet.add(groupService.getGroup(idGroup));
         theStudent.setGroups(groupSet);
-      //  return "redirect:/group/addStudentToGroupForm";
-
-
-//SECOND METHODp
-
-//        String theGroup;
-//        if (groupService.getGroup(idGroup).isMain()==true) {
-//            theGroup = groupService.getGroup(idGroup).getName();
-//        }
-//        else {
-//
-//        }
-       // theStudent.setGroupSort(theGroup);
         studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
 
@@ -378,11 +358,10 @@ public class A_GroupController {
 
     @PostMapping("savePriceSubscription")
     private String savePriceSubscriptionForm(@ModelAttribute("subscription") CustomerCard card){
-       Group inGroup= groupService.getGroup(idGroup);
+        Group inGroup= groupService.getGroup(idGroup);
 
 
         return "A_add_subscription_form";
     }
 
 }
-

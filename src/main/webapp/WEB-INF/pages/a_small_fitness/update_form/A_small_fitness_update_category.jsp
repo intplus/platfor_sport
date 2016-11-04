@@ -55,8 +55,13 @@
 
             <tr>
             <select name="option">
-                <option value="">выберите категорию</option>
+                <option value="">выберите группу</option>
                 <c:forEach items="${categoryList}" var="category">
+                    <%--<c:if test="${category.nameTraine!=null}">--%>
+                    <%--<option value="${groups.id}">--%>
+                        <%--<c:out value="${groups.nameTraine}"/>--%>
+                    <%--</option>--%>
+                    <%--</c:if>--%>
                     <option value="${category.id}">
                     <c:choose>
                         <c:when test="${category.name!=null}">

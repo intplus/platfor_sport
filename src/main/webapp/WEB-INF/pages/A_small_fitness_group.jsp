@@ -27,22 +27,18 @@
 
 <SCRIPT language="javascript">
     $(function(){
-
         // add multiple select / deselect functionality
         $("#selectall").click(function () {
             $('.case').attr('checked', this.checked);
         });
-
         // if all checkbox are selected, check the selectall checkbox
         // and viceversa
         $(".case").click(function(){
-
             if($(".case").length == $(".case:checked").length) {
                 $("#selectall").attr("checked", "checked");
             } else {
                 $("#selectall").removeAttr("checked");
             }
-
         });
     });
 </SCRIPT>
@@ -207,7 +203,7 @@
 
 <div>
     <c:set value="${chooseGroup}" var="groupName"/>
-    <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
+    <c:set value="${chooseGroup}" var="groupTrainer"/>
 
 
     <c:choose>
@@ -282,7 +278,7 @@
     <br/><br/>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-       <thead>
+        <thead>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
@@ -320,7 +316,7 @@
                     <select name="selectedFinisfDate">
                         <option value="0">выберите дату</option>
                         <c:forEach items="${listOfMonth}" var="listMonth">
-                        <option value="listMonth"><c:out value="${listMonth}"/></option>
+                            <option value="listMonth"><c:out value="${listMonth}"/></option>
                         </c:forEach>
                     </select>
 
@@ -348,7 +344,7 @@
                 </td>
             </tr>
         </c:forEach>
-</tbody>
+        </tbody>
     </table>
     </form>
 

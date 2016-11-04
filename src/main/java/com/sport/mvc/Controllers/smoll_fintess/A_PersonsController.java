@@ -8,7 +8,6 @@ import com.sport.mvc.services.GroupService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
-import com.sport.mvc.services.PhoneService;
 import com.sport.mvc.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -46,19 +44,9 @@ public class A_PersonsController {
     @Qualifier("categoryGroupService")
     private CategoryGroupService categoryService;
 
-
-
-
-    @Autowired
-    @Qualifier("phoneService")
-    private PhoneService phoneService;
-
     @Autowired
     @Qualifier("mail")
     private SendMailService sendMailService;
-
-
-
 
     @RequestMapping(value = "/general_registration_form")
     public String showForm(Model model){
@@ -106,15 +94,16 @@ public class A_PersonsController {
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
 //param for identifying locations is ->String chooseGroup
-       if(idGroup!=null) {
-        String chooseGroup = groupService.getGroup(idGroup).getName();
-        modelAndView.addObject("chooseNewGroup", chooseGroup);
-                        }
-
-        if(idGroup!=null) {
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
-            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
+            String chooseGroup = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseGroup", chooseGroup);
         }
+
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
+            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseGroup", chooseNewGroupTrainer);
+        }
+
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -146,9 +135,14 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        theStudent.setRecordDay(dateFormat.format(today));
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
+        groupService.getAll();
+
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
     }
@@ -165,6 +159,7 @@ public class A_PersonsController {
             if (ids!=null)
 
                 for (int i =0; i < ids.size();i++) {
+                    System.out.println("in method A_controller del " + ids );
                     studentService.deleteListOfStudents(ids.get(i));
                 }
         }
@@ -190,7 +185,18 @@ public class A_PersonsController {
         if(result.hasErrors()) {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
+
+        /*
+        Set<Group> groupSet = new HashSet<>();
+        List<Group> groups = groupService.getAll();
+        for(int i = 0; i < groups.size(); ++i) {
+            groupSet.add(groups.get(i));
+        }
+        theStudent.setGroups(groupSet);
+        */
+
         studentService.updateStudent(theStudent);
+
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
@@ -241,46 +247,10 @@ public class A_PersonsController {
         return email;
     }
 
-
-    @PostMapping("/saveComplexMail")
-    public String saveComplexMail(HttpServletRequest request, Model model){
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        System.out.println(email);
-        //get the topic and body of the message
-        String body = request.getParameter("body");
-        String topic = request.getParameter("topic");
-      //  List<Integer> send date = request.getParameter("");
-        for (int i=0; i<studentService.getAll().size(); i++) {
-            if (studenEmail.get(i)!=null || !studenEmail.get(i).equals(""));
-            try {
-                sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-//            try {
-//                sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
-//                resultMessage = "The e-mail was sent successfully";
-//            } catch (MessagingException e) {
-//                e.printStackTrace();
-//                resultMessage = "There's an error: " + e.getMessage();
-//            }
-//            finally {
-//                email = null;
-//                password = null;
-//                studenEmail.clear();
-//                model.addAttribute("message", resultMessage);
-//                return "A_small_fitness_result_of_send_message";
-//
-//            }
-
-        }
-        return email;
-    }
     //complex message method
     @RequestMapping("/showComplexMailForm")
     public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
-        return "send_complex_mail_form";
+        return "A_small_fitness_send_complex_mail_form";
     }
 
 
