@@ -175,11 +175,6 @@
     </li>
     <%--//close groups menu, and show first level menu items--%>
 
-
-
-
-
-
     <li><a href="#">Statistic</a></li>
 
     <li><a href="#">Finance</a></li>
@@ -227,6 +222,8 @@
 
 <!-- MAIN SECTION -->
 <main>
+
+    <a href="/group/addPriceSubscription">abonement price</a>
 
     <div class="work_form">
 

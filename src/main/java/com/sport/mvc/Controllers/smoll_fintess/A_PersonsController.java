@@ -241,10 +241,46 @@ public class A_PersonsController {
         return email;
     }
 
+
+    @PostMapping("/saveComplexMail")
+    public String saveComplexMail(HttpServletRequest request, Model model){
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        System.out.println(email);
+        //get the topic and body of the message
+        String body = request.getParameter("body");
+        String topic = request.getParameter("topic");
+      //  List<Integer> send date = request.getParameter("");
+        for (int i=0; i<studentService.getAll().size(); i++) {
+            if (studenEmail.get(i)!=null || !studenEmail.get(i).equals(""));
+            try {
+                sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+//            try {
+//                sendMailService.sendMailTo(studenEmail.get(i), topic, body, email, password);
+//                resultMessage = "The e-mail was sent successfully";
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//                resultMessage = "There's an error: " + e.getMessage();
+//            }
+//            finally {
+//                email = null;
+//                password = null;
+//                studenEmail.clear();
+//                model.addAttribute("message", resultMessage);
+//                return "A_small_fitness_result_of_send_message";
+//
+//            }
+
+        }
+        return email;
+    }
     //complex message method
     @RequestMapping("/showComplexMailForm")
     public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
-        return "A_small_fitness_send_complex_mail_form";
+        return "send_complex_mail_form";
     }
 
 

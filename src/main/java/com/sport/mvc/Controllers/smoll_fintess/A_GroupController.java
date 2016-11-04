@@ -2,6 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.CategoryGroup;
+import com.sport.mvc.models.CustomerCard;
 import com.sport.mvc.models.Group;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.CategoryGroupService;
@@ -367,6 +368,21 @@ public class A_GroupController {
 
         }
         return listDayOfMonth;
+    }
+
+    @RequestMapping("addPriceSubscription")
+    private String addSubscriptionForm(Model theModel){
+        CustomerCard card = new CustomerCard();
+        theModel.addAttribute("subscription", card);
+        return "A_add_subscription_form";
+    }
+
+    @PostMapping("savePriceSubscription")
+    private String savePriceSubscriptionForm(@ModelAttribute("subscription") CustomerCard card){
+       Group inGroup= groupService.getGroup(idGroup);
+
+
+        return "A_add_subscription_form";
     }
 
 }

@@ -83,12 +83,12 @@
             <td><form:input path="age" /></td>
         </tr>
         <tr>
-            <td><label>Position:</label></td>
-            <%--<td><form:input path="p" /></td>--%>
+            <td><label>Post:</label></td>
+            <td><form:input path="post" /></td>
         </tr>
         <tr>
             <td><label>Comment:</label></td>
-            <%--<td><form:input path="" /></td>--%>
+            <td><form:input path="comment"  /></td>
         </tr>
 
         <tr>

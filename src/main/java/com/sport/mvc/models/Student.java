@@ -10,6 +10,7 @@ import javax.validation.constraints.Null;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +55,45 @@ public class Student extends Model {
 
     @Column(name = "age")
     private String age;
+
+    @Column(name ="comment")
+    private String Comment;
+
+
+    public String getRecordDate() {
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        recordDate =dateFormat.format(today);
+        return recordDate;
+    }
+
+    public void setRecordDate(String recordDate) {
+        this.recordDate = recordDate;
+    }
+
+    @Column(name = "recordDate")
+    private String recordDate;
+
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String comment) {
+        Comment = comment;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    @Column(name = "post")
+
+    private String post;
+
 
     @Pattern(regexp = "[0-9]{10,10}+", message="{Pattern.student.phone}")
     @Column(name = "phone")
