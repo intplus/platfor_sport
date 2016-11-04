@@ -94,15 +94,16 @@ public class A_PersonsController {
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
 //param for identifying locations is ->String chooseGroup
-       if(idGroup!=null) {
-        String chooseGroup = groupService.getGroup(idGroup).getName();
-        modelAndView.addObject("chooseNewGroup", chooseGroup);
-                        }
-
-        if(idGroup!=null) {
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
-            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
+            String chooseGroup = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseGroup", chooseGroup);
         }
+
+        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
+            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
+            modelAndView.addObject("chooseGroup", chooseNewGroupTrainer);
+        }
+
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -134,6 +135,9 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        theStudent.setRecordDay(dateFormat.format(today));
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }

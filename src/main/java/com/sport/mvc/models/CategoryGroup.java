@@ -17,9 +17,6 @@ public class CategoryGroup extends Model {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "nameTraine")
-    private String nameTraine;
-
     @Column(name = "is_main")
     private boolean isMain;
 
@@ -41,14 +38,6 @@ public class CategoryGroup extends Model {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNameTraine() {
-        return nameTraine;
-    }
-
-    public void setNameTraine(String nameTraine) {
-        this.nameTraine = nameTraine;
     }
 
     public boolean isMain() {

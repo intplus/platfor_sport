@@ -28,20 +28,23 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "record_day")
+    private String recordDay;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "post")
+    private String post;
+
+
+
     @Column(name = "email")
     @Email
     private String email;
 
-    public String getGroupSort() {
-        return groupSort;
-    }
 
-    public void setGroupSort(String groupSort) {
-        this.groupSort = groupSort;
-    }
 
-    @Column(name = "group_sort")
-    private  String groupSort;
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -170,6 +173,31 @@ public class Student extends Model {
         return phone;
     }
 
+
+    public String getRecordDay() {
+        return recordDay;
+    }
+
+    public void setRecordDay(String recordDay) {
+        this.recordDay = recordDay;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -180,7 +208,6 @@ public class Student extends Model {
         if (name != null ? !name.equals(student.name) : student.name != null) return false;
         if (surname != null ? !surname.equals(student.surname) : student.surname != null) return false;
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
-        if (groupSort != null ? !groupSort.equals(student.groupSort) : student.groupSort != null) return false;
         if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
         if (strBirthday != null ? !strBirthday.equals(student.strBirthday) : student.strBirthday != null) return false;
         if (age != null ? !age.equals(student.age) : student.age != null) return false;
@@ -197,7 +224,6 @@ public class Student extends Model {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (groupSort != null ? groupSort.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (strBirthday != null ? strBirthday.hashCode() : 0);
         result = 31 * result + (age != null ? age.hashCode() : 0);
