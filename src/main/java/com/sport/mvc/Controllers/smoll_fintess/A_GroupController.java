@@ -71,11 +71,13 @@ public class A_GroupController {
         //param for identifying locations is ->String chooseGroup
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
+            System.out.println(chooseGroup+" true");
             modelAndView.addObject("chooseGroup", chooseGroup);
         }
 
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
+            System.out.println(chooseNewGroupTrainer+" false");
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
 
