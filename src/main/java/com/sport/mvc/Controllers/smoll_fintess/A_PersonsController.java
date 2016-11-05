@@ -9,6 +9,7 @@ import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.StudentService;
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -250,7 +251,76 @@ public class A_PersonsController {
     //complex message method
     @RequestMapping("/showComplexMailForm")
     public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
-        return "A_small_fitness_send_complex_mail_form";
+
+//        Date d = new Date();
+//        SimpleDateFormat formatDay = new SimpleDateFormat("dd");
+//        String dayToday = formatDay.format(d);
+//       // System.out.println(format1.format(d)); //25.02.2013 09:03
+
+        GregorianCalendar gregorianCalendar = new GregorianCalendar(2016, 1, 1, 0, 0, 0);
+        List<Integer> list = new ArrayList<>();
+        for(int i=1;i<30;i++){
+            list.add(i);
+        }
+        model.addAttribute("date" ,list);
+        return "send_complex_mail_form";
+    }
+
+    @RequestMapping("/sendComplexMail")
+    public String sendComplexMail(HttpServletRequest request,
+                                  @RequestParam(value = "case", required = false) List <Integer> idN, Model model){
+
+
+        Date d = new Date();
+
+        SimpleDateFormat formatDay = new SimpleDateFormat("dd");
+        SimpleDateFormat formatDay2 = new SimpleDateFormat("hh:mm:");
+
+        int dayToday = Integer.parseInt(formatDay.format(d));
+        String timeToday =formatDay2.format(d);
+
+        System.out.println("time in hours = "+timeToday);
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        System.out.println(email);
+
+        //get the topic and body of the message
+        String body = request.getParameter("body");
+        String topic = request.getParameter("topic");
+
+        String resultMessage = "";
+
+        for(int k= 0;k<=idN.size();k++){
+            System.out.println(idN.size()+" size");
+            if(idN.get(k)==dayToday ){
+                System.out.println("numbet in if "+dayToday+" its day todat=="+idN.get(k));
+
+        for (Student s: studentService.getAll()) {
+            if(s.getEmail()!=null || !s.getEmail().equals("")) {
+                try {
+                    System.out.println(s.getEmail() + " send to");
+                    sendMailService.sendMailTo(s.getEmail(), topic, body, email, password);
+                    resultMessage = "The e-mail was sent successfully";
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                    resultMessage = "Error the e-mail was not sent successfully";
+                }
+
+
+                }
+
+            }
+
+          }//end of forEach Student s: studentService.getAll
+            model.addAttribute("message", resultMessage);
+            return "A_small_fitness_result_of_send_message";
+        }//end of idN.get(k)==dayToday
+     // return "A_small_fitness_first_work_Page";
+        return email;
+
+
     }
 
 
