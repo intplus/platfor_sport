@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -344,5 +345,38 @@ public class A_GroupController {
         return listDayOfMonth;
     }
 
+    /*//delete student from group
+    @RequestMapping("/delete")
+    public String deleteStudentFromGroup(@RequestParam(value = "deletee", required = false) String deletee,
+                                         @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
+                                         @RequestParam(value = "case", required = false) List <Long> ids,
+                                         @RequestParam(value = "send_complex_email", required = false) String complexEmail,
+                                         RedirectAttributes ra) {
+        if(deletee!=null){
+            if (ids!=null)
+
+                for (int i =0; i < ids.size();i++) {
+                    System.out.println("in method A_controller del " + ids );
+                   // groupService.
+                }
+        }
+        else if (complexEmail!=null) {
+            //redirect ids to the send complex message page
+            ra.addFlashAttribute("id", ids);
+            return "redirect:/registerPerson/showComplexMailForm";
+        }
+
+        else if(sendEmail!=null){
+            //redirect our ids to the send message page
+            ra.addFlashAttribute("id", ids);
+            return "redirect:/registerPerson/showMailForm";
+
+
+        }
+
+
+        return "A_small_fitness_group";
+    }
+*/
 }
 

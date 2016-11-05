@@ -158,10 +158,26 @@ public class A_PersonsController {
                                     @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
                                     @RequestParam(value = "case", required = false) List <Long> ids,
                                     @RequestParam(value = "send_complex_email", required = false) String complexEmail,
+                                    @RequestParam(value = "option", required = false) String  option,
+                                    @RequestParam(value = "option1", required = false) String option1,
                                     RedirectAttributes ra) {
+        List<Student> students = new ArrayList<Student>();
+        for (int i = 0; i<=ids.size(); i++) {
+            students.add(studentService.getStudent(ids.get(i)));
+        }
+        if (option !=null) {
+            String theGroup;
+            if (groupService.getGroup(idGroup).getNameTraine()==null) {
+                theGroup = groupService.getGroup(idGroup).getName();
+            }
+            else {
+                theGroup =groupService.getGroup(idGroup).getNameTraine();
+            }
+          //  theStudent.setGroupSort(theGroup);
+         //   studentService.addStudent(theStudent);
+        }
 
-
-        if(deletee!=null){
+        else if(deletee!=null){
             if (ids!=null)
 
                 for (int i =0; i < ids.size();i++) {
@@ -186,13 +202,19 @@ public class A_PersonsController {
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
+    @RequestMapping("/saveStudentAfterUpdate")
+    public String test() {
+        return "a_small_fitness/update_form/A_small_fitness_update_student";
+    }
+
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
         studentService.updateStudent(theStudent);
-        return "redirect:/registerPerson/showFirstWorkPage";
+       // return "redirect:/registerPerson/showFirstWorkPage";
+        return "a_small_fitness/update_form/A_small_fitness_update_student";
     }
 
     @GetMapping("/showFormForUpdate")

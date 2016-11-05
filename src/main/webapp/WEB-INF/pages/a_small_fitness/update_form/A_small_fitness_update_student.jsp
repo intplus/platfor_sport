@@ -54,7 +54,7 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form action="saveStudentAfterUpdate" modelAttribute="student" method="POST">
+    <form:form name="updateForm" action="saveStudentAfterUpdate" modelAttribute="student" method="POST">
 
         <form:hidden path="id" />
 
@@ -62,36 +62,36 @@
             <tbody>
             <tr>
                 <td><label>First name:</label></td>
-                <td><form:input path="name" /><form:errors path="name" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="name" id="name"/><form:errors path="name" class="alert alert-danger"></form:errors></td>
             </tr>
 
             <tr>
                 <td><label>Last name:</label></td>
-                <td><form:input path="surname" /><form:errors path="surname" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="surname" id="syrname"/><form:errors path="surname" class="alert alert-danger"></form:errors></td>
             </tr>
 
             <tr>
                 <td><label>Телефон в формате (0xxxxxxxxx):</label></td>
-                <td><form:input path="phone" /><form:errors path="phone" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="phone" id="phone"/><form:errors path="phone" class="alert alert-danger"></form:errors></td>
             </tr>
             <tr>
                 <td><label>Email:</label></td>
-                <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="email" id="email"/><form:errors path="email" class="alert alert-danger"></form:errors></td>
             </tr>
 
             <tr>
                 <td><label>Birthday in format (dd.mm.yyyy):</label></td>
-                <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="birthday" id="birthday"/><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
             </tr>
 
-            <tr>
+           <%-- <tr>
                 <td><label>Position:</label></td>
-                    <%--<td><form:input path="p" /></td>--%>
+                    &lt;%&ndash;<td><form:input path="p" /></td>&ndash;%&gt;
             </tr>
             <tr>
                 <td><label>Comment:</label></td>
-                    <%--<td><form:input path="" /></td>--%>
-            </tr>
+                    &lt;%&ndash;<td><form:input path="" /></td>&ndash;%&gt;
+            </tr>--%>
             <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
