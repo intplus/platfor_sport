@@ -28,20 +28,23 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "record_day")
+    private String recordDay;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "post")
+    private String post;
+
+
+
     @Column(name = "email")
     @Email
     private String email;
 
-    public String getGroupSort() {
-        return groupSort;
-    }
 
-    public void setGroupSort(String groupSort) {
-        this.groupSort = groupSort;
-    }
 
-    @Column(name = "group_sort")
-    private  String groupSort;
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -59,9 +62,6 @@ public class Student extends Model {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Phone> phones = new HashSet<>();
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_group", joinColumns = @JoinColumn(name = "student_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "group_id", nullable = false, updatable = false))
@@ -75,9 +75,6 @@ public class Student extends Model {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
-
-    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "status_id")
@@ -131,12 +128,12 @@ public class Student extends Model {
         this.birthday = birthday;
     }
 
-    public Set<Comment> getComments() {
-        return comments;
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
     public Set<CustomerCard> getCards() {
@@ -145,14 +142,6 @@ public class Student extends Model {
 
     public void setCards(Set<CustomerCard> cards) {
         this.cards = cards;
-    }
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
     }
 
 
@@ -180,16 +169,34 @@ public class Student extends Model {
         this.surname = surName;
     }
 
-    public Set<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<Phone> phones) {
-        this.phones = phones;
-    }
-
-
     public String getPhone() {
         return phone;
     }
+
+
+    public String getRecordDay() {
+        return recordDay;
+    }
+
+    public void setRecordDay(String recordDay) {
+        this.recordDay = recordDay;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+
 }

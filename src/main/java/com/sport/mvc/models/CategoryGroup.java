@@ -17,8 +17,8 @@ public class CategoryGroup extends Model {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "nameTraine")
-    private String nameTraine;
+    @Column(name = "is_main")
+    private boolean isMain;
 
     public CategoryGroup() {
         super();
@@ -40,11 +40,11 @@ public class CategoryGroup extends Model {
         this.name = name;
     }
 
-    public String getNameTraine() {
-        return nameTraine;
+    public boolean isMain() {
+        return isMain;
     }
 
-    public void setNameTraine(String nameTraine) {
-        this.nameTraine = nameTraine;
+    public void setMain(boolean main) {
+        isMain = main;
     }
 }
