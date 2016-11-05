@@ -266,7 +266,7 @@
     <br/><br/>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <thead>
+       <thead>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>

@@ -97,8 +97,8 @@
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     </form:form>
 </div>
 

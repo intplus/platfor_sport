@@ -322,13 +322,7 @@ public class A_GroupController {
         return "redirect:/group/ShowGroupPage";
     }
 
-//    @RequestMapping("/takeIdCategory")
-//    public String TakeIdCategory(@RequestParam("categoryId") long theId ) {
-//        //take id group, where we now, and write it in to global variable->idGroup
-//        idCategory = theId;
-//        //return to showGroup page for fow all data on the  page
-//        return "redirect:/group/ShowGroupPage";
-//    }
+
 
     private List<String> ListOfDayInMonth() {
         Calendar calendar = Calendar.getInstance();
