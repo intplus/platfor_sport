@@ -1,13 +1,9 @@
 package com.sport.mvc.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -44,6 +40,15 @@ public class User extends Model {
 
     @Column(name = "district")
     private String district;
+
+    @Column(name = "isactive")
+    private String isactive;
+
+    @Column(name = "isnonexpired")
+    private String isnonexpired;
+
+    @Column(name = "isnonlocked")
+    private String isnonlocked;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "session_history_id")
@@ -192,6 +197,30 @@ public class User extends Model {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public String getIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(String isactive) {
+        this.isactive = isactive;
+    }
+
+    public String getIsnonexpired() {
+        return isnonexpired;
+    }
+
+    public void setIsnonexpired(String isnonexpired) {
+        this.isnonexpired = isnonexpired;
+    }
+
+    public String getIsnonlocked() {
+        return isnonlocked;
+    }
+
+    public void setIsnonlocked(String isnonlocked) {
+        this.isnonlocked = isnonlocked;
     }
 
     @Override

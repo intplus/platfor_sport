@@ -1,7 +1,6 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,5 +17,8 @@ public class StartController {
         return "chooseRegisterFormRegistry";
     }
 
-
+    @RequestMapping("/login")
+    public String ShowLogin(){
+        return "login";
+    }
 }
