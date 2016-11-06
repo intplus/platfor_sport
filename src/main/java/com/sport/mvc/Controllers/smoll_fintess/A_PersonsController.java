@@ -94,10 +94,8 @@ public class A_PersonsController {
 
 //check, if user has this student, add to student list
   for(Student s: studentService.getAll()) {
-      System.out.println(s.getPhone());
 
-
-          if (s.getUser().getId() == getCurrentUser().getId() ) {
+      if (s.getUser().getId() == getCurrentUser().getId() ) {
               studentsList.add(s);
           }
 
@@ -152,7 +150,7 @@ public class A_PersonsController {
     }
 
     @RequestMapping("/delete")
-    public String deleteListOfUsers(@RequestParam(value = "deletee", required = false) String deletee,
+    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
                                     @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
                                     @RequestParam(value = "case", required = false) List <Long> ids,
                                     @RequestParam(value = "send_complex_email", required = false) String complexEmail,
@@ -184,12 +182,89 @@ public class A_PersonsController {
         return "redirect:/registerPerson/showFirstWorkPage";
     }
 
+
+//    @RequestMapping(value = "/act", method = RequestMethod.POST)
+//    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String delete,
+//                                    @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
+//                                    @RequestParam(value = "case", required = false) List <Long> ids,
+//                                    @RequestParam(value = "send_complex_email", required = false) String complexEmail,
+//                                    @RequestParam(value = "addToGroup", required = false) String addToGroup,
+//                                    @RequestParam(value = "option1", required = false) String groupName,
+//                                    @RequestParam(value = "option2", required = false) String trainerGroupName,
+//                                    @RequestParam(value = "addToTrainerGroup", required = false) String addToTrainerGroup,
+//                                    RedirectAttributes ra) {
+//        if (addToGroup!=null) {
+//            Long groupId = null;
+//            Set<Group> groupSet = new HashSet<>();
+//            List<Group> groups = groupService.getAll();
+//            for (int i = 0; i<groups.size(); i++) {
+//                if (groups.get(i).getName().equals(groupName)) {
+//                    groupId = groups.get(i).getId();
+//
+//                }
+//            }
+//            groupSet.add(groupService.getGroup(groupId));
+//
+//            for (int i = 0; i<ids.size(); i++) {
+//                Student theStudent = studentService.getStudent(ids.get(i));
+//                theStudent.setGroups(groupSet);
+//                studentService.addStudent(theStudent);
+//            }
+//
+//        }
+//
+//        else if (addToTrainerGroup!=null)  {
+//            Long groupId = null;
+//            Set<Group> groupSet = new HashSet<>();
+//            List<Group> groups = groupService.getAll();
+//            for (int i = 0; i<groups.size(); i++) {
+//                if (groups.get(i).getName().equals(trainerGroupName)) {
+//                    groupId = groups.get(i).getId();
+//
+//                }
+//            }
+//            groupSet.add(groupService.getGroup(groupId));
+//
+//            for (int i = 0; i<ids.size(); i++) {
+//                Student theStudent = studentService.getStudent(ids.get(i));
+//                theStudent.setGroups(groupSet);
+//                studentService.addStudent(theStudent);
+//            }
+//        }
+//
+//
+//        else if(delete!=null){
+//            if (ids!=null)
+//
+//                for (int i =0; i < ids.size();i++) {
+//                    System.out.println("in method A_controller del " + ids );
+//                    studentService.deleteListOfStudents(ids.get(i));
+//                }
+//        }
+//        else if (complexEmail!=null) {
+//            //redirect ids to the send complex message page
+//            ra.addFlashAttribute("id", ids);
+//            return "redirect:/registerPerson/showComplexMailForm";
+//        }
+//
+//        else if(sendEmail!=null){
+//            //redirect our ids to the send message page
+//            ra.addFlashAttribute("id", ids);
+//            return "redirect:/registerPerson/showMailForm";
+//
+//
+//        }
+//
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//    }
+
     @PostMapping("/saveStudentAfterUpdate")
     public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
         if(result.hasErrors()) {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
 
+        theStudent.setUser(getCurrentUser());
         studentService.updateStudent(theStudent);
 
         return "redirect:/registerPerson/showFirstWorkPage";
