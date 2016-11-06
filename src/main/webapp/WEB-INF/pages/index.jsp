@@ -38,9 +38,9 @@
     <div class="container">
         <ul>
             <li><a href="#">Главная</a></li>
-            <li><a href="/showChooseRegisterForm">Старт</a></li>
+            <%--<li><a href="/showChooseRegisterForm">Старт</a></li>--%>
             <li><a href="#">Контакты</a></li>
-            <li><a href="/login">Войти</a></li>
+            <li><a href="/login">Вход </a></li>
 
         </ul>
 

@@ -12,10 +12,10 @@ public class StartController {
     }
 
     //returns choose registration form page
-    @RequestMapping("/showChooseRegisterForm")
-    public String showChooseForm(){
-        return "chooseRegisterFormRegistry";
-    }
+//    @RequestMapping("/showChooseRegisterForm")
+//    public String showChooseForm(){
+//        return "chooseRegisterFormRegistry";
+//    }
 
     @RequestMapping("login")
     public String ShowLogin(){

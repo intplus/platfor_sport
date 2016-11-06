@@ -47,7 +47,7 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form action="saveStudent" modelAttribute="student" method="POST">
+    <form:form action="saveStudent" modelAttribute="student" method="POST" >
         <form:hidden path="id" />
 
         <table>
