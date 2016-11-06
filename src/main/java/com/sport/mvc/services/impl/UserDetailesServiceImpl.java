@@ -4,7 +4,6 @@ package com.sport.mvc.services.impl;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +34,8 @@ public class UserDetailesServiceImpl implements UserDetailsService {
 			boolean accountNonExpired = user.getIsnonexpired().equalsIgnoreCase("Y");
 			boolean credentialsNonExpired= user.getIsnonexpired().equalsIgnoreCase("Y");
 			boolean accountNonLocked= user.getIsnonlocked().equalsIgnoreCase("Y");
+
+
 			
 			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
@@ -45,6 +46,7 @@ public class UserDetailesServiceImpl implements UserDetailsService {
 		}else {
 			 throw new UsernameNotFoundException("Invalid User");
 		}
+
 		
 	}
 

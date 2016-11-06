@@ -59,7 +59,14 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
+    @RequestMapping(value = "/general_registration_form")
+    public String showForm(Model model){
 
+        //   RegisterPerson theRegisterPerson= new RegisterPerson();
+        //   model.addAttribute("registerPersonDate", theRegisterPerson);
+        return "general_registration_formRegistry";
+
+    }
 
     //method for jump register page FITNESS CENTRE =)
     @RequestMapping(value = "/registerFitnessCenter")
