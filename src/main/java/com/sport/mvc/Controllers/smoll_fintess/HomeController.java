@@ -39,15 +39,12 @@ public class HomeController {
     		String username = ((UserDetails) principal).getUsername();
     		User user = userservice.getUserByUsername(username);
     	    response.setAttribute("user", user);
-
-
-			System.out.println(" Login okclic -" + user.getUsername()+ " id is"+user.getId());
-			log.info("Welcome home! ");
-			return "redirect:registerPerson/takeIdUser";
+            log.info("Welcome to your cabinet!");
+			return "redirect:/registerPerson//showFirstWorkPage";
     	}else {
 
-			log.info("Welcome home! ");
-			return "redirect:registerPerson/takeIdUser";
+			log.info("Welcome to your cabinet!");
+			return "redirect:registerPerson/showFirstWorkPage";
 		}
 	}
 

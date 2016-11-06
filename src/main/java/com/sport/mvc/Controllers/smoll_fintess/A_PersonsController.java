@@ -11,7 +11,7 @@ import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.StudentService;
-import org.hibernate.annotations.SourceType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -59,14 +59,7 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
-    @RequestMapping(value = "/general_registration_form")
-    public String showForm(Model model){
 
-        //   RegisterPerson theRegisterPerson= new RegisterPerson();
-        //   model.addAttribute("registerPersonDate", theRegisterPerson);
-        return "general_registration_formRegistry";
-
-    }
 
     //method for jump register page FITNESS CENTRE =)
     @RequestMapping(value = "/registerFitnessCenter")
@@ -89,22 +82,17 @@ public class A_PersonsController {
         return "register_pages/registerTrainer";
     }
 
-    private Long idGroup;
-
-    private Long idUser;
-
-
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
-        //add atribute to group
-        //create list student and group for add data to the jsp page
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
-        List<Group> groupsList = groupService.getAll();
-//        List<Student> studentsList=studentService.getAll();
-        List<Student> studentsList= new ArrayList<>();
-
         ModelAndView modelAndView = new ModelAndView();
 
+        //create list student,category of group and group for add data to the jsp page
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<Group> groupsList = groupService.getAll();
+        List<Student> studentsList= new ArrayList<>();
+
+
+//check, if user has this student, add to student list
   for(Student s: studentService.getAll()) {
       if(s.getUser().getId()==getCurrentUser().getId()){
           studentsList.add(s);
@@ -114,17 +102,6 @@ public class A_PersonsController {
         modelAndView.addObject("students", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
-//param for identifying locations is ->String chooseGroup
-        if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
-            String chooseGroup = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseGroup", chooseGroup);
-        }
-
-        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseGroup", chooseNewGroupTrainer);
-        }
-
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -146,7 +123,6 @@ public class A_PersonsController {
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
-
         // create model attribute to bind form data
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
@@ -156,15 +132,16 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        // add date(when user do this record
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
         theStudent.setRecordDay(dateFormat.format(today));
         theStudent.setUser(getCurrentUser());
 //        theStudent.setUser();
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
-        groupService.getAll();
 
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
@@ -226,6 +203,25 @@ public class A_PersonsController {
 
         return "a_small_fitness/update_form/A_small_fitness_update_student";
     }
+
+
+
+    @RequestMapping("/showMailForm")
+    public String showMailForm(Model theModel, @ModelAttribute("id") List<Long> ids){
+        //get our ids and get user name, and email
+        //add received emails to the arrauList
+        List<Student> students = new ArrayList<Student>();
+        for (int i = 0; i<ids.size(); i++) {
+            students.add(studentService.getStudent(ids.get(i)));
+            String email = students.get(i).getEmail();
+            studenEmail.add(email);
+        }
+        theModel.addAttribute("id", ids);
+        theModel.addAttribute("students", students);
+        return "A_send_mail_form";
+    }
+
+
     //create empty array list in order to fill it in the showMailForm method
     List<String> studenEmail = new ArrayList<String>();
 
@@ -265,12 +261,6 @@ public class A_PersonsController {
     @RequestMapping("/showComplexMailForm")
     public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
 
-//        Date d = new Date();
-//        SimpleDateFormat formatDay = new SimpleDateFormat("dd");
-//        String dayToday = formatDay.format(d);
-//       // System.out.println(format1.format(d)); //25.02.2013 09:03
-
-        GregorianCalendar gregorianCalendar = new GregorianCalendar(2016, 1, 1, 0, 0, 0);
         List<Integer> list = new ArrayList<>();
         for(int i=1;i<30;i++){
             list.add(i);
@@ -282,10 +272,7 @@ public class A_PersonsController {
     @RequestMapping("/sendComplexMail")
     public String sendComplexMail(HttpServletRequest request,
                                   @RequestParam(value = "case", required = false) List <Integer> idN, Model model){
-
-
         Date d = new Date();
-
         SimpleDateFormat formatDay = new SimpleDateFormat("dd");
         SimpleDateFormat formatDay2 = new SimpleDateFormat("hh:mm:");
 
@@ -337,20 +324,7 @@ public class A_PersonsController {
     }
 
 
-    @RequestMapping("/showMailForm")
-    public String showMailForm(Model theModel, @ModelAttribute("id") List<Long> ids){
-    //get our ids and get user name, and email
-        //add received emails to the arrauList
-        List<Student> students = new ArrayList<Student>();
-        for (int i = 0; i<ids.size(); i++) {
-            students.add(studentService.getStudent(ids.get(i)));
-            String email = students.get(i).getEmail();
-            studenEmail.add(email);
-        }
-        theModel.addAttribute("id", ids);
-        theModel.addAttribute("students", students);
-        return "A_send_mail_form";
-    }
+
 
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
@@ -469,26 +443,8 @@ public class A_PersonsController {
     }
 
 
-//    @GetMapping("/takeIdUser")
-//    public String TakeIdGroups( ) {
-//        //take id group, where we now, and write it in to global variable->idGroup
-//
-//        System.out.println("In methid get user id");
-////        idUser = user.getId();
-////        idUser =id;
-//////        System.out.println("user- "+user+ "  "+idUser);
-////        System.out.println(id+"   id");
-//        //return to showGroup page for fow all data on the  page
-//        return "redirect:/registerPerson/showFirstWorkPage";
-//    }
 
-    @RequestMapping("takeIdUser")
-    public String TakeIdGroup() {
-        System.out.println("in method");
-        System.out.println(getCurrentUser().getId()+  " id??");
-        return "redirect:/registerPerson/showFirstWorkPage";
-    }
-
+    //take registered user
     public User getCurrentUser()  throws NotFoundException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
