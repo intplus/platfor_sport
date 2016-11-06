@@ -94,7 +94,7 @@ public class A_PersonsController {
 
 //check, if user has this student, add to student list
   for(Student s: studentService.getAll()) {
-      if(s.getUser().getId()==getCurrentUser().getId()){
+      if(s.getUser().getId()!=null  && s.getUser().getId()==getCurrentUser().getId()){
           studentsList.add(s);
       }
 
@@ -138,7 +138,7 @@ public class A_PersonsController {
 
         theStudent.setRecordDay(dateFormat.format(today));
         theStudent.setUser(getCurrentUser());
-//        theStudent.setUser();
+
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }

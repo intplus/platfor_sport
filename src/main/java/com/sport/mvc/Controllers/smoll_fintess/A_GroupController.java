@@ -38,8 +38,6 @@ public class A_GroupController {
     //variable for taking the group id, when some group will by in use.
     private  Long idGroup;
 
-
-
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
         ModelAndView modelAndView = new ModelAndView();
@@ -51,7 +49,7 @@ public class A_GroupController {
         List<Student> studentsList = new ArrayList<>();
 
 
-//check in which a group of students
+//check in which og group the students
         for (Student s: studentService.getAll()){
             if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup){
                 System.out.println(s.getId()+"it is my student");
@@ -322,13 +320,6 @@ public class A_GroupController {
         return "redirect:/group/ShowGroupPage";
     }
 
-//    @RequestMapping("/takeIdCategory")
-//    public String TakeIdCategory(@RequestParam("categoryId") long theId ) {
-//        //take id group, where we now, and write it in to global variable->idGroup
-//        idCategory = theId;
-//        //return to showGroup page for fow all data on the  page
-//        return "redirect:/group/ShowGroupPage";
-//    }
 
     private List<String> ListOfDayInMonth() {
         Calendar calendar = Calendar.getInstance();

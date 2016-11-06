@@ -65,7 +65,7 @@ public class User extends Model {
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
 //            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
 //    private Set<Sport> sports = new HashSet<>();
