@@ -27,6 +27,8 @@ public class HomeController {
     
     @Autowired
     HttpSession response;
+
+
 	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -37,9 +39,16 @@ public class HomeController {
     		String username = ((UserDetails) principal).getUsername();
     		User user = userservice.getUserByUsername(username);
     	    response.setAttribute("user", user);
-    	}
-		log.info("Welcome home! ");
-		return "redirect:registerPerson/showFirstWorkPage";
+
+
+			System.out.println(" Login okclic -" + user.getUsername()+ " id is"+user.getId());
+			log.info("Welcome home! ");
+			return "redirect:registerPerson/takeIdUser";
+    	}else {
+
+			log.info("Welcome home! ");
+			return "redirect:registerPerson/takeIdUser";
+		}
 	}
 
 

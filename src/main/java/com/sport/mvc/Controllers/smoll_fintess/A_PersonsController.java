@@ -3,8 +3,10 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 import com.sport.mvc.models.CategoryGroup;
 import com.sport.mvc.models.Group;
+import com.sport.mvc.models.User;
 import com.sport.mvc.services.CategoryGroupService;
 import com.sport.mvc.services.GroupService;
+import com.sport.mvc.services.UserService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
@@ -13,6 +15,10 @@ import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.acls.model.NotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +46,10 @@ public class A_PersonsController {
     @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
+
+    @Autowired
+    @Qualifier("userService")
+    private UserService userService;
 
     @Autowired
     @Qualifier("categoryGroupService")
@@ -81,6 +91,8 @@ public class A_PersonsController {
 
     private Long idGroup;
 
+    private Long idUser;
+
 
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
@@ -88,9 +100,17 @@ public class A_PersonsController {
         //create list student and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         List<Group> groupsList = groupService.getAll();
-        List<Student> studentsList=studentService.getAll();
+//        List<Student> studentsList=studentService.getAll();
+        List<Student> studentsList= new ArrayList<>();
 
         ModelAndView modelAndView = new ModelAndView();
+
+  for(Student s: studentService.getAll()) {
+      if(s.getUser().getId()==getCurrentUser().getId()){
+          studentsList.add(s);
+      }
+
+  }
         modelAndView.addObject("students", studentsList);
         modelAndView.addObject("groupsList", groupsList);
         modelAndView.addObject("categoryList",categoryGroupList);
@@ -139,6 +159,8 @@ public class A_PersonsController {
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         theStudent.setRecordDay(dateFormat.format(today));
+        theStudent.setUser(getCurrentUser());
+//        theStudent.setUser();
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
@@ -456,4 +478,43 @@ public class A_PersonsController {
     }
 
 
+//    @GetMapping("/takeIdUser")
+//    public String TakeIdGroups( ) {
+//        //take id group, where we now, and write it in to global variable->idGroup
+//
+//        System.out.println("In methid get user id");
+////        idUser = user.getId();
+////        idUser =id;
+//////        System.out.println("user- "+user+ "  "+idUser);
+////        System.out.println(id+"   id");
+//        //return to showGroup page for fow all data on the  page
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//    }
+
+    @RequestMapping("takeIdUser")
+    public String TakeIdGroup() {
+        System.out.println("in method");
+        System.out.println(getCurrentUser().getId()+  " id??");
+        return "redirect:/registerPerson/showFirstWorkPage";
+    }
+
+    public User getCurrentUser()  throws NotFoundException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (null == auth) {
+            System.out.println("error Vasia");;
+        }
+
+        Object obj = auth.getPrincipal();
+        String username = "";
+
+        if (obj instanceof UserDetails) {
+            username = ((UserDetails) obj).getUsername();
+        } else {
+            username = obj.toString();
+        }
+
+        User u = userService.getUserByUsername(username);
+        return u;
+    }
 }
