@@ -209,15 +209,6 @@ public class A_PersonsController {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
 
-        /*
-        Set<Group> groupSet = new HashSet<>();
-        List<Group> groups = groupService.getAll();
-        for(int i = 0; i < groups.size(); ++i) {
-            groupSet.add(groups.get(i));
-        }
-        theStudent.setGroups(groupSet);
-        */
-
         studentService.updateStudent(theStudent);
 
         return "redirect:/registerPerson/showFirstWorkPage";
