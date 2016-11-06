@@ -17,4 +17,8 @@ public interface ItemDao <T extends Model> {
 
     void remove(T Model);
 
+    boolean addRole(T role); /// ROLE !!!!!!!!!
+
+    boolean roleExists(String name);
+
 }
