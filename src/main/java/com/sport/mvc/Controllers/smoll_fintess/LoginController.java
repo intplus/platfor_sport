@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+//@RequestMapping("loginController")
 public class LoginController {
 	
 	@Autowired
@@ -42,19 +43,15 @@ public class LoginController {
 		user.setIsnonexpired("Y");
 		user.setIsnonlocked("Y");
 
-        System.out.println(user.getEmail()+" "+ user.getName()+ "-name "+user.getUsername()+"username");
 
-        System.out.println(userservice.addUser(user));
         Boolean save = userservice.addUser(user);
-        System.out.println(save +" true?");
+
         if (save) {
 			response.put("suceess", true);
 	        response.put("message", "Registration Sucess");
 			return response;
 		}else {
-			System.out.println(" save?" +save);
-			System.out.println(user.getEmail()+" "+ user.getName()+ "-name "+user.getUsername()+"username"+"  ELSE!!!!");
-			response.put("error", true);
+            response.put("error", true);
 	        response.put("message", "Registration Failed");
 			return response;
 		}
@@ -66,7 +63,7 @@ public class LoginController {
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login";
+        return "index";
     }
 
 }

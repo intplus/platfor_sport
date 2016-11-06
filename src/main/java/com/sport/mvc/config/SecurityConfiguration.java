@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    	.antMatchers("/resources/**").permitAll()
 	    	.antMatchers("/404").permitAll()
 	        .antMatchers("/login").permitAll()
-			.antMatchers("/A_small_fitness_first_work_Page").permitAll() //тестовая страница сюда переходит
+			.antMatchers("/home").permitAll() //тестовая страница сюда переходит
 	        .antMatchers("/registration").permitAll()
 	        .antMatchers("/**").authenticated() /// на страницы не пеоеходит которые идут с этим маркером
 	        .and().formLogin().loginPage("/login")

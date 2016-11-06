@@ -39,12 +39,9 @@ public class HomeController {
     	    response.setAttribute("user", user);
     	}
 		log.info("Welcome home! ");
-		return "index";
+		return "redirect:registerPerson/showFirstWorkPage";
 	}
 
-	@RequestMapping(value = "/hello")
-	public String hello(){
-		return "hello";
-	}
+
 	
 }

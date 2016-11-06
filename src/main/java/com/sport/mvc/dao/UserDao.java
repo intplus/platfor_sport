@@ -4,7 +4,7 @@ import com.sport.mvc.models.User;
 
 public interface UserDao extends ItemDao<User> {
 
-    boolean addUser(User model);
+    boolean addUser(User user);
 
     User getUserByUsername(String username);
 

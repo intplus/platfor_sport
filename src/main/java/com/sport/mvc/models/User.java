@@ -49,22 +49,26 @@ public class User extends Model {
 //    @JoinColumn(name = "session_history_id")
 //    private SessionHistory sessionHistory;
 //
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "role_id")
-//    private Role role;
-//
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
 //    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<Group> groups = new HashSet<>();
 //
-//
+@ManyToOne(fetch = FetchType.LAZY, optional = true)
+@JoinColumn(name = "group_id")
+private Group group;
+
+
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
 //            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
 //    private Set<Sport> sports = new HashSet<>();
 //
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "price_id")
-//    private Price price;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "price_id")
+    private Price price;
 //
 //    public User() {
 //        super();
@@ -186,13 +190,13 @@ public class User extends Model {
 //        this.password = password;
 //    }
 //
-//    public Price getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(Price price) {
-//        this.price = price;
-//    }
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 //
 //    @Override
 //    public boolean equals(Object o) {
@@ -257,10 +261,6 @@ public class User extends Model {
     public User(Long id) {
         super(id);
     }
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "role_id")
-    private Role role;
 
     public String getEmail() {
         return email;
