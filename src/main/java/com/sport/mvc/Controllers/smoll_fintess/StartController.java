@@ -17,8 +17,10 @@ public class StartController {
         return "chooseRegisterFormRegistry";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("login")
     public String ShowLogin(){
         return "login";
     }
+
+
 }

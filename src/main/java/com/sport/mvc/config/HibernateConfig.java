@@ -2,25 +2,24 @@ package com.sport.mvc.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({"com.sport.mvc"})
 @PropertySource("classpath:db.properties")
-@Import(SecurityConfiguration.class)
 public class HibernateConfig {
 
     private static final String DATABASE_DRIVER = "db.driver";
@@ -69,29 +68,12 @@ public class HibernateConfig {
         properties.put(HIBERNATE_CONNECTION_USE_UNICODE, environment.getRequiredProperty(HIBERNATE_CONNECTION_USE_UNICODE));
         return properties;
     }
-    @Bean
-    public SessionFactory sessionFactory1() {
-        LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
-        lsfb.setDataSource(dataSource());
-        lsfb.setPackagesToScan("org.javabase.apps");
-        lsfb.setHibernateProperties(hibernateProperties());
-        try {
-            lsfb.afterPropertiesSet();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lsfb.getObject();
-    }
+
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
-    }
-
-    @Bean
-    public HibernateTemplate hibernateTemplate() {
-        return new HibernateTemplate((SessionFactory) sessionFactory1());
     }
 }
