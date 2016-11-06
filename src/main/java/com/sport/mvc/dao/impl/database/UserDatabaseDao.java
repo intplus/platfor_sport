@@ -1,13 +1,49 @@
 package com.sport.mvc.dao.impl.database;
 
 import com.sport.mvc.dao.UserDao;
+
 import com.sport.mvc.models.User;
 import org.springframework.stereotype.Repository;
+
+
+import java.util.List;
 
 @Repository(value = "userDatabaseDao")
 public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserDao {
 
     public UserDatabaseDao() {
     }
-    //// сюда дополнительные методы
+
+
+    @Override
+    public boolean addUser(User model) {
+        try {
+
+        getSession().save(model);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    @Override
+    public boolean userExists(String username) {
+        List<User> userList = getSession().createQuery("FROM User").list();
+        return userList.size()>0 ? true : false;
+    }
+
+
+    @Override
+    public User getUserByUsername(String userName) {
+        String likeName="'"+userName+"'";
+        List<User> userList = getSession().createQuery("FROM User u WHERE u.username = "+likeName).list();
+
+        if (userList.size()>0) {
+            User user = userList.get(0);
+            return user;
+        }else {
+            System.out.println("User Not Found");
+            return null;
+        }
+    }
 }

@@ -54,9 +54,12 @@ public class A_GroupController {
 //check in which a group of students
         for (Student s: studentService.getAll()){
             if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup){
+                System.out.println(s.getId()+"it is my student");
                 studentsList.add(s);
             }
+
         }
+
 // show student in his group if group has more then 0 student
         if (!(studentsList.isEmpty())){
             modelAndView.addObject("studentList", studentsList);
@@ -68,13 +71,11 @@ public class A_GroupController {
         //param for identifying locations is ->String chooseGroup
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
-            System.out.println(chooseGroup+" true");
             modelAndView.addObject("chooseGroup", chooseGroup);
         }
 
-        if(idGroup!=null && groupService.getGroup(idGroup).isMain()!=true) {
+        else {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            System.out.println(chooseNewGroupTrainer+" --");
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
 
@@ -321,7 +322,13 @@ public class A_GroupController {
         return "redirect:/group/ShowGroupPage";
     }
 
-
+//    @RequestMapping("/takeIdCategory")
+//    public String TakeIdCategory(@RequestParam("categoryId") long theId ) {
+//        //take id group, where we now, and write it in to global variable->idGroup
+//        idCategory = theId;
+//        //return to showGroup page for fow all data on the  page
+//        return "redirect:/group/ShowGroupPage";
+//    }
 
     private List<String> ListOfDayInMonth() {
         Calendar calendar = Calendar.getInstance();
