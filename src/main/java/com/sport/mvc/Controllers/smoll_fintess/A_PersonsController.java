@@ -94,9 +94,13 @@ public class A_PersonsController {
 
 //check, if user has this student, add to student list
   for(Student s: studentService.getAll()) {
-      if(s.getUser().getId()!=null  && s.getUser().getId()==getCurrentUser().getId()){
-          studentsList.add(s);
-      }
+      System.out.println(s.getPhone());
+
+
+          if (s.getUser().getId() == getCurrentUser().getId() ) {
+              studentsList.add(s);
+          }
+
 
   }
         modelAndView.addObject("students", studentsList);

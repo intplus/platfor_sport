@@ -1,15 +1,17 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
 
-import com.sport.mvc.models.CategoryGroup;
-import com.sport.mvc.models.CustomerCard;
-import com.sport.mvc.models.Group;
-import com.sport.mvc.models.Student;
+import com.sport.mvc.models.*;
 import com.sport.mvc.services.CategoryGroupService;
 import com.sport.mvc.services.GroupService;
 import com.sport.mvc.services.StudentService;
+import com.sport.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.acls.model.NotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,10 @@ public class A_GroupController {
     @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
+
+    @Autowired
+    @Qualifier("userService")
+    private UserService userService;
 
     @Autowired
     @Qualifier("studentService")
@@ -305,7 +311,10 @@ public class A_GroupController {
     public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
 
         Set<Group> groupSet = new HashSet<>();
+       // Group group =groupService.getGroup(idGroup);
+//        group.setUser(getCurrentUser());
         groupSet.add(groupService.getGroup(idGroup));
+        theStudent.setUser(getCurrentUser());
         theStudent.setGroups(groupSet);
         studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
@@ -353,6 +362,27 @@ public class A_GroupController {
 
 
         return "A_add_subscription_form";
+    }
+
+    //take registered user
+    public User getCurrentUser()  throws NotFoundException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (null == auth) {
+            System.out.println("error Vasia");;
+        }
+
+        Object obj = auth.getPrincipal();
+        String username = "";
+
+        if (obj instanceof UserDetails) {
+            username = ((UserDetails) obj).getUsername();
+        } else {
+            username = obj.toString();
+        }
+
+        User u = userService.getUserByUsername(username);
+        return u;
     }
 
 }
