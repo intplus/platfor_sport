@@ -34,6 +34,8 @@ public class UserDetailesServiceImpl implements UserDetailsService {
 			boolean accountNonExpired = user.getIsnonexpired().equalsIgnoreCase("Y");
 			boolean credentialsNonExpired= user.getIsnonexpired().equalsIgnoreCase("Y");
 			boolean accountNonLocked= user.getIsnonlocked().equalsIgnoreCase("Y");
+
+
 			
 			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
@@ -44,6 +46,7 @@ public class UserDetailesServiceImpl implements UserDetailsService {
 		}else {
 			 throw new UsernameNotFoundException("Invalid User");
 		}
+
 		
 	}
 

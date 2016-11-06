@@ -28,7 +28,7 @@ public class HomeController {
     @Autowired
     HttpSession response;
 	
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -36,8 +36,11 @@ public class HomeController {
     	if (principal instanceof UserDetails) {
     		String username = ((UserDetails) principal).getUsername();
     		User user = userservice.getUserByUsername(username);
-    	    response.setAttribute("user", user);
-    	}
+
+			System.out.println("+++++++++++++++++++++"+user.getId());
+			response.setAttribute("user", user);
+			System.out.println(((UserDetails) principal).getPassword());
+		}
 		log.info("Welcome home! ");
 		return "index";
 	}

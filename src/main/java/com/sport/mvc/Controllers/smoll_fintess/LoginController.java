@@ -32,7 +32,9 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public Map<String, Object> registration(@RequestBody User user) {
+
 		Map<String, Object> response= new HashMap<String, Object>();
+
         Role role = new Role();
         role.setId(Long.valueOf(1));
 
@@ -42,11 +44,11 @@ public class LoginController {
 		user.setIsnonlocked("Y");
 
         System.out.println(user.getEmail()+" "+ user.getName()+ "-name "+user.getUsername()+"username");
-
         System.out.println(userservice.addUser(user));
         Boolean save = userservice.addUser(user);
         System.out.println(save +" true?");
-        if (save) {
+		System.out.println(user.getId());
+		if (save) {
 			response.put("suceess", true);
 	        response.put("message", "Registration Sucess");
 			return response;
@@ -65,7 +67,7 @@ public class LoginController {
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
 }
