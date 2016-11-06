@@ -88,7 +88,8 @@ public class A_PersonsController {
 
         //create list student,category of group and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
-        List<Group> groupsList = groupService.getAll();
+//        List<Group> groupsList = groupService.getAll();
+        List<Group> groupsList = new ArrayList<>();
         List<Student> studentsList= new ArrayList<>();
 
 
@@ -100,6 +101,14 @@ public class A_PersonsController {
           }
 
 
+  }
+
+  for(Group g: groupService.getAll()){
+
+
+     // if(g.getUser().getId()==getCurrentUser().getId()){
+          groupsList.add(g);
+    //  }
   }
         modelAndView.addObject("students", studentsList);
         modelAndView.addObject("groupsList", groupsList);

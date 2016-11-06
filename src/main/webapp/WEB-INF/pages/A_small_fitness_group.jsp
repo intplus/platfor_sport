@@ -188,7 +188,7 @@
             </c:choose>
         </li>
 
-        <li id="out"><a href="#">Out</a></li>
+        <li id="out"><a href='<c:url value="/logout"></c:url>' class="btn btn-default btn-flat">Sign OUT</a></li>
     </ul>
 
 
