@@ -29,8 +29,8 @@ public class HomeController {
     HttpSession response;
 
 
-
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	
+	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
