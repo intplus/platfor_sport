@@ -87,7 +87,7 @@ public class A_PersonsController {
         ModelAndView modelAndView = new ModelAndView();
 
         //create list student,category of group and group for add data to the jsp page
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
 //        List<Group> groupsList = groupService.getAll();
         List<Group> groupsList = new ArrayList<>();
         List<Student> studentsList= new ArrayList<>();
@@ -117,7 +117,20 @@ public class A_PersonsController {
   if(!groupsList.isEmpty()) {
       modelAndView.addObject("groupsList", groupsList);
   }
-        modelAndView.addObject("categoryList",categoryGroupList);
+
+
+        for(CategoryGroup g: categoryService.getAll()){
+
+            System.out.println(g.getName()+"name" +g.getUser().getId()+" group in user");
+            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+                categoryGroupList.add(g);
+            }
+        }
+
+  if(!categoryGroupList.isEmpty()) {
+      modelAndView.addObject("categoryList", categoryGroupList);
+  }
+
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;

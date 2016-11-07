@@ -107,6 +107,7 @@ public class A_GroupController {
     @PostMapping("/saveGroupToTrainers")
     public String saveGroupToTrainers(@ModelAttribute("group") Group group,@RequestParam("choose") String categoryName) {
         //add group to DB
+        group.setUser(getCurrentUser());
         if(categoryName.equals("")){
             groupService.addGroup(group);
         }
@@ -174,6 +175,7 @@ public class A_GroupController {
     public String saveCategory(@ModelAttribute("category") CategoryGroup category) {
         //add group to DB
         category.setMain(true);
+        category.setUser(getCurrentUser());
         categoryService.addCategoryGroup(category);
         return "redirect:/group/showFormForAddCategory";
     }
@@ -191,6 +193,7 @@ public class A_GroupController {
     @PostMapping("/saveTrainersCategory")
     public String saveTrainersCategory(@ModelAttribute("category") CategoryGroup category) {
         //add group to DB
+        category.setUser(getCurrentUser());
         categoryService.addCategoryGroup(category);
         return "redirect:/group/showFormForAddCategoryTrainers";
     }
