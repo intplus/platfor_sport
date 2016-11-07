@@ -114,6 +114,21 @@ public class A_GroupController {
     }
 
 
+
+
+    @RequestMapping( value = "/AddGroupToInstructorsForm", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView  FormForAddInstructors() {
+        // create model attribute to bind form data
+        Group group = new Group();
+        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categoryList" ,categoryGroupList);
+        modelAndView.addObject("group", group);
+        modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group_to_instructors");
+        return  modelAndView;
+    }
+
+
     @PostMapping("/saveGroupToTrainers")
     public String saveGroupToTrainers(@ModelAttribute("group") Group group,@RequestParam("choose") String categoryName) {
         //add group to DB
