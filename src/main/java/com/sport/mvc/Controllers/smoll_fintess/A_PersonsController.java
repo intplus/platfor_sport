@@ -96,7 +96,7 @@ public class A_PersonsController {
 //check, if user has this student, add to student list
   for(Student s: studentService.getAll()) {
 
-      if (s.getUser().getId() == getCurrentUser().getId() ) {
+      if (s.getUser().getId()!=null && s.getUser().getId() == getCurrentUser().getId() ) {
               studentsList.add(s);
           }
 
@@ -105,13 +105,18 @@ public class A_PersonsController {
 
   for(Group g: groupService.getAll()){
 
-
-     // if(g.getUser().getId()==getCurrentUser().getId()){
+      System.out.println(g.getName()+"name" +g.getUser().getId()+" group in user");
+      if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
           groupsList.add(g);
-    //  }
+      }
   }
-        modelAndView.addObject("students", studentsList);
-        modelAndView.addObject("groupsList", groupsList);
+
+  if (!studentsList.isEmpty()) {
+      modelAndView.addObject("students", studentsList);
+  }
+  if(!groupsList.isEmpty()) {
+      modelAndView.addObject("groupsList", groupsList);
+  }
         modelAndView.addObject("categoryList",categoryGroupList);
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");

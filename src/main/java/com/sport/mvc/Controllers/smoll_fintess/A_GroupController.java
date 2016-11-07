@@ -143,7 +143,7 @@ public class A_GroupController {
     @PostMapping("/saveGroup")
     public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
         //add group to DB
-       // group.setUser(getCurrentUser()); // add user to group&???
+        group.setUser(getCurrentUser()); // add user to group&???
         group.setMain(true);
         if(categoryName.equals("")){
 
