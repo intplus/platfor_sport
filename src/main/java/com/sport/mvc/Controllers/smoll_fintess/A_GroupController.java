@@ -47,31 +47,55 @@ public class A_GroupController {
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView showForm(){
         ModelAndView modelAndView = new ModelAndView();
-        //create list student and group for add data to the jsp page
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
-        List<Group> groupsList = groupService.getAll();
-        // List<Student> studentsList=studentService.getAll();
 
-        List<Student> studentsList = new ArrayList<>();
+        //create list student,category of group and group for add data to the jsp page
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
+        List<Group> groupsList = new ArrayList<>();
+        List<Student> studentsListInGroup= new ArrayList<>();
 
-
+        for(Student s: studentService.getAll()) {
+//check, if user has this student, add to student list
+            if (s.getUser().getId()!=null && s.getUser().getId() == getCurrentUser().getId() ) {
 //check in which og group the students
-        for (Student s: studentService.getAll()){
-            if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup){
-                System.out.println(s.getId()+"it is my student");
-                studentsList.add(s);
+        if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup) {
+
+            studentsListInGroup.add(s);
+        }
             }
 
+
         }
 
-// show student in his group if group has more then 0 student
-        if (!(studentsList.isEmpty())){
-            modelAndView.addObject("studentList", studentsList);
+        for(Group g: groupService.getAll()){
+            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+                groupsList.add(g);
+            }
         }
 
-        modelAndView.addObject("studentList", studentsList);
-        modelAndView.addObject("groupsList", groupsList);
-        modelAndView.addObject("categoryList",categoryGroupList);
+
+        for(CategoryGroup g: categoryService.getAll()){
+            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+                categoryGroupList.add(g);
+            }
+        }
+
+        // show student in his group if group has more then 0 student
+
+        if (!studentsListInGroup.isEmpty()) {
+            modelAndView.addObject("students", studentsListInGroup);
+        }
+        // show group his group if group has more then 0 student
+        if(!groupsList.isEmpty()) {
+            modelAndView.addObject("groupsList", groupsList);
+        }
+
+        // show categoty in his group if group has more then 0 student
+        if(!categoryGroupList.isEmpty()) {
+            modelAndView.addObject("categoryList", categoryGroupList);
+        }
+
+
+
         //param for identifying locations is ->String chooseGroup
         if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
@@ -87,20 +111,6 @@ public class A_GroupController {
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
-
-    }
-
-    @RequestMapping( value = "/AddGroupToInstructorsForm", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForAddInstructors() {
-        // create model attribute to bind form data
-        Group group = new Group();
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categoryList" ,categoryGroupList);
-        modelAndView.addObject("group", group);
-        modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group_to_instructors");
-        //  return "A_small_fitness_add_group";
-        return  modelAndView;
     }
 
 

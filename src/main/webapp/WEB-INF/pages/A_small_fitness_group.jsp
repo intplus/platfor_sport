@@ -281,7 +281,7 @@
         </thead>
         <tbody>
 
-        <c:forEach items="${studentList}" var="student">
+        <c:forEach items="${students}" var="student">
             <tr align="center">
                 <td>${student.name}</td>
                 <td align="left">${student.surname}</td>
