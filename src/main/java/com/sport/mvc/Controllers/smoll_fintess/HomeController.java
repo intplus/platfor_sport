@@ -30,7 +30,7 @@ public class HomeController {
 
 
 	
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -40,11 +40,11 @@ public class HomeController {
     		User user = userservice.getUserByUsername(username);
     	    response.setAttribute("user", user);
             log.info("Welcome to your cabinet!");
-			return "redirect:/registerPerson//showFirstWorkPage";
+			return "index";
     	}else {
 
 			log.info("Welcome to your cabinet!");
-			return "redirect:registerPerson/showFirstWorkPage";
+			return "index";
 		}
 	}
 

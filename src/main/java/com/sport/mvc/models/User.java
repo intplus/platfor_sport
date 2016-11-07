@@ -54,21 +54,22 @@ public class User extends Model {
     private Role role;
 
 
-    public Set<Group> getGroups() {
-        return groups;
-    }
 
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
 
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 
-    //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-//            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
-//    private Set<Sport> sports = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Student> students = new HashSet<>();
+
+
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
+    private Set<Sport> sports = new HashSet<>();
 //
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "price_id")
@@ -211,6 +212,31 @@ public class User extends Model {
 
     public void setIsnonlocked(String isnonlocked) {
         this.isnonlocked = isnonlocked;
+    }
+
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Sport> getSports() {
+        return sports;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
     public User(Role role, String username, String password, String email) {
