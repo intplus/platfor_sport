@@ -254,25 +254,31 @@ public class A_GroupController {
         return modelAndView;
     }
 
-    @RequestMapping("/deleteGroup")
+    @RequestMapping("/deleteGroups")
     public String deleteGroup(@RequestParam(value = "idGroup", required = false) List<Long> ids) {
 
         for (int i = 0; i < ids.size(); i++) {
             Group group = groupService.getGroup(ids.get(i));
+
             group.setUser(null);
+            System.out.println(group.getUser().getId()+" id user group");
             while(group.getStudents().iterator().hasNext()){
+                System.out.println(group.getStudents().iterator().next().getGroups().iterator().next().getId()+" st id");
               //  Student theStudent =studentService.getStudent(ids.get(i));
-                if(group.getStudents().iterator().next().getGroups()!=null) {
-                    group.getStudents().iterator().next().setGroups(null);
+                if(group.getStudents().iterator().next().getGroups().iterator().next().getId()!=null) {
+                    group.getStudents().iterator().next().getGroups().iterator().next().setId(null);
                 }
 
+                    System.out.println(group.getStudents().iterator().next().getGroups().iterator().next().getId()+" gr id");
+
             }
-            if(group.getCategoryGroup()!=null){
-                group.setCategoryGroup(null);
+            if(group.getCategoryGroup().getId()!=null){
+                group.getCategoryGroup().setId(null);
+                System.out.println(group.getCategoryGroup().getId()+" id categ");
             }
 
             System.out.println();
-            groupService.deleteListOfGroup(ids.get(i));
+          //  groupService.deleteListOfGroup(ids.get(i));
 
         }
         return "redirect:/group//ShowGroupPage";

@@ -38,7 +38,7 @@
 <div class="container addgroup_form">
     <h1>Delete group</h1>
     <br>
-    <form:form action="deleteGroup"  method="get">
+    <form:form action="deleteGroups"  method="get">
 
         <li> Group
             <ul>
