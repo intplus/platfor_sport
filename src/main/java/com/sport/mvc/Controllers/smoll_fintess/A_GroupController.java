@@ -237,24 +237,45 @@ public class A_GroupController {
     @RequestMapping(value = "/showFormForDelete", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView FormForDeleteGroups() {
         // create model attribute to bind form data
-        Group group = new Group();
-        List<Group> groupList = groupService.getAll();
+
+        List<Group> groupList = new ArrayList<>();
+        for (Group g: groupService.getAll()){
+            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+                groupList.add(g);
+            }
+        }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("groupList", groupList);
-        modelAndView.addObject("group", group);
-        modelAndView.setViewName("a_small_fitness/delete_form/A_small_fitness_delete_groups");
+        if(!groupList.isEmpty()) {
+            modelAndView.addObject("groupList", groupList);
+        }
+
+        modelAndView.setViewName("a_small_fitness/delete/A_delete_groups");
         //  return "A_small_fitness_add_group";
         return modelAndView;
     }
 
-    @PostMapping("/deleteGroup")
-    public String deleteGroup(@RequestParam(value = "case", required = false) List<Long> ids) {
+    @RequestMapping("/deleteGroup")
+    public String deleteGroup(@RequestParam(value = "idGroup", required = false) List<Long> ids) {
 
         for (int i = 0; i < ids.size(); i++) {
+            Group group = groupService.getGroup(ids.get(i));
+            group.setUser(null);
+            while(group.getStudents().iterator().hasNext()){
+              //  Student theStudent =studentService.getStudent(ids.get(i));
+                if(group.getStudents().iterator().next().getGroups()!=null) {
+                    group.getStudents().iterator().next().setGroups(null);
+                }
+
+            }
+            if(group.getCategoryGroup()!=null){
+                group.setCategoryGroup(null);
+            }
+
+            System.out.println();
             groupService.deleteListOfGroup(ids.get(i));
 
         }
-        return "redirect:/group/showFormForDelete";
+        return "redirect:/group//ShowGroupPage";
     }
 
 
@@ -262,12 +283,20 @@ public class A_GroupController {
     public ModelAndView FormForUpdateGroups() {
         // create model attribute to bind form data
         Group group = new Group();
-        List<Group> groupList = groupService.getAll();
+
+        List<Group> groupList = new ArrayList<>();
+        for (Group g: groupService.getAll()){
+            if(g.getUser().getId()!=null && g.getUser().getId() ==getCurrentUser().getId()){
+                groupList.add(g);
+            }
+        }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("groupList", groupList);
+        if(!groupList.isEmpty()) {
+            modelAndView.addObject("groupList", groupList);
+        }
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_groups");
-        //  return "A_small_fitness_add_group";
+
         return modelAndView;
     }
 
@@ -277,16 +306,16 @@ public class A_GroupController {
         //add group to DB
         System.out.println(group.getName());
         for (Group g : groupService.getAll()) {
-            if (g.getId() == theId && groupService.getGroup(theId).getName() != null) {
+            if (g.getId() == theId && groupService.getGroup(theId).isMain() == true) {
                 g.setName(group.getName());
                 groupService.addGroup(g);
-                continue;
+                break;
             }
-//            if(g.getId()==theId&& groupService.getGroup(theId).getNameTraine()!=null){
-//                g.setNameTraine(group.getName());
-//                groupService.addGroup(g);
-//                continue;
-//            }
+            if(g.getId()==theId&& groupService.getGroup(theId).isMain()!=true){
+                g.setName(group.getName());
+                groupService.addGroup(g);
+                break;
+            }
         }
         return "redirect:/group/showFormForUpdate";
     }
@@ -297,9 +326,17 @@ public class A_GroupController {
         // create model attribute to bind form data
         CategoryGroup category = new CategoryGroup();
 
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
+        for(CategoryGroup c: categoryService.getAll()){
+            if(c.getUser().getId()!=null && c.getUser().getId()==getCurrentUser().getId()){
+                categoryGroupList.add(c);
+            }
+        }
+
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categoryList", categoryGroupList);
+        if (!categoryGroupList.isEmpty()) {
+            modelAndView.addObject("categoryList", categoryGroupList);
+        }
         modelAndView.addObject("category", category);
         modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_category");
         //  return "A_small_fitness_add_group";
@@ -312,11 +349,11 @@ public class A_GroupController {
         //add group to DB
 
         for (CategoryGroup c : categoryService.getAll()) {
-//            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getNameTraine()!=null) {
-//                c.setNameTraine(category.getName());
-//                categoryService.addCategoryGroup(c);
-//            }
-            if (c.getId() == theId && categoryService.getCategoryGroup(theId).getName() != null) {
+            if(c.getId()==theId && categoryService.getCategoryGroup(theId).isMain()==true) {
+                c.setName(category.getName());
+                categoryService.addCategoryGroup(c);
+            }
+            if (c.getId() == theId && categoryService.getCategoryGroup(theId).isMain() != true) {
                 c.setName(category.getName());
                 categoryService.addCategoryGroup(c);
             }
@@ -325,10 +362,7 @@ public class A_GroupController {
     }
 
 
-    @RequestMapping("/deleteGroup")
-    public void deleteGrout() {
-        //  groupService.deleteListOfGroup();
-    }
+
 
     @RequestMapping("/addStudentToGroupForm")
     public String addStudentToGroup(Model theModel) {

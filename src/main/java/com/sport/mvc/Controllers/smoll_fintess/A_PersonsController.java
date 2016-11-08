@@ -183,7 +183,7 @@ public class A_PersonsController {
                                     RedirectAttributes ra) {
         if (addToGroup!=null) {
             Long groupId = null;
-            System.out.println("in add to group");
+
             Set<Group> groupSet = new HashSet<>();
             List<Group> groups = groupService.getAll();
             for (int i = 0; i<groups.size(); i++) {
