@@ -436,7 +436,9 @@ public class A_PersonsController {
 
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
-                                    @RequestParam(value = "option", required = false) String option) {
+                                    @RequestParam(value = "option", required = false) String option){
+        System.out.println(data+ " the data");
+        System.out.println(option+ "option");
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
         Set<Student> particularCollision = new LinkedHashSet<Student>();

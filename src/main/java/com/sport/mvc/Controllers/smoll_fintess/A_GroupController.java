@@ -99,7 +99,8 @@ public class A_GroupController {
         if (idGroup != null && groupService.getGroup(idGroup).isMain() == true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseGroup", chooseGroup);
-        } else {
+        }
+        if(idGroup != null && groupService.getGroup(idGroup).isMain() != true){
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
@@ -259,26 +260,22 @@ public class A_GroupController {
 
         for (int i = 0; i < ids.size(); i++) {
             Group group = groupService.getGroup(ids.get(i));
+            if(!group.getStudents().isEmpty()) {
+                for (Student s : group.getStudents()) {
+                    s.setGroups(null);
+                    studentService.addStudent(s);
+                }
+            }
+
+            if(group.getCategoryGroup()!=null){
+                group.setCategoryGroup(null);
+                groupService.addGroup(group);
+
+            }
 
             group.setUser(null);
-
-            while(group.getStudents().iterator().hasNext()){
-
-              //  Student theStudent =studentService.getStudent(ids.get(i));
-                if(group.getStudents().iterator().next().getGroups().iterator().next().getId()!=null) {
-                    group.getStudents().iterator().next().getGroups().iterator().next().setId(null);
-                }
-
-
-
-            }
-            if(group.getCategoryGroup().getId()!=null){
-                group.getCategoryGroup().setId(null);
-
-            }
-
-            System.out.println();
-          //  groupService.deleteListOfGroup(ids.get(i));
+            groupService.addGroup(group);
+            groupService.deleteListOfGroup(ids.get(i));
 
         }
         return "redirect:/group//ShowGroupPage";
@@ -352,8 +349,6 @@ public class A_GroupController {
 
     @PostMapping("/updateCategory")
     public String updateTrainersGroup(@ModelAttribute("category") CategoryGroup category, @RequestParam("option") Long theId) {
-        //add group to DB
-
         for (CategoryGroup c : categoryService.getAll()) {
             if(c.getId()==theId && categoryService.getCategoryGroup(theId).isMain()==true) {
                 c.setName(category.getName());
@@ -382,16 +377,13 @@ public class A_GroupController {
 
     @RequestMapping("saveStudentToGroup")
     public String saveStudentToGroup(@ModelAttribute("student") Student theStudent) {
-
         Set<Group> groupSet = new HashSet<>();
-        // Group group =groupService.getGroup(idGroup);
-//        group.setUser(getCurrentUser());
+
         groupSet.add(groupService.getGroup(idGroup));
         theStudent.setUser(getCurrentUser());
         theStudent.setGroups(groupSet);
         studentService.addStudent(theStudent);
         return "redirect:/group/addStudentToGroupForm";
-
     }
 
     @RequestMapping("/takeIdGroup")
