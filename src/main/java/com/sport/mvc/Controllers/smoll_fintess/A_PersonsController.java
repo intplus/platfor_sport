@@ -406,26 +406,56 @@ public class A_PersonsController {
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-        List<Student> students =new ArrayList<>();
+      //  List<Student> students =new ArrayList<>();
         //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
-        if (option.equals("ageAfterSixteen")) {
+        List<Student> students = new ArrayList<>();
 
-             students = studentService.getStudentAgeAfterSixteen();
-        }
-       else if (option.equals("ageBeforeSixteen")){
-           students = studentService.getStudentAgeBeforSixteen();
+            if (option.equals("ageAfterSixteen")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != getCurrentUser().getId() || s.getAge() == null || s.getAge().equals("")) {
+                        continue;
+                    }
+                    int age = Integer.parseInt(s.getAge());
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId() &&
+                            age > 16) {
+                        students.add(s);
 
-        }
+                    }
+                }
+            } else if (option.equals("ageBeforeSixteen")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != getCurrentUser().getId() || s.getAge() == null || s.getAge().equals("")) {
+                        continue;
+                    }
+                    int age = Integer.parseInt(s.getAge());
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId() &&
+                            age <16) {
+                        students.add(s);
 
-        else  if(option.equals("getUnknownStudent")){
-            students =studentService.getStudentByOnlyUnknownStudent();
-        }
+                    }
+                }
+            } else if (option.equals("getUnknownStudent")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
 
-        else if(option.equals("allStudent")){
-            students = studentService.getAll();
+                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ||
+                                !(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)) {
+                            continue;
+                        }
+                        students.add(s);
+                    }
 
-        }
+                }
+            } else if (option.equals("allStudent")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
+                        students.add(s);
+                    }
+                }
+
+            }
+
 
             modelAndView.addObject("students", students);
             modelAndView.setViewName("A_small_fitness_first_work_Page");
