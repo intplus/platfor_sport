@@ -407,8 +407,6 @@ public class A_PersonsController {
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-      //  List<Student> students =new ArrayList<>();
-        //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = new ArrayList<>();
 
@@ -470,10 +468,6 @@ public class A_PersonsController {
     @RequestMapping(value = "/find")
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
                                     @RequestParam(value = "option", required = false) String option){
-
-        System.out.println("in method find");
-        System.out.println(data+ " the data");
-        System.out.println(option+ "option");
 
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
