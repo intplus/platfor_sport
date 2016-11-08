@@ -45,10 +45,10 @@ public class User extends Model {
     @Column(name = "district")
     private String district;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "session_history_id")
-//    private SessionHistory sessionHistory;
-//
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "session_history_id")
+    private SessionHistory sessionHistory;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "role_id")
     private Role role;
@@ -228,6 +228,14 @@ public class User extends Model {
 
     public void setPrices(Set<Price> prices) {
         this.prices = prices;
+    }
+
+    public SessionHistory getSessionHistory() {
+        return sessionHistory;
+    }
+
+    public void setSessionHistory(SessionHistory sessionHistory) {
+        this.sessionHistory = sessionHistory;
     }
 
     public User(Role role, String username, String password, String email) {
