@@ -53,36 +53,19 @@ public class User extends Model {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
-
-
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 
-
-
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Student> students = new HashSet<>();
-
-
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "sport_id", nullable = false, updatable = false))
     private Set<Sport> sports = new HashSet<>();
-//
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "price_id")
-    private Price price;
 
-    public Price getPrice() {
-        return price;
-    }
-
-    public void setPrice(Price price) {
-        this.price = price;
-    }
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Price> prices = new HashSet<>();
 
     @Column(name = "isactive")
     private String isactive;
@@ -237,6 +220,14 @@ public class User extends Model {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public Set<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Set<Price> prices) {
+        this.prices = prices;
     }
 
     public User(Role role, String username, String password, String email) {
