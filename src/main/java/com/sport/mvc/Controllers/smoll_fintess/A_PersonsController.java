@@ -169,38 +169,6 @@ public class A_PersonsController {
         return "redirect:/registerPerson/showFormForAdd";
     }
 
-//    @RequestMapping("/delete")
-//    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
-//                                    @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
-//                                    @RequestParam(value = "case", required = false) List <Long> ids,
-//                                    @RequestParam(value = "send_complex_email", required = false) String complexEmail,
-//                                    RedirectAttributes ra) {
-//
-//
-//        if(deletee!=null){
-//            if (ids!=null)
-//
-//                for (int i =0; i < ids.size();i++) {
-//                    System.out.println("in method A_controller del " + ids );
-//                    studentService.deleteListOfStudents(ids.get(i));
-//                }
-//        }
-//        else if (complexEmail!=null) {
-//            //redirect ids to the send complex message page
-//            ra.addFlashAttribute("id", ids);
-//            return "redirect:/registerPerson/showComplexMailForm";
-//        }
-//
-//        else if(sendEmail!=null){
-//            //redirect our ids to the send message page
-//            ra.addFlashAttribute("id", ids);
-//            return "redirect:/registerPerson/showMailForm";
-//
-//
-//        }
-//
-//        return "redirect:/registerPerson/showFirstWorkPage";
-//    }
 
 
     @RequestMapping(value = "/act")

@@ -435,7 +435,7 @@ public class A_GroupController {
                 }
 
         }
-            return "redirect:/registerPerson/showGroupPage";
+            return "redirect:/group//ShowGroupPage";
         }
 
 
