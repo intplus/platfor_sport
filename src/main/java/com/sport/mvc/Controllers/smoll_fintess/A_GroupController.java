@@ -263,7 +263,7 @@ public class A_GroupController {
             group.setUser(null);
 
             while(group.getStudents().iterator().hasNext()){
-                
+
               //  Student theStudent =studentService.getStudent(ids.get(i));
                 if(group.getStudents().iterator().next().getGroups().iterator().next().getId()!=null) {
                     group.getStudents().iterator().next().getGroups().iterator().next().setId(null);
