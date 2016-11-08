@@ -261,20 +261,20 @@ public class A_GroupController {
             Group group = groupService.getGroup(ids.get(i));
 
             group.setUser(null);
-            System.out.println(group.getUser().getId()+" id user group");
+
             while(group.getStudents().iterator().hasNext()){
-                System.out.println(group.getStudents().iterator().next().getGroups().iterator().next().getId()+" st id");
+                
               //  Student theStudent =studentService.getStudent(ids.get(i));
                 if(group.getStudents().iterator().next().getGroups().iterator().next().getId()!=null) {
                     group.getStudents().iterator().next().getGroups().iterator().next().setId(null);
                 }
 
-                    System.out.println(group.getStudents().iterator().next().getGroups().iterator().next().getId()+" gr id");
+
 
             }
             if(group.getCategoryGroup().getId()!=null){
                 group.getCategoryGroup().setId(null);
-                System.out.println(group.getCategoryGroup().getId()+" id categ");
+
             }
 
             System.out.println();
