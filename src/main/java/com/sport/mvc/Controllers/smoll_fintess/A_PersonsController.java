@@ -12,6 +12,7 @@ import com.sport.mvc.socialAdvertisement.SendMailService;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.StudentService;
 
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -438,10 +439,12 @@ public class A_PersonsController {
             } else if (option.equals("getUnknownStudent")) {
                 for (Student s : studentService.getAll()) {
                     if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
-
-                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ||
-                                !(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)) {
-                            continue;
+                        System.out.println(s.getName()+" ---name");
+                        System.out.println(s.getSurname()+"---familia");
+                        System.out.println(s.getEmail()+"===mail");
+                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("")) {
+                            //||!(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)
+                           continue;
                         }
                         students.add(s);
                     }
