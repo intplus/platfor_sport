@@ -507,35 +507,27 @@ public class A_GroupController {
     @PostMapping("/saveOrChangeAbonement")
     public String addOrChangeAbonement(@ModelAttribute("price") Price price) {
 
-        if(priceService.getAll().isEmpty())  {
-            System.out.println( priceService.getAll().size()+ "size");
-            Group group = groupService.getGroup(idGroup);
+        Group group = groupService.getGroup(idGroup);
+
+
+        if(!priceService.getAll().isEmpty()) {
+            for (Price p: priceService.getAll()){
+                if (group.getPrices().getId() == p.getId()) {
+                        p.setPriceMonth(price.getPriceMonth());
+                        p.setPriceMonthHalf(price.getPriceMonthHalf());
+                        p.setPriceSingle(price.getPriceSingle());
+                        priceService.addPrice(p);
+                        break;
+                    }
+
+            }
+        }
+
+        if(priceService.getAll().isEmpty()) {
             price.setGroups(group);
             price.setUser(getCurrentUser());
             priceService.addPrice(price);
         }
-        else {
-            for (Price p : priceService.getAll()) {
-                if (idGroup == p.getGroups().getId()) {
-                    System.out.println(idGroup+"  id gr  ,," + p.getGroups().getId()+" id price");
-                    p.setPriceMonth(price.getPriceMonth());
-                    p.setPriceMonthHalf(price.getPriceMonthHalf());
-                    p.setPriceSingle(price.getPriceSingle());
-                    priceService.addPrice(p);
-                    break;
-                } else {
-                    System.out.println(idGroup +" else,,"+p.getGroups().getId()+" id price");
-                    Group group = groupService.getGroup(idGroup);
-                    price.setGroups(group);
-                    price.setUser(getCurrentUser());
-                    priceService.addPrice(price);
-                    break;
-                }
-            }
-        }
-
-
-
         return "redirect:/group/ShowGroupPage";
     }
 
