@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.xml.ws.RequestWrapper;
 import java.util.*;
 
 
@@ -469,6 +470,29 @@ public class A_GroupController {
         }
             return "redirect:/group//ShowGroupPage";
         }
+
+        @RequestMapping("/showFormAddOrChangePriceAbonement")
+        public  String showFormAddOrChangePrice(){
+
+
+
+            return "A_small_fitness_addOrChange_price_of_abonement";
+        }
+
+    @PostMapping("/addOrChangeAbonement")
+    public String addOrChangeAbonement(@ModelAttribute("abonement") CategoryGroup category, @RequestParam("option") Long theId) {
+        for (CategoryGroup c : categoryService.getAll()) {
+            if(c.getId()==theId && categoryService.getCategoryGroup(theId).isMain()==true) {
+                c.setName(category.getName());
+                categoryService.addCategoryGroup(c);
+            }
+            if (c.getId() == theId && categoryService.getCategoryGroup(theId).isMain() != true) {
+                c.setName(category.getName());
+                categoryService.addCategoryGroup(c);
+            }
+        }
+        return "redirect:/group/showFormForUpdateCategory";
+    }
 
 
 

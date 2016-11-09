@@ -92,6 +92,7 @@
                         </c:forEach>
                     </ul>
                 </li>
+                <li><a href="/group//showFormAddOrChangePriceAbonement"></a></li>
                 <%--// Empty li--%>
                 <li><a href="#">.....</a></li>
                 <%--//show new creating groups--%>
