@@ -160,6 +160,37 @@ public class A_PersonsController {
         theStudent.setRecordDay(dateFormat.format(today));
 
         theStudent.setUser(getCurrentUser());
+        if(!theStudent.getName().equals("") && theStudent.getName().length()>=1 && theStudent.getName().length()<=3){
+            model.addAttribute("moreChar", "name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getSurname().equals("") && theStudent.getSurname().length()>=1 && theStudent.getSurname().length()<=3){
+            model.addAttribute("moreCharSereName", "sere name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+        if(!theStudent.getName().equals("") && theStudent.getName().length()>=1 && theStudent.getName().length()<=3){
+            model.addAttribute("moreChar", "name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getPhone().equals("") && theStudent.getPhone().length()<10){
+            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+//        if(!theStudent.getBirthday().equals("") ){
+//            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+//            return "a_small_fitness/add_form/A_small_fitness_add_student";
+//        }
+        if(!theStudent.getAge().equals("") && theStudent.getAge().equals("0")){
+            model.addAttribute("ageException", "Age must be more then 0 ");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getPhone().equals("") && theStudent.getPhone().length()<10){
+            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
 
         if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
                  && theStudent.getComments().equals("") && theStudent.getSurname().equals("")&&theStudent.getBirthday()==null
