@@ -272,6 +272,7 @@
         <th>Статус оплаты</th>
         <th>Блок<input type="radio"></th>
         <th><input type="checkbox" id="selectall"></th>
+       <th>Редактировать поле</th>
         </thead>
         <tbody>
 
@@ -334,7 +335,6 @@
                 </td>
                 <td > <input type="radio"></td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
-                <td align="left"></td>
                 <td>
                     <!-- construct an "update" link with customer id -->
                     <c:url var="updateLink" value="/registerPerson/showFormForUpdate" >
