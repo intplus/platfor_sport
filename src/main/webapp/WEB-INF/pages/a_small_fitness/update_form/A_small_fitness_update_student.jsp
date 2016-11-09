@@ -88,6 +88,7 @@
                 <td><label>Comment:</label></td>
                 <td><form:input path="comments"  /></td>
             </tr>
+            <form:input type="hidden" path="recordDay"/>
             <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>

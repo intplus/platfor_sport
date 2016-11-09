@@ -273,9 +273,7 @@ public class A_PersonsController {
         if(result.hasErrors()) {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
-        Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        theStudent.setRecordDay(dateFormat.format(today));
+
         theStudent.setUser(getCurrentUser());
         studentService.updateStudent(theStudent);
 
@@ -289,6 +287,7 @@ public class A_PersonsController {
         System.out.println(theId);
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
+        theStudent.setRecordDay(theStudent.getRecordDay());
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
