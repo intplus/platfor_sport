@@ -60,6 +60,7 @@
 
                 <td><label></label></td>
                 <td><input type="submit" value="Save Price" class="save" /></td>
+            <td><input type="submit" value="Delete abonement" class="delete" /></td>
             </tr>
 
             </tbody>
