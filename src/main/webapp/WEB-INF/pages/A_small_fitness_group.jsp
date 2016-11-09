@@ -177,18 +177,10 @@
         <li><a href="#">Finance</a></li>
 
         <li>
-            <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
-
-            <c:choose>
-                <c:when test="${groupTrainer}!=null">
-                    <h4>You in ${groupTrainer} group </h4>
-                </c:when>
-                <c:otherwise >
-                    <h4>You in ${groupTrainer} group</h4>
-                </c:otherwise>
-            </c:choose>
+            <c:set value="${chooseGroup}" var="group"/>
+            <a href="#">You in ${group.name} group</a>
         </li>
-
+         <li><a href="#">${currentUser.username}  ${currentUser.email}</a></li>
         <li id="out"><a href='<c:url value="/logout"></c:url>' class="btn btn-default btn-flat">Sign OUT</a></li>
     </ul>
 
@@ -198,14 +190,15 @@
 
 <div>
     <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
+    <c:set value="${chooseGroup}" var="group"/>
 
     <c:choose>
         <c:when test="${groupTrainer}!=null">
             <h4>You in ${groupTrainer} group </h4>
         </c:when>
-        <c:otherwise >
-            <h4>You in ${groupTrainer} group</h4>
-        </c:otherwise>
+        <c:when test="${groupTrainer}==null">
+            <h4>You in ${group} group </h4>
+        </c:when>
     </c:choose>
 
 </div>

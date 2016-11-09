@@ -96,17 +96,9 @@ public class A_GroupController {
             modelAndView.addObject("categoryList", categoryGroupList);
         }
 
-
-        //param for identifying locations is ->String chooseGroup
-        if (idGroup != null && groupService.getGroup(idGroup).isMain() == true) {
-            String chooseGroup = groupService.getGroup(idGroup).getName();
+        Group chooseGroup = groupService.getGroup(idGroup);
             modelAndView.addObject("chooseGroup", chooseGroup);
-        }
-        if(idGroup != null && groupService.getGroup(idGroup).isMain() != true){
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
-        }
-
+            System.out.println(chooseGroup.getName());
 
         List<Price> priceList = new ArrayList<Price>();
         for(Price p: priceService.getAll() ){
@@ -125,6 +117,7 @@ public class A_GroupController {
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
     }
