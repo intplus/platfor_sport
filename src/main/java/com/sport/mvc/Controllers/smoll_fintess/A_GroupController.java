@@ -2,10 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.*;
-import com.sport.mvc.services.CategoryGroupService;
-import com.sport.mvc.services.GroupService;
-import com.sport.mvc.services.StudentService;
-import com.sport.mvc.services.UserService;
+import com.sport.mvc.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.acls.model.NotFoundException;
@@ -28,6 +25,10 @@ public class A_GroupController {
     @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
+
+    @Autowired
+    @Qualifier("priceService")
+    private PriceService priceService;
 
     @Autowired
     @Qualifier("userService")
@@ -104,6 +105,22 @@ public class A_GroupController {
         if(idGroup != null && groupService.getGroup(idGroup).isMain() != true){
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
+        }
+
+
+        List<Price> priceList = new ArrayList<Price>();
+        for(Price p: priceService.getAll() ){
+            if( p.getUser().getId()!=null && p.getUser().getId()==getCurrentUser().getId() &&
+                    p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
+                priceList.add(p);
+
+            }
+        }
+        for(Price p: priceList){
+            System.out.println(p.getPriceSingle()+" price to jsp");
+        }
+        if(!priceList.isEmpty()){
+            modelAndView.addObject("priceList",priceList);
         }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
@@ -472,26 +489,54 @@ public class A_GroupController {
         }
 
         @RequestMapping("/showFormAddOrChangePriceAbonement")
-        public  String showFormAddOrChangePrice(){
+        public  String showFormAddOrChangePrice(Model theModel){
 
-
-
-            return "A_small_fitness_addOrChange_price_of_abonement";
+            Price price = new Price();
+            List<Price> priceList = new ArrayList<Price>();
+            for(Price p: priceService.getAll() ){
+                if( p.getUser().getId()!=null && p.getUser().getId()==getCurrentUser().getId() &&
+                        p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
+                          priceList.add(p);
+                }
+            }
+       theModel.addAttribute("price",price);
+//       theModel.addAttribute("priceList",priceList);
+            return "a_small_fitness/add_form/A_small_fitness_addOrChange_price_of_abonement";
         }
 
-    @PostMapping("/addOrChangeAbonement")
-    public String addOrChangeAbonement(@ModelAttribute("abonement") CategoryGroup category, @RequestParam("option") Long theId) {
-        for (CategoryGroup c : categoryService.getAll()) {
-            if(c.getId()==theId && categoryService.getCategoryGroup(theId).isMain()==true) {
-                c.setName(category.getName());
-                categoryService.addCategoryGroup(c);
-            }
-            if (c.getId() == theId && categoryService.getCategoryGroup(theId).isMain() != true) {
-                c.setName(category.getName());
-                categoryService.addCategoryGroup(c);
+    @PostMapping("/saveOrChangeAbonement")
+    public String addOrChangeAbonement(@ModelAttribute("price") Price price) {
+
+        if(priceService.getAll().isEmpty())  {
+            System.out.println( priceService.getAll().size()+ "size");
+            Group group = groupService.getGroup(idGroup);
+            price.setGroups(group);
+            price.setUser(getCurrentUser());
+            priceService.addPrice(price);
+        }
+        else {
+            for (Price p : priceService.getAll()) {
+                if (idGroup == p.getGroups().getId()) {
+                    System.out.println(idGroup+"  id gr  ,," + p.getGroups().getId()+" id price");
+                    p.setPriceMonth(price.getPriceMonth());
+                    p.setPriceMonthHalf(price.getPriceMonthHalf());
+                    p.setPriceSingle(price.getPriceSingle());
+                    priceService.addPrice(p);
+                    break;
+                } else {
+                    System.out.println(idGroup +" else,,"+p.getGroups().getId()+" id price");
+                    Group group = groupService.getGroup(idGroup);
+                    price.setGroups(group);
+                    price.setUser(getCurrentUser());
+                    priceService.addPrice(price);
+                    break;
+                }
             }
         }
-        return "redirect:/group/showFormForUpdateCategory";
+
+
+
+        return "redirect:/group/ShowGroupPage";
     }
 
 

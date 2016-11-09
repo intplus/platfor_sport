@@ -92,7 +92,7 @@
                         </c:forEach>
                     </ul>
                 </li>
-                <li><a href="/group//showFormAddOrChangePriceAbonement"></a></li>
+                <li><a href="/group//showFormAddOrChangePriceAbonement">Abonement Price</a></li>
                 <%--// Empty li--%>
                 <li><a href="#">.....</a></li>
                 <%--//show new creating groups--%>
@@ -288,7 +288,28 @@
                 <td align="left">${student.surname}</td>
                 <td>${student.phone}</td>
                 <td>${student.email}</td>
-                <td></td>
+
+                <td>
+
+                    <select name="selectedPrice">
+                        <option value="0">abonement price</option>
+                        <c:forEach items="${priceList}" var="prices">
+                            <%--<c:choose>--%>
+                            <c:if test="${prices.priceMonth!=0}">
+                            <option value="prices"><c:out value="${prices.priceMonth}"/></option>
+                            </c:if>
+                                <c:if test="${prices.priceMonth!=0}">
+                                    <option value="prices"><c:out value="${prices.priceMonthHalf}"/></option>
+                                </c:if>
+                                <c:if test="${prices.priceMonth!=0}">
+                                    <option value="prices"><c:out value="${prices.priceSingle}"/></option>
+                                </c:if>
+                        <%--</c:choose>--%>
+                        </c:forEach>
+                    </select>
+
+                </td>
+
                 <td></td>
                 <td>
                     <select name="selectedStartDate">

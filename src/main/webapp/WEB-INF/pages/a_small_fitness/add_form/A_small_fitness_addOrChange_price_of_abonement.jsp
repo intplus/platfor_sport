@@ -30,44 +30,36 @@
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
         </ul>
 
-        <!-- LOGIN FORM -->
-        <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required>
-            <input type="submit" value="Sign In">
-        </form>
-        <!-- /LOGIN FORM -->
+
     </div>
 </nav>
 
 
 <div class="container addgroup_form">
-    <h1>Add new group or add new group to category</h1>
+    <h1>Add new  or change price</h1>
     <br>
-    <form:form action="saveGroup" modelAttribute="group" method="POST">
+    <form:form action="saveOrChangeAbonement" modelAttribute="price" method="POST">
         <form:hidden path="id" />
         <table>
             <tbody>
             <tr>
-                <td><label>Name:</label></td>
-                <td><form:input path="name" /></td>
+                <td><label>single price:</label></td>
+                <td><form:input path="priceSingle" /></td>
+            </tr>
+
+
+            <tr>
+                <td><label>half month:</label></td>
+                <td><form:input path="priceMonthHalf" /></td>
             </tr>
 
             <tr>
-                <select name="option">
-                    <option value="">выберите категорию</option>
-                    <c:forEach items="${categoryList}" var="category">
-                        <c:if test="${category.main==true}">
-                            <option value="${category.name}">
-                                <c:out value="${category.name}"/>
-                            </option>
-                        </c:if>
-                    </c:forEach>
-                </select>
+                <td><label>month price:</label></td>
+                <td><form:input path="priceMonth" /></td>
             </tr>
-            <tr>
+
                 <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+                <td><input type="submit" value="Save Price" class="save" /></td>
             </tr>
 
             </tbody>
@@ -75,7 +67,7 @@
     </form:form>
 </div>
 
-<a href="/group//ShowGroupPage">Return tu group</a>
+<a href="/group//ShowGroupPage">Return to group</a>
 <footer class="footer">
     <div class="container">
 
