@@ -489,41 +489,51 @@ public class A_GroupController {
         }
 
         @RequestMapping("/showFormAddOrChangePriceAbonement")
-        public  String showFormAddOrChangePrice(Model theModel){
+        public  String showFormAddOrChangePrice( Model theModel){
 
             Price price = new Price();
-            List<Price> priceList = new ArrayList<Price>();
-            for(Price p: priceService.getAll() ){
-                if( p.getUser().getId()!=null && p.getUser().getId()==getCurrentUser().getId() &&
-                        p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
-                          priceList.add(p);
+            theModel.addAttribute("price", price);
+
+            for(Price p: priceService.getAll()){
+                if (idGroup==p.getGroups().getId()){
+                    theModel.addAttribute("price",p);
+
+                    break;
                 }
+
             }
-       theModel.addAttribute("price",price);
-//       theModel.addAttribute("priceList",priceList);
+
             return "a_small_fitness/add_form/A_small_fitness_addOrChange_price_of_abonement";
         }
 
     @PostMapping("/saveOrChangeAbonement")
     public String addOrChangeAbonement(@ModelAttribute("price") Price price) {
 
+        boolean flag=true;
         Group group = groupService.getGroup(idGroup);
-
-
-        if(!priceService.getAll().isEmpty()) {
+        if(!priceService.getAll().isEmpty() ) {
             for (Price p: priceService.getAll()){
-                if (group.getPrices().getId() == p.getId()) {
+                if ( p!=null && idGroup == p.getGroups().getId()){
+                    System.out.println("in if check");
                         p.setPriceMonth(price.getPriceMonth());
                         p.setPriceMonthHalf(price.getPriceMonthHalf());
                         p.setPriceSingle(price.getPriceSingle());
                         priceService.addPrice(p);
+                        flag=true;
                         break;
                     }
-
+                    flag=false;
+            }
+            if (flag==false){
+                price.setGroups(group);
+                price.setUser(getCurrentUser());
+                priceService.addPrice(price);
+                    flag=true;
             }
         }
 
         if(priceService.getAll().isEmpty()) {
+            System.out.println("in is empty");
             price.setGroups(group);
             price.setUser(getCurrentUser());
             priceService.addPrice(price);

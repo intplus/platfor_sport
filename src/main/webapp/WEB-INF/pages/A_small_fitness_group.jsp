@@ -213,7 +213,7 @@
 <!-- MAIN SECTION -->
 <main>
 
-    <a href="/group/addPriceSubscription">abonement price</a>
+
 
     <div class="work_form">
 

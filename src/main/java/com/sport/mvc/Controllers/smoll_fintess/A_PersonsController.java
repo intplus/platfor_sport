@@ -315,7 +315,7 @@ public class A_PersonsController {
     public String showFormForUpdate(@RequestParam("studentId") long theId, Model theModel) {
 
         //   logger.info("showing form for update");
-        System.out.println(theId);
+
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
         theStudent.setRecordDay(theStudent.getRecordDay());
