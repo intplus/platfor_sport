@@ -76,8 +76,8 @@
             </tr>
             <br>
             <tr>
-                <td><label>Birthday in format (dd.mm.yyyy):</label></td>
-                <td><form:input path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
+                <td><label>Birthday:</label></td>
+                <td><form:input type="date" path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
             </tr>
             <br>
             <tr>

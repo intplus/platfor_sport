@@ -376,9 +376,13 @@ public class A_GroupController {
 
 
     @RequestMapping("saveStudentToGroup")
-    public String saveStudentToGroup(@ModelAttribute("student") Student theStudent) {
+    public String saveStudentToGroup(@ModelAttribute("student") Student theStudent, Model model) {
         Set<Group> groupSet = new HashSet<>();
-
+        if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
+                 && theStudent.getSurname().equals("")) {
+            model.addAttribute("nullFields", "Add at least one field");
+            return "a_small_fitness/add_form/A_add_to_group_Student";
+        }
         groupSet.add(groupService.getGroup(idGroup));
         theStudent.setUser(getCurrentUser());
         theStudent.setGroups(groupSet);

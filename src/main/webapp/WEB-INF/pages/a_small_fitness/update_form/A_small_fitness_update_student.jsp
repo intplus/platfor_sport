@@ -73,7 +73,7 @@
             </tr>
 
             <tr>
-                <td><label>Birthday in format (dd.mm.yyyy):</label></td>
+                <td><label>Birthday:</label></td>
                 <td><form:input path="birthday" /><form:errors path="birthday" class="alert alert-danger"></form:errors></td>
             </tr>
             <tr>
