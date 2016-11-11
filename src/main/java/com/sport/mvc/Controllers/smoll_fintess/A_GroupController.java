@@ -115,6 +115,10 @@ public class A_GroupController {
             modelAndView.addObject("priceList",priceList);
         }
 
+        for (int i = 0; i<studentsListInGroup.size(); i++) {
+
+        }
+        modelAndView.addObject("countOfRecords", studentsListInGroup.size());
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.addObject("currentUser", getCurrentUser());
@@ -467,12 +471,20 @@ public class A_GroupController {
     }
 
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/act", method = RequestMethod.POST)
     public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
-                                    @RequestParam(value = "case", required = false) List<Long> ids) {
+                                    @RequestParam(value = "case", required = false) List<Long> ids,
+                                    @RequestParam(value = "set", required = false) String set,
+                                    @RequestParam(value = "selectedPrice", required = false) String price,
+                                    @RequestParam(value = "selectedStartDate", required = false) String firstDte,
+                                    @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
+                                    @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
+        if (set != null) {
+
+        }
 
 
-        if (deletee != null) {
+       else if (deletee != null) {
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {
