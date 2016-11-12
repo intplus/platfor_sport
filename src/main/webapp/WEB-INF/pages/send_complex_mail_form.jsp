@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -26,29 +27,17 @@
                     <input type="password" name="password" placeholder="Enter password from your email" class="form-control" >
 
 <table>
-    <%--<th>пон</th>--%>
-    <%--<th>вт</th>--%>
-    <%--<th>ср</th>--%>
-    <%--<th>чв</th>--%>
-    <%--<th>пн</th>--%>
-    <%--<th>суб</th>--%>
-    <%--<th>воск</th>--%>
+
         <c:forEach items="${date}" var="n">
         <th> ${n}  <input type="checkbox" class="case", name="case" value="${n}"></th>
 
         </c:forEach>
 
     <tr>
-        <%--<c:forEach items="${date}" var="n">--%>
-        <%--<td> ${n}  <input type="checkbox" class="case", name="case" value=""></td>--%>
-
-        <%--</c:forEach>--%>
-
-
-
 
     </tr>
 </table>
+
 
 
 
