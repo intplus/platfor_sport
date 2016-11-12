@@ -11,7 +11,7 @@ public class CustomerCard extends Model {
 
     private static final long serialVersionUID = -7420101268348647447L;
 
-    @Column(name = "comment")
+    @Column(name = "status")
     private String comment;
 
     @Column(name = "start_abonement")
