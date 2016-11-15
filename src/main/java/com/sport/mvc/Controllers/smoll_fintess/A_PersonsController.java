@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,6 +61,8 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
+
+    private User  curenUser ;
 
 
     //method for jump register page FITNESS CENTRE =)
@@ -123,37 +126,8 @@ public class A_PersonsController {
   if(!categoryGroupList.isEmpty()) {
       modelAndView.addObject("categoryList", categoryGroupList);
   }
-        int studentWithoutName = 0;
-        int studentWithoutSurname = 0;
-        int studnetWithoutPhone = 0;
-        int studnetWithoutEmail = 0;
-        int studentBefore16 = 0;
-        int studentAfter16 = 0;
-        for (int i = 0; i<studentsList.size(); i++) {
-            Student student = studentsList.get(i);
-            if (student.getName()==null || student.getName().equals(""))
-                studentWithoutName++;
-            if (student.getSurname()==null || student.getSurname().equals(""))
-                studentWithoutSurname++;
-            if (student.getPhone()==null || student.getPhone().equals(""))
-                studnetWithoutPhone++;
-            if (student.getEmail()==null || student.getEmail().equals(""))
-                studnetWithoutEmail++;
-            if (student.getAge()!=null && !student.getAge().equals("")) {
-                if (Integer.parseInt(student.getAge()) > 16)
-                    studentAfter16++;
-                if (Integer.parseInt(student.getAge()) < 16)
-                    studentBefore16++;
-            }
-        }
-        modelAndView.addObject("withoutPhone", studnetWithoutPhone);
-        modelAndView.addObject("withoutName", studentWithoutName);
-        modelAndView.addObject("withoutSurname", studentWithoutSurname);
-        modelAndView.addObject("withoutEmail", studnetWithoutEmail);
-        modelAndView.addObject("before16", studentBefore16);
-        modelAndView.addObject("after16", studentAfter16);
+
         modelAndView.addObject("currentUser", getCurrentUser());
-        modelAndView.addObject("countOfRecords", studentsList.size());
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
 
@@ -165,7 +139,7 @@ public class A_PersonsController {
     public void initBinder(WebDataBinder binder)
     {
         //format of date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, true));
@@ -422,53 +396,91 @@ public class A_PersonsController {
     @RequestMapping("/sendComplexMail")
     public String sendComplexMail(HttpServletRequest request,
                                   @RequestParam(value = "case", required = false) List <Integer> idN, Model model){
+
+
+        Thread thr = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
         Date d = new Date();
         SimpleDateFormat formatDay = new SimpleDateFormat("dd");
         SimpleDateFormat formatDay2 = new SimpleDateFormat("hh:mm:");
 
         int dayToday = Integer.parseInt(formatDay.format(d));
-        String timeToday =formatDay2.format(d);
+        String timeToday = "14:44";
 
-        System.out.println("time in hours = "+timeToday);
+
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        System.out.println(email);
+        System.out.println(email+ " from");
+
 
         //get the topic and body of the message
         String body = request.getParameter("body");
         String topic = request.getParameter("topic");
+        String body2= body+" now date"+new Date();
 
-        String resultMessage = "";
+List<Long> list = new ArrayList<>();
+        list.clear();
+        System.out.println(list.size()+" after clear");
+        for(Integer number: idN){
+            list.add(Long.valueOf(number));
+        }
+        System.out.println(list.size()+" after add");
 
-        for(int k= 0;k<=idN.size();k++){
-            System.out.println(idN.size()+" size");
-            if(idN.get(k)==dayToday ){
-                System.out.println("numbet in if "+dayToday+" its day todat=="+idN.get(k));
 
-        for (Student s: studentService.getAll()) {
-            if(s.getEmail()!=null || !s.getEmail().equals("")) {
-                try {
-                    System.out.println(s.getEmail() + " send to");
-                    sendMailService.sendMailTo(s.getEmail(), topic, body, email, password);
-                    resultMessage = "The e-mail was sent successfully";
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                    resultMessage = "Error the e-mail was not sent successfully";
+                    try {
+                        System.out.println(curenUser.getId() + " id --curant user");
+                        for (int k = 0; k <= idN.size(); k++) {
+                            System.out.println(idN.size() + " size");
+                                System.out.println(idN.get(k) + "------");
+                            if (idN.get(k) == dayToday) {
+                                System.out.println(dayToday + " day today its");
+                                System.out.println("numbet in if " + dayToday + " its day todat==" + idN.get(k));
+
+                                for (Student s : studentService.getAll()) {
+                                    if (s.getUser().getId() != null && s.getUser().getId() == curenUser.getId()) {
+                                        if (!s.getEmail().equals("") || s.getEmail() != null) {
+                                            try {
+                                                System.out.println(s.getEmail() + " send to");
+                                                sendMailService.sendMailTo(s.getEmail(), topic, body2, email, password);
+
+                                            } catch (MessagingException e) {
+                                                e.printStackTrace();
+
+                                            }
+
+
+                                        }
+
+                                    }
+                                }
+
+                            }//end of forEach Student s: studentService.getAll
+
+                        }//end of idN.get(k)==dayToday
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        System.out.println(" I am slip");
+                        TimeUnit.SECONDS.sleep(30);
+//                        TimeUnit.HOURS.sleep(24);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
-                }
-
             }
+        };
 
-          }//end of forEach Student s: studentService.getAll
-            model.addAttribute("message", resultMessage);
-            return "A_small_fitness_result_of_send_message";
-        }//end of idN.get(k)==dayToday
-     // return "A_small_fitness_first_work_Page";
-        return email;
+        thr.start();
+        return "redirect:/registerPerson/showFirstWorkPage";
+
+
 
 
     }
@@ -643,6 +655,7 @@ public class A_PersonsController {
         }
 
         User u = userService.getUserByUsername(username);
+        curenUser =u;
         return u;
     }
 }
