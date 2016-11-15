@@ -243,7 +243,7 @@
         <%--Table form--%>
         <div class="table form">
 
-            <form method="post" action="act">
+            <form method="get" action="/group//act">
                 <input type="hidden" id="txt" name="">
                 <input type="button" value="Добавить"
                        onclick="window.location.href='addStudentToGroupForm'; return false;" class="add-button"
@@ -348,23 +348,22 @@
         </c:forEach>
         </tbody>
     </table>
-    <br>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <th>Count of participants</th>
-        <th>Count of abonements</th>
-        <th>Sum of abonements</th>
-        <th>Users with debt</th>
+
         <tr align="center">
-            <td>${countOfRecords}</td>
+            <td>all count ${countOfRecords}</td>
             <td>${countOfAbonements}</td>
             <td>${withoutName}</td>
-            <td>${withDebt}</td>
+            <td>debt ${withDebt}</td>
 
         </tr>
 
 
     </table>
+    <br>
+
+
 
 
 

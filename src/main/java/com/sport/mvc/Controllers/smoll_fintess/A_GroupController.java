@@ -471,8 +471,8 @@ public class A_GroupController {
     }
 
 
-    @RequestMapping(value = "/act", method = RequestMethod.POST)
-    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
+    @RequestMapping(value = "/act")
+    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String delete,
                                     @RequestParam(value = "case", required = false) List<Long> ids,
                                     @RequestParam(value = "set", required = false) String set,
                                     @RequestParam(value = "selectedPrice", required = false) String price,
@@ -484,7 +484,7 @@ public class A_GroupController {
         }
 
 
-       else if (deletee != null) {
+       else if (delete != null) {
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {

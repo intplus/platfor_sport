@@ -123,8 +123,7 @@ public class A_PersonsController {
   if(!categoryGroupList.isEmpty()) {
       modelAndView.addObject("categoryList", categoryGroupList);
   }
-        int studentWithoutName = 0;
-        int studentWithoutSurname = 0;
+
         int studnetWithoutPhone = 0;
         int studnetWithoutEmail = 0;
         int studentBefore16 = 0;
