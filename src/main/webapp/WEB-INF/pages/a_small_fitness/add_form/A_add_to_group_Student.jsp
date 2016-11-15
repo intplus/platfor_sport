@@ -42,7 +42,6 @@
 
 <div class="container addgroup_form">
     <h1>Add student to group</h1>
-    <h2>${nullFields}</h2>
     <br>
     <form:form action="/group/saveStudentToGroup" modelAttribute="student" method="POST">
 
