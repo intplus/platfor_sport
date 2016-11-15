@@ -59,6 +59,16 @@ public class A_GroupController {
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<Group> groupsList = new ArrayList<>();
         List<Student> studentsListInGroup = new ArrayList<>();
+        List<CustomerCard> customerCardsList = new ArrayList<>();
+
+        for (Student s : studentService.getAll()) {
+            for (CustomerCard card : customerCardService.getAll()) {
+
+                if (card != null && card.getStudent().getId() ==s.getId()){
+                    customerCardsList.add(card);
+                }
+            }
+        }
 
         for (Student s : studentService.getAll()) {
 //check, if user has this student, add to student list
@@ -113,15 +123,13 @@ public class A_GroupController {
 
             }
         }
-        for(Price p: priceList){
-            System.out.println(p.getPriceSingle()+" price to jsp");
-        }
+
         if(!priceList.isEmpty()){
             modelAndView.addObject("priceList",priceList);
         }
 
-        for (int i = 0; i<studentsListInGroup.size(); i++) {
-
+        if(!customerCardsList.isEmpty()){
+            modelAndView.addObject("customerCardList", customerCardsList);
         }
         modelAndView.addObject("countOfRecords", studentsListInGroup.size());
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
@@ -485,11 +493,10 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
-            System.out.println(" in set method");
-            System.out.println(price+" its price");
-            int price2 =Integer.valueOf(price);
-            System.out.println(firstDte);
-            System.out.println(secondDate);
+
+            int price2 = 0;
+                 price2= Integer.valueOf(price);
+
             Student theStudent =null ;
             for(int i=0; i<ids.size();i++){
                 theStudent =studentService.getStudent(ids.get(i));

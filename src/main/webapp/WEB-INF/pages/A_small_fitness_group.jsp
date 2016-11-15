@@ -287,7 +287,19 @@
                 <td>
 
                     <select name="selectedPrice">
-                        <option value="0">abonement price</option>
+
+                        <%--//get price for student from db--%>
+                        <c:forEach items="${customerCardList}" var="customerCard">
+                            <c:choose>
+                                <c:when test="${student.id==customerCard.student.id}">
+                            <option >${customerCard.price}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option >abonement price</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
                         <c:forEach items="${priceList}" var="prices">
                             <%--<c:choose>--%>
                             <%--//--%>
@@ -325,9 +337,21 @@
                 </td>
                 <td>
                     <select name="selectedCode">
-                        <option value="1">Олачено</option>
-                        <option value="2">Не оплачено</option>
-                        <option value="3">Долг</option>
+                        <c:forEach items="${customerCardList}" var="customerCard">
+
+                                  <c:choose>
+                                      <c:when test="${student.id==customerCard.student.id}">
+                        <option value="0">${customerCard.status}</option>
+                                      </c:when>
+                                      <c:otherwise>
+                                          <option value="0">выбирете статус</option>
+                                      </c:otherwise>
+
+                                  </c:choose>
+                            </c:forEach>
+                        <option value="Олачено">Оплачено</option>
+                        <option value="Не оплачено">Не оплачено</option>
+                        <option value="Долг">Долг</option>
                     </select>
 
                 </td>
