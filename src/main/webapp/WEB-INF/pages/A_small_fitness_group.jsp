@@ -290,6 +290,7 @@
                         <option value="0">abonement price</option>
                         <c:forEach items="${priceList}" var="prices">
                             <%--<c:choose>--%>
+                            <%--//--%>
                             <c:if test="${prices.priceMonth!=0}">
                                 <option value="prices">other <c:out value="${prices.priceOther}"/></option>
                             </c:if>
