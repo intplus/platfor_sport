@@ -115,10 +115,6 @@ public class A_GroupController {
             modelAndView.addObject("priceList",priceList);
         }
 
-        for (int i = 0; i<studentsListInGroup.size(); i++) {
-
-        }
-        modelAndView.addObject("countOfRecords", studentsListInGroup.size());
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
         modelAndView.addObject("currentUser", getCurrentUser());
@@ -391,13 +387,9 @@ public class A_GroupController {
 
 
     @RequestMapping("saveStudentToGroup")
-    public String saveStudentToGroup(@ModelAttribute("student") Student theStudent, Model model) {
+    public String saveStudentToGroup(@ModelAttribute("student") Student theStudent) {
         Set<Group> groupSet = new HashSet<>();
-        if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
-                 && theStudent.getSurname().equals("")) {
-            model.addAttribute("nullFields", "Add at least one field");
-            return "a_small_fitness/add_form/A_add_to_group_Student";
-        }
+
         groupSet.add(groupService.getGroup(idGroup));
         theStudent.setUser(getCurrentUser());
         theStudent.setGroups(groupSet);
@@ -471,20 +463,12 @@ public class A_GroupController {
     }
 
 
-    @RequestMapping(value = "/act", method = RequestMethod.POST)
+    @RequestMapping("/delete")
     public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
-                                    @RequestParam(value = "case", required = false) List<Long> ids,
-                                    @RequestParam(value = "set", required = false) String set,
-                                    @RequestParam(value = "selectedPrice", required = false) String price,
-                                    @RequestParam(value = "selectedStartDate", required = false) String firstDte,
-                                    @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
-                                    @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
-        if (set != null) {
-
-        }
+                                    @RequestParam(value = "case", required = false) List<Long> ids) {
 
 
-       else if (deletee != null) {
+        if (deletee != null) {
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {
