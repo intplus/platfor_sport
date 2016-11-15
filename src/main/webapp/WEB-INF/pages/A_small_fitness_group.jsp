@@ -243,7 +243,7 @@
         <%--Table form--%>
         <div class="table form">
 
-            <form method="post" action="act">
+            <form method="get" action="delete">
                 <input type="hidden" id="txt" name="">
                 <input type="button" value="Добавить"
                        onclick="window.location.href='addStudentToGroupForm'; return false;" class="add-button"
@@ -270,7 +270,6 @@
         <th>Дата начала Абонемента</th>
         <th>Дата окончания Абонементадата</th>
         <th>Статус оплаты</th>
-        <th></th>
         <th>Блок<input type="radio"></th>
         <th><input type="checkbox" id="selectall"></th>
        <th>Редактировать поле</th>
@@ -307,11 +306,24 @@
 
                 <td></td>
                 <td>
-                   <input type="date" name="selectedStartDate">
+                    <select name="selectedStartDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                            <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
+                    </select>
+
                 </td>
 
                 <td>
-                    <input type="date" name="selectedFinisfDate">
+
+                    <select name="selectedFinisfDate">
+                        <option value="0">выберите дату</option>
+                        <c:forEach items="${listOfMonth}" var="listMonth">
+                            <option value="listMonth"><c:out value="${listMonth}"/></option>
+                        </c:forEach>
+                    </select>
+
                 </td>
                 <td>
                     <select name="selectedCode">
@@ -321,7 +333,6 @@
                     </select>
 
                 </td>
-                <td><input type="submit" name="set" value="OK"></td>
                 <td > <input type="radio"></td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
                 <td>
@@ -338,27 +349,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <br>
-
-    <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <th>Count of participants</th>
-        <th>Count of abonements</th>
-        <th>Sum of abonements</th>
-        <th>Users with debt</th>
-        <tr align="center">
-            <td>${countOfRecords}</td>
-            <td>${countOfAbonements}</td>
-            <td>${withoutName}</td>
-            <td>${withDebt}</td>
-
-        </tr>
-
-
-    </table>
-
-
-
-
     </form>
 
 
