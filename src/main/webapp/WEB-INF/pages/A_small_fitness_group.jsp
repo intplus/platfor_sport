@@ -291,13 +291,22 @@
                         <c:forEach items="${priceList}" var="prices">
                             <%--<c:choose>--%>
                             <c:if test="${prices.priceMonth!=0}">
-                            <option value="prices"><c:out value="${prices.priceMonth}"/></option>
+                                <option value="prices">other <c:out value="${prices.priceOther}"/></option>
+                            </c:if>
+                            <c:if test="${prices.priceMonth!=0}">
+                                <option value="prices">individual <c:out value="${prices.priceIndividual}"/></option>
+                            </c:if>
+                            <c:if test="${prices.priceMonth!=0}">
+                                <option value="prices">year <c:out value="${prices.priceYear}"/></option>
+                            </c:if>
+                            <c:if test="${prices.priceMonth!=0}">
+                            <option value="prices">month <c:out value="${prices.priceMonth}"/></option>
                             </c:if>
                                 <c:if test="${prices.priceMonth!=0}">
-                                    <option value="prices"><c:out value="${prices.priceMonthHalf}"/></option>
+                                    <option value="prices">half month <c:out value="${prices.priceMonthHalf}"/></option>
                                 </c:if>
                                 <c:if test="${prices.priceMonth!=0}">
-                                    <option value="prices"><c:out value="${prices.priceSingle}"/></option>
+                                    <option value="prices">singl <c:out value="${prices.priceSingle}"/></option>
                                 </c:if>
                         <%--</c:choose>--%>
                         </c:forEach>
