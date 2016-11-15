@@ -492,23 +492,20 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
-            System.out.println(" in method add");
 
-
-            int price2 = Integer.valueOf(price);
-            System.out.println(price2+" ---price");
-            System.out.println(ids.size()+"size");
             Student  theStudent = new Student();
             for(int i=0; i<ids.size();i++){
-                System.out.println(ids.get(i)+"  id st");
+
+                int price2 = Integer.valueOf(price);
 
                 theStudent =studentService.getStudent(ids.get(i));
+                CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
+
+                customerCardService.addCustomerCard(customerCard);
 
 
             }
-            CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
 
-            customerCardService.addCustomerCard(customerCard);
 
 
 

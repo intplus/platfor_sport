@@ -291,20 +291,20 @@
                         <%--//get price for student from db--%>
                         <c:forEach items="${customerCardList}" var="customerCard">
 
-                               <c:choose>
+                               <%--<c:choose>--%>
 
-                                <c:when test="${student.id==customerCard.student.id}">
+                                <c:if test="${student.id==customerCard.student.id}">
                                     <option >${customerCard.price}</option>
-                                </c:when>
+                                </c:if>
 
 
-                                <c:otherwise>
-                                    <option >abonement price</option>
-                                </c:otherwise>
+                            <%--<c:if test="${student.id!=customerCard.student.id }">--%>
+                                <%--<option >abonement price</option>--%>
+                            <%--</c:if>--%>
 
 
 
-                            </c:choose>
+                            <%--</c:choose>--%>
 
                         </c:forEach>
 
@@ -356,7 +356,7 @@
 
                                   <c:choose>
                                       <c:when test="${student.id==customerCard.student.id}">
-                        <option value="0">${customerCard.status}</option>
+                        <option disabled selected>${customerCard.status}</option>
                                       </c:when>
                                       <c:otherwise>
                                           <option value="0">выбирете статус</option>
