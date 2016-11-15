@@ -290,38 +290,53 @@
 
                         <%--//get price for student from db--%>
                         <c:forEach items="${customerCardList}" var="customerCard">
-                            <c:choose>
+
+                               <c:choose>
+
                                 <c:when test="${student.id==customerCard.student.id}">
-                            <option >${customerCard.price}</option>
+                                    <option >${customerCard.price}</option>
                                 </c:when>
+
+
                                 <c:otherwise>
                                     <option >abonement price</option>
                                 </c:otherwise>
+
+
+
                             </c:choose>
+
                         </c:forEach>
 
                         <c:forEach items="${priceList}" var="prices">
-                            <%--<c:choose>--%>
+                            <c:choose>
                             <%--//--%>
-                            <c:if test="${prices.priceMonth!=0}">
+                            <c:when test="${prices.priceOther!=0}">
                                 <option value="${prices.priceOther}">other <c:out value="${prices.priceOther}"/></option>
-                            </c:if>
-                            <c:if test="${prices.priceMonth!=0}">
+                            </c:when>
+
+                            <c:when test="${prices.priceIndividual!=0}">
                                 <option value="${prices.priceIndividual}">individual <c:out value="${prices.priceIndividual}"/></option>
-                            </c:if>
-                            <c:if test="${prices.priceMonth!=0}">
+                            </c:when>
+
+                            <c:when test="${prices.priceYear!=0}">
                                 <option value="${prices.priceYear}">year <c:out value="${prices.priceYear}"/></option>
-                            </c:if>
-                            <c:if test="${prices.priceMonth!=0}">
+                            </c:when>
+
+                            <c:when test="${prices.priceMonth!=0}">
                             <option value="${prices.priceMonth}">month <c:out value="${prices.priceMonth}"/></option>
-                            </c:if>
-                                <c:if test="${prices.priceMonth!=0}">
+                            </c:when>
+
+                                <c:when test="${prices.priceMonthHalf!=0}">
                                     <option value="${prices.priceMonthHalf}">half month <c:out value="${prices.priceMonthHalf}"/></option>
-                                </c:if>
-                                <c:if test="${prices.priceSingle!=0}">
-                                    <option value="prices">singl <c:out value="${prices.priceSingle}"/></option>
-                                </c:if>
-                        <%--</c:choose>--%>
+                                </c:when>
+
+                                <c:when test="${prices.priceSingle!=0}">
+                                    <option value="${prices.priceSingle}">singl <c:out value="${prices.priceSingle}"/></option>
+                                </c:when>
+
+
+                        </c:choose>
                         </c:forEach>
                     </select>
 
