@@ -23,6 +23,11 @@ import java.util.*;
 public class A_GroupController {
 
     @Autowired
+    @Qualifier("customerCardService")
+    private CustomerCardService customerCardService;
+
+
+    @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
 
@@ -480,6 +485,17 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
+            System.out.println(" in set method");
+            System.out.println(price+" its price");
+            int price2 =Integer.valueOf(price);
+            System.out.println(firstDte);
+            System.out.println(secondDate);
+            Student theStudent =null ;
+            for(int i=0; i<ids.size();i++){
+                theStudent =studentService.getStudent(ids.get(i));
+            }
+        CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
+            customerCardService.addCustomerCard(customerCard);
 
         }
 
