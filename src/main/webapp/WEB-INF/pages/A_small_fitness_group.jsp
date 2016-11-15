@@ -309,34 +309,34 @@
                         </c:forEach>
 
                         <c:forEach items="${priceList}" var="prices">
-                            <c:choose>
+                            <%--<c:choose>--%>
                             <%--//--%>
-                            <c:when test="${prices.priceOther!=0}">
+                            <c:if test="${prices.priceOther!=0}">
                                 <option value="${prices.priceOther}">other <c:out value="${prices.priceOther}"/></option>
-                            </c:when>
+                            </c:if>
 
-                            <c:when test="${prices.priceIndividual!=0}">
+                            <c:if test="${prices.priceIndividual!=0}">
                                 <option value="${prices.priceIndividual}">individual <c:out value="${prices.priceIndividual}"/></option>
-                            </c:when>
+                            </c:if>
 
-                            <c:when test="${prices.priceYear!=0}">
+                            <c:if test="${prices.priceYear!=0}">
                                 <option value="${prices.priceYear}">year <c:out value="${prices.priceYear}"/></option>
-                            </c:when>
+                            </c:if>
 
-                            <c:when test="${prices.priceMonth!=0}">
+                            <c:if test="${prices.priceMonth!=0}">
                             <option value="${prices.priceMonth}">month <c:out value="${prices.priceMonth}"/></option>
-                            </c:when>
+                            </c:if>
 
-                                <c:when test="${prices.priceMonthHalf!=0}">
+                                <c:if test="${prices.priceMonthHalf!=0}">
                                     <option value="${prices.priceMonthHalf}">half month <c:out value="${prices.priceMonthHalf}"/></option>
-                                </c:when>
+                                </c:if>
 
-                                <c:when test="${prices.priceSingle!=0}">
+                                <c:if test="${prices.priceSingle!=0}">
                                     <option value="${prices.priceSingle}">singl <c:out value="${prices.priceSingle}"/></option>
-                                </c:when>
+                                </c:if>
 
 
-                        </c:choose>
+                        <%--</c:choose>--%>
                         </c:forEach>
                     </select>
 

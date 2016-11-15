@@ -113,12 +113,11 @@ public class A_GroupController {
 
         Group chooseGroup = groupService.getGroup(idGroup);
             modelAndView.addObject("chooseGroup", chooseGroup);
-            System.out.println(chooseGroup.getName());
+
 
         List<Price> priceList = new ArrayList<Price>();
         for(Price p: priceService.getAll() ){
-            if( p.getUser().getId()!=null && p.getUser().getId()==getCurrentUser().getId() &&
-                    p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
+            if(p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
                 priceList.add(p);
 
             }
@@ -559,6 +558,9 @@ public class A_GroupController {
                         p.setPriceMonth(price.getPriceMonth());
                         p.setPriceMonthHalf(price.getPriceMonthHalf());
                         p.setPriceSingle(price.getPriceSingle());
+                    p.setPriceYear(price.getPriceYear());
+                    p.setPriceIndividual(price.getPriceIndividual());
+                    p.setPriceOther(price.getPriceOther());
                         priceService.addPrice(p);
                         flag=true;
                         break;
